@@ -1,0 +1,224 @@
+{
+  "layer": "motion-fulfillment",
+  "retrieved": "2026-07-06",
+  "primary_source_specified": {
+    "name": "MWPVL International \u2014 Amazon distribution network reference",
+    "url": "https://www.mwpvl.com/html/amazon_com.html",
+    "status": "UNUSABLE",
+    "reason": "Page fetched successfully (HTTP 200) but no longer contains parseable facility-listing data tables. The page's own body text states the maintainer removed this content: \"Please note that in future we will no longer be updating this information online due to the high rates of plagiarism of this content ... If there is an interest in obtaining current information available in XLSX format then please contact us and we can provide details regarding the commercial terms.\" All 8 <table> elements present are layout scaffolding (nav/footer/sidebar), not facility data. Two linked MWPVL pages (amazon_maps.html, amazon_building_new_sortation_network.html) were also fetched and inspected; neither contains a parseable facility table either (one is an image-figure-caption index, the other a 2014 narrative blog post)."
+  },
+  "fallback_source_specified": {
+    "name": "Overpass API",
+    "url": "https://overpass-api.de/api/interpreter",
+    "status": "UNUSABLE",
+    "reason": "Every query variant attempted (multiple mirror hosts, curl and Python urllib, GET and POST, full browser headers, even a trivial single-node query) returned HTTP 406 specifically at the /api/interpreter path, while the sibling /api/status endpoint on the same host succeeded (200). This isolates the failure to a path-specific block (WAF/proxy rule) rather than a client or query-syntax issue. No usable OSM Amazon-tagged warehouse data could be retrieved."
+  },
+  "substitute_source_used": {
+    "name": "fba.wiki \u2014 Locations of Amazon Warehouses in USA",
+    "url": "https://fba.wiki/en/list-of-amazon-warehouses-fulfillment-centers/amazon-warehouses-in-usa",
+    "justification": "A real, live, third-party FBA-seller-logistics reference explicitly captioned \"Amazon currently has 314 active Fulfillment Centers in the USA,\" listing facility code + full street address per row. Scoped to the same class of large-format nodes MWPVL tracks (FC / SC / IXD / return-center buildings with airport-style codes), derived from real Amazon Seller Central shipment-routing data (the same codes appear on live FBA inbound shipment labels). Every code/address pair is a real, independently checkable identifier in active logistics use. No records were fabricated, estimated, or interpolated."
+  },
+  "rejected_supplementary_source": {
+    "name": "youramazonguy.com US address list",
+    "row_count": 769,
+    "reason_rejected": "Evaluated as a supplement to expand coverage beyond fba.wiki's 314 records, then rejected after inspection. Its additional ~455 codes not already in fba.wiki are dominated by small-format Amazon Flex / DSP / Prime Now / Amazon Fresh pickup-point and delivery-station addresses that follow a documented single-first-letter order-type-prefix convention (D/C/H/N/P/R/M/U/V/S/I/Q/T/Z + locale + digit; per ridesharingdriver.com and warehouse.ninja) rather than MWPVL's large-facility scope. Spot-checking confirmed contamination directly: codes like UIN1 and UMD1 have \"Prime Now/Amazon Fresh\" written into their own address field; INY4/ISE1/IBF1/ICH2 etc. resolve to downtown office-tower and retail-strip addresses (Manhattan, Seattle, Chicago Loop) inconsistent with a large single-purpose logistics building. Because a reliable code-shape filter to separate \"real large facility\" from \"real but small Flex/DSP pickup point\" could not be constructed with confidence (both classes commonly use the exact 3-letter-plus-1-digit shape), this supplement was dropped entirely rather than risk misrepresenting small last-mile addresses as major logistics nodes."
+  },
+  "parse_method": "fba.wiki's HTML table was scraped to CSV (code, address, location_state) and parsed with Python csv.DictReader. City was extracted from the penultimate comma-separated segment of the address string (\"<street>, <City>, <ST> <ZIP>\"). One known source-data defect (BOS2's address is missing a comma, which glues the city name onto the street) was manually corrected by hand-verifying the facility's real, publicly known location (Stoughton, MA) and hardcoding the override. All 314 rows parsed cleanly with a unique facility code each (no duplicates).",
+  "type_assignment_method": "None of the available real sources label facility type (FC/SC/IXD) explicitly. A documented community heuristic (widely referenced on FBA-seller forums and warehouse-code trackers such as warehouse.ninja) is that the trailing digit and code shape loosely correlate with function: suffix digit 5 or 6 => Sortation Center; suffix digit 9, or a 4-letter non-standard code (e.g. IVSx, XUSx, KRFD, PHXZ) => Inbound Cross-Dock (IXD); all other 3-letter+1-digit codes => Fulfillment Center (the default / large majority). THIS IS A HEURISTIC, NOT GROUND TRUTH \u2014 no source independently confirms function per code. It is disclosed here as a caveat and used only to add descriptive texture to meta.type; it does not affect inclusion/exclusion or geocoding.",
+  "counts_by_type": {
+    "Fulfillment Center": 217,
+    "Sortation Center": 70,
+    "Inbound Cross-Dock (IXD)": 27
+  },
+  "total_facilities_in_source": 314,
+  "total_facilities_in_output": 314,
+  "dropped_facilities": 0,
+  "dropped_facilities_notes": [],
+  "geocoding": {
+    "method": "Primary: exact (state, city_lower) key match against data/ref/us_places.csv (21,783-row US places gazetteer). Secondary: normalized variant matching (diacritic/period stripping, Ft./Fort, Mt./Mount, St./Saint swaps, township/twp suffix stripping, du pont/dupont space-collapse). Tertiary (for places absent from the gazetteer entirely \u2014 mostly unincorporated communities and townships too small or too new to appear in the reference CSV): ExaAnswer web-grounded lookup, one query per unique place, coordinate chosen preferentially from Wikipedia's official infobox \"Coordinates\" field where available, else the most specific/corroborated source found (e.g., TopoQuest civil-boundary or post-office entries, TravelMath).",
+    "total_records": 314,
+    "matched_exact": 294,
+    "matched_variant": 3,
+    "matched_exa_answer": 17,
+    "unresolved_dropped": 0,
+    "match_rate": "314 / 314 = 100.0% (297/314 = 94.6% from the local gazetteer alone; remaining 17/314 = 5.4% resolved via ExaAnswer web lookup)",
+    "exa_answer_resolved_places": [
+      {
+        "code": "ACY1",
+        "city": "West Deptford",
+        "state": "NJ",
+        "resolved_coordinate": [
+          39.84197,
+          -75.18509
+        ],
+        "citation": "Wikipedia (West Deptford Township, New Jersey)"
+      },
+      {
+        "code": "ACY5",
+        "city": "Logan Township",
+        "state": "NJ",
+        "resolved_coordinate": [
+          39.79208,
+          -75.35518
+        ],
+        "citation": "Wikipedia (Logan Township, Gloucester County, New Jersey)"
+      },
+      {
+        "code": "AGS2",
+        "city": "Pendergrass",
+        "state": "GA",
+        "resolved_coordinate": [
+          34.16417,
+          -83.68111
+        ],
+        "citation": "Wikipedia (Pendergrass, Georgia)"
+      },
+      {
+        "code": "AVP1",
+        "city": "Hazle Township",
+        "state": "PA",
+        "resolved_coordinate": [
+          40.95605,
+          -75.99929
+        ],
+        "citation": "TopoQuest (civil-boundary entry, \"Township of Hazle,\" Luzerne County, PA; USGS Hazleton quad)"
+      },
+      {
+        "code": "AVP3",
+        "city": "Covington Township",
+        "state": "PA",
+        "resolved_coordinate": [
+          41.3,
+          -75.48306
+        ],
+        "citation": "Wikipedia (Covington Township, Lackawanna County, Pennsylvania)"
+      },
+      {
+        "code": "BWI4",
+        "city": "Clear Brook",
+        "state": "VA",
+        "resolved_coordinate": [
+          39.25649,
+          -78.09611
+        ],
+        "citation": "TravelMath (Clear Brook, VA); corroborated by TopoQuest \"Clear Brook\" post office entry (~39.2563,-78.0949)"
+      },
+      {
+        "code": "CMH6",
+        "city": "Lockbourne",
+        "state": "OH",
+        "resolved_coordinate": [
+          39.80778,
+          -82.98361
+        ],
+        "citation": "Wikipedia (Lockbourne, Ohio)"
+      },
+      {
+        "code": "DCA1",
+        "city": "Sparrows Point",
+        "state": "MD",
+        "resolved_coordinate": [
+          39.21917,
+          -76.47611
+        ],
+        "citation": "Wikipedia (Sparrows Point, Maryland) \u2014 article explicitly names Amazon as an operator of distribution/fulfillment centers at this location"
+      },
+      {
+        "code": "DTW5",
+        "city": "Brownstown Charter Twp",
+        "state": "MI",
+        "resolved_coordinate": [
+          42.12611,
+          -83.25722
+        ],
+        "citation": "Wikipedia (Brownstown Charter Township, Michigan)"
+      },
+      {
+        "code": "EWR8",
+        "city": "Teterboro",
+        "state": "NJ",
+        "resolved_coordinate": [
+          40.85457,
+          -74.05962
+        ],
+        "citation": "Wikipedia (Teterboro, New Jersey)"
+      },
+      {
+        "code": "IVSC",
+        "city": "West Deptford",
+        "state": "NJ",
+        "resolved_coordinate": [
+          39.84197,
+          -75.18509
+        ],
+        "citation": "Wikipedia (West Deptford Township, New Jersey)"
+      },
+      {
+        "code": "MTN9",
+        "city": "Nottingham",
+        "state": "MD",
+        "resolved_coordinate": [
+          39.36389,
+          -76.45222
+        ],
+        "citation": "Wikipedia (Nottingham, Baltimore County, Maryland)"
+      },
+      {
+        "code": "ONT1",
+        "city": "Mira Loma",
+        "state": "CA",
+        "resolved_coordinate": [
+          33.98472,
+          -117.51528
+        ],
+        "citation": "Wikipedia (Mira Loma, California)"
+      },
+      {
+        "code": "PHL5",
+        "city": "Lewisberry",
+        "state": "PA",
+        "resolved_coordinate": [
+          40.13528,
+          -76.86056
+        ],
+        "citation": "Wikipedia (Lewisberry, Pennsylvania)"
+      },
+      {
+        "code": "TEB3",
+        "city": "Logan Township",
+        "state": "NJ",
+        "resolved_coordinate": [
+          39.79208,
+          -75.35518
+        ],
+        "citation": "Wikipedia (Logan Township, Gloucester County, New Jersey)"
+      },
+      {
+        "code": "TEB6",
+        "city": "East Windsor",
+        "state": "NJ",
+        "resolved_coordinate": [
+          40.25914,
+          -74.53358
+        ],
+        "citation": "Wikipedia (East Windsor, New Jersey)"
+      },
+      {
+        "code": "TTN2",
+        "city": "East Windsor",
+        "state": "NJ",
+        "resolved_coordinate": [
+          40.25914,
+          -74.53358
+        ],
+        "citation": "Wikipedia (East Windsor, New Jersey)"
+      }
+    ]
+  },
+  "field_caveats": {
+    "v_sqft": "NULL FOR ALL 314 RECORDS. Neither fba.wiki nor any other source used in this substitution provides square-footage data per facility. The task's originally-specified primary source (MWPVL) does track sqft, but MWPVL's public facility tables no longer exist (see primary_source_specified above) \u2014 this is a direct, disclosed data-richness loss relative to the original task design, not an omission in parsing. v is honestly set to null rather than estimated or fabricated.",
+    "meta.status": "Defaulted to \"open\" for all 314 records. No available source labels open/announced/under-construction/closed status explicitly. This default is a reasoned assumption, not a verified fact: every code in this dataset is drawn from a live, current (fba.wiki, accessed 2026-07-06) reference of active facility codes used on real FBA inbound shipment labels, which by construction excludes closed facilities and is unlikely to include speculative/announced-but-unbuilt ones. No facility in this dataset was independently confirmed closed, but none was independently confirmed still-operating on the retrieval date either \u2014 this is disclosed as a limitation.",
+    "meta.type": "Heuristic, not confirmed ground truth. See type_assignment_method above. Users of this layer should treat Fulfillment Center / Sortation Center / Inbound Cross-Dock (IXD) labels as informed inference from code shape, not verified facility function.",
+    "meta.city": "Reflects the city/place name as it appeared in fba.wiki's source address (or a manually verified override for BOS2), not necessarily the USPS-preferred city name for that ZIP code."
+  }
+}

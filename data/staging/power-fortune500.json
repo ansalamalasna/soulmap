@@ -1,0 +1,5530 @@
+{
+  "layer": "power-fortune500",
+  "retrieved": "2026-07-06",
+  "list_year": 2025,
+  "sources": [
+    {
+      "name": "Fortune 500 (2025) - fortune.com official ranking page, embedded JSON dataset",
+      "url": "https://fortune.com/ranking/fortune500/2025/",
+      "note": "Primary/authoritative source. Data extracted from the page's Next.js __NEXT_DATA__ JSON payload (props.pageProps.franchiseSearch.items), which contains Fortune's full underlying dataset for the list (a superset spanning the Fortune 1000, filtered here to rank<=500). Revenue figures are FY2024 revenue as published by Fortune for the 2025 ranking (71st annual list, announced June 2, 2025; Walmart #1 at $680,985M)."
+    },
+    {
+      "name": "Wikipedia - List of Fortune 500 companies (redirects to 'List of largest companies in the United States by revenue')",
+      "url": "https://en.wikipedia.org/wiki/List_of_Fortune_500_companies",
+      "note": "Used to confirm list-year identity (Walmart $680,985M / rank 1 match) and as a sanity check for top-100 rows. Wikipedia's table only covers ranks 1-100, so it could not be used as the primary source for the full 500."
+    },
+    {
+      "name": "Salt Technologies AI - Fortune 500 Companies Directory 2025 (mirror)",
+      "url": "https://www.salttechno.ai/datasets/fortune-500-companies-2025.json",
+      "note": "Third-party mirror used ONLY for a 10-row random cross-check against the fortune.com primary source, not as a data source for the output records. 7/10 sampled rows matched exactly; the remainder showed minor revenue discrepancies (largest ~$1.2B on a company with ~$39B revenue, i.e. a few percent) consistent with this being an independently-compiled/LLM-assisted mirror rather than a transcription of the same primary figures. Not used to override any fortune.com values."
+    }
+  ],
+  "records": [
+    {
+      "lat": 36.37285,
+      "lon": -94.20882,
+      "name": "Walmart",
+      "v": 680985,
+      "meta": {
+        "rank": 1,
+        "city": "Bentonville",
+        "state": "AR"
+      }
+    },
+    {
+      "lat": 47.60621,
+      "lon": -122.33207,
+      "name": "Amazon",
+      "v": 637959,
+      "meta": {
+        "rank": 2,
+        "city": "Seattle",
+        "state": "WA"
+      }
+    },
+    {
+      "lat": 44.85469,
+      "lon": -93.47079,
+      "name": "UnitedHealth Group",
+      "v": 400278,
+      "meta": {
+        "rank": 3,
+        "city": "Eden Prairie",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 37.323,
+      "lon": -122.03218,
+      "name": "Apple",
+      "v": 391035,
+      "meta": {
+        "rank": 4,
+        "city": "Cupertino",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 42.00288,
+      "lon": -71.51478,
+      "name": "CVS Health",
+      "v": 372809,
+      "meta": {
+        "rank": 5,
+        "city": "Woonsocket",
+        "state": "RI"
+      }
+    },
+    {
+      "lat": 41.25626,
+      "lon": -95.94043,
+      "name": "Berkshire Hathaway",
+      "v": 371433,
+      "meta": {
+        "rank": 6,
+        "city": "Omaha",
+        "state": "NE"
+      }
+    },
+    {
+      "lat": 37.38605,
+      "lon": -122.08385,
+      "name": "Alphabet",
+      "v": 350018,
+      "meta": {
+        "rank": 7,
+        "city": "Mountain View",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 30.07994,
+      "lon": -95.41716,
+      "name": "Exxon Mobil",
+      "v": 349585,
+      "meta": {
+        "rank": 8,
+        "city": "Spring",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 32.81402,
+      "lon": -96.94889,
+      "name": "McKesson",
+      "v": 308951,
+      "meta": {
+        "rank": 9,
+        "city": "Irving",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 40.07928,
+      "lon": -75.30157,
+      "name": "Cencora",
+      "v": 293958.6,
+      "meta": {
+        "rank": 10,
+        "city": "Conshohocken",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "JPMorgan Chase",
+      "v": 278906,
+      "meta": {
+        "rank": 11,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 47.5301,
+      "lon": -122.03262,
+      "name": "Costco Wholesale",
+      "v": 254453,
+      "meta": {
+        "rank": 12,
+        "city": "Issaquah",
+        "state": "WA"
+      }
+    },
+    {
+      "lat": 41.82649,
+      "lon": -72.73009,
+      "name": "Cigna Group",
+      "v": 247121,
+      "meta": {
+        "rank": 13,
+        "city": "Bloomfield",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 47.67399,
+      "lon": -122.12151,
+      "name": "Microsoft",
+      "v": 245122,
+      "meta": {
+        "rank": 14,
+        "city": "Redmond",
+        "state": "WA"
+      }
+    },
+    {
+      "lat": 40.09923,
+      "lon": -83.11408,
+      "name": "Cardinal Health",
+      "v": 226827,
+      "meta": {
+        "rank": 15,
+        "city": "Dublin",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Chevron",
+      "v": 202792,
+      "meta": {
+        "rank": 16,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 35.22709,
+      "lon": -80.84313,
+      "name": "Bank of America",
+      "v": 192434,
+      "meta": {
+        "rank": 17,
+        "city": "Charlotte",
+        "state": "NC"
+      }
+    },
+    {
+      "lat": 42.33143,
+      "lon": -83.04575,
+      "name": "General Motors",
+      "v": 187442,
+      "meta": {
+        "rank": 18,
+        "city": "Detroit",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 42.32226,
+      "lon": -83.17631,
+      "name": "Ford Motor",
+      "v": 184992,
+      "meta": {
+        "rank": 19,
+        "city": "Dearborn",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 39.76838,
+      "lon": -86.15804,
+      "name": "Elevance Health",
+      "v": 177011,
+      "meta": {
+        "rank": 20,
+        "city": "Indianapolis",
+        "state": "IN"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Citigroup",
+      "v": 170757,
+      "meta": {
+        "rank": 21,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 37.45383,
+      "lon": -122.18219,
+      "name": "Meta Platforms",
+      "v": 164501,
+      "meta": {
+        "rank": 22,
+        "city": "Menlo Park",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 38.62727,
+      "lon": -90.19789,
+      "name": "Centene",
+      "v": 163071,
+      "meta": {
+        "rank": 23,
+        "city": "St. Louis",
+        "state": "MO"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "Home Depot",
+      "v": 159514,
+      "meta": {
+        "rank": 24,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 38.89511,
+      "lon": -77.03637,
+      "name": "Fannie Mae",
+      "v": 152670,
+      "meta": {
+        "rank": 25,
+        "city": "Washington",
+        "state": "DC"
+      }
+    },
+    {
+      "lat": 42.17114,
+      "lon": -87.84451,
+      "name": "Walgreens Boots Alliance",
+      "v": 147658,
+      "meta": {
+        "rank": 26,
+        "city": "Deerfield",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 39.12711,
+      "lon": -84.51439,
+      "name": "Kroger",
+      "v": 147123,
+      "meta": {
+        "rank": 27,
+        "city": "Cincinnati",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Phillips 66",
+      "v": 145496,
+      "meta": {
+        "rank": 28,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 41.04422,
+      "lon": -83.64993,
+      "name": "Marathon Petroleum",
+      "v": 140412,
+      "meta": {
+        "rank": 29,
+        "city": "Findlay",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Verizon Communications",
+      "v": 134788,
+      "meta": {
+        "rank": 30,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 37.35411,
+      "lon": -121.95524,
+      "name": "Nvidia",
+      "v": 130497,
+      "meta": {
+        "rank": 31,
+        "city": "Santa Clara",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Goldman Sachs Group",
+      "v": 126853,
+      "meta": {
+        "rank": 32,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 37.77493,
+      "lon": -122.41942,
+      "name": "Wells Fargo",
+      "v": 125397,
+      "meta": {
+        "rank": 33,
+        "city": "San Francisco",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 29.42412,
+      "lon": -98.49363,
+      "name": "Valero Energy",
+      "v": 123974,
+      "meta": {
+        "rank": 34,
+        "city": "San Antonio",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 39.95238,
+      "lon": -75.16362,
+      "name": "Comcast",
+      "v": 123731,
+      "meta": {
+        "rank": 35,
+        "city": "Philadelphia",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 40.4842,
+      "lon": -88.99369,
+      "name": "State Farm Insurance",
+      "v": 122951,
+      "meta": {
+        "rank": 36,
+        "city": "Bloomington",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "AT&T",
+      "v": 122336,
+      "meta": {
+        "rank": 37,
+        "city": "Dallas",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 38.93428,
+      "lon": -77.17748,
+      "name": "Freddie Mac",
+      "v": 122052,
+      "meta": {
+        "rank": 38,
+        "city": "McLean",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 38.25424,
+      "lon": -85.75941,
+      "name": "Humana",
+      "v": 117761,
+      "meta": {
+        "rank": 39,
+        "city": "Louisville",
+        "state": "KY"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Morgan Stanley",
+      "v": 107285,
+      "meta": {
+        "rank": 40,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 44.97997,
+      "lon": -93.26384,
+      "name": "Target",
+      "v": 106566,
+      "meta": {
+        "rank": 41,
+        "city": "Minneapolis",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "StoneX Group",
+      "v": 99887.8,
+      "meta": {
+        "rank": 42,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 30.26715,
+      "lon": -97.74306,
+      "name": "Tesla",
+      "v": 97690,
+      "meta": {
+        "rank": 43,
+        "city": "Austin",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 30.50826,
+      "lon": -97.6789,
+      "name": "Dell Technologies",
+      "v": 95567,
+      "meta": {
+        "rank": 44,
+        "city": "Round Rock",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 41.04093,
+      "lon": -73.71457,
+      "name": "PepsiCo",
+      "v": 91854,
+      "meta": {
+        "rank": 45,
+        "city": "Purchase",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 34.18084,
+      "lon": -118.30897,
+      "name": "Walt Disney",
+      "v": 91361,
+      "meta": {
+        "rank": 46,
+        "city": "Burbank",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "UPS",
+      "v": 91070,
+      "meta": {
+        "rank": 47,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 40.48622,
+      "lon": -74.45182,
+      "name": "Johnson & Johnson",
+      "v": 88821,
+      "meta": {
+        "rank": 48,
+        "city": "New Brunswick",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 35.14953,
+      "lon": -90.04898,
+      "name": "FedEx",
+      "v": 87693,
+      "meta": {
+        "rank": 49,
+        "city": "Memphis",
+        "state": "TN"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "Archer Daniels Midland",
+      "v": 85530,
+      "meta": {
+        "rank": 50,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 39.12711,
+      "lon": -84.51439,
+      "name": "Procter & Gamble",
+      "v": 84039,
+      "meta": {
+        "rank": 51,
+        "city": "Cincinnati",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 35.58486,
+      "lon": -80.81007,
+      "name": "Lowe's",
+      "v": 83674,
+      "meta": {
+        "rank": 52,
+        "city": "Mooresville",
+        "state": "NC"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "Energy Transfer",
+      "v": 82671,
+      "meta": {
+        "rank": 53,
+        "city": "Dallas",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 38.88101,
+      "lon": -77.10428,
+      "name": "RTX",
+      "v": 80738,
+      "meta": {
+        "rank": 54,
+        "city": "Arlington",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 43.6135,
+      "lon": -116.20345,
+      "name": "Albertsons",
+      "v": 79237.7,
+      "meta": {
+        "rank": 55,
+        "city": "Boise",
+        "state": "ID"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Sysco",
+      "v": 78844,
+      "meta": {
+        "rank": 56,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 41.54778,
+      "lon": -81.44361,
+      "name": "Progressive",
+      "v": 75372,
+      "meta": {
+        "rank": 57,
+        "city": "Mayfield Village",
+        "state": "OH",
+        "approx": true,
+        "geocode_note": "Mayfield Village, OH (Progressive Corporation HQ) is a distinct incorporated village in Cuyahoga County, absent from us_places.csv (which only has the separate towns 'Mayfield' and 'Mayfield Heights'). Coordinates from en.wikipedia.org/wiki/Mayfield,_Ohio (village-level, consistent with town-level precision used elsewhere in this dataset)."
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "American Express",
+      "v": 74201,
+      "meta": {
+        "rank": 58,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 38.98067,
+      "lon": -77.10026,
+      "name": "Lockheed Martin",
+      "v": 71043,
+      "meta": {
+        "rank": 59,
+        "city": "Bethesda",
+        "state": "MD"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "MetLife",
+      "v": 70986,
+      "meta": {
+        "rank": 60,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 36.16589,
+      "lon": -86.78444,
+      "name": "HCA Healthcare",
+      "v": 70603,
+      "meta": {
+        "rank": 61,
+        "city": "Nashville",
+        "state": "TN"
+      }
+    },
+    {
+      "lat": 40.73566,
+      "lon": -74.17237,
+      "name": "Prudential Financial",
+      "v": 70405,
+      "meta": {
+        "rank": 62,
+        "city": "Newark",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 38.88101,
+      "lon": -77.10428,
+      "name": "Boeing",
+      "v": 66517,
+      "meta": {
+        "rank": 63,
+        "city": "Arlington",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 32.81402,
+      "lon": -96.94889,
+      "name": "Caterpillar",
+      "v": 64809,
+      "meta": {
+        "rank": 64,
+        "city": "Irving",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 40.60816,
+      "lon": -74.27765,
+      "name": "Merck",
+      "v": 64168,
+      "meta": {
+        "rank": 65,
+        "city": "Rahway",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 42.12753,
+      "lon": -87.82895,
+      "name": "Allstate",
+      "v": 64106,
+      "meta": {
+        "rank": 66,
+        "city": "Northbrook",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Pfizer",
+      "v": 63627,
+      "meta": {
+        "rank": 67,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 41.12648,
+      "lon": -73.71402,
+      "name": "IBM",
+      "v": 62753,
+      "meta": {
+        "rank": 68,
+        "city": "Armonk",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "New York Life Insurance",
+      "v": 62639.2,
+      "meta": {
+        "rank": 69,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "Delta Air Lines",
+      "v": 61643,
+      "meta": {
+        "rank": 70,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 28.03947,
+      "lon": -81.9498,
+      "name": "Publix Super Markets",
+      "v": 60177,
+      "meta": {
+        "rank": 71,
+        "city": "Lakeland",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 39.96118,
+      "lon": -82.99879,
+      "name": "Nationwide",
+      "v": 58645.9,
+      "meta": {
+        "rank": 72,
+        "city": "Columbus",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 37.54827,
+      "lon": -121.98857,
+      "name": "TD Synnex",
+      "v": 58452.4,
+      "meta": {
+        "rank": 73,
+        "city": "Fremont",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "United Airlines Holdings",
+      "v": 57063,
+      "meta": {
+        "rank": 74,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "ConocoPhillips",
+      "v": 56953,
+      "meta": {
+        "rank": 75,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 42.27926,
+      "lon": -71.41617,
+      "name": "TJX",
+      "v": 56360,
+      "meta": {
+        "rank": 76,
+        "city": "Framingham",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 42.32558,
+      "lon": -87.84118,
+      "name": "AbbVie",
+      "v": 56334,
+      "meta": {
+        "rank": 77,
+        "city": "North Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Enterprise Products Partners",
+      "v": 56219,
+      "meta": {
+        "rank": 78,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 41.05343,
+      "lon": -73.53873,
+      "name": "Charter Communications",
+      "v": 55085,
+      "meta": {
+        "rank": 79,
+        "city": "Stamford",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 37.55376,
+      "lon": -77.46026,
+      "name": "Performance Food Group",
+      "v": 54681.2,
+      "meta": {
+        "rank": 80,
+        "city": "Richmond",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 32.72541,
+      "lon": -97.32085,
+      "name": "American Airlines Group",
+      "v": 54211,
+      "meta": {
+        "rank": 81,
+        "city": "Fort Worth",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 38.93428,
+      "lon": -77.17748,
+      "name": "Capital One Financial",
+      "v": 53938,
+      "meta": {
+        "rank": 82,
+        "city": "McLean",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 37.33939,
+      "lon": -121.89496,
+      "name": "Cisco Systems",
+      "v": 53803,
+      "meta": {
+        "rank": 83,
+        "city": "San Jose",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 37.44188,
+      "lon": -122.14302,
+      "name": "HP",
+      "v": 53559,
+      "meta": {
+        "rank": 84,
+        "city": "Palo Alto",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 36.18674,
+      "lon": -94.12881,
+      "name": "Tyson Foods",
+      "v": 53309,
+      "meta": {
+        "rank": 85,
+        "city": "Springdale",
+        "state": "AR"
+      }
+    },
+    {
+      "lat": 37.35411,
+      "lon": -121.95524,
+      "name": "Intel",
+      "v": 53101,
+      "meta": {
+        "rank": 86,
+        "city": "Santa Clara",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 30.26715,
+      "lon": -97.74306,
+      "name": "Oracle",
+      "v": 52961,
+      "meta": {
+        "rank": 87,
+        "city": "Austin",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 37.44188,
+      "lon": -122.14302,
+      "name": "Broadcom",
+      "v": 52432,
+      "meta": {
+        "rank": 88,
+        "city": "Palo Alto",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 41.5067,
+      "lon": -90.51513,
+      "name": "Deere",
+      "v": 51716,
+      "meta": {
+        "rank": 89,
+        "city": "Moline",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 45.48706,
+      "lon": -122.80371,
+      "name": "Nike",
+      "v": 51362,
+      "meta": {
+        "rank": 90,
+        "city": "Beaverton",
+        "state": "OR"
+      }
+    },
+    {
+      "lat": 42.35843,
+      "lon": -71.05977,
+      "name": "Liberty Mutual Insurance Group",
+      "v": 50429,
+      "meta": {
+        "rank": 91,
+        "city": "Boston",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Plains GP Holdings",
+      "v": 50073,
+      "meta": {
+        "rank": 92,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 29.42412,
+      "lon": -98.49363,
+      "name": "USAA",
+      "v": 48560,
+      "meta": {
+        "rank": 93,
+        "city": "San Antonio",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 40.34872,
+      "lon": -74.65905,
+      "name": "Bristol-Myers Squibb",
+      "v": 48300,
+      "meta": {
+        "rank": 94,
+        "city": "Princeton",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 33.66946,
+      "lon": -117.82311,
+      "name": "Ingram Micro Holding",
+      "v": 47983.7,
+      "meta": {
+        "rank": 95,
+        "city": "Irvine",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 38.96872,
+      "lon": -77.3411,
+      "name": "General Dynamics",
+      "v": 47716,
+      "meta": {
+        "rank": 96,
+        "city": "Reston",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "Coca-Cola",
+      "v": 47061,
+      "meta": {
+        "rank": 97,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "TIAA",
+      "v": 46945.8,
+      "meta": {
+        "rank": 98,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Travelers",
+      "v": 46423,
+      "meta": {
+        "rank": 99,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 39.76838,
+      "lon": -86.15804,
+      "name": "Eli Lilly",
+      "v": 45042.7,
+      "meta": {
+        "rank": 100,
+        "city": "Indianapolis",
+        "state": "IN"
+      }
+    },
+    {
+      "lat": 37.77493,
+      "lon": -122.41942,
+      "name": "Uber Technologies",
+      "v": 43978,
+      "meta": {
+        "rank": 101,
+        "city": "San Francisco",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 42.10148,
+      "lon": -72.58981,
+      "name": "Massachusetts Mutual Life",
+      "v": 43072,
+      "meta": {
+        "rank": 102,
+        "city": "Springfield",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 43.61558,
+      "lon": -84.24721,
+      "name": "Dow",
+      "v": 42964,
+      "meta": {
+        "rank": 103,
+        "city": "Midland",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 42.37649,
+      "lon": -71.23561,
+      "name": "Thermo Fisher Scientific",
+      "v": 42879,
+      "meta": {
+        "rank": 104,
+        "city": "Waltham",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 44.97997,
+      "lon": -93.26384,
+      "name": "U.S. Bancorp",
+      "v": 42712,
+      "meta": {
+        "rank": 105,
+        "city": "Minneapolis",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 25.77427,
+      "lon": -80.19366,
+      "name": "World Kinect",
+      "v": 42168,
+      "meta": {
+        "rank": 106,
+        "city": "Miami",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 42.3005,
+      "lon": -87.8947,
+      "name": "Abbott Laboratories",
+      "v": 41950,
+      "meta": {
+        "rank": 107,
+        "city": "Abbott Park",
+        "state": "IL",
+        "approx": true,
+        "geocode_note": "Abbott Park, IL (Abbott Laboratories HQ) is an unincorporated corporate-campus locality in Lake County (per Abbott's own FAQ: 'a suburb 40 miles north of Chicago'), not a Census place, so it is absent from us_places.csv. Coordinates (42.3005, -87.8947 / 42°18'3\"N 87°53'41\"W) from wikimapia.org listing for the Abbott Laboratories headquarters facility."
+      }
+    },
+    {
+      "lat": 44.8833,
+      "lon": -93.283,
+      "name": "Best Buy",
+      "v": 41528,
+      "meta": {
+        "rank": 108,
+        "city": "Richfield",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 43.0389,
+      "lon": -87.90647,
+      "name": "Northwestern Mutual",
+      "v": 41445,
+      "meta": {
+        "rank": 109,
+        "city": "Milwaukee",
+        "state": "WI"
+      }
+    },
+    {
+      "lat": 38.88233,
+      "lon": -77.17109,
+      "name": "Northrop Grumman",
+      "v": 41033,
+      "meta": {
+        "rank": 110,
+        "city": "Falls Church",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 33.76696,
+      "lon": -118.18923,
+      "name": "Molina Healthcare",
+      "v": 40650,
+      "meta": {
+        "rank": 111,
+        "city": "Long Beach",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 36.32311,
+      "lon": -86.71333,
+      "name": "Dollar General",
+      "v": 40612.3,
+      "meta": {
+        "rank": 112,
+        "city": "Goodlettsville",
+        "state": "TN"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Bank of New York (BNY)",
+      "v": 39914,
+      "meta": {
+        "rank": 113,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Warner Bros. Discovery",
+      "v": 39321,
+      "meta": {
+        "rank": 114,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 44.84802,
+      "lon": -93.04272,
+      "name": "CHS",
+      "v": 39261.2,
+      "meta": {
+        "rank": 115,
+        "city": "Inver Grove Heights",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 37.22661,
+      "lon": -121.97468,
+      "name": "Netflix",
+      "v": 39001,
+      "meta": {
+        "rank": 116,
+        "city": "Los Gatos",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 32.71571,
+      "lon": -117.16472,
+      "name": "Qualcomm",
+      "v": 38962,
+      "meta": {
+        "rank": 117,
+        "city": "San Diego",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 39.25617,
+      "lon": -84.418,
+      "name": "GE Aerospace",
+      "v": 38702,
+      "meta": {
+        "rank": 118,
+        "city": "Evendale",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 35.22709,
+      "lon": -80.84313,
+      "name": "Honeywell International",
+      "v": 38498,
+      "meta": {
+        "rank": 119,
+        "city": "Charlotte",
+        "state": "NC"
+      }
+    },
+    {
+      "lat": 37.77493,
+      "lon": -122.41942,
+      "name": "Salesforce",
+      "v": 37895,
+      "meta": {
+        "rank": 120,
+        "city": "San Francisco",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 41.05343,
+      "lon": -73.53873,
+      "name": "Philip Morris International",
+      "v": 37878,
+      "meta": {
+        "rank": 121,
+        "city": "Stamford",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 41.99531,
+      "lon": -87.88451,
+      "name": "US Foods Holding",
+      "v": 37877,
+      "meta": {
+        "rank": 122,
+        "city": "Rosemont",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 32.73569,
+      "lon": -97.10807,
+      "name": "D.R. Horton",
+      "v": 36801.4,
+      "meta": {
+        "rank": 123,
+        "city": "Arlington",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 42.32652,
+      "lon": -122.87559,
+      "name": "Lithia Motors",
+      "v": 36610.6,
+      "meta": {
+        "rank": 124,
+        "city": "Medford",
+        "state": "OR"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "Mondelez International",
+      "v": 36441,
+      "meta": {
+        "rank": 125,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 47.60621,
+      "lon": -122.33207,
+      "name": "Starbucks",
+      "v": 36176.2,
+      "meta": {
+        "rank": 126,
+        "city": "Seattle",
+        "state": "WA"
+      }
+    },
+    {
+      "lat": 37.77493,
+      "lon": -122.41942,
+      "name": "Visa",
+      "v": 35926,
+      "meta": {
+        "rank": 127,
+        "city": "San Francisco",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "CBRE Group",
+      "v": 35767,
+      "meta": {
+        "rank": 128,
+        "city": "Dallas",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 25.77427,
+      "lon": -80.19366,
+      "name": "Lennar",
+      "v": 35441.5,
+      "meta": {
+        "rank": 129,
+        "city": "Miami",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 42.3751,
+      "lon": -71.10561,
+      "name": "GE Vernova",
+      "v": 34935,
+      "meta": {
+        "rank": 130,
+        "city": "Cambridge",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 40.44062,
+      "lon": -79.99589,
+      "name": "PNC Financial Services Group",
+      "v": 34440,
+      "meta": {
+        "rank": 131,
+        "city": "Pittsburgh",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 39.20144,
+      "lon": -85.92138,
+      "name": "Cummins",
+      "v": 34102,
+      "meta": {
+        "rank": 132,
+        "city": "Columbus",
+        "state": "IN"
+      }
+    },
+    {
+      "lat": 47.61038,
+      "lon": -122.20068,
+      "name": "Paccar",
+      "v": 33663.8,
+      "meta": {
+        "rank": 133,
+        "city": "Bellevue",
+        "state": "WA"
+      }
+    },
+    {
+      "lat": 34.17056,
+      "lon": -118.83759,
+      "name": "Amgen",
+      "v": 33424,
+      "meta": {
+        "rank": 134,
+        "city": "Thousand Oaks",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 40.85788,
+      "lon": -74.42599,
+      "name": "PBF Energy",
+      "v": 33115.3,
+      "meta": {
+        "rank": 135,
+        "city": "Parsippany",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 30.33218,
+      "lon": -81.65565,
+      "name": "GuideWell Mutual Holding",
+      "v": 32955,
+      "meta": {
+        "rank": 136,
+        "city": "Jacksonville",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 37.33939,
+      "lon": -121.89496,
+      "name": "PayPal Holdings",
+      "v": 31797,
+      "meta": {
+        "rank": 137,
+        "city": "San Jose",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 41.82399,
+      "lon": -71.41283,
+      "name": "United Natural Foods",
+      "v": 30980,
+      "meta": {
+        "rank": 138,
+        "city": "Providence",
+        "state": "RI"
+      }
+    },
+    {
+      "lat": 36.81904,
+      "lon": -76.27494,
+      "name": "Dollar Tree",
+      "v": 30845.6,
+      "meta": {
+        "rank": 139,
+        "city": "Chesapeake",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 35.22709,
+      "lon": -80.84313,
+      "name": "Nucor",
+      "v": 30734,
+      "meta": {
+        "rank": 140,
+        "city": "Charlotte",
+        "state": "NC"
+      }
+    },
+    {
+      "lat": 42.58364,
+      "lon": -83.24549,
+      "name": "Penske Automotive Group",
+      "v": 30455.2,
+      "meta": {
+        "rank": 141,
+        "city": "Bloomfield Hills",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 47.60621,
+      "lon": -122.33207,
+      "name": "Coupang",
+      "v": 30268,
+      "meta": {
+        "rank": 142,
+        "city": "Seattle",
+        "state": "WA"
+      }
+    },
+    {
+      "lat": 30.07994,
+      "lon": -95.41716,
+      "name": "Hewlett Packard Enterprise",
+      "v": 30127,
+      "meta": {
+        "rank": 143,
+        "city": "Spring",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 35.22709,
+      "lon": -80.84313,
+      "name": "Duke Energy",
+      "v": 29938,
+      "meta": {
+        "rank": 144,
+        "city": "Charlotte",
+        "state": "NC"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "KKR",
+      "v": 29880.4,
+      "meta": {
+        "rank": 145,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 36.98038,
+      "lon": -76.42975,
+      "name": "Ferguson Enterprises",
+      "v": 29635,
+      "meta": {
+        "rank": 146,
+        "city": "Newport News",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Paramount Skydance",
+      "v": 29213,
+      "meta": {
+        "rank": 147,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 27.77086,
+      "lon": -82.67927,
+      "name": "Jabil",
+      "v": 28883,
+      "meta": {
+        "rank": 148,
+        "city": "St. Petersburg",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 37.55855,
+      "lon": -122.27108,
+      "name": "Gilead Sciences",
+      "v": 28754,
+      "meta": {
+        "rank": 149,
+        "city": "Foster City",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "HF Sinclair",
+      "v": 28580,
+      "meta": {
+        "rank": 150,
+        "city": "Dallas",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 37.55376,
+      "lon": -77.46026,
+      "name": "CarMax",
+      "v": 28213.4,
+      "meta": {
+        "rank": 151,
+        "city": "Richmond",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 41.04093,
+      "lon": -73.71457,
+      "name": "Mastercard",
+      "v": 28167,
+      "meta": {
+        "rank": 152,
+        "city": "Purchase",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "NRG Energy",
+      "v": 28130,
+      "meta": {
+        "rank": 153,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 39.57916,
+      "lon": -104.87692,
+      "name": "Arrow Electronics",
+      "v": 27923.3,
+      "meta": {
+        "rank": 154,
+        "city": "Centennial",
+        "state": "CO"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Baker Hughes",
+      "v": 27829,
+      "meta": {
+        "rank": 155,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "Southwest Airlines",
+      "v": 27483,
+      "meta": {
+        "rank": 156,
+        "city": "Dallas",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "AIG",
+      "v": 27251,
+      "meta": {
+        "rank": 157,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 37.35411,
+      "lon": -121.95524,
+      "name": "Applied Materials",
+      "v": 27176,
+      "meta": {
+        "rank": 158,
+        "city": "Santa Clara",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Occidental Petroleum",
+      "v": 26880,
+      "meta": {
+        "rank": 159,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 26.12231,
+      "lon": -80.14338,
+      "name": "AutoNation",
+      "v": 26765.4,
+      "meta": {
+        "rank": 160,
+        "city": "Fort Lauderdale",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "Southern",
+      "v": 26724,
+      "meta": {
+        "rank": 161,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 41.76371,
+      "lon": -72.68509,
+      "name": "Hartford Insurance Group",
+      "v": 26535,
+      "meta": {
+        "rank": 162,
+        "city": "Hartford",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Apollo Global Management",
+      "v": 26262,
+      "meta": {
+        "rank": 163,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 32.99124,
+      "lon": -97.19501,
+      "name": "Charles Schwab",
+      "v": 25999,
+      "meta": {
+        "rank": 164,
+        "city": "Westlake",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "McDonald's",
+      "v": 25920,
+      "meta": {
+        "rank": 165,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "Kraft Heinz",
+      "v": 25846,
+      "meta": {
+        "rank": 166,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 37.35411,
+      "lon": -121.95524,
+      "name": "Advanced Micro Devices",
+      "v": 25785,
+      "meta": {
+        "rank": 167,
+        "city": "Santa Clara",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 35.22709,
+      "lon": -80.84313,
+      "name": "Truist Financial",
+      "v": 25612,
+      "meta": {
+        "rank": 168,
+        "city": "Charlotte",
+        "state": "NC"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "Freeport-McMoRan",
+      "v": 25455,
+      "meta": {
+        "rank": 169,
+        "city": "Phoenix",
+        "state": "AZ"
+      }
+    },
+    {
+      "lat": 43.6135,
+      "lon": -116.20345,
+      "name": "Micron Technology",
+      "v": 25111,
+      "meta": {
+        "rank": 170,
+        "city": "Boise",
+        "state": "ID"
+      }
+    },
+    {
+      "lat": 38.98067,
+      "lon": -77.10026,
+      "name": "Marriott International",
+      "v": 25100,
+      "meta": {
+        "rank": 171,
+        "city": "Bethesda",
+        "state": "MD"
+      }
+    },
+    {
+      "lat": 26.82339,
+      "lon": -80.13865,
+      "name": "Carrier Global",
+      "v": 24809,
+      "meta": {
+        "rank": 172,
+        "city": "Palm Beach Gardens",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 26.87978,
+      "lon": -80.05337,
+      "name": "NextEra Energy",
+      "v": 24753,
+      "meta": {
+        "rank": 173,
+        "city": "Juno Beach",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 44.94441,
+      "lon": -93.09327,
+      "name": "3M",
+      "v": 24575,
+      "meta": {
+        "rank": 174,
+        "city": "St. Paul",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Marsh & McLennan",
+      "v": 24458,
+      "meta": {
+        "rank": 175,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 37.80437,
+      "lon": -122.2708,
+      "name": "PG&E",
+      "v": 24419,
+      "meta": {
+        "rank": 176,
+        "city": "Oakland",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 41.25626,
+      "lon": -95.94043,
+      "name": "Union Pacific",
+      "v": 24250,
+      "meta": {
+        "rank": 177,
+        "city": "Omaha",
+        "state": "NE"
+      }
+    },
+    {
+      "lat": 41.05343,
+      "lon": -73.53873,
+      "name": "Synchrony",
+      "v": 24166,
+      "meta": {
+        "rank": 178,
+        "city": "Stamford",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 37.80437,
+      "lon": -122.2708,
+      "name": "Block",
+      "v": 24121.1,
+      "meta": {
+        "rank": 179,
+        "city": "Oakland",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 38.89511,
+      "lon": -77.03637,
+      "name": "Danaher",
+      "v": 23875,
+      "meta": {
+        "rank": 180,
+        "city": "Washington",
+        "state": "DC"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "Avnet",
+      "v": 23757.1,
+      "meta": {
+        "rank": 181,
+        "city": "Phoenix",
+        "state": "AZ"
+      }
+    },
+    {
+      "lat": 41.1176,
+      "lon": -73.4079,
+      "name": "Booking Holdings",
+      "v": 23739,
+      "meta": {
+        "rank": 182,
+        "city": "Norwalk",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "EOG Resources",
+      "v": 23698,
+      "meta": {
+        "rank": 183,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Quanta Services",
+      "v": 23672.8,
+      "meta": {
+        "rank": 184,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 42.16753,
+      "lon": -87.89701,
+      "name": "Discover",
+      "v": 23634,
+      "meta": {
+        "rank": 185,
+        "city": "Riverwoods",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 39.29038,
+      "lon": -76.61219,
+      "name": "Constellation Energy",
+      "v": 23568,
+      "meta": {
+        "rank": 186,
+        "city": "Baltimore",
+        "state": "MD"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "Genuine Parts",
+      "v": 23486.6,
+      "meta": {
+        "rank": 187,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "Jones Lang LaSalle",
+      "v": 23432.9,
+      "meta": {
+        "rank": 188,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 42.47337,
+      "lon": -83.22187,
+      "name": "Lear",
+      "v": 23306,
+      "meta": {
+        "rank": 189,
+        "city": "Southfield",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 34.07362,
+      "lon": -118.40036,
+      "name": "Live Nation Entertainment",
+      "v": 23155.6,
+      "meta": {
+        "rank": 190,
+        "city": "Beverly Hills",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 41.4995,
+      "lon": -81.69541,
+      "name": "Sherwin-Williams",
+      "v": 23098.5,
+      "meta": {
+        "rank": 191,
+        "city": "Cleveland",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "Exelon",
+      "v": 23028,
+      "meta": {
+        "rank": 192,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Macy's",
+      "v": 23006,
+      "meta": {
+        "rank": 193,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Halliburton",
+      "v": 22944,
+      "meta": {
+        "rank": 194,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 42.20115,
+      "lon": -85.58,
+      "name": "Stryker",
+      "v": 22595,
+      "meta": {
+        "rank": 195,
+        "city": "Portage",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 38.66311,
+      "lon": -90.57707,
+      "name": "Reinsurance Group of America",
+      "v": 22107,
+      "meta": {
+        "rank": 196,
+        "city": "Chesterfield",
+        "state": "MO"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Waste Management",
+      "v": 22063,
+      "meta": {
+        "rank": 197,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 42.35843,
+      "lon": -71.05977,
+      "name": "State Street",
+      "v": 22054,
+      "meta": {
+        "rank": 198,
+        "city": "Boston",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 40.44062,
+      "lon": -79.99589,
+      "name": "WESCO International",
+      "v": 21818.8,
+      "meta": {
+        "rank": 199,
+        "city": "Pittsburgh",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 36.15398,
+      "lon": -95.99277,
+      "name": "Oneok",
+      "v": 21698,
+      "meta": {
+        "rank": 200,
+        "city": "Tulsa",
+        "state": "OK"
+      }
+    },
+    {
+      "lat": 37.33939,
+      "lon": -121.89496,
+      "name": "Adobe",
+      "v": 21505,
+      "meta": {
+        "rank": 201,
+        "city": "San Jose",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 43.07305,
+      "lon": -89.40123,
+      "name": "American Family Insurance Group",
+      "v": 21339.4,
+      "meta": {
+        "rank": 202,
+        "city": "Madison",
+        "state": "WI"
+      }
+    },
+    {
+      "lat": 28.08363,
+      "lon": -80.60811,
+      "name": "L3Harris Technologies",
+      "v": 21325,
+      "meta": {
+        "rank": 203,
+        "city": "Melbourne",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 37.70215,
+      "lon": -121.93579,
+      "name": "Ross Stores",
+      "v": 21129.2,
+      "meta": {
+        "rank": 204,
+        "city": "Dublin",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 42.21947,
+      "lon": -87.97952,
+      "name": "CDW",
+      "v": 20998.7,
+      "meta": {
+        "rank": 205,
+        "city": "Vernon Hills",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "Tenet Healthcare",
+      "v": 20665,
+      "meta": {
+        "rank": 206,
+        "city": "Dallas",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 42.34593,
+      "lon": -71.55229,
+      "name": "BJ's Wholesale Club",
+      "v": 20501.8,
+      "meta": {
+        "rank": 207,
+        "city": "Marlborough",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 43.0389,
+      "lon": -87.90647,
+      "name": "Fiserv",
+      "v": 20456,
+      "meta": {
+        "rank": 208,
+        "city": "Milwaukee",
+        "state": "WI"
+      }
+    },
+    {
+      "lat": 37.55376,
+      "lon": -77.46026,
+      "name": "Altria Group",
+      "v": 20444,
+      "meta": {
+        "rank": 209,
+        "city": "Richmond",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "BlackRock",
+      "v": 20407,
+      "meta": {
+        "rank": 210,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 41.01676,
+      "lon": -74.2057,
+      "name": "Becton Dickinson",
+      "v": 20178,
+      "meta": {
+        "rank": 211,
+        "city": "Franklin Lakes",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Colgate-Palmolive",
+      "v": 20101,
+      "meta": {
+        "rank": 212,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 32.81402,
+      "lon": -96.94889,
+      "name": "Kimberly-Clark",
+      "v": 20058,
+      "meta": {
+        "rank": 213,
+        "city": "Irving",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Group 1 Automotive",
+      "v": 19934.3,
+      "meta": {
+        "rank": 214,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 41.4995,
+      "lon": -81.69541,
+      "name": "Parker-Hannifin",
+      "v": 19929.6,
+      "meta": {
+        "rank": 215,
+        "city": "Cleveland",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 44.97997,
+      "lon": -93.26384,
+      "name": "General Mills",
+      "v": 19857.2,
+      "meta": {
+        "rank": 216,
+        "city": "Minneapolis",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 40.8976,
+      "lon": -74.01597,
+      "name": "Cognizant Technology Solutions",
+      "v": 19736,
+      "meta": {
+        "rank": 217,
+        "city": "Teaneck",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 39.96118,
+      "lon": -82.99879,
+      "name": "American Electric Power",
+      "v": 19721.3,
+      "meta": {
+        "rank": 218,
+        "city": "Columbus",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "GE HealthCare Technologies",
+      "v": 19672,
+      "meta": {
+        "rank": 219,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 40.82066,
+      "lon": -74.29376,
+      "name": "Automatic Data Processing",
+      "v": 19202.6,
+      "meta": {
+        "rank": 220,
+        "city": "Roseland",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 41.4995,
+      "lon": -81.69541,
+      "name": "Cleveland-Cliffs",
+      "v": 19185,
+      "meta": {
+        "rank": 221,
+        "city": "Cleveland",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 32.46098,
+      "lon": -84.98771,
+      "name": "Aflac",
+      "v": 18927,
+      "meta": {
+        "rank": 222,
+        "city": "Columbus",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 41.08144,
+      "lon": -81.51901,
+      "name": "Goodyear Tire & Rubber",
+      "v": 18878,
+      "meta": {
+        "rank": 223,
+        "city": "Akron",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Corebridge Financial",
+      "v": 18781,
+      "meta": {
+        "rank": 224,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 39.73915,
+      "lon": -104.9847,
+      "name": "Newmont",
+      "v": 18682,
+      "meta": {
+        "rank": 225,
+        "city": "Denver",
+        "state": "CO"
+      }
+    },
+    {
+      "lat": 35.14953,
+      "lon": -90.04898,
+      "name": "International Paper",
+      "v": 18619,
+      "meta": {
+        "rank": 226,
+        "city": "Memphis",
+        "state": "TN"
+      }
+    },
+    {
+      "lat": 35.14953,
+      "lon": -90.04898,
+      "name": "AutoZone",
+      "v": 18490.3,
+      "meta": {
+        "rank": 227,
+        "city": "Memphis",
+        "state": "TN"
+      }
+    },
+    {
+      "lat": 40.04622,
+      "lon": -75.35991,
+      "name": "Lincoln National",
+      "v": 18442,
+      "meta": {
+        "rank": 228,
+        "city": "Radnor",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "PulteGroup",
+      "v": 17947,
+      "meta": {
+        "rank": 229,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 44.97997,
+      "lon": -93.26384,
+      "name": "Ameriprise Financial",
+      "v": 17926,
+      "meta": {
+        "rank": 230,
+        "city": "Minneapolis",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 33.20763,
+      "lon": -92.66627,
+      "name": "Murphy USA",
+      "v": 17909.4,
+      "meta": {
+        "rank": 231,
+        "city": "El Dorado",
+        "state": "AR"
+      }
+    },
+    {
+      "lat": 43.0389,
+      "lon": -87.90647,
+      "name": "ManpowerGroup",
+      "v": 17853.9,
+      "meta": {
+        "rank": 232,
+        "city": "Milwaukee",
+        "state": "WI"
+      }
+    },
+    {
+      "lat": 44.85469,
+      "lon": -93.47079,
+      "name": "C.H. Robinson Worldwide",
+      "v": 17725,
+      "meta": {
+        "rank": 233,
+        "city": "Eden Prairie",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 40.44062,
+      "lon": -79.99589,
+      "name": "PPG Industries",
+      "v": 17723,
+      "meta": {
+        "rank": 234,
+        "city": "Pittsburgh",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 34.08057,
+      "lon": -118.07285,
+      "name": "Edison International",
+      "v": 17599,
+      "meta": {
+        "rank": 235,
+        "city": "Rosemead",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 41.1306,
+      "lon": -85.12886,
+      "name": "Steel Dynamics",
+      "v": 17540.4,
+      "meta": {
+        "rank": 236,
+        "city": "Fort Wayne",
+        "state": "IN"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Loews",
+      "v": 17510,
+      "meta": {
+        "rank": 237,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 38.62727,
+      "lon": -90.19789,
+      "name": "Emerson Electric",
+      "v": 17492,
+      "meta": {
+        "rank": 238,
+        "city": "St. Louis",
+        "state": "MO"
+      }
+    },
+    {
+      "lat": 39.95238,
+      "lon": -75.16362,
+      "name": "Aramark",
+      "v": 17400.7,
+      "meta": {
+        "rank": 239,
+        "city": "Philadelphia",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 36.17497,
+      "lon": -115.13722,
+      "name": "MGM Resorts International",
+      "v": 17240.5,
+      "meta": {
+        "rank": 240,
+        "city": "Las Vegas",
+        "state": "NV"
+      }
+    },
+    {
+      "lat": 32.81402,
+      "lon": -96.94889,
+      "name": "Vistra",
+      "v": 17224,
+      "meta": {
+        "rank": 241,
+        "city": "Irving",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 34.00288,
+      "lon": -84.14464,
+      "name": "Asbury Automotive Group",
+      "v": 17188.6,
+      "meta": {
+        "rank": 242,
+        "city": "Duluth",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 42.25863,
+      "lon": -87.84063,
+      "name": "W.W. Grainger",
+      "v": 17168,
+      "meta": {
+        "rank": 243,
+        "city": "Lake Forest",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 42.37649,
+      "lon": -71.23561,
+      "name": "Global Partners",
+      "v": 17163.6,
+      "meta": {
+        "rank": 244,
+        "city": "Waltham",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "Jacobs Solutions",
+      "v": 16973.9,
+      "meta": {
+        "rank": 245,
+        "city": "Dallas",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 39.76838,
+      "lon": -86.15804,
+      "name": "Corteva",
+      "v": 16908,
+      "meta": {
+        "rank": 246,
+        "city": "Indianapolis",
+        "state": "IN"
+      }
+    },
+    {
+      "lat": 41.25626,
+      "lon": -95.94043,
+      "name": "Peter Kiewit Sons'",
+      "v": 16838,
+      "meta": {
+        "rank": 247,
+        "city": "Omaha",
+        "state": "NE"
+      }
+    },
+    {
+      "lat": 42.34593,
+      "lon": -71.55229,
+      "name": "Boston Scientific",
+      "v": 16747,
+      "meta": {
+        "rank": 248,
+        "city": "Marlborough",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 37.21533,
+      "lon": -93.29824,
+      "name": "O'Reilly Automotive",
+      "v": 16708.5,
+      "meta": {
+        "rank": 249,
+        "city": "Springfield",
+        "state": "MO"
+      }
+    },
+    {
+      "lat": 38.96872,
+      "lon": -77.3411,
+      "name": "Leidos Holdings",
+      "v": 16662,
+      "meta": {
+        "rank": 250,
+        "city": "Reston",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 37.66598,
+      "lon": -77.50637,
+      "name": "Markel Group",
+      "v": 16620.8,
+      "meta": {
+        "rank": 251,
+        "city": "Glen Allen",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 42.11671,
+      "lon": -86.45419,
+      "name": "Whirlpool",
+      "v": 16607,
+      "meta": {
+        "rank": 252,
+        "city": "Benton Harbor",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Guardian Life Ins. Co. of America",
+      "v": 16471,
+      "meta": {
+        "rank": 253,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 32.81402,
+      "lon": -96.94889,
+      "name": "Builders FirstSource",
+      "v": 16400.5,
+      "meta": {
+        "rank": 254,
+        "city": "Irving",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 42.33143,
+      "lon": -83.04575,
+      "name": "Ally Financial",
+      "v": 16389,
+      "meta": {
+        "rank": 255,
+        "city": "Detroit",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Targa Resources",
+      "v": 16381.5,
+      "meta": {
+        "rank": 256,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 32.81402,
+      "lon": -96.94889,
+      "name": "Fluor",
+      "v": 16315,
+      "meta": {
+        "rank": 257,
+        "city": "Irving",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 37.38605,
+      "lon": -122.08385,
+      "name": "Intuit",
+      "v": 16285,
+      "meta": {
+        "rank": 258,
+        "city": "Mountain View",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "AECOM",
+      "v": 16283.7,
+      "meta": {
+        "rank": 259,
+        "city": "Dallas",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 38.60089,
+      "lon": -90.4329,
+      "name": "Jones Financial (Edward Jones)",
+      "v": 16257,
+      "meta": {
+        "rank": 260,
+        "city": "Des Peres",
+        "state": "MO"
+      }
+    },
+    {
+      "lat": 43.1789,
+      "lon": -88.11731,
+      "name": "Kohl's",
+      "v": 16221,
+      "meta": {
+        "rank": 261,
+        "city": "Menomonee Falls",
+        "state": "WI"
+      }
+    },
+    {
+      "lat": 45.05024,
+      "lon": -93.15661,
+      "name": "Land O'Lakes",
+      "v": 16206.8,
+      "meta": {
+        "rank": 262,
+        "city": "Arden Hills",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 41.60054,
+      "lon": -93.60911,
+      "name": "Principal Financial",
+      "v": 16127.7,
+      "meta": {
+        "rank": 263,
+        "city": "Des Moines",
+        "state": "IA"
+      }
+    },
+    {
+      "lat": 37.55376,
+      "lon": -77.46026,
+      "name": "Dominion Energy",
+      "v": 16070,
+      "meta": {
+        "rank": 264,
+        "city": "Richmond",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Kyndryl Holdings",
+      "v": 16052,
+      "meta": {
+        "rank": 265,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "Republic Services",
+      "v": 16032,
+      "meta": {
+        "rank": 266,
+        "city": "Phoenix",
+        "state": "AZ"
+      }
+    },
+    {
+      "lat": 35.46756,
+      "lon": -97.51643,
+      "name": "Devon Energy",
+      "v": 15940,
+      "meta": {
+        "rank": 267,
+        "city": "Oklahoma City",
+        "state": "OK"
+      }
+    },
+    {
+      "lat": 42.06975,
+      "lon": -87.78784,
+      "name": "Illinois Tool Works",
+      "v": 15898,
+      "meta": {
+        "rank": 268,
+        "city": "Glenview",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "Northern Trust",
+      "v": 15875.6,
+      "meta": {
+        "rank": 269,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 42.73253,
+      "lon": -84.55553,
+      "name": "Auto-Owners Insurance",
+      "v": 15839,
+      "meta": {
+        "rank": 270,
+        "city": "Lansing",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 40.08927,
+      "lon": -75.39602,
+      "name": "Universal Health Services",
+      "v": 15827.9,
+      "meta": {
+        "rank": 271,
+        "city": "King of Prussia",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 33.61891,
+      "lon": -117.92895,
+      "name": "Pacific Life",
+      "v": 15827,
+      "meta": {
+        "rank": 272,
+        "city": "Newport Beach",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 39.64777,
+      "lon": -104.98776,
+      "name": "EchoStar",
+      "v": 15825.5,
+      "meta": {
+        "rank": 273,
+        "city": "Englewood",
+        "state": "CO"
+      }
+    },
+    {
+      "lat": 44.94441,
+      "lon": -93.09327,
+      "name": "Ecolab",
+      "v": 15741.4,
+      "meta": {
+        "rank": 274,
+        "city": "St. Paul",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Cheniere Energy",
+      "v": 15703,
+      "meta": {
+        "rank": 275,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Omnicom Group",
+      "v": 15689.1,
+      "meta": {
+        "rank": 276,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "Texas Instruments",
+      "v": 15641,
+      "meta": {
+        "rank": 277,
+        "city": "Dallas",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 40.44062,
+      "lon": -79.99589,
+      "name": "United States Steel",
+      "v": 15640,
+      "meta": {
+        "rank": 278,
+        "city": "Pittsburgh",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Estée Lauder",
+      "v": 15608,
+      "meta": {
+        "rank": 279,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 34.16834,
+      "lon": -118.60592,
+      "name": "Farmers Insurance Exchange",
+      "v": 15456.4,
+      "meta": {
+        "rank": 280,
+        "city": "Woodland Hills",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 40.71562,
+      "lon": -74.36468,
+      "name": "Kenvue",
+      "v": 15455,
+      "meta": {
+        "rank": 281,
+        "city": "Summit",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 35.99403,
+      "lon": -78.89862,
+      "name": "IQVIA Holdings",
+      "v": 15405,
+      "meta": {
+        "rank": 282,
+        "city": "Durham",
+        "state": "NC"
+      }
+    },
+    {
+      "lat": 41.66121,
+      "lon": -72.77954,
+      "name": "Stanley Black & Decker",
+      "v": 15365.7,
+      "meta": {
+        "rank": 283,
+        "city": "New Britain",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 42.50482,
+      "lon": -71.19561,
+      "name": "Keurig Dr Pepper",
+      "v": 15351,
+      "meta": {
+        "rank": 284,
+        "city": "Burlington",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 41.05343,
+      "lon": -73.53873,
+      "name": "United Rentals",
+      "v": 15345,
+      "meta": {
+        "rank": 285,
+        "city": "Stamford",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Consolidated Edison",
+      "v": 15256,
+      "meta": {
+        "rank": 286,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 41.45704,
+      "lon": -72.82316,
+      "name": "Amphenol",
+      "v": 15222.7,
+      "meta": {
+        "rank": 287,
+        "city": "Wallingford",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 42.17114,
+      "lon": -87.84451,
+      "name": "Baxter International",
+      "v": 15149,
+      "meta": {
+        "rank": 288,
+        "city": "Deerfield",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Kinder Morgan",
+      "v": 15100,
+      "meta": {
+        "rank": 289,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 37.77493,
+      "lon": -122.41942,
+      "name": "Gap",
+      "v": 15086,
+      "meta": {
+        "rank": 290,
+        "city": "San Francisco",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 47.60621,
+      "lon": -122.33207,
+      "name": "Nordstrom",
+      "v": 15016,
+      "meta": {
+        "rank": 291,
+        "city": "Seattle",
+        "state": "WA"
+      }
+    },
+    {
+      "lat": 37.33939,
+      "lon": -121.89496,
+      "name": "Super Micro Computer",
+      "v": 14989.3,
+      "meta": {
+        "rank": 292,
+        "city": "San Jose",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 35.7721,
+      "lon": -78.63861,
+      "name": "First Citizens BancShares",
+      "v": 14968,
+      "meta": {
+        "rank": 293,
+        "city": "Raleigh",
+        "state": "NC"
+      }
+    },
+    {
+      "lat": 27.77086,
+      "lon": -82.67927,
+      "name": "Raymond James Financial",
+      "v": 14923,
+      "meta": {
+        "rank": 294,
+        "city": "St. Petersburg",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 37.54827,
+      "lon": -121.98857,
+      "name": "Lam Research",
+      "v": 14905.4,
+      "meta": {
+        "rank": 295,
+        "city": "Fremont",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 36.03312,
+      "lon": -86.78278,
+      "name": "Tractor Supply",
+      "v": 14883.2,
+      "meta": {
+        "rank": 296,
+        "city": "Brentwood",
+        "state": "TN"
+      }
+    },
+    {
+      "lat": 41.72971,
+      "lon": -93.60577,
+      "name": "Casey's General Stores",
+      "v": 14862.9,
+      "meta": {
+        "rank": 297,
+        "city": "Ankeny",
+        "state": "IA"
+      }
+    },
+    {
+      "lat": 40.26257,
+      "lon": -80.18728,
+      "name": "Viatris",
+      "v": 14739.3,
+      "meta": {
+        "rank": 298,
+        "city": "Canonsburg",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 41.25626,
+      "lon": -95.94043,
+      "name": "Mutual of Omaha",
+      "v": 14622.2,
+      "meta": {
+        "rank": 299,
+        "city": "Omaha",
+        "state": "NE"
+      }
+    },
+    {
+      "lat": 41.1176,
+      "lon": -73.4079,
+      "name": "EMCOR Group",
+      "v": 14566.1,
+      "meta": {
+        "rank": 300,
+        "city": "Norwalk",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 30.33218,
+      "lon": -81.65565,
+      "name": "CSX",
+      "v": 14540,
+      "meta": {
+        "rank": 301,
+        "city": "Jacksonville",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 36.055,
+      "lon": -86.6725,
+      "name": "LKQ",
+      "v": 14355,
+      "meta": {
+        "rank": 302,
+        "city": "Antioch",
+        "state": "TN",
+        "approx": true,
+        "geocode_note": "Antioch, TN (LKQ Corporation HQ) is an unincorporated Nashville neighborhood in Davidson County, not independently in us_places.csv under TN (only CA and IL 'Antioch' entries exist there). Coordinates from en.wikipedia.org/wiki/Antioch,_Tennessee (neighborhood-level)."
+      }
+    },
+    {
+      "lat": 41.71982,
+      "lon": -72.83204,
+      "name": "Otis Worldwide",
+      "v": 14261,
+      "meta": {
+        "rank": 303,
+        "city": "Farmington",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 35.22709,
+      "lon": -80.84313,
+      "name": "Sonic Automotive",
+      "v": 14224.3,
+      "meta": {
+        "rank": 304,
+        "city": "Charlotte",
+        "state": "NC"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "S&P Global",
+      "v": 14208,
+      "meta": {
+        "rank": 305,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 41.07621,
+      "lon": -73.85875,
+      "name": "Regeneron Pharmaceuticals",
+      "v": 14202,
+      "meta": {
+        "rank": 306,
+        "city": "Tarrytown",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 42.68753,
+      "lon": -83.2341,
+      "name": "BorgWarner",
+      "v": 14086,
+      "meta": {
+        "rank": 307,
+        "city": "Auburn Hills",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Fox",
+      "v": 13980,
+      "meta": {
+        "rank": 308,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 33.50921,
+      "lon": -111.89903,
+      "name": "Reliance",
+      "v": 13835,
+      "meta": {
+        "rank": 309,
+        "city": "Scottsdale",
+        "state": "AZ"
+      }
+    },
+    {
+      "lat": 39.12711,
+      "lon": -84.51439,
+      "name": "Western & Southern Financial Group",
+      "v": 13769.2,
+      "meta": {
+        "rank": 310,
+        "city": "Cincinnati",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 41.82399,
+      "lon": -71.41283,
+      "name": "Textron",
+      "v": 13702,
+      "meta": {
+        "rank": 311,
+        "city": "Providence",
+        "state": "RI"
+      }
+    },
+    {
+      "lat": 47.60621,
+      "lon": -122.33207,
+      "name": "Expedia Group",
+      "v": 13691,
+      "meta": {
+        "rank": 312,
+        "city": "Seattle",
+        "state": "WA"
+      }
+    },
+    {
+      "lat": 30.33218,
+      "lon": -81.65565,
+      "name": "Fidelity National Financial",
+      "v": 13681,
+      "meta": {
+        "rank": 313,
+        "city": "Jacksonville",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 33.41477,
+      "lon": -111.90931,
+      "name": "Carvana",
+      "v": 13673,
+      "meta": {
+        "rank": 314,
+        "city": "Tempe",
+        "state": "AZ"
+      }
+    },
+    {
+      "lat": 39.04372,
+      "lon": -77.48749,
+      "name": "DXC Technology",
+      "v": 13667,
+      "meta": {
+        "rank": 315,
+        "city": "Ashburn",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 41.02649,
+      "lon": -73.62846,
+      "name": "W.R. Berkley",
+      "v": 13638.8,
+      "meta": {
+        "rank": 316,
+        "city": "Greenwich",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 42.88645,
+      "lon": -78.87837,
+      "name": "M&T Bank",
+      "v": 13453,
+      "meta": {
+        "rank": 317,
+        "city": "Buffalo",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 40.5184,
+      "lon": -80.16672,
+      "name": "Dick's Sporting Goods",
+      "v": 13442.8,
+      "meta": {
+        "rank": 318,
+        "city": "Coraopolis",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 44.97997,
+      "lon": -93.26384,
+      "name": "Xcel Energy",
+      "v": 13441,
+      "meta": {
+        "rank": 319,
+        "city": "Minneapolis",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 39.12711,
+      "lon": -84.51439,
+      "name": "Fifth Third Bancorp",
+      "v": 13275,
+      "meta": {
+        "rank": 320,
+        "city": "Cincinnati",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Blackstone",
+      "v": 13230,
+      "meta": {
+        "rank": 321,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 32.71571,
+      "lon": -117.16472,
+      "name": "Sempra",
+      "v": 13185,
+      "meta": {
+        "rank": 322,
+        "city": "San Diego",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 42.12922,
+      "lon": -80.08506,
+      "name": "Erie Insurance Group",
+      "v": 13176.9,
+      "meta": {
+        "rank": 323,
+        "city": "Erie",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 42.14285,
+      "lon": -77.05469,
+      "name": "Corning",
+      "v": 13118,
+      "meta": {
+        "rank": 324,
+        "city": "Corning",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 32.50931,
+      "lon": -92.1193,
+      "name": "Lumen Technologies",
+      "v": 13108,
+      "meta": {
+        "rank": 325,
+        "city": "Monroe",
+        "state": "LA"
+      }
+    },
+    {
+      "lat": 41.08144,
+      "lon": -81.51901,
+      "name": "FirstEnergy",
+      "v": 13043,
+      "meta": {
+        "rank": 326,
+        "city": "Akron",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Hess",
+      "v": 13018,
+      "meta": {
+        "rank": 327,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 36.09569,
+      "lon": -79.4378,
+      "name": "Labcorp Holdings",
+      "v": 13008.9,
+      "meta": {
+        "rank": 328,
+        "city": "Burlington",
+        "state": "NC"
+      }
+    },
+    {
+      "lat": 37.33939,
+      "lon": -121.89496,
+      "name": "Western Digital",
+      "v": 13003,
+      "meta": {
+        "rank": 329,
+        "city": "San Jose",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 35.04563,
+      "lon": -85.30968,
+      "name": "Unum Group",
+      "v": 12887.3,
+      "meta": {
+        "rank": 330,
+        "city": "Chattanooga",
+        "state": "TN"
+      }
+    },
+    {
+      "lat": 39.73915,
+      "lon": -104.9847,
+      "name": "DaVita",
+      "v": 12815.6,
+      "meta": {
+        "rank": 331,
+        "city": "Denver",
+        "state": "CO"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "Kellanova",
+      "v": 12749,
+      "meta": {
+        "rank": 332,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 40.79343,
+      "lon": -73.41512,
+      "name": "Henry Schein",
+      "v": 12673,
+      "meta": {
+        "rank": 333,
+        "city": "Melville",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 25.72149,
+      "lon": -80.26838,
+      "name": "Ryder System",
+      "v": 12636,
+      "meta": {
+        "rank": 334,
+        "city": "Coral Gables",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 35.92506,
+      "lon": -86.86889,
+      "name": "Community Health Systems",
+      "v": 12634,
+      "meta": {
+        "rank": 335,
+        "city": "Franklin",
+        "state": "TN"
+      }
+    },
+    {
+      "lat": 36.03312,
+      "lon": -86.78278,
+      "name": "Delek US Holdings",
+      "v": 12464.2,
+      "meta": {
+        "rank": 336,
+        "city": "Brentwood",
+        "state": "TN"
+      }
+    },
+    {
+      "lat": 42.33143,
+      "lon": -83.04575,
+      "name": "DTE Energy",
+      "v": 12457,
+      "meta": {
+        "rank": 337,
+        "city": "Detroit",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Equitable Holdings",
+      "v": 12437,
+      "meta": {
+        "rank": 338,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 39.74595,
+      "lon": -75.54659,
+      "name": "DuPont",
+      "v": 12386,
+      "meta": {
+        "rank": 339,
+        "city": "Wilmington",
+        "state": "DE"
+      }
+    },
+    {
+      "lat": 32.71571,
+      "lon": -117.16472,
+      "name": "LPL Financial Holdings",
+      "v": 12385.1,
+      "meta": {
+        "rank": 340,
+        "city": "San Diego",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 41.82399,
+      "lon": -71.41283,
+      "name": "Citizens Financial Group",
+      "v": 12362,
+      "meta": {
+        "rank": 341,
+        "city": "Providence",
+        "state": "RI"
+      }
+    },
+    {
+      "lat": 25.72149,
+      "lon": -80.26838,
+      "name": "MasTec",
+      "v": 12303.5,
+      "meta": {
+        "rank": 342,
+        "city": "Coral Gables",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 38.88101,
+      "lon": -77.10428,
+      "name": "AES",
+      "v": 12278,
+      "meta": {
+        "rank": 343,
+        "city": "Arlington",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 37.97476,
+      "lon": -87.55585,
+      "name": "Berry Global Group",
+      "v": 12258,
+      "meta": {
+        "rank": 344,
+        "city": "Evansville",
+        "state": "IN"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Westlake",
+      "v": 12142,
+      "meta": {
+        "rank": 345,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "Norfolk Southern",
+      "v": 12123,
+      "meta": {
+        "rank": 346,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 40.60843,
+      "lon": -75.49018,
+      "name": "Air Products & Chemicals",
+      "v": 12100.6,
+      "meta": {
+        "rank": 347,
+        "city": "Allentown",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 36.25535,
+      "lon": -94.13076,
+      "name": "J.B. Hunt Transport Services",
+      "v": 12087.2,
+      "meta": {
+        "rank": 348,
+        "city": "Lowell",
+        "state": "AR"
+      }
+    },
+    {
+      "lat": 39.83665,
+      "lon": -105.0372,
+      "name": "Ball",
+      "v": 12056,
+      "meta": {
+        "rank": 349,
+        "city": "Westminster",
+        "state": "CO"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "Conagra Brands",
+      "v": 12050.9,
+      "meta": {
+        "rank": 350,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 39.96118,
+      "lon": -82.99879,
+      "name": "Huntington Bancshares",
+      "v": 11961,
+      "meta": {
+        "rank": 351,
+        "city": "Columbus",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 43.66663,
+      "lon": -92.97464,
+      "name": "Hormel Foods",
+      "v": 11920.8,
+      "meta": {
+        "rank": 352,
+        "city": "Austin",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 42.10148,
+      "lon": -72.58981,
+      "name": "Eversource Energy",
+      "v": 11900.8,
+      "meta": {
+        "rank": 353,
+        "city": "Springfield",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 40.44062,
+      "lon": -79.99589,
+      "name": "Alcoa",
+      "v": 11895,
+      "meta": {
+        "rank": 354,
+        "city": "Pittsburgh",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 29.95465,
+      "lon": -90.07507,
+      "name": "Entergy",
+      "v": 11879.7,
+      "meta": {
+        "rank": 355,
+        "city": "New Orleans",
+        "state": "LA"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "Assurant",
+      "v": 11877.5,
+      "meta": {
+        "rank": 356,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 26.13421,
+      "lon": -80.23184,
+      "name": "Chewy",
+      "v": 11861.3,
+      "meta": {
+        "rank": 357,
+        "city": "Plantation",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 42.35843,
+      "lon": -71.05977,
+      "name": "Wayfair",
+      "v": 11851,
+      "meta": {
+        "rank": 358,
+        "city": "Boston",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 27.94752,
+      "lon": -82.45843,
+      "name": "Crown Holdings",
+      "v": 11801,
+      "meta": {
+        "rank": 359,
+        "city": "Tampa",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 40.85788,
+      "lon": -74.42599,
+      "name": "Avis Budget Group",
+      "v": 11789,
+      "meta": {
+        "rank": 360,
+        "city": "Parsippany",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "Intercontinental Exchange",
+      "v": 11761,
+      "meta": {
+        "rank": 361,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 47.60621,
+      "lon": -122.33207,
+      "name": "Alaska Air Group",
+      "v": 11735,
+      "meta": {
+        "rank": 362,
+        "city": "Seattle",
+        "state": "WA"
+      }
+    },
+    {
+      "lat": 41.02649,
+      "lon": -73.62846,
+      "name": "GXO Logistics",
+      "v": 11709,
+      "meta": {
+        "rank": 363,
+        "city": "Greenwich",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 34.00288,
+      "lon": -84.14464,
+      "name": "AGCO",
+      "v": 11661.9,
+      "meta": {
+        "rank": 364,
+        "city": "Duluth",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 38.62727,
+      "lon": -90.19789,
+      "name": "Graybar Electric",
+      "v": 11645.5,
+      "meta": {
+        "rank": 365,
+        "city": "St. Louis",
+        "state": "MO"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "Molson Coors Beverage",
+      "v": 11627,
+      "meta": {
+        "rank": 366,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 42.08419,
+      "lon": -88.01313,
+      "name": "Arthur J. Gallagher",
+      "v": 11554.9,
+      "meta": {
+        "rank": 367,
+        "city": "Rolling Meadows",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 36.98038,
+      "lon": -76.42975,
+      "name": "Huntington Ingalls Industries",
+      "v": 11535,
+      "meta": {
+        "rank": 368,
+        "city": "Newport News",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "International Flavors & Fragrances",
+      "v": 11484,
+      "meta": {
+        "rank": 369,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 28.53834,
+      "lon": -81.37924,
+      "name": "Darden Restaurants",
+      "v": 11390,
+      "meta": {
+        "rank": 370,
+        "city": "Orlando",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 39.34589,
+      "lon": -84.5605,
+      "name": "Cincinnati Financial",
+      "v": 11337.5,
+      "meta": {
+        "rank": 371,
+        "city": "Fairfield",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 33.61891,
+      "lon": -117.92895,
+      "name": "Chipotle Mexican Grill",
+      "v": 11313.9,
+      "meta": {
+        "rank": 372,
+        "city": "Newport Beach",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 33.01984,
+      "lon": -96.69889,
+      "name": "Yum China Holdings",
+      "v": 11303,
+      "meta": {
+        "rank": 373,
+        "city": "Plano",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 36.17497,
+      "lon": -115.13722,
+      "name": "Las Vegas Sands",
+      "v": 11298,
+      "meta": {
+        "rank": 374,
+        "city": "Las Vegas",
+        "state": "NV"
+      }
+    },
+    {
+      "lat": 41.69864,
+      "lon": -88.0684,
+      "name": "Ulta Beauty",
+      "v": 11295.7,
+      "meta": {
+        "rank": 375,
+        "city": "Bolingbrook",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 39.52963,
+      "lon": -119.8138,
+      "name": "Caesars Entertainment",
+      "v": 11270,
+      "meta": {
+        "rank": 376,
+        "city": "Reno",
+        "state": "NV"
+      }
+    },
+    {
+      "lat": 38.25424,
+      "lon": -85.75941,
+      "name": "BrightSpring Health Services",
+      "v": 11266.5,
+      "meta": {
+        "rank": 377,
+        "city": "Louisville",
+        "state": "KY"
+      }
+    },
+    {
+      "lat": 41.56283,
+      "lon": -83.65382,
+      "name": "Andersons",
+      "v": 11257.5,
+      "meta": {
+        "rank": 378,
+        "city": "Maumee",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 40.28592,
+      "lon": -76.65025,
+      "name": "Hershey",
+      "v": 11202.3,
+      "meta": {
+        "rank": 379,
+        "city": "Hershey",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 38.93428,
+      "lon": -77.17748,
+      "name": "Hilton Worldwide Holdings",
+      "v": 11174,
+      "meta": {
+        "rank": 380,
+        "city": "McLean",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 27.94752,
+      "lon": -82.45843,
+      "name": "Mosaic",
+      "v": 11122.8,
+      "meta": {
+        "rank": 381,
+        "city": "Tampa",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 37.77493,
+      "lon": -122.41942,
+      "name": "Airbnb",
+      "v": 11102,
+      "meta": {
+        "rank": 382,
+        "city": "San Francisco",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 31.99735,
+      "lon": -102.07791,
+      "name": "Diamondback Energy",
+      "v": 11066,
+      "meta": {
+        "rank": 383,
+        "city": "Midland",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 42.35843,
+      "lon": -71.05977,
+      "name": "American Tower",
+      "v": 11038.4,
+      "meta": {
+        "rank": 384,
+        "city": "Boston",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 42.35843,
+      "lon": -71.05977,
+      "name": "Vertex Pharmaceuticals",
+      "v": 11020.1,
+      "meta": {
+        "rank": 385,
+        "city": "Boston",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 37.35411,
+      "lon": -121.95524,
+      "name": "ServiceNow",
+      "v": 10984,
+      "meta": {
+        "rank": 386,
+        "city": "Santa Clara",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 41.66394,
+      "lon": -83.55521,
+      "name": "Owens Corning",
+      "v": 10975,
+      "meta": {
+        "rank": 387,
+        "city": "Toledo",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 44.97997,
+      "lon": -93.26384,
+      "name": "Thrivent Financial",
+      "v": 10918.3,
+      "meta": {
+        "rank": 388,
+        "city": "Minneapolis",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 35.7721,
+      "lon": -78.63861,
+      "name": "Advance Auto Parts",
+      "v": 10890.9,
+      "meta": {
+        "rank": 389,
+        "city": "Raleigh",
+        "state": "NC"
+      }
+    },
+    {
+      "lat": 40.14178,
+      "lon": -75.20906,
+      "name": "Toll Brothers",
+      "v": 10846.7,
+      "meta": {
+        "rank": 390,
+        "city": "Fort Washington",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 34.50259,
+      "lon": -84.95105,
+      "name": "Mohawk Industries",
+      "v": 10836.9,
+      "meta": {
+        "rank": 391,
+        "city": "Calhoun",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "Motorola Solutions",
+      "v": 10817,
+      "meta": {
+        "rank": 392,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 44.02471,
+      "lon": -88.54261,
+      "name": "Oshkosh",
+      "v": 10730.2,
+      "meta": {
+        "rank": 393,
+        "city": "Oshkosh",
+        "state": "WI"
+      }
+    },
+    {
+      "lat": 37.77493,
+      "lon": -122.41942,
+      "name": "DoorDash",
+      "v": 10722,
+      "meta": {
+        "rank": 394,
+        "city": "San Francisco",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 37.66598,
+      "lon": -77.50637,
+      "name": "Accendra Health",
+      "v": 10700.9,
+      "meta": {
+        "rank": 395,
+        "city": "Glen Allen",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 38.96872,
+      "lon": -77.3411,
+      "name": "NVR",
+      "v": 10692.9,
+      "meta": {
+        "rank": 396,
+        "city": "Reston",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Interpublic Group",
+      "v": 10691.7,
+      "meta": {
+        "rank": 397,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 38.93428,
+      "lon": -77.17748,
+      "name": "Booz Allen Hamilton Holding",
+      "v": 10661.9,
+      "meta": {
+        "rank": 398,
+        "city": "McLean",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 40.07122,
+      "lon": -74.86489,
+      "name": "Burlington Stores",
+      "v": 10634.8,
+      "meta": {
+        "rank": 399,
+        "city": "Burlington",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 47.61038,
+      "lon": -122.20068,
+      "name": "Expeditors Intl. of Washington",
+      "v": 10600.5,
+      "meta": {
+        "rank": 400,
+        "city": "Bellevue",
+        "state": "WA"
+      }
+    },
+    {
+      "lat": 47.20316,
+      "lon": -122.2404,
+      "name": "Lululemon athletica",
+      "v": 10588.1,
+      "meta": {
+        "rank": 401,
+        "city": "Sumner",
+        "state": "WA"
+      }
+    },
+    {
+      "lat": 30.33218,
+      "lon": -81.65565,
+      "name": "Fidelity National Information (FIS)",
+      "v": 10540,
+      "meta": {
+        "rank": 402,
+        "city": "Jacksonville",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Jefferies Financial Group",
+      "v": 10515.1,
+      "meta": {
+        "rank": 403,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 36.15398,
+      "lon": -95.99277,
+      "name": "Williams",
+      "v": 10503,
+      "meta": {
+        "rank": 404,
+        "city": "Tulsa",
+        "state": "OK"
+      }
+    },
+    {
+      "lat": 39.73915,
+      "lon": -104.9847,
+      "name": "VF",
+      "v": 10454.7,
+      "meta": {
+        "rank": 405,
+        "city": "Denver",
+        "state": "CO"
+      }
+    },
+    {
+      "lat": 41.82186,
+      "lon": -71.50675,
+      "name": "FM",
+      "v": 10413.6,
+      "meta": {
+        "rank": 406,
+        "city": "Johnston",
+        "state": "RI"
+      }
+    },
+    {
+      "lat": 42.68753,
+      "lon": -83.2341,
+      "name": "Autoliv",
+      "v": 10390,
+      "meta": {
+        "rank": 407,
+        "city": "Auburn Hills",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 40.44062,
+      "lon": -79.99589,
+      "name": "Westinghouse Air Brake",
+      "v": 10387,
+      "meta": {
+        "rank": 408,
+        "city": "Pittsburgh",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 40.73566,
+      "lon": -74.17237,
+      "name": "Public Service Enterprise Group",
+      "v": 10290,
+      "meta": {
+        "rank": 409,
+        "city": "Newark",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 41.56283,
+      "lon": -83.65382,
+      "name": "Dana",
+      "v": 10284,
+      "meta": {
+        "rank": 410,
+        "city": "Maumee",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 37.33939,
+      "lon": -121.89496,
+      "name": "Ebay",
+      "v": 10283,
+      "meta": {
+        "rank": 411,
+        "city": "San Jose",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 32.81402,
+      "lon": -96.94889,
+      "name": "Celanese",
+      "v": 10280,
+      "meta": {
+        "rank": 412,
+        "city": "Irving",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "Global Payments",
+      "v": 10105.9,
+      "meta": {
+        "rank": 413,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "News Corp.",
+      "v": 10085,
+      "meta": {
+        "rank": 414,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 41.68199,
+      "lon": -85.97667,
+      "name": "Thor Industries",
+      "v": 10043.4,
+      "meta": {
+        "rank": 415,
+        "city": "Elkhart",
+        "state": "IN"
+      }
+    },
+    {
+      "lat": 39.64777,
+      "lon": -104.98776,
+      "name": "QVC Group",
+      "v": 10037,
+      "meta": {
+        "rank": 416,
+        "city": "Englewood",
+        "state": "CO"
+      }
+    },
+    {
+      "lat": 25.95065,
+      "lon": -80.12282,
+      "name": "Icahn Enterprises",
+      "v": 10020,
+      "meta": {
+        "rank": 417,
+        "city": "Sunny Isles Beach",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 42.98256,
+      "lon": -77.40888,
+      "name": "Constellation Brands",
+      "v": 9961.8,
+      "meta": {
+        "rank": 418,
+        "city": "Victor",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 40.78955,
+      "lon": -74.05653,
+      "name": "Quest Diagnostics",
+      "v": 9872,
+      "meta": {
+        "rank": 419,
+        "city": "Secaucus",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 37.42827,
+      "lon": -121.90662,
+      "name": "KLA",
+      "v": 9812.2,
+      "meta": {
+        "rank": 420,
+        "city": "Milpitas",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 38.96955,
+      "lon": -77.3861,
+      "name": "QXO Building Products",
+      "v": 9763.2,
+      "meta": {
+        "rank": 421,
+        "city": "Herndon",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "APA",
+      "v": 9737,
+      "meta": {
+        "rank": 422,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 33.91918,
+      "lon": -118.41647,
+      "name": "Gold.com",
+      "v": 9699,
+      "meta": {
+        "rank": 423,
+        "city": "El Segundo",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 42.3751,
+      "lon": -71.10561,
+      "name": "Biogen",
+      "v": 9675.9,
+      "meta": {
+        "rank": 424,
+        "city": "Cambridge",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 39.92595,
+      "lon": -75.11962,
+      "name": "Campbell's",
+      "v": 9636,
+      "meta": {
+        "rank": 425,
+        "city": "Camden",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 37.52966,
+      "lon": -122.04024,
+      "name": "Concentrix",
+      "v": 9618.9,
+      "meta": {
+        "rank": 426,
+        "city": "Newark",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 39.12711,
+      "lon": -84.51439,
+      "name": "Cintas",
+      "v": 9596.6,
+      "meta": {
+        "rank": 427,
+        "city": "Cincinnati",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 42.81225,
+      "lon": -85.72281,
+      "name": "SpartanNash",
+      "v": 9549.3,
+      "meta": {
+        "rank": 428,
+        "city": "Byron Center",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 41.83281,
+      "lon": -87.92895,
+      "name": "Ace Hardware",
+      "v": 9491.4,
+      "meta": {
+        "rank": 429,
+        "city": "Oak Brook",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 42.54648,
+      "lon": -71.17367,
+      "name": "Analog Devices",
+      "v": 9427.2,
+      "meta": {
+        "rank": 430,
+        "city": "Wilmington",
+        "state": "MA"
+      }
+    },
+    {
+      "lat": 36.54843,
+      "lon": -82.56182,
+      "name": "Eastman Chemical",
+      "v": 9382,
+      "meta": {
+        "rank": 431,
+        "city": "Kingsport",
+        "state": "TN"
+      }
+    },
+    {
+      "lat": 41.02649,
+      "lon": -73.62846,
+      "name": "Interactive Brokers Group",
+      "v": 9376,
+      "meta": {
+        "rank": 432,
+        "city": "Greenwich",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 33.52066,
+      "lon": -86.80249,
+      "name": "Regions Financial",
+      "v": 9373,
+      "meta": {
+        "rank": 433,
+        "city": "Birmingham",
+        "state": "AL"
+      }
+    },
+    {
+      "lat": 40.74482,
+      "lon": -73.94875,
+      "name": "JetBlue Airways",
+      "v": 9279,
+      "meta": {
+        "rank": 434,
+        "city": "Long Island City",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 40.85788,
+      "lon": -74.42599,
+      "name": "Zoetis",
+      "v": 9256,
+      "meta": {
+        "rank": 435,
+        "city": "Parsippany",
+        "state": "NJ"
+      }
+    },
+    {
+      "lat": 41.4995,
+      "lon": -81.69541,
+      "name": "KeyCorp",
+      "v": 9236,
+      "meta": {
+        "rank": 436,
+        "city": "Cleveland",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Oscar Health",
+      "v": 9177.6,
+      "meta": {
+        "rank": 437,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 39.73915,
+      "lon": -104.9847,
+      "name": "Ovintiv",
+      "v": 9152,
+      "meta": {
+        "rank": 438,
+        "city": "Denver",
+        "state": "CO"
+      }
+    },
+    {
+      "lat": 39.02362,
+      "lon": -94.69357,
+      "name": "Seaboard",
+      "v": 9100,
+      "meta": {
+        "rank": 439,
+        "city": "Merriam",
+        "state": "KS"
+      }
+    },
+    {
+      "lat": 26.43814,
+      "lon": -81.80675,
+      "name": "Hertz Global Holdings",
+      "v": 9049,
+      "meta": {
+        "rank": 440,
+        "city": "Estero",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 33.88474,
+      "lon": -118.41091,
+      "name": "Skechers U.S.A.",
+      "v": 8969.4,
+      "meta": {
+        "rank": 441,
+        "city": "Manhattan Beach",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 40.74482,
+      "lon": -73.94875,
+      "name": "Optimum Communications",
+      "v": 8954.4,
+      "meta": {
+        "rank": 442,
+        "city": "Long Island City",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "NOV",
+      "v": 8870,
+      "meta": {
+        "rank": 443,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "Graphic Packaging Holding",
+      "v": 8807,
+      "meta": {
+        "rank": 444,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 41.66616,
+      "lon": -81.33955,
+      "name": "Avery Dennison",
+      "v": 8755.7,
+      "meta": {
+        "rank": 445,
+        "city": "Mentor",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 37.48522,
+      "lon": -122.23635,
+      "name": "Equinix",
+      "v": 8748,
+      "meta": {
+        "rank": 446,
+        "city": "Redwood City",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 33.30616,
+      "lon": -111.84125,
+      "name": "Insight Enterprises",
+      "v": 8701.7,
+      "meta": {
+        "rank": 447,
+        "city": "Chandler",
+        "state": "AZ"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Sirius XM Holdings",
+      "v": 8699,
+      "meta": {
+        "rank": 448,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "PVH",
+      "v": 8652.9,
+      "meta": {
+        "rank": 449,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "CenterPoint Energy",
+      "v": 8643,
+      "meta": {
+        "rank": 450,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 43.0389,
+      "lon": -87.90647,
+      "name": "WEC Energy Group",
+      "v": 8599.9,
+      "meta": {
+        "rank": 451,
+        "city": "Milwaukee",
+        "state": "WI"
+      }
+    },
+    {
+      "lat": 38.89511,
+      "lon": -77.03637,
+      "name": "Xylem",
+      "v": 8562,
+      "meta": {
+        "rank": 452,
+        "city": "Washington",
+        "state": "DC"
+      }
+    },
+    {
+      "lat": 37.56299,
+      "lon": -122.32553,
+      "name": "Franklin Resources",
+      "v": 8478,
+      "meta": {
+        "rank": 453,
+        "city": "San Mateo",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 40.60843,
+      "lon": -75.49018,
+      "name": "PPL",
+      "v": 8462,
+      "meta": {
+        "rank": 454,
+        "city": "Allentown",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 37.66243,
+      "lon": -121.87468,
+      "name": "Workday",
+      "v": 8446,
+      "meta": {
+        "rank": 455,
+        "city": "Pleasanton",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 41.80892,
+      "lon": -88.01117,
+      "name": "Dover",
+      "v": 8424.3,
+      "meta": {
+        "rank": 456,
+        "city": "Downers Grove",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 42.25863,
+      "lon": -87.84063,
+      "name": "Packaging Corp. of America",
+      "v": 8383.3,
+      "meta": {
+        "rank": 457,
+        "city": "Lake Forest",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "ABM Industries",
+      "v": 8359.4,
+      "meta": {
+        "rank": 458,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 37.36883,
+      "lon": -122.03635,
+      "name": "Intuitive Surgical",
+      "v": 8352.1,
+      "meta": {
+        "rank": 459,
+        "city": "Sunnyvale",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 39.12711,
+      "lon": -84.51439,
+      "name": "American Financial Group",
+      "v": 8324,
+      "meta": {
+        "rank": 460,
+        "city": "Cincinnati",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 43.0389,
+      "lon": -87.90647,
+      "name": "Rockwell Automation",
+      "v": 8264.2,
+      "meta": {
+        "rank": 461,
+        "city": "Milwaukee",
+        "state": "WI"
+      }
+    },
+    {
+      "lat": 44.95302,
+      "lon": -92.99522,
+      "name": "Solventum",
+      "v": 8254,
+      "meta": {
+        "rank": 462,
+        "city": "Maplewood",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 41.85003,
+      "lon": -87.65005,
+      "name": "Old Republic International",
+      "v": 8231.5,
+      "meta": {
+        "rank": 463,
+        "city": "Chicago",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 44.94441,
+      "lon": -93.09327,
+      "name": "Securian Financial Group",
+      "v": 8226.3,
+      "meta": {
+        "rank": 464,
+        "city": "St. Paul",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 37.77493,
+      "lon": -122.41942,
+      "name": "Prologis",
+      "v": 8201.6,
+      "meta": {
+        "rank": 465,
+        "city": "San Francisco",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 40.84367,
+      "lon": -81.76402,
+      "name": "J.M. Smucker",
+      "v": 8178.7,
+      "meta": {
+        "rank": 466,
+        "city": "Orrville",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 33.50921,
+      "lon": -111.89903,
+      "name": "Taylor Morrison Home",
+      "v": 8168.1,
+      "meta": {
+        "rank": 467,
+        "city": "Scottsdale",
+        "state": "AZ"
+      }
+    },
+    {
+      "lat": 41.02649,
+      "lon": -73.62846,
+      "name": "XPO",
+      "v": 8072,
+      "meta": {
+        "rank": 468,
+        "city": "Greenwich",
+        "state": "CT"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Voya Financial",
+      "v": 8050,
+      "meta": {
+        "rank": 469,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 37.35411,
+      "lon": -121.95524,
+      "name": "Palo Alto Networks",
+      "v": 8027.5,
+      "meta": {
+        "rank": 470,
+        "city": "Santa Clara",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 40.12617,
+      "lon": -82.92907,
+      "name": "Vertiv Holdings",
+      "v": 8011.8,
+      "meta": {
+        "rank": 471,
+        "city": "Westerville",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 41.66394,
+      "lon": -83.55521,
+      "name": "Welltower",
+      "v": 7991.1,
+      "meta": {
+        "rank": 472,
+        "city": "Toledo",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 40.71427,
+      "lon": -74.00597,
+      "name": "Foot Locker",
+      "v": 7988,
+      "meta": {
+        "rank": 473,
+        "city": "New York",
+        "state": "NY"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "Par Pacific Holdings",
+      "v": 7974.5,
+      "meta": {
+        "rank": 474,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 41.4995,
+      "lon": -81.69541,
+      "name": "TransDigm Group",
+      "v": 7940,
+      "meta": {
+        "rank": 475,
+        "city": "Cleveland",
+        "state": "OH"
+      }
+    },
+    {
+      "lat": 32.81402,
+      "lon": -96.94889,
+      "name": "Commercial Metals",
+      "v": 7926,
+      "meta": {
+        "rank": 476,
+        "city": "Irving",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 38.62727,
+      "lon": -90.19789,
+      "name": "Post Holdings",
+      "v": 7922.7,
+      "meta": {
+        "rank": 477,
+        "city": "St. Louis",
+        "state": "MO"
+      }
+    },
+    {
+      "lat": 42.36837,
+      "lon": -83.35271,
+      "name": "Masco",
+      "v": 7828,
+      "meta": {
+        "rank": 478,
+        "city": "Livonia",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 29.703,
+      "lon": -98.12445,
+      "name": "Rush Enterprises",
+      "v": 7804.7,
+      "meta": {
+        "rank": 479,
+        "city": "New Braunfels",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "KBR",
+      "v": 7742,
+      "meta": {
+        "rank": 480,
+        "city": "Houston",
+        "state": "TX"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "Sprouts Farmers Market",
+      "v": 7719.3,
+      "meta": {
+        "rank": 481,
+        "city": "Phoenix",
+        "state": "AZ"
+      }
+    },
+    {
+      "lat": 37.77493,
+      "lon": -122.41942,
+      "name": "Williams-Sonoma",
+      "v": 7711.5,
+      "meta": {
+        "rank": 482,
+        "city": "San Francisco",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 41.2381,
+      "lon": -85.85305,
+      "name": "Zimmer Biomet Holdings",
+      "v": 7678.6,
+      "meta": {
+        "rank": 483,
+        "city": "Warsaw",
+        "state": "IN"
+      }
+    },
+    {
+      "lat": 38.96872,
+      "lon": -77.3411,
+      "name": "CACI International",
+      "v": 7659.8,
+      "meta": {
+        "rank": 484,
+        "city": "Reston",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 33.30616,
+      "lon": -111.84125,
+      "name": "Microchip Technology",
+      "v": 7634.4,
+      "meta": {
+        "rank": 485,
+        "city": "Chandler",
+        "state": "AZ"
+      }
+    },
+    {
+      "lat": 25.77427,
+      "lon": -80.19366,
+      "name": "Watsco",
+      "v": 7618.3,
+      "meta": {
+        "rank": 486,
+        "city": "Miami",
+        "state": "FL"
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.38798,
+      "name": "Newell Brands",
+      "v": 7582,
+      "meta": {
+        "rank": 487,
+        "city": "Atlanta",
+        "state": "GA"
+      }
+    },
+    {
+      "lat": 37.55376,
+      "lon": -77.46026,
+      "name": "ARKO",
+      "v": 7571.1,
+      "meta": {
+        "rank": 488,
+        "city": "Richmond",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 37.33939,
+      "lon": -121.89496,
+      "name": "Sanmina",
+      "v": 7568.3,
+      "meta": {
+        "rank": 489,
+        "city": "San Jose",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 37.48522,
+      "lon": -122.23635,
+      "name": "Electronic Arts",
+      "v": 7562,
+      "meta": {
+        "rank": 490,
+        "city": "Redwood City",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 38.25424,
+      "lon": -85.75941,
+      "name": "Yum Brands",
+      "v": 7549,
+      "meta": {
+        "rank": 491,
+        "city": "Louisville",
+        "state": "KY"
+      }
+    },
+    {
+      "lat": 44.04996,
+      "lon": -91.63932,
+      "name": "Fastenal",
+      "v": 7546,
+      "meta": {
+        "rank": 492,
+        "city": "Winona",
+        "state": "MN"
+      }
+    },
+    {
+      "lat": 42.24587,
+      "lon": -84.40135,
+      "name": "CMS Energy",
+      "v": 7515,
+      "meta": {
+        "rank": 493,
+        "city": "Jackson",
+        "state": "MI"
+      }
+    },
+    {
+      "lat": 33.87529,
+      "lon": -117.56644,
+      "name": "Monster Beverage",
+      "v": 7492.7,
+      "meta": {
+        "rank": 494,
+        "city": "Corona",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 34.07362,
+      "lon": -118.40036,
+      "name": "Endeavor Group Holdings",
+      "v": 7482.9,
+      "meta": {
+        "rank": 495,
+        "city": "Beverly Hills",
+        "state": "CA"
+      }
+    },
+    {
+      "lat": 38.96872,
+      "lon": -77.3411,
+      "name": "Science Applications International",
+      "v": 7479,
+      "meta": {
+        "rank": 496,
+        "city": "Reston",
+        "state": "VA"
+      }
+    },
+    {
+      "lat": 38.62727,
+      "lon": -90.19789,
+      "name": "Core & Main",
+      "v": 7441,
+      "meta": {
+        "rank": 497,
+        "city": "St. Louis",
+        "state": "MO"
+      }
+    },
+    {
+      "lat": 40.44062,
+      "lon": -79.99589,
+      "name": "Howmet Aerospace",
+      "v": 7430,
+      "meta": {
+        "rank": 498,
+        "city": "Pittsburgh",
+        "state": "PA"
+      }
+    },
+    {
+      "lat": 41.85059,
+      "lon": -87.882,
+      "name": "Ingredion",
+      "v": 7430,
+      "meta": {
+        "rank": 498,
+        "city": "Westchester",
+        "state": "IL"
+      }
+    },
+    {
+      "lat": 33.52066,
+      "lon": -86.80249,
+      "name": "Vulcan Materials",
+      "v": 7417.7,
+      "meta": {
+        "rank": 500,
+        "city": "Birmingham",
+        "state": "AL"
+      }
+    }
+  ]
+}

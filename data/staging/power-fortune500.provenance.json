@@ -1,0 +1,71 @@
+{
+  "layer": "power-fortune500",
+  "list_year": 2025,
+  "list_year_note": "2025 Fortune 500 list (71st annual), published June 2, 2025, ranking companies by FY2024 revenue. Confirmed via Walmart #1 at $680,985M matching both fortune.com's own 2025 ranking page and Wikipedia's cited figure for the current list at time of retrieval.",
+  "retrieved": "2026-07-06",
+  "sources": [
+    {
+      "name": "Fortune 500 (2025) - fortune.com official ranking page, embedded JSON dataset",
+      "url": "https://fortune.com/ranking/fortune500/2025/",
+      "note": "Primary/authoritative source. Data extracted from the page's Next.js __NEXT_DATA__ JSON payload (props.pageProps.franchiseSearch.items), which contains Fortune's full underlying dataset for the list (a superset spanning the Fortune 1000, filtered here to rank<=500). Revenue figures are FY2024 revenue as published by Fortune for the 2025 ranking (71st annual list, announced June 2, 2025; Walmart #1 at $680,985M)."
+    },
+    {
+      "name": "Wikipedia - List of Fortune 500 companies (redirects to 'List of largest companies in the United States by revenue')",
+      "url": "https://en.wikipedia.org/wiki/List_of_Fortune_500_companies",
+      "note": "Used to confirm list-year identity (Walmart $680,985M / rank 1 match) and as a sanity check for top-100 rows. Wikipedia's table only covers ranks 1-100, so it could not be used as the primary source for the full 500."
+    },
+    {
+      "name": "Salt Technologies AI - Fortune 500 Companies Directory 2025 (mirror)",
+      "url": "https://www.salttechno.ai/datasets/fortune-500-companies-2025.json",
+      "note": "Third-party mirror used ONLY for a 10-row random cross-check against the fortune.com primary source, not as a data source for the output records. 7/10 sampled rows matched exactly; the remainder showed minor revenue discrepancies (largest ~$1.2B on a company with ~$39B revenue, i.e. a few percent) consistent with this being an independently-compiled/LLM-assisted mirror rather than a transcription of the same primary figures. Not used to override any fortune.com values."
+    }
+  ],
+  "parse_method": {
+    "primary_extraction": "Fetched https://fortune.com/ranking/fortune500/2025/ via curl with a browser User-Agent. The page is a Next.js app; extracted the <script id=\"__NEXT_DATA__\"> JSON blob and read props.pageProps.franchiseSearch.items, which is Fortune's own structured ranking dataset (1000 entries spanning the Fortune 1000; filtered to rank<=500 for this layer). Each item carries rank, name, and a data{} dict with 'Revenues ($M)', 'Headquarters City', 'State' (full state name), sector/industry, employees, etc.",
+    "wikipedia_check": "Fetched en.wikipedia.org/wiki/List_of_Fortune_500_companies via curl and parsed with pandas.read_html(). Confirmed it contains only the top-100 rows (Rank, Name, Industry, Revenue (USD millions), Revenue growth, Employees, Headquarters), matching fortune.com's rank 1-100 figures exactly, before falling back to the fortune.com embedded dataset for the full 500.",
+    "cross_check": "Downloaded a third-party mirror (salttechno.ai) full 500-row CSV/JSON and diffed 10 randomly sampled ranks against the fortune.com primary extraction. 7/10 matched exactly (revenue + HQ); 3/10 had revenue differing by roughly 0.1%-3% (e.g. Hilton Worldwide $11,174M vs $11,220M; CHS $39,261.2M vs $40,498M) and 2/10 had a company-name lookup miss due to naming variants (e.g. 'Labcorp Holdings' vs 'Labcorp'). Because fortune.com is the official, primary publisher of the ranking, its figures were used as-is and the mirror was not used to alter any value.",
+    "revenue_parsing": "Revenue strings like '$680,985' or '$13,008.9' were stripped of '$' and ',' and parsed as floats; whole numbers were cast to int for cleanliness. No revenue figure was guessed or estimated; any company for which Fortune's own field was empty would have v=null (none occurred in the 2025 dataset)."
+  },
+  "geocoding": {
+    "reference_file": "/agent/workspace/soulsurvey/data/ref/us_places.csv (21,784 US places; columns state,city_lower,lat,lon,pop)",
+    "method": "Matched on (state 2-letter abbreviation, city_lower). Generated candidate city_lower variants per HQ city to handle known mismatches: New York -> 'new york city'; St./Saint/St interchange (e.g. 'St. Louis' -> 'st. louis', 'saint louis'); Ft./Fort interchange; punctuation-stripped variants (periods removed); unicode/accent-stripped ascii fallback. Hyphenated names like Winston-Salem matched directly since us_places.csv stores them hyphenated and Fortune's HQ city string was already 'Winston-Salem'. Where multiple population entries existed for the same (state, city_lower) key, the highest-population entry was kept.",
+    "match_rate": "100.0% (500/500) of the 500-row Fortune list geocoded successfully. 497/500 (99.4%) matched us_places.csv directly on the (state, city_lower) key with no override (small HQ towns such as Bentonville AR, Purchase NY, Armonk NY, McLean VA, Bloomfield Hills MI, Conshohocken PA, Issaquah WA, Woonsocket RI, Mettawa IL, and similar were all present in the reference file). The remaining 3/500 (0.6%) -- Mayfield Village OH, Abbott Park IL, Antioch TN -- are legitimate unincorporated/small-place HQ locations absent from us_places.csv; each was verified to be in the correct metro area (Cleveland, Chicago, Nashville respectively) and geocoded via an independent, cited source rather than dropped or guessed. Zero companies were dropped for geocoding failure.",
+    "geocode_methods_breakdown": {
+      "exact": 497,
+      "manual_override": 3
+    },
+    "approx_flagged_count": 3,
+    "approx_flagged_detail": [
+      {
+        "rank": 57,
+        "company": "Progressive",
+        "note": "Mayfield Village, OH (Progressive Corporation HQ) is a distinct incorporated village in Cuyahoga County, absent from us_places.csv (which only has the separate towns 'Mayfield' and 'Mayfield Heights'). Coordinates from en.wikipedia.org/wiki/Mayfield,_Ohio (village-level, consistent with town-level precision used elsewhere in this dataset)."
+      },
+      {
+        "rank": 107,
+        "company": "Abbott Laboratories",
+        "note": "Abbott Park, IL (Abbott Laboratories HQ) is an unincorporated corporate-campus locality in Lake County (per Abbott's own FAQ: 'a suburb 40 miles north of Chicago'), not a Census place, so it is absent from us_places.csv. Coordinates (42.3005, -87.8947 / 42°18'3\"N 87°53'41\"W) from wikimapia.org listing for the Abbott Laboratories headquarters facility."
+      },
+      {
+        "rank": 302,
+        "company": "LKQ",
+        "note": "Antioch, TN (LKQ Corporation HQ) is an unincorporated Nashville neighborhood in Davidson County, not independently in us_places.csv under TN (only CA and IL 'Antioch' entries exist there). Coordinates from en.wikipedia.org/wiki/Antioch,_Tennessee (neighborhood-level)."
+      }
+    ]
+  },
+  "coverage": {
+    "companies_in_fortune_dataset_rank_1_500": 500,
+    "companies_captured_in_output": 500,
+    "companies_dropped": 0,
+    "revenue_coverage_pct": 100.0,
+    "companies_with_null_revenue": 0
+  },
+  "companies_dropped_detail": [],
+  "caveats": [
+    "Rank 498 is a genuine tie in Fortune's own data: Howmet Aerospace and Ingredion both report exactly $7,430M FY2024 revenue and both carry Fortune's official rank label '498' (rank 499 is skipped, standard practice for ties). Both are included as separate records with meta.rank=498; total distinct-rank count is therefore 499 unique rank values across 500 companies.",
+    "Fortune's embedded JSON is a superset (Fortune 1000); this layer only includes items with rank<=500 as published on fortune.com/ranking/fortune500/2025/.",
+    "Revenue figures are as published by Fortune for FY2024 (mostly companies' fiscal years ending in or before Dec 2024/early 2025); a small number of companies use non-calendar fiscal years, which is Fortune's standard methodology and not adjusted here.",
+    "HQ coordinates are city-level (population-weighted centroid from the reference dataset), not exact street-address rooftop coordinates. For headquarters located in small/dedicated corporate campuses within a named town (e.g. Bentonville, Purchase, Armonk), coordinates reflect that town's location, which is standard for a city-level basemap layer of this kind.",
+    "No rows were dropped for geocoding failure in the final run (see companies_dropped_detail for empty list); if any drops occur in a re-run against a different/updated us_places.csv, they will be reflected here with a reason and none will be silently guessed."
+  ]
+}

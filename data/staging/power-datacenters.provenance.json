@@ -1,0 +1,112 @@
+{
+  "layer": "power-datacenters",
+  "retrieved": "2026-07-06",
+  "query": {
+    "engine": "Overpass API",
+    "text": "[out:json][timeout:600];\n( node[\"telecom\"=\"data_center\"]; way[\"telecom\"=\"data_center\"]; relation[\"telecom\"=\"data_center\"];\n  node[\"building\"=\"data_center\"]; way[\"building\"=\"data_center\"]; relation[\"building\"=\"data_center\"]; );\nout center tags;",
+    "scope": "worldwide, single request (no bounding-box split needed)",
+    "endpoint_used": "https://overpass-api.de/api/interpreter",
+    "fallback_endpoint_available_but_unused": "https://overpass.kumi.systems/api/interpreter",
+    "http_status": 200,
+    "wall_clock_seconds": 60,
+    "retries_needed": 0,
+    "notes": "Worldwide query returned in ~60s with no timeout/429/remark. Splitting by scheme or bounding box was not required."
+  },
+  "raw_result": {
+    "elements_returned": 4530,
+    "by_osm_type": { "node": 845, "way": 3621, "relation": 64 },
+    "by_tag_scheme_pre_dedup": {
+      "telecom=data_center": 4359,
+      "building=data_center": 171
+    },
+    "elements_missing_coordinates": 0
+  },
+  "processing": {
+    "coordinate_rule": "node -> lat/lon directly; way/relation -> Overpass 'center' (centroid) coordinates from 'out center tags' output",
+    "fields_extracted": ["lat", "lon", "tags.name", "tags.operator", "tags.addr:country (when present, no geocoding performed)"],
+    "country_derivation": "Cheap only: used OSM tags.addr:country verbatim where tagged (240 / 4530 raw elements, ~5.3% coverage). No reverse-geocoding was run against the other ~95%, per instructions not to geocode every point. US/non-US totals in this file are instead computed by bounding-box classification (see below), which is independent of the sparse addr:country tag.",
+    "extra_cheap_fields_kept_in_meta": ["city (addr:city, when present)", "ref (OSM ref tag, e.g. facility code)", "osm_tag (which of the two tag schemes matched)", "osm_id (type/id, for traceability back to OSM)"]
+  },
+  "dedup_rule": {
+    "text": "Same name (case-insensitive) within ~200m of each other, OR any two unnamed points within ~50m of each other -> collapsed to one record.",
+    "implementation": "Haversine great-circle distance; spatial grid index (0.01-degree cells, ~1.1km) used to bound neighbor search instead of full O(n^2) comparison. Within a duplicate pair, the record with richer metadata (has name > has operator > more meta keys) was kept.",
+    "osm_pass_results": {
+      "candidates_before_dedup": 4530,
+      "duplicate_pairs_merged": 286,
+      "records_after_dedup": 4244
+    },
+    "brockovich_merge_pass": {
+      "rule_applied_identically": true,
+      "additional_heuristic": "A Brockovich point was also treated as a duplicate of an existing OSM point if they were within 200m AND one operator/company string was a substring of the other (handles e.g. 'Amazon' vs 'Amazon Web Services' naming drift across sources).",
+      "brockovich_operational_or_construction_candidates": 98,
+      "matched_as_duplicate_of_existing_osm_point": 0,
+      "added_as_new_records": 98,
+      "observation": "Zero overlap detected between the Brockovich hyperscale/AI list and the OSM dataset. This is plausible, not suspicious: OSM's telecom=data_center / building=data_center tagging is dominated by manually-surveyed classic colocation/telecom facilities (Equinix, Digital Realty, NTT, CyrusOne, etc.), while Brockovich's list is specifically 2024-2026 hyperscale AI-training campuses (xAI Colossus, Stargate sites, new Meta/Google/Microsoft AI buildouts) that are largely too new, too remote, or too recently announced to have been mapped into OSM yet. Manually spot-checked the Ashburn/Loudoun County cluster (both sources are dense there): the two datasets' points for that area are legitimately distinct buildings/operators sitting only ~130m-3km apart, not the same facility double-counted."
+    }
+  },
+  "totals": {
+    "final_record_count": 4342,
+    "osm_derived": 4244,
+    "brockovich_added": 98,
+    "us_count_bbox": 1673,
+    "non_us_count_bbox": 2669,
+    "us_share_pct": 38.5,
+    "named_records": 3413,
+    "named_share_pct": 78.6,
+    "unnamed_records": 929,
+    "records_with_operator_tag": 2829
+  },
+  "us_bbox_definition": {
+    "continental": { "lat_min": 24.0, "lat_max": 50.0, "lon_min": -125.0, "lon_max": -66.0 },
+    "alaska": { "lat_min": 51.0, "lat_max": 72.0, "lon_min": -170.0, "lon_max": -129.0 },
+    "hawaii": { "lat_min": 18.5, "lat_max": 22.5, "lon_min": -160.5, "lon_max": -154.5 },
+    "caveat": "Rough rectangular boxes, not a real US/Canada/Mexico border. A handful of points in northern Mexico or southern Canada near the border could be misclassified. Chosen for cheapness per instructions rather than a polygon-in-country test."
+  },
+  "top_named_operators_by_frequency": [
+    { "operator": "Amazon Web Services", "count": 228 },
+    { "operator": "Digital Realty", "count": 166 },
+    { "operator": "Equinix", "count": 162 },
+    { "operator": "Microsoft", "count": 112 },
+    { "operator": "Google", "count": 89 },
+    { "operator": "Meta", "count": 87 },
+    { "operator": "NTT", "count": 65 },
+    { "operator": "Quality Technology Services", "count": 51 },
+    { "operator": "Flexential", "count": 42 },
+    { "operator": "CyrusOne", "count": 35 },
+    { "operator": "Vantage Data Centers", "count": 26 },
+    { "operator": "Lumen Technologies", "count": 24 },
+    { "operator": "Bouygues Télécom", "count": 21 },
+    { "operator": "EdgeConneX", "count": 20 },
+    { "operator": "CoreSite", "count": 19 },
+    { "operator": "Centersquare", "count": 17 },
+    { "operator": "Iron Mountain", "count": 17 },
+    { "operator": "SFR", "count": 16 },
+    { "operator": "atNorth", "count": 16 },
+    { "operator": "Switch", "count": 16 },
+    { "operator": "NorthC", "count": 15 },
+    { "operator": "Stack Infrastructure", "count": 14 },
+    { "operator": "Telehouse", "count": 13 },
+    { "operator": "Verizon", "count": 13 },
+    { "operator": "DataBank", "count": 12 }
+  ],
+  "enrichment_attempt": {
+    "source": "https://brockovichdatacenter.com/",
+    "description": "US-focused community accountability map (Erin Brockovich initiative) tracking major/hyperscale AI data centers plus crowd-sourced 'issue' reports.",
+    "how_found": "Page HTML fetched directly; the map's own two fetch() JSON endpoints (community-reports.json, zip-geocodes.json) turned out to be the *complaint* pins, not the facility list. The actual data-center markers are an inline JavaScript literal array (`var centers = [...]`, ~140 entries) embedded directly in the page's <script> block, extracted with Node.js by isolating and evaluating that static array literal (no external calls, no execution of page logic beyond parsing the data structure) and dumping it to JSON.",
+    "result": "success",
+    "raw_entries_found": 140,
+    "status_breakdown": { "operational": 33, "construction": 65, "proposed": 42 },
+    "inclusion_decision": "Only 'operational' and 'construction' entries (98 total) were merged in. 'proposed' entries (42) were excluded — per Brockovich's own legend these are 'in pipeline / pending approval' with no physical footprint yet, which conflicts with this layer's 'REAL data-center locations' / 'no fabricated records' mandate. A proposal is not yet a place where the cloud touches ground.",
+    "fields_captured_in_meta": ["operator (company)", "country: US (hardcoded, source is US-only)", "city", "status (operational | construction)", "source: brockovichdatacenter.com", "citation (their own cited press/source list per point)"],
+    "time_spent": "under 5 minutes as instructed"
+  },
+  "caveats": [
+    "OSM completeness bias: OpenStreetMap coverage of data centers is driven entirely by volunteer mapping effort. Countries/regions with active OSM communities and mapping parties (much of Europe, US, parts of East Asia/Oceania) are almost certainly over-represented relative to their true share of global data-center capacity; regions with sparse OSM editing (much of Africa, Central Asia, parts of Latin America and the Middle East) are almost certainly under-represented. The counts here reflect 'what's been mapped', not 'what exists'.",
+    "Tag ambiguity: this query is intentionally literal. It picked up at least one 'man_made=tower' co-tagged with 'telecom=data_center' (a comms tower, not a building) and general 'building=data_center' polygons whose companion 'building:levels'/'building:colour' tags suggest ordinary office buildings mis-tagged or shared with unrelated functions (e.g. one relation tagged 'building=office' with a data-center-adjacent name). No manual curation/removal was performed beyond the specified dedup rule -- the dataset is exactly what the two tag schemes return.",
+    "Way/relation centroids ('out center') are geometric centers of the mapped building footprint, not necessarily the coordinates of any specific rack room or entrance; for large campuses (e.g. multi-building hyperscale sites) this can land the point anywhere within the polygon.",
+    "addr:country coverage is sparse (~5%) in the raw OSM data, so per-point 'country' in meta is present for only a minority of OSM-derived records. The 4530/4244/4342 totals and the reported US share come from a rough bounding-box test, not a verified country field on every record.",
+    "Multi-building corporate campuses can appear as several adjacent OSM points (visible in the Ashburn/Loudoun County cluster) that are legitimately distinct buildings, not un-caught duplicates -- but a human glancing at the map may perceive apparent clustering as noise rather than the real density of that specific corridor.",
+    "Brockovich source is a community/advocacy project, not an official registry; its 'operational'/'construction' status labels and coordinates are as accurate as its own citations (press articles, filings) and it explicitly states 'location data may be approximate' and that smaller/unannounced facilities are not listed. It is US-only, so it does not affect non-US coverage or bias.",
+    "This snapshot is a point-in-time capture (retrieved 2026-07-06). Both OSM and the Brockovich list change continuously (new construction, demolitions, editor corrections); no attempt was made to validate against a third source."
+  ]
+}

@@ -1,0 +1,3786 @@
+{
+  "layer": "motion-fulfillment",
+  "retrieved": "2026-07-06",
+  "sources": [
+    {
+      "name": "fba.wiki \u2014 Locations of Amazon Warehouses in USA",
+      "url": "https://fba.wiki/en/list-of-amazon-warehouses-fulfillment-centers/amazon-warehouses-in-usa",
+      "note": "Substitute source (see provenance for why the task's specified MWPVL primary and Overpass API fallback were both non-functional). Live, third-party FBA-seller-logistics reference listing 314 active US Amazon fulfillment/sortation/cross-dock facility codes with full street addresses, sourced from real Amazon Seller Central shipment-routing data."
+    },
+    {
+      "name": "Exa Answer (web-grounded QA, various underlying sources cited per-record)",
+      "url": "https://exa.ai",
+      "note": "Used to geocode 17 of 314 facilities whose city could not be matched in data/ref/us_places.csv (mostly unincorporated places and townships not in the reference gazetteer). Per-record citation is in provenance.geocode_exa_answer_citations."
+    }
+  ],
+  "records": [
+    {
+      "lat": 40.53676,
+      "lon": -75.6313,
+      "name": "ABE2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Breinigsville",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.53676,
+      "lon": -75.6313,
+      "name": "ABE3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Breinigsville",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.68843,
+      "lon": -75.22073,
+      "name": "ABE4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Easton",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.1215,
+      "lon": -75.3399,
+      "name": "ABE5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Norristown",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.11955,
+      "lon": -74.80544,
+      "name": "ABE8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Florence",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.08449,
+      "lon": -106.65114,
+      "name": "ABQ1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Albuquerque",
+        "state": "NM",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.84197,
+      "lon": -75.18509,
+      "name": "ACY1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "West Deptford",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.07122,
+      "lon": -74.86489,
+      "name": "ACY2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Burlington",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.79208,
+      "lon": -75.35518,
+      "name": "ACY5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Logan Township",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.72541,
+      "lon": -97.32085,
+      "name": "AFW1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Fort Worth",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.16417,
+      "lon": -83.68111,
+      "name": "AGS2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Pendergrass",
+        "state": "GA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.08144,
+      "lon": -81.51901,
+      "name": "AKC1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Akron",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.51591,
+      "lon": -73.61012,
+      "name": "ALB1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Nassau",
+        "state": "NY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.80816,
+      "lon": -84.1702,
+      "name": "ATL2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Stone Mountain",
+        "state": "GA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.67955,
+      "lon": -84.43937,
+      "name": "ATL6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "East Point",
+        "state": "GA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.58706,
+      "lon": -84.54243,
+      "name": "ATL7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Union City",
+        "state": "GA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.794,
+      "lon": -84.66049,
+      "name": "ATL8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Lithia Springs",
+        "state": "GA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.95605,
+      "lon": -75.99929,
+      "name": "AVP1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Hazle Township",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.3,
+      "lon": -75.48306,
+      "name": "AVP3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Covington Township",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.32591,
+      "lon": -75.78936,
+      "name": "AVP6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Pittston",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "AZA4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Phoenix",
+        "state": "AZ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "AZA5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Phoenix",
+        "state": "AZ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.8526,
+      "lon": -72.6437,
+      "name": "BDL2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Windsor",
+        "state": "CT",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.39093,
+      "lon": -72.85954,
+      "name": "BDL3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "North Haven",
+        "state": "CT",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.53815,
+      "lon": -72.80704,
+      "name": "BDL5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Meriden",
+        "state": "CT",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.5951,
+      "lon": -72.64537,
+      "name": "BDL6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Cromwell",
+        "state": "CT",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 47.20316,
+      "lon": -122.2404,
+      "name": "BFI1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Sumner",
+        "state": "WA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 47.09676,
+      "lon": -122.63124,
+      "name": "BFI3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "DuPont",
+        "state": "WA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 47.38093,
+      "lon": -122.23484,
+      "name": "BFI4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Kent",
+        "state": "WA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 47.38093,
+      "lon": -122.23484,
+      "name": "BFI5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Kent",
+        "state": "WA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 47.38093,
+      "lon": -122.23484,
+      "name": "BFI6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Kent",
+        "state": "WA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 47.20316,
+      "lon": -122.2404,
+      "name": "BFI7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Sumner",
+        "state": "WA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.37329,
+      "lon": -119.01871,
+      "name": "BFL1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Bakersfield",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.40178,
+      "lon": -86.95444,
+      "name": "BHM1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Bessemer",
+        "state": "AL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.20811,
+      "lon": -86.2911,
+      "name": "BNA1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Lebanon",
+        "state": "TN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.20811,
+      "lon": -86.2911,
+      "name": "BNA2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Lebanon",
+        "state": "TN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.84562,
+      "lon": -86.39027,
+      "name": "BNA3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Murfreesboro",
+        "state": "TN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.16589,
+      "lon": -86.78444,
+      "name": "BNA5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Nashville",
+        "state": "TN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.01562,
+      "lon": -86.58194,
+      "name": "BNA9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "La Vergne",
+        "state": "TN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 43.54072,
+      "lon": -116.56346,
+      "name": "BOI2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Nampa",
+        "state": "ID",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.1251,
+      "lon": -71.10227,
+      "name": "BOS2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Stoughton",
+        "state": "MA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.13982,
+      "lon": -71.51617,
+      "name": "BOS4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Milford",
+        "state": "MA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.1251,
+      "lon": -71.10227,
+      "name": "BOS5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Stoughton",
+        "state": "MA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.70149,
+      "lon": -71.15505,
+      "name": "BOS7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Fall River",
+        "state": "MA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.90061,
+      "lon": -78.67031,
+      "name": "BUF5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Lancaster",
+        "state": "NY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.00622,
+      "lon": -77.4286,
+      "name": "BWI1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Sterling",
+        "state": "VA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.29038,
+      "lon": -76.61219,
+      "name": "BWI2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Baltimore",
+        "state": "MD",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.25649,
+      "lon": -78.09611,
+      "name": "BWI4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Clear Brook",
+        "state": "VA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.29038,
+      "lon": -76.61219,
+      "name": "BWI5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Baltimore",
+        "state": "MD",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.99349,
+      "lon": -81.07398,
+      "name": "CAE1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "West Columbia",
+        "state": "SC",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.99349,
+      "lon": -81.07398,
+      "name": "CAE3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "West Columbia",
+        "state": "SC",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.57733,
+      "lon": -74.2282,
+      "name": "CDW5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Carteret",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.04563,
+      "lon": -85.30968,
+      "name": "CHA1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Chattanooga",
+        "state": "TN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.2873,
+      "lon": -84.75827,
+      "name": "CHA2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Charleston",
+        "state": "TN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.43478,
+      "lon": -81.52568,
+      "name": "CLE2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "North Randall",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.5931,
+      "lon": -81.52679,
+      "name": "CLE3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Euclid",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.31256,
+      "lon": -81.44011,
+      "name": "CLE5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Twinsburg",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.22709,
+      "lon": -80.84313,
+      "name": "CLT2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Charlotte",
+        "state": "NC",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.40888,
+      "lon": -80.58158,
+      "name": "CLT3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Concord",
+        "state": "NC",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.22709,
+      "lon": -80.84313,
+      "name": "CLT4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Charlotte",
+        "state": "NC",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.40888,
+      "lon": -80.58158,
+      "name": "CLT5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Concord",
+        "state": "NC",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.95729,
+      "lon": -82.68183,
+      "name": "CMH1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Etna",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.8784,
+      "lon": -82.88379,
+      "name": "CMH2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Groveport",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.44034,
+      "lon": -84.36216,
+      "name": "CMH3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Monroe",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.94478,
+      "lon": -83.2688,
+      "name": "CMH4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "West Jefferson",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.80778,
+      "lon": -82.98361,
+      "name": "CMH6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Lockbourne",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.38067,
+      "lon": -84.79966,
+      "name": "CSG1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Newnan",
+        "state": "GA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.06589,
+      "lon": -84.70106,
+      "name": "CVG1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Hebron",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.06589,
+      "lon": -84.70106,
+      "name": "CVG2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Hebron",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.06589,
+      "lon": -84.70106,
+      "name": "CVG3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Hebron",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.06589,
+      "lon": -84.70106,
+      "name": "CVG5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Hebron",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.06589,
+      "lon": -84.70106,
+      "name": "CVG7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Hebron",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.06589,
+      "lon": -84.70106,
+      "name": "CVG9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Hebron",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "DAL2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Dallas",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "DAL3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Dallas",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.58902,
+      "lon": -96.68527,
+      "name": "DAL9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Wilmer",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.21917,
+      "lon": -76.47611,
+      "name": "DCA1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Sparrows Point",
+        "state": "MD",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.96358,
+      "lon": -117.56418,
+      "name": "DCA2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Eastvale",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.24205,
+      "lon": -76.44802,
+      "name": "DCA6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Edgemere",
+        "state": "MD",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.6895,
+      "lon": -84.16883,
+      "name": "DCM2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Kettering",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.34589,
+      "lon": -84.5605,
+      "name": "DCN1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Fairfield",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.8526,
+      "lon": -72.6437,
+      "name": "DCY1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Windsor",
+        "state": "CT",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.74818,
+      "lon": -96.47193,
+      "name": "DDX7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Forney",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.72943,
+      "lon": -104.83192,
+      "name": "DEN2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Aurora",
+        "state": "CO",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.86804,
+      "lon": -104.97192,
+      "name": "DEN3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Thornton",
+        "state": "CO",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 38.83388,
+      "lon": -104.82136,
+      "name": "DEN4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Colorado Springs",
+        "state": "CO",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.72943,
+      "lon": -104.83192,
+      "name": "DEN5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Aurora",
+        "state": "CO",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.72943,
+      "lon": -104.83192,
+      "name": "DEN7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Aurora",
+        "state": "CO",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.36837,
+      "lon": -83.35271,
+      "name": "DET1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Livonia",
+        "state": "MI",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 43.60862,
+      "lon": -86.36396,
+      "name": "DET2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Shelby Township",
+        "state": "MI",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.95457,
+      "lon": -97.01501,
+      "name": "DFW6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Coppell",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.72541,
+      "lon": -97.32085,
+      "name": "DFW7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Fort Worth",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.81402,
+      "lon": -96.94889,
+      "name": "DFW8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Irving",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.45704,
+      "lon": -72.82316,
+      "name": "DOB2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Wallingford",
+        "state": "CT",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.46756,
+      "lon": -97.51643,
+      "name": "DOK1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Oklahoma City",
+        "state": "OK",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.15398,
+      "lon": -95.99277,
+      "name": "DOK2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Tulsa",
+        "state": "OK",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.46756,
+      "lon": -97.51643,
+      "name": "DOK3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Oklahoma City",
+        "state": "OK",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.46756,
+      "lon": -97.51643,
+      "name": "DOK4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Oklahoma City",
+        "state": "OK",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.17056,
+      "lon": -118.83759,
+      "name": "DPS3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Thousand Oaks",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.70054,
+      "lon": -93.46216,
+      "name": "DSM5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Bondurant",
+        "state": "IA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.70054,
+      "lon": -93.46216,
+      "name": "DSM9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Bondurant",
+        "state": "IA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.22226,
+      "lon": -83.3966,
+      "name": "DTW1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Romulus",
+        "state": "MI",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.22226,
+      "lon": -83.3966,
+      "name": "DTW3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Romulus",
+        "state": "MI",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.12611,
+      "lon": -83.25722,
+      "name": "DTW5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Brownstown Charter Twp",
+        "state": "MI",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 31.75872,
+      "lon": -106.48693,
+      "name": "ELP1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "El Paso",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.21455,
+      "lon": -74.61932,
+      "name": "EWR4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Robbinsville Twp",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.58038,
+      "lon": -74.28515,
+      "name": "EWR5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Avenel",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.85457,
+      "lon": -74.05962,
+      "name": "EWR8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Teterboro",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.57733,
+      "lon": -74.2282,
+      "name": "EWR9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Carteret",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.74773,
+      "lon": -119.77237,
+      "name": "FAT1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Fresno",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.33023,
+      "lon": -119.29206,
+      "name": "FAT2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Visalia",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.11417,
+      "lon": -94.62746,
+      "name": "FOE1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Kansas City",
+        "state": "KS",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "FTW1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Dallas",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.95457,
+      "lon": -97.01501,
+      "name": "FTW2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Coppell",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.72541,
+      "lon": -97.32085,
+      "name": "FTW3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Fort Worth",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.72541,
+      "lon": -97.32085,
+      "name": "FTW4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Fort Worth",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.93429,
+      "lon": -97.07807,
+      "name": "FTW6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Grapevine",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.78306,
+      "lon": -96.80667,
+      "name": "FTW8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Dallas",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.95457,
+      "lon": -97.01501,
+      "name": "FTW9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Coppell",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 47.65966,
+      "lon": -117.42908,
+      "name": "GEG1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Spokane",
+        "state": "WA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 47.67323,
+      "lon": -117.23937,
+      "name": "GEG2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Spokane Valley",
+        "state": "WA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.7892,
+      "lon": -85.51669,
+      "name": "GRR1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Caledonia",
+        "state": "MI",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.11986,
+      "lon": -80.07365,
+      "name": "GSO1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Kernersville",
+        "state": "NC",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.94957,
+      "lon": -81.93205,
+      "name": "GSP1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Spartanburg",
+        "state": "SC",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.43532,
+      "lon": -112.35821,
+      "name": "GYR1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Goodyear",
+        "state": "AZ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "GYR3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Phoenix",
+        "state": "AZ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.64176,
+      "lon": -77.71999,
+      "name": "HGR2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Hagerstown",
+        "state": "MD",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.30781,
+      "lon": -88.14672,
+      "name": "HMW1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Wilmington",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.46756,
+      "lon": -97.51643,
+      "name": "HOK1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Oklahoma City",
+        "state": "OK",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 29.99883,
+      "lon": -95.26216,
+      "name": "HOU1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Humble",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "HOU2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Houston",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 29.78606,
+      "lon": -95.95107,
+      "name": "HOU3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Brookshire",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 29.78579,
+      "lon": -95.8244,
+      "name": "HOU5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Katy",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 29.58218,
+      "lon": -95.76078,
+      "name": "HOU6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Richmond",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "HOU7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Houston",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.69224,
+      "lon": -97.33754,
+      "name": "ICT2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Wichita",
+        "state": "KS",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.59365,
+      "lon": -87.69477,
+      "name": "IGQ1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Markham",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.42003,
+      "lon": -87.74171,
+      "name": "IGQ2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Monee",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.65948,
+      "lon": -75.56359,
+      "name": "ILG1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "New Castle",
+        "state": "DE",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.99726,
+      "lon": -86.34583,
+      "name": "IND1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Whitestown",
+        "state": "IN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.70421,
+      "lon": -86.39944,
+      "name": "IND2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Plainfield",
+        "state": "IN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.70421,
+      "lon": -86.39944,
+      "name": "IND3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Plainfield",
+        "state": "IN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.76838,
+      "lon": -86.15804,
+      "name": "IND4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Indianapolis",
+        "state": "IN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.70421,
+      "lon": -86.39944,
+      "name": "IND5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Plainfield",
+        "state": "IN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.76838,
+      "lon": -86.15804,
+      "name": "IND8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Indianapolis",
+        "state": "IN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.61366,
+      "lon": -86.10665,
+      "name": "IND9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Greenwood",
+        "state": "IN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 29.76328,
+      "lon": -95.36327,
+      "name": "ITX1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Houston",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.01673,
+      "lon": -84.60078,
+      "name": "IVSA",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Erlanger",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.84197,
+      "lon": -75.18509,
+      "name": "IVSC",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "West Deptford",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.74761,
+      "lon": -75.31047,
+      "name": "IVSD",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Swedesboro",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 30.33218,
+      "lon": -81.65565,
+      "name": "JAX2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Jacksonville",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 30.33218,
+      "lon": -81.65565,
+      "name": "JAX3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Jacksonville",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 30.33218,
+      "lon": -81.65565,
+      "name": "JAX5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Jacksonville",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.56233,
+      "lon": -74.13986,
+      "name": "JFK8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Staten Island",
+        "state": "NY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.50835,
+      "lon": -89.03178,
+      "name": "JVL1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Beloit",
+        "state": "WI",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.22043,
+      "lon": -77.28803,
+      "name": "KRB2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Prince George",
+        "state": "VA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.27113,
+      "lon": -89.094,
+      "name": "KRFD",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Rockford",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 28.03947,
+      "lon": -81.9498,
+      "name": "LAL1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Lakeland",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.0397,
+      "lon": -114.98194,
+      "name": "LAS1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Henderson",
+        "state": "NV",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.19886,
+      "lon": -115.1175,
+      "name": "LAS2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "North Las Vegas",
+        "state": "NV",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.17497,
+      "lon": -115.13722,
+      "name": "LAS5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Las Vegas",
+        "state": "NV",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.19886,
+      "lon": -115.1175,
+      "name": "LAS6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "North Las Vegas",
+        "state": "NV",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.17497,
+      "lon": -115.13722,
+      "name": "LAS7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Las Vegas",
+        "state": "NV",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.09223,
+      "lon": -117.43505,
+      "name": "LAX9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Fontana",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.98869,
+      "lon": -84.47772,
+      "name": "LEX1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Lexington",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.98869,
+      "lon": -84.47772,
+      "name": "LEX3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Lexington",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 30.22409,
+      "lon": -92.01984,
+      "name": "LFT1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Lafayette",
+        "state": "LA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.51872,
+      "lon": -74.4121,
+      "name": "LGA5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Edison",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.51872,
+      "lon": -74.4121,
+      "name": "LGA9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Edison",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.96358,
+      "lon": -117.56418,
+      "name": "LGB3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Eastvale",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.05557,
+      "lon": -117.18254,
+      "name": "LGB4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Redlands",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.10834,
+      "lon": -117.28977,
+      "name": "LGB5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "San Bernardino",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.95335,
+      "lon": -117.39616,
+      "name": "LGB6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Riverside",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.1064,
+      "lon": -117.37032,
+      "name": "LGB7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Rialto",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.1064,
+      "lon": -117.37032,
+      "name": "LGB8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Rialto",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.78252,
+      "lon": -117.22865,
+      "name": "LGB9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Perris",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.74648,
+      "lon": -92.28959,
+      "name": "LIT1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Little Rock",
+        "state": "AR",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.76954,
+      "lon": -92.26709,
+      "name": "LIT2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "North Little Rock",
+        "state": "AR",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.01673,
+      "lon": -84.60078,
+      "name": "LUK5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Erlanger",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.9884,
+      "lon": -85.71579,
+      "name": "LUK7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Shepherdsville",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 38.95362,
+      "lon": -94.73357,
+      "name": "MCI5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Lenexa",
+        "state": "KS",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 28.53834,
+      "lon": -81.37924,
+      "name": "MCO1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Orlando",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 28.90054,
+      "lon": -81.26367,
+      "name": "MCO2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Deltona",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 28.1614,
+      "lon": -81.60174,
+      "name": "MCO5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Davenport",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.20148,
+      "lon": -77.18887,
+      "name": "MDT1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Carlisle",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.60011,
+      "lon": -75.94133,
+      "name": "MDT2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "North East",
+        "state": "MD",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.52519,
+      "lon": -88.0834,
+      "name": "MDW2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Joliet",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.52519,
+      "lon": -88.0834,
+      "name": "MDW4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Joliet",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.55475,
+      "lon": -88.09867,
+      "name": "MDW5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Crest Hill",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.64753,
+      "lon": -88.08951,
+      "name": "MDW6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Romeoville",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.42003,
+      "lon": -87.74171,
+      "name": "MDW7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Monee",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.36363,
+      "lon": -87.84479,
+      "name": "MDW8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Waukegan",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.78586,
+      "lon": -88.14729,
+      "name": "MDW9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Naperville",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.14953,
+      "lon": -90.04898,
+      "name": "MEM1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Memphis",
+        "state": "TN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.87232,
+      "lon": -89.69064,
+      "name": "MEM2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Byhalia",
+        "state": "MS",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.14953,
+      "lon": -90.04898,
+      "name": "MEM4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Memphis",
+        "state": "TN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.96176,
+      "lon": -89.82953,
+      "name": "MEM6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Olive Branch",
+        "state": "MS",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.10927,
+      "lon": -83.76267,
+      "name": "MGE1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Braselton",
+        "state": "GA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.4493,
+      "lon": -83.31155,
+      "name": "MGE3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Jefferson",
+        "state": "GA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 25.90232,
+      "lon": -80.25033,
+      "name": "MIA1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Opa-locka",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 25.77427,
+      "lon": -80.19366,
+      "name": "MIA5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Miami",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 38.76473,
+      "lon": -95.00802,
+      "name": "MKC4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Edgerton",
+        "state": "KS",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.11417,
+      "lon": -94.62746,
+      "name": "MKC6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Kansas City",
+        "state": "KS",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.58474,
+      "lon": -87.82119,
+      "name": "MKE1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Kenosha",
+        "state": "WI",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.88585,
+      "lon": -87.86314,
+      "name": "MKE2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Oak Creek",
+        "state": "WI",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.58474,
+      "lon": -87.82119,
+      "name": "MKE5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Kenosha",
+        "state": "WI",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 30.54769,
+      "lon": -88.17528,
+      "name": "MOB5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Theodore",
+        "state": "AL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.78504,
+      "lon": -85.76942,
+      "name": "MQJ1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Greenfield",
+        "state": "IN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.55005,
+      "lon": -86.07971,
+      "name": "MQJ2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Whiteland",
+        "state": "IN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.20005,
+      "lon": -86.51861,
+      "name": "MQY1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Mt. Juliet",
+        "state": "TN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 44.79802,
+      "lon": -93.5269,
+      "name": "MSP1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Shakopee",
+        "state": "MN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 44.79802,
+      "lon": -93.5269,
+      "name": "MSP5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Shakopee",
+        "state": "MN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 44.64969,
+      "lon": -93.24272,
+      "name": "MSP6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Lakeville",
+        "state": "MN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 45.09413,
+      "lon": -93.35634,
+      "name": "MSP9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Brooklyn Park",
+        "state": "MN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.74595,
+      "lon": -75.54659,
+      "name": "MTN1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Wilmington",
+        "state": "DE",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.29038,
+      "lon": -76.61219,
+      "name": "MTN5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Baltimore",
+        "state": "MD",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.36389,
+      "lon": -76.45222,
+      "name": "MTN9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Nottingham",
+        "state": "MD",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.4716,
+      "lon": -121.12966,
+      "name": "OAK3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Patterson",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.73987,
+      "lon": -121.42618,
+      "name": "OAK4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Tracy",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.52966,
+      "lon": -122.04024,
+      "name": "OAK5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Newark",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.73987,
+      "lon": -121.42618,
+      "name": "OAK6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Tracy",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.46756,
+      "lon": -97.51643,
+      "name": "OKC1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Oklahoma City",
+        "state": "OK",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.46756,
+      "lon": -97.51643,
+      "name": "OKC2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Oklahoma City",
+        "state": "OK",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.46756,
+      "lon": -97.51643,
+      "name": "OKC5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Oklahoma City",
+        "state": "OK",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.46756,
+      "lon": -97.51643,
+      "name": "OKC9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Oklahoma City",
+        "state": "OK",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 47.03426,
+      "lon": -122.82319,
+      "name": "OLM1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Lacey",
+        "state": "WA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.98472,
+      "lon": -117.51528,
+      "name": "ONT1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Mira Loma",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.10834,
+      "lon": -117.28977,
+      "name": "ONT2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "San Bernardino",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.10834,
+      "lon": -117.28977,
+      "name": "ONT5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "San Bernardino",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.93752,
+      "lon": -117.23059,
+      "name": "ONT6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Moreno Valley",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.93752,
+      "lon": -117.23059,
+      "name": "ONT8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Moreno Valley",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.10834,
+      "lon": -117.28977,
+      "name": "ONT9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "San Bernardino",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.42948,
+      "lon": -88.22867,
+      "name": "ORD2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Channahon",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.42003,
+      "lon": -87.74171,
+      "name": "ORD4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Monee",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.50392,
+      "lon": -87.7131,
+      "name": "ORD5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Matteson",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.42948,
+      "lon": -88.22867,
+      "name": "ORD9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Channahon",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.72836,
+      "lon": -76.58496,
+      "name": "ORF3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Suffolk",
+        "state": "VA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 26.93422,
+      "lon": -80.09421,
+      "name": "PBI2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Jupiter",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.73987,
+      "lon": -121.42618,
+      "name": "PCA1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Tracy",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 41.60977,
+      "lon": -83.56438,
+      "name": "PCW1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Rossford",
+        "state": "OH",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 45.52289,
+      "lon": -122.98983,
+      "name": "PDX5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Hillsboro",
+        "state": "OR",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 45.52345,
+      "lon": -122.67621,
+      "name": "PDX6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Portland",
+        "state": "OR",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 44.9429,
+      "lon": -123.0351,
+      "name": "PDX7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Salem",
+        "state": "OR",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 45.53929,
+      "lon": -122.38731,
+      "name": "PDX9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Troutdale",
+        "state": "OR",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.65948,
+      "lon": -75.56359,
+      "name": "PHL1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "New Castle",
+        "state": "DE",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.20148,
+      "lon": -77.18887,
+      "name": "PHL4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Carlisle",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.13528,
+      "lon": -76.86056,
+      "name": "PHL5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Lewisberry",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.20148,
+      "lon": -77.18887,
+      "name": "PHL6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Carlisle",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.44956,
+      "lon": -75.71632,
+      "name": "PHL7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Middletown",
+        "state": "DE",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.44956,
+      "lon": -75.71632,
+      "name": "PHL9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Middletown",
+        "state": "DE",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "PHX3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Phoenix",
+        "state": "AZ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.43532,
+      "lon": -112.35821,
+      "name": "PHX5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Goodyear",
+        "state": "AZ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "PHX6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Phoenix",
+        "state": "AZ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "PHX7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Phoenix",
+        "state": "AZ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "PHXZ",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Phoenix",
+        "state": "AZ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.95537,
+      "lon": -90.03481,
+      "name": "PIL1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Horn Lake",
+        "state": "MS",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.44951,
+      "lon": -80.2445,
+      "name": "PIT2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Imperial",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.44062,
+      "lon": -79.99589,
+      "name": "PIT5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Pittsburgh",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.92946,
+      "lon": -116.97725,
+      "name": "PSP1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Beaumont",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.55565,
+      "lon": -75.98188,
+      "name": "RDG1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Hamburg",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.71126,
+      "lon": -78.61417,
+      "name": "RDU1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Garner",
+        "state": "NC",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 35.99403,
+      "lon": -78.89862,
+      "name": "RDU5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Durham",
+        "state": "NC",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.22793,
+      "lon": -77.40193,
+      "name": "RIC1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Petersburg",
+        "state": "VA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.35682,
+      "lon": -77.44165,
+      "name": "RIC2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Chester",
+        "state": "VA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.55376,
+      "lon": -77.46026,
+      "name": "RIC3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Richmond",
+        "state": "VA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.75903,
+      "lon": -77.47998,
+      "name": "RIC5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Ashland",
+        "state": "VA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.52963,
+      "lon": -119.8138,
+      "name": "RNO4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Reno",
+        "state": "NV",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.71571,
+      "lon": -117.16472,
+      "name": "SAN3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "San Diego",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 29.55217,
+      "lon": -98.26973,
+      "name": "SAT1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Schertz",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 29.88327,
+      "lon": -97.94139,
+      "name": "SAT2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "San Marcos",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 29.42412,
+      "lon": -98.49363,
+      "name": "SAT4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "San Antonio",
+        "state": "TX",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.84069,
+      "lon": -83.6324,
+      "name": "SAV3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Macon",
+        "state": "GA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.10834,
+      "lon": -117.28977,
+      "name": "SBD2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "San Bernardino",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.9577,
+      "lon": -121.29078,
+      "name": "SCK1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Stockton",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.79743,
+      "lon": -121.21605,
+      "name": "SCK3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Manteca",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.9577,
+      "lon": -121.29078,
+      "name": "SCK9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Stockton",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.3434,
+      "lon": -85.34191,
+      "name": "SDF1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Campbellsville",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 38.25424,
+      "lon": -85.75941,
+      "name": "SDF2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Louisville",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.9884,
+      "lon": -85.71579,
+      "name": "SDF4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Shepherdsville",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.9884,
+      "lon": -85.71579,
+      "name": "SDF6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Shepherdsville",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 38.27757,
+      "lon": -85.73718,
+      "name": "SDF8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Jeffersonville",
+        "state": "IN",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.9884,
+      "lon": -85.71579,
+      "name": "SDF9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Shepherdsville",
+        "state": "KY",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 47.60621,
+      "lon": -122.33207,
+      "name": "SEA6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Seattle",
+        "state": "WA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 47.61038,
+      "lon": -122.20068,
+      "name": "SEA8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Bellevue",
+        "state": "WA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.73987,
+      "lon": -121.42618,
+      "name": "SJC7",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Tracy",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.96358,
+      "lon": -117.56418,
+      "name": "SLA5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Eastvale",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.76078,
+      "lon": -111.89105,
+      "name": "SLC1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Salt Lake City",
+        "state": "UT",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.60967,
+      "lon": -111.9391,
+      "name": "SLC2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "West Jordan",
+        "state": "UT",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.76078,
+      "lon": -111.89105,
+      "name": "SLC3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Salt Lake City",
+        "state": "UT",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 38.58157,
+      "lon": -121.4944,
+      "name": "SMF1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Sacramento",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.9577,
+      "lon": -121.29078,
+      "name": "SMF3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Stockton",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 38.35658,
+      "lon": -121.98774,
+      "name": "SMF5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Vacaville",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 42.46254,
+      "lon": -83.10409,
+      "name": "SMI1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Hazel Park",
+        "state": "MI",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 34.1064,
+      "lon": -117.37032,
+      "name": "SNA4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Rialto",
+        "state": "CA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 37.12005,
+      "lon": -93.48019,
+      "name": "STL3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Republic",
+        "state": "MO",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 38.81144,
+      "lon": -89.95316,
+      "name": "STL4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Edwardsville",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 38.77144,
+      "lon": -90.37095,
+      "name": "STL5",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Hazelwood",
+        "state": "MO",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 38.73172,
+      "lon": -90.08038,
+      "name": "STL6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Pontoon Beach",
+        "state": "IL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 38.78394,
+      "lon": -90.48123,
+      "name": "STL8",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "St Charles",
+        "state": "MO",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 39.79208,
+      "lon": -75.35518,
+      "name": "TEB3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Logan Township",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.25914,
+      "lon": -74.53358,
+      "name": "TEB6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "East Windsor",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.4976,
+      "lon": -74.48849,
+      "name": "TEB9",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Somerset",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.33565,
+      "lon": -75.92687,
+      "name": "TEN1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Reading",
+        "state": "PA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 27.72086,
+      "lon": -82.43315,
+      "name": "TPA1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Ruskin",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 28.03947,
+      "lon": -81.9498,
+      "name": "TPA2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Lakeland",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 28.0653,
+      "lon": -81.78869,
+      "name": "TPA3",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Auburndale",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 28.0353,
+      "lon": -82.38926,
+      "name": "TPA4",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Temple Terrace",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 29.1872,
+      "lon": -82.14009,
+      "name": "TPA6",
+      "v": null,
+      "meta": {
+        "type": "Sortation Center",
+        "city": "Ocala",
+        "state": "FL",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.25914,
+      "lon": -74.53358,
+      "name": "TTN2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "East Windsor",
+        "state": "NJ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 36.15398,
+      "lon": -95.99277,
+      "name": "TUL2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Tulsa",
+        "state": "OK",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.44838,
+      "lon": -112.07404,
+      "name": "TUS1",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Phoenix",
+        "state": "AZ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 32.22174,
+      "lon": -110.92648,
+      "name": "TUS2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Tucson",
+        "state": "AZ",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 33.58706,
+      "lon": -84.54243,
+      "name": "XEW2",
+      "v": null,
+      "meta": {
+        "type": "Fulfillment Center",
+        "city": "Union City",
+        "state": "GA",
+        "status": "open"
+      }
+    },
+    {
+      "lat": 40.20148,
+      "lon": -77.18887,
+      "name": "XUSC",
+      "v": null,
+      "meta": {
+        "type": "Inbound Cross-Dock (IXD)",
+        "city": "Carlisle",
+        "state": "PA",
+        "status": "open"
+      }
+    }
+  ]
+}

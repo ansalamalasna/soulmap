@@ -1,0 +1,84 @@
+{
+  "layer": "desire-searches",
+  "retrieved": "2026-07-06",
+  "year": "2025",
+  "sources": [
+    {
+      "name": "Pornhub Insights - 2025 Year in Review (official, via Wayback Machine archive)",
+      "url": "http://web.archive.org/web/20260624182314/https://www.pornhub.com/insights/2025-year-in-review",
+      "note": "PRIMARY SOURCE. Direct pornhub.com/insights access returned HTTP 403 in this environment; the Wayback Machine snapshot (captured 2026-06-24) serves the identical official page, text and images. Used for the full US state map image ('United States Top Relative Searches') and the full 'Top 20 Countries in Detail' text section (search terms, top categories, and top relative categories for each of the 20 countries)."
+    },
+    {
+      "name": "Pornhub Insights 2025 US state map image (direct asset)",
+      "url": "http://web.archive.org/web/20260624182314im_/https://www.pornhub.com/insights/wp-content/uploads/2025/12/1_pornhub-insights-2025-year-in-review-map-united-states.png",
+      "note": "The infographic titled 'United States Top Relative Searches: Terms Searched More Often in Each State When Compared to All Others.' Read directly (state labels + term labels are rendered text on the image, verified at 2x-3x zoom crops). This is the authoritative source for all 28 states + DC captured in this dataset. States not labeled on this map are gray/uncolored, meaning Pornhub had no data for them (see caveats)."
+    },
+    {
+      "name": "Advocate.com - \"Pornhub's spicy stats prove just how horny 2025 was\"",
+      "url": "https://www.advocate.com/gay-love-and-sex/pornhub-stats-2025",
+      "note": "Independent press cross-check (published 2025-12-10). Confirms Oregon='horny grandma', Minnesota='anal beads', Illinois='hairy armpits', Vermont='jockstrap' verbatim, matching the map image reading exactly."
+    },
+    {
+      "name": "DNYUZ - \"Pornhub reveals number of women watching X-rated videos is surging... top US searches\"",
+      "url": "https://dnyuz.com/2025/12/13/pornhub-reveals-number-of-women-watching-x-rated-videos-is-surging-new-report-exposes-top-us-searches/",
+      "note": "Independent press cross-check (published 2025-12-13, syndicated from New York Post). Confirms California='Latina amateur', New York='Dominican', Louisiana='Thicc', Pennsylvania='puffy nipples' verbatim, matching the map image reading exactly. Also confirms context that Pornhub is blocked in numerous states (cites Florida and Texas by name) and only reports relative search terms for states where the site remains accessible."
+    },
+    {
+      "name": "UNILAD Tech - \"Pornhub's 2025 year in review reveals 'bleak' detail about the USA\"",
+      "url": "https://www.uniladtech.com/news/tech-news/adult-film-site-2025-year-in-review-bleak-detail-usa-018949-20251210",
+      "note": "Supplementary press context (published 2025-12-10). Independently confirms Pennsylvania='puffy nipples', Louisiana='thicc', and District of Columbia='dildo sucking', and reports that Pornhub was blocked in 23 states as of Dec 2, 2025 due to age-verification laws (with Missouri named as the 23rd)."
+    }
+  ],
+  "regions": [
+    { "key": "US-WA", "value": 1, "label": "pegging" },
+    { "key": "US-OR", "value": 1, "label": "horny grandma" },
+    { "key": "US-CA", "value": 1, "label": "latina amateur" },
+    { "key": "US-NV", "value": 1, "label": "las vegas" },
+    { "key": "US-CO", "value": 1, "label": "native american" },
+    { "key": "US-NM", "value": 1, "label": "real wife" },
+    { "key": "US-AK", "value": 1, "label": "big women" },
+    { "key": "US-HI", "value": 1, "label": "american" },
+    { "key": "US-MN", "value": 1, "label": "anal beads" },
+    { "key": "US-IA", "value": 1, "label": "amish" },
+    { "key": "US-WI", "value": 1, "label": "sloppy" },
+    { "key": "US-IL", "value": 1, "label": "hairy armpits" },
+    { "key": "US-MO", "value": 1, "label": "boner" },
+    { "key": "US-MI", "value": 1, "label": "pawg" },
+    { "key": "US-OH", "value": 1, "label": "queef" },
+    { "key": "US-LA", "value": 1, "label": "thicc" },
+    { "key": "US-WV", "value": 1, "label": "redneck" },
+    { "key": "US-PA", "value": 1, "label": "puffy nipples" },
+    { "key": "US-NY", "value": 1, "label": "dominican" },
+    { "key": "US-NJ", "value": 1, "label": "jewish" },
+    { "key": "US-DE", "value": 1, "label": "nipple sucking" },
+    { "key": "US-MD", "value": 1, "label": "nigerian" },
+    { "key": "US-DC", "value": 1, "label": "dildo sucking" },
+    { "key": "US-CT", "value": 1, "label": "feet worship" },
+    { "key": "US-RI", "value": 1, "label": "caught" },
+    { "key": "US-MA", "value": 1, "label": "sweaty" },
+    { "key": "US-VT", "value": 1, "label": "jockstrap" },
+    { "key": "US-NH", "value": 1, "label": "slutty milf" },
+    { "key": "US-ME", "value": 1, "label": "granny sex" },
+
+    { "key": "US", "value": 1, "label": "latina", "meta": { "country": "United States", "kind": "top_search_term", "note": "Top overall (non-relative) national search term, provided for context; not a relative term since the US is the baseline all other states/countries are compared against." } },
+    { "key": "MX", "value": 1, "label": "Latina (+357%)", "meta": { "country": "Mexico", "kind": "top_relative_category" } },
+    { "key": "PH", "value": 1, "label": "Reality (+308%)", "meta": { "country": "Philippines", "kind": "top_relative_category" } },
+    { "key": "BR", "value": 1, "label": "Brazilian (+915%)", "meta": { "country": "Brazil", "kind": "top_relative_category" } },
+    { "key": "DE", "value": 1, "label": "German (+1,043%)", "meta": { "country": "Germany", "kind": "top_relative_category" } },
+    { "key": "FR", "value": 1, "label": "French (+1,337%)", "meta": { "country": "France", "kind": "top_relative_category", "note": "France's data covers only part of 2025; Pornhub suspended site access in France June 4-19 and again from July 15 onward due to age-verification laws." } },
+    { "key": "IT", "value": 1, "label": "Italian (+1,645%)", "meta": { "country": "Italy", "kind": "top_relative_category" } },
+    { "key": "GB", "value": 1, "label": "British (+921%)", "meta": { "country": "United Kingdom", "kind": "top_relative_category" } },
+    { "key": "ES", "value": 1, "label": "digitacion / fingering (+778%)", "meta": { "country": "Spain", "kind": "top_trending_search", "note": "Spain's per-country section did not report a 'top relative category' figure in the source narrative; using the top trending search term instead, per task fallback guidance." } },
+    { "key": "CA", "value": 1, "label": "Small Tits (+126%)", "meta": { "country": "Canada", "kind": "top_relative_category" } },
+    { "key": "JP", "value": 1, "label": "Japanese", "meta": { "country": "Japan", "kind": "top_category", "note": "Japan's per-country section did not report a 'top relative category' percentage in the source narrative; using Japan's top viewed category instead." } },
+    { "key": "PL", "value": 1, "label": "Babe (+141%)", "meta": { "country": "Poland", "kind": "top_relative_category" } },
+    { "key": "AR", "value": 1, "label": "Latina (+205%)", "meta": { "country": "Argentina", "kind": "top_relative_category" } },
+    { "key": "NL", "value": 1, "label": "Fetish (+124%)", "meta": { "country": "Netherlands", "kind": "top_relative_category" } },
+    { "key": "CO", "value": 1, "label": "Ebony (+231%)", "meta": { "country": "Colombia", "kind": "top_relative_category" } },
+    { "key": "UA", "value": 1, "label": "Double Penetration (+194%)", "meta": { "country": "Ukraine", "kind": "top_relative_category" } },
+    { "key": "AU", "value": 1, "label": "Asian (+137%)", "meta": { "country": "Australia", "kind": "top_relative_category" } },
+    { "key": "EG", "value": 1, "label": "Arab (+938%)", "meta": { "country": "Egypt", "kind": "top_relative_category" } },
+    { "key": "PE", "value": 1, "label": "Latina (+235%)", "meta": { "country": "Peru", "kind": "top_relative_category" } },
+    { "key": "CL", "value": 1, "label": "Latina (+308%)", "meta": { "country": "Chile", "kind": "top_relative_category" } }
+  ]
+}
