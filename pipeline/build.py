@@ -227,6 +227,7 @@ def build():
         "states": load(p("data","ref","states-10m.json")),
         "nation": load(p("data","ref","nation-10m.json")),
         "counties": counties,
+        "places": load(p("data","ref","places_baked.json")),
     }
 
     def read(fp):
