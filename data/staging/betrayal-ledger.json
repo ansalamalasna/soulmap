@@ -1,0 +1,733 @@
+{
+  "layer": "betrayal-ledger",
+  "retrieved": "2026-07-07T00:00:00Z",
+  "sources": [
+    {
+      "name": "Curated from DOJ/USAO press releases, state Attorney General releases, court records (FindLaw/Justia/govinfo), and major-outlet reporting (AP, NYT, WaPo, NPR, regional dailies)",
+      "url": "",
+      "note": "per-entry citations are recorded in each record's meta.cites; every case named here has a criminal conviction or guilty plea by the named individual(s), never an allegation alone"
+    }
+  ],
+  "records": [
+    {
+      "lat": 41.839,
+      "lon": -89.4796,
+      "name": "Dixon, IL",
+      "v": 53700000,
+      "meta": {
+        "who": "Rita Crundwell, City Comptroller",
+        "years": "1990–2012",
+        "scheme": "Ran a secret municipal bank account for 22 years to bankroll a 400-horse quarter-horse breeding empire while the city she bled cut police equipment and road repair.",
+        "outcome": "Pleaded guilty to wire fraud; sentenced to 19 years 7 months federal prison (235 months) and ordered to pay $53.7M restitution — called the largest municipal embezzlement in U.S. history by federal prosecutors.",
+        "cites": [
+          "https://www.justice.gov/usao-ndil/pr/former-dixon-comptroller-rita-crundwell-sentenced-nearly-20-years-federal-prison-537",
+          "https://caselaw.findlaw.com/court/us-7th-circuit/1649874.html",
+          "https://www.shawlocal.com/2013/02/14/ex-dixon-comptroller-crundwell-sentenced-to-19-years-7-months/afq2jvw/"
+        ]
+      }
+    },
+    {
+      "lat": 33.7788,
+      "lon": -117.8531,
+      "name": "Beaumont, CA",
+      "v": 43000000,
+      "meta": {
+        "who": "Alan Kapanicas, City Manager; William Aylward, Finance Director; David Dillon & Ernest Egger, city planning/economic-development officials (via private consultancy Urban Logic); Deepak Moorjani, Public Works Director",
+        "years": "1993–2015",
+        "scheme": "Diverted roughly $43 million in transportation-impact bond funds into a self-controlled consultancy and secret accounts via fabricated contracts, nearly bankrupting the small Inland Empire city.",
+        "outcome": "All five pleaded guilty to embezzlement/misappropriation/conflict-of-interest felonies; ordered to pay a combined $11M+ restitution (Kapanicas $1M, Aylward $100K, Dillon $4M, Egger $3M, Moorjani $3M), barred for life from California public office; no defendant received jail time.",
+        "cites": [
+          "https://www.desertsun.com/story/news/crime_courts/2017/12/19/beaumont-almost-brought-its-knees-officials-plead-guilty-43-million-embezzlement-case/963714001/",
+          "https://ktla.com/news/local-news/4-beaumont-city-officials-fined-millions-for-embezzling-public-money-other-corruption-charges/",
+          "https://newschief.com/story/news/2018/06/25/kapanicas-embezzlement-scheme-leads-new-complaint-beaumont-case/732639002/"
+        ]
+      }
+    },
+    {
+      "lat": 26.4656,
+      "lon": -98.2213,
+      "name": "Hidalgo County, TX (Weslaco contracts)",
+      "v": 38500000,
+      "meta": {
+        "who": "Arturo “A.C.” Cuellar Jr., Hidalgo County Commissioner; John F. Cuellar & Gerardo Tafolla, Weslaco City Commissioners; Ricardo Quintanilla, co-conspirator",
+        "years": "2008–2015",
+        "scheme": "Bribed Weslaco city commissioners with $405,000 disguised as legal fees to steer a $38.5 million water-treatment-facility rehabilitation contract to favored engineering firms, part of a scheme that moved $4.1 million in illicit fees.",
+        "outcome": "Arturo Cuellar convicted on 61 counts (money laundering, Travel Act violations) and sentenced to 20 years federal prison; Quintanilla convicted on 15 counts, 16.5 years; John Cuellar pleaded guilty to honest-services fraud conspiracy, 3 years.",
+        "cites": [
+          "https://www.valleycentral.com/news/local-news/former-hidalgo-county-commissioner-two-others-sentenced-for-bribery-conspiracy/",
+          "https://www.justice.gov/usao-sdtx"
+        ]
+      }
+    },
+    {
+      "lat": 31.4715,
+      "lon": -110.9765,
+      "name": "Rio Rico / Santa Cruz County, AZ",
+      "v": 38700000,
+      "meta": {
+        "who": "Elizabeth Gutfahr, Santa Cruz County Treasurer",
+        "years": "2014–2024",
+        "scheme": "Wired county funds to bank accounts held by fake companies she created via 187 fraudulent transfers, undermining a required two-step approval process, to buy real estate, renovate her family ranch, fund a cattle business, and buy 20+ vehicles — in one of Arizona's poorest counties.",
+        "outcome": "Pleaded guilty to embezzlement by a public official, money laundering, and tax evasion; sentenced to 10 years federal prison and ordered to pay $51.8M restitution.",
+        "cites": [
+          "https://www.irs.gov/compliance/criminal-investigation/former-santa-cruz-county-treasurer-sentenced-to-10-years-in-prison-for-stealing-over-38-million-in-county-funds",
+          "https://www.azcentral.com/story/news/local/arizona/2025/06/24/former-county-official-who-embezzled-almost-40m-gets-10-year-sentence/84324229007/"
+        ]
+      }
+    },
+    {
+      "lat": 36.5969,
+      "lon": -120.8337,
+      "name": "Panoche Water District, CA",
+      "v": 25000000,
+      "meta": {
+        "who": "Dennis Falaschi, General Manager, Panoche Water & Drainage Districts",
+        "years": "1992–2015",
+        "scheme": "Directed staff to unseal a federal irrigation pipe and secretly divert more than 42 billion gallons of water from the Delta-Mendota Canal into the district's own canal for 23 years, then sold the stolen federal water to farmers.",
+        "outcome": "Pleaded guilty to conspiracy to take government property and filing a false tax return; sentenced to 5 years probation, 6 months home detention, $10,000 fine; the district separately paid $8.26M in civil settlements. Interior Dept./BOR valued the stolen water at over $25 million.",
+        "cites": [
+          "https://www.doioig.gov/sites/default/files/2021-migration/Investigative%20Summary_Panoche%20Water%20District%20General%20Manager%20Conspired%20to%20Illegally%20Divert%20Federal%20Water.pdf",
+          "https://www.justice.gov/usao-edca/pr/former-water-district-general-manager-pleads-guilty-conspiracy-commit-water-theft-and"
+        ]
+      }
+    },
+    {
+      "lat": 41.8399,
+      "lon": -87.7539,
+      "name": "Cicero, IL",
+      "v": 12000000,
+      "meta": {
+        "who": "Betty Loren-Maltese, Town President",
+        "years": "1992–1996",
+        "scheme": "Rerouted the town's municipal health-insurance business to a mob-linked shell company, Specialty Risk Consultants, which siphoned premiums into a horse farm, a Wisconsin island casino, and a summer home for a Cicero organized-crime boss.",
+        "outcome": "Convicted at federal trial of racketeering conspiracy; sentenced to 8 years 1 month federal prison, $100,000 fine, $8M+ restitution.",
+        "cites": [
+          "https://en.wikipedia.org/wiki/Betty_Loren-Maltese",
+          "https://www.mrt.com/news/article/Ex-Ill-Town-President-Sentenced-to-Jail-7779321.php",
+          "https://www.insurancejournal.com/news/midwest/2003/01/10/25322.htm"
+        ]
+      }
+    },
+    {
+      "lat": 40.7999,
+      "lon": -73.651,
+      "name": "Roslyn, NY",
+      "v": 11200000,
+      "meta": {
+        "who": "Frank Tassone, Superintendent of Schools; Pamela Gluckin, Assistant Superintendent for Business",
+        "years": "1990–2004",
+        "scheme": "Padded expense accounts, fabricated vendor invoices through a phantom word-processing company at the superintendent's home address, and billed the district for Concorde flights and Las Vegas gambling trips — the largest public-school embezzlement in U.S. history (the basis for HBO's \"Bad Education\").",
+        "outcome": "Tassone pleaded guilty to grand larceny; sentenced to 4 to 12 years state prison. Gluckin pleaded guilty; sentenced to 3 to 9 years, ordered to repay funds from her pension; died in 2017.",
+        "cites": [
+          "https://www.townandcountrymag.com/education-college/a32291684/bad-education-hbo-true-story-frank-tassone-pamela-gluckin/",
+          "https://nymag.com/nymetro/urban/features/9908/",
+          "https://www.rollingstone.com/culture/culture-features/bad-education-hbo-true-story-scandal-fact-check-992263/"
+        ]
+      }
+    },
+    {
+      "lat": 33.5207,
+      "lon": -86.8025,
+      "name": "Jefferson County, AL",
+      "v": 7200000,
+      "meta": {
+        "who": "Larry Langford, Jefferson County Commission President and later Birmingham Mayor",
+        "years": "2002–2007",
+        "scheme": "Took $241,843 in cash, Italian suits, Rolex watches, and loans from investment banker Bill Blount in exchange for steering county sewer-bond and swap business to Blount's firm, which collected roughly $7.2 million in fees — part of the financing that ballooned the county's sewer debt past $3 billion and drove it to the largest municipal bankruptcy in U.S. history at the time.",
+        "outcome": "Convicted at federal trial on 60 counts (bribery, fraud, money laundering, conspiracy, filing false tax returns); sentenced to 15 years federal prison, ordered to forfeit $241,843 and pay $119,985 in back taxes. NOTE: the $241,843 is Langford's personal bribe take; the $3B+ figure is the county's separate sewer-debt/bankruptcy context, not his personal theft — recorded here is the $7.2M in fees his bribery diverted to his benefactor's firm.",
+        "cites": [
+          "https://www.justice.gov/archive/usao/aln/News/March%202010/MARCH%205,%202010%20FEDERAL%20JUDGE%20SENTENCES%20FORMER%20BIRMINGHAM%20MAYOR%20AND%20FORMER%20JEFFERSON%20COUNTY%20COMMISSION%20PRESIDENT%20TO%2015%20YEARS%20FOR%20BRIBERY%20SCHEME.htm",
+          "https://www.nbcnews.com/id/wbna35727690",
+          "https://www.al.com/spotnews/2010/03/post_497.html"
+        ]
+      }
+    },
+    {
+      "lat": 42.3314,
+      "lon": -83.0458,
+      "name": "Detroit, MI",
+      "v": 4600000,
+      "meta": {
+        "who": "Kwame Kilpatrick, Mayor",
+        "years": "2002–2008",
+        "scheme": "Ran city hall as what prosecutors called a criminal enterprise, shaking down contractors, steering millions in city and water-department work to friend Bobby Ferguson for kickbacks, and turning a nonprofit fund meant to help struggling Detroiters into a personal slush fund.",
+        "outcome": "Convicted at federal trial on 24 counts (racketeering, extortion, bribery, tax crimes); sentenced to 28 years federal prison — among the stiffest white-collar sentences in U.S. history at the time. (Commuted by presidential clemency in January 2021 after roughly 7 years served.)",
+        "cites": [
+          "https://www.npr.org/2013/10/10/231592980/former-detroit-mayor-kilpatrick-sentenced-to-28-years-in-prison",
+          "https://www.bbc.com/news/world-us-canada-24485162",
+          "https://www.cbsnews.com/detroit/news/sentencing-underway-for-ex-detroit-mayor-kwame-kilpatrick/"
+        ]
+      }
+    },
+    {
+      "lat": 33.9195,
+      "lon": -118.187,
+      "name": "Bell, CA",
+      "v": 5500000,
+      "meta": {
+        "who": "Robert Rizzo, City Manager; Angela Spaccia, Assistant City Administrator",
+        "years": "2005–2010",
+        "scheme": "Secretly drafted illegal employment contracts to inflate their own pay to over $1.5 million and $564,000 a year respectively in a blue-collar city where a quarter of residents live below the poverty line, while illegally raising taxes and issuing $50 million in park bonds for a park never built.",
+        "outcome": "Rizzo pleaded no contest to corruption charges; sentenced to 12 years state prison plus 33 months federal for tax evasion, restitution near $8.8M. Spaccia convicted at trial on 11 of 13 felonies; sentenced to 11 years 8 months (later resentenced to 10 years on appeal), restitution over $8M.",
+        "cites": [
+          "https://en.wikipedia.org/wiki/City_of_Bell_scandal",
+          "https://www.cbsnews.com/news/california-city-manager-gets-12-years-for-corruption-scheme/",
+          "https://www.npr.org/sections/thetwo-way/2014/04/16/303768753/ex-city-manager-caught-in-calif-salary-scandal-gets-12-years"
+        ]
+      }
+    },
+    {
+      "lat": 39.9259,
+      "lon": -75.1196,
+      "name": "Camden, NJ",
+      "v": 65000,
+      "meta": {
+        "who": "Milton Milan, Mayor",
+        "years": "1996–1998",
+        "scheme": "Laundered $65,000 in drug money through his construction company to post bond-project collateral, staged a break-in at his own business for insurance fraud, and took $30,000–$50,000 in Mafia bribes for construction-contract favors as Camden's first Latino mayor.",
+        "outcome": "Convicted at federal trial on 14 of 19 counts (mail/wire fraud, money laundering, structuring, conspiracy); sentenced to 87 months (7 years 3 months) federal prison, $14,761 restitution, barred from holding office.",
+        "cites": [
+          "https://en.wikipedia.org/wiki/Milton_Milan",
+          "https://law.justia.com/cases/federal/appellate-courts/F3/304/273/474433/"
+        ]
+      }
+    },
+    {
+      "lat": 41.4995,
+      "lon": -81.6954,
+      "name": "Cuyahoga County, OH",
+      "v": 166000,
+      "meta": {
+        "who": "Jimmy Dimora, County Commissioner",
+        "years": "1998–2010",
+        "scheme": "Took more than $166,000 in bribes — cash, home renovations, casino trips, prostitutes — in exchange for steering contracts to allies, fixing judges' cases, and rigging jobs and grants, in a probe that ultimately convicted over 50 county officials, employees, and contractors including two judges and the county auditor.",
+        "outcome": "Convicted at federal trial on 32–33 counts (racketeering, bribery, conspiracy, Hobbs Act violations, tax charges); sentenced to 28 years federal prison, $98,000 restitution.",
+        "cites": [
+          "https://www.justice.gov/archive/usao/ohn/news/2012/31julydimora.html",
+          "https://www.ideastream.org/2012-07-31/jimmy-dimora-sentenced-to-28-years-in-prison",
+          "https://www.dispatch.com/story/news/crime/2012/03/09/former-cuyahoga-county-commissioner-guilty/23632532007/"
+        ]
+      }
+    },
+    {
+      "lat": 41.1792,
+      "lon": -73.1894,
+      "name": "Bridgeport, CT",
+      "v": 500000,
+      "meta": {
+        "who": "Joseph Ganim, Mayor",
+        "years": "1995–2001",
+        "scheme": "Solicited more than $500,000 in cash, wine, home improvements, and services from firms in exchange for steering lucrative city contracts — including the wastewater-treatment operating contract and an 18-year extension worth a $150,000 personal kickback — and used municipal funds to buy himself a $1 million life-insurance policy.",
+        "outcome": "Convicted at federal trial on 16 counts (racketeering, extortion, bribery, mail fraud, tax fraud); sentenced to 9 years federal prison, $150,000 fine, forfeiture of $175,000–$500,000. (Later reelected mayor of Bridgeport in 2015 after serving his sentence.)",
+        "cites": [
+          "https://www.justice.gov/archive/tax/usaopress/2003/txdv0320030701-3.htm",
+          "https://www.ctinsider.com/news/article/Ganim-found-guilty-on-16-charges-11891766.php",
+          "https://casetext.com/case/us-v-ganim-7"
+        ]
+      }
+    },
+    {
+      "lat": 41.824,
+      "lon": -71.4128,
+      "name": "Providence, RI",
+      "v": 250000,
+      "meta": {
+        "who": "Vincent “Buddy” Cianci Jr., Mayor",
+        "years": "1990–2000",
+        "scheme": "Turned city hall into what prosecutors called “a city for sale,” running a decades-long racketeering enterprise that sold municipal jobs, contracts, and tax breaks through his chief of administration and a towing-company associate, forfeiting $250,000 in a campaign account tied to the scheme.",
+        "outcome": "Convicted at federal trial (Operation Plunder Dome) of RICO conspiracy; sentenced to 64 months (5 years 4 months) federal prison; $250,000 campaign-fund forfeiture. (Cianci had earlier resigned as mayor in 1984 after pleading no contest to a separate felony assault.)",
+        "cites": [
+          "https://caselaw.findlaw.com/court/us-1st-circuit/1105072.html",
+          "https://www.foxnews.com/story/providence-mayor-convicted-of-corruption",
+          "https://www.upi.com/Top_News/2002/06/24/RI-Mayor-Cianci-guilty-in-split-decision/86531024939535/"
+        ]
+      }
+    },
+    {
+      "lat": 33.749,
+      "lon": -84.388,
+      "name": "Atlanta, GA",
+      "v": 17000000,
+      "meta": {
+        "who": "Mitzi Bickers, former Director of Human Services, City of Atlanta",
+        "years": "2010–2015",
+        "scheme": "Used her influence at city hall to steer roughly $17 million in sidewalk, bridge, and snow-removal contracts to two favored contractors in exchange for about $2 million in bribes, spent on a lakefront home, a luxury SUV, and jet skis.",
+        "outcome": "Convicted at federal jury trial on 9 of 12 felony counts (conspiracy to commit bribery, money laundering, wire fraud, false tax returns); faced a maximum of over 100 years but received a fraction at sentencing. Contractors Elvin “E.R.” Mitchell Jr. (5 years, $1.12M restitution) and Charles Richards Jr. (27 months, $193,000 restitution) also convicted.",
+        "cites": [
+          "https://www.ajc.com/news/jury-finds-mitzi-bickers-guilty-in-atlanta-corruption-case/2QDPRTLQIJBRDI3EWGWGJN2AJQ/",
+          "https://www.ajc.com/news/local/contractors-sentenced-prison-atlanta-city-hall-bribery-scheme/2MfrDB5sQgNhMbrGyOei8I/"
+        ]
+      }
+    },
+    {
+      "lat": 29.9547,
+      "lon": -90.0751,
+      "name": "New Orleans, LA",
+      "v": 500000,
+      "meta": {
+        "who": "C. Ray Nagin, Mayor",
+        "years": "2004–2010",
+        "scheme": "Took roughly half a million dollars in bribes — cash, free vacations, truckloads of free granite for his family's countertop business — from contractors seeking city work and his support for post-Katrina rebuilding projects, spanning the storm's chaotic aftermath.",
+        "outcome": "Convicted at federal jury trial on 20 of 21 counts (bribery, wire fraud, money laundering, tax evasion); sentenced to 10 years federal prison, $84,264 restitution, $501,200 forfeiture — New Orleans' first mayor convicted and imprisoned for public corruption. (Sentence commuted by presidential clemency in 2020 after roughly 8 years served.)",
+        "cites": [
+          "https://www.fbi.gov/contact-us/field-offices/neworleans/news/press-releases/former-new-orleans-mayor-c.-ray-nagin-sentenced-for-conspiracy-bribery-honest-services-wire-fraud-money-laundering-and-tax-violations",
+          "https://www.nola.com/news/crime_police/ray-nagin-sentenced-to-10-years-in-prison-for-public-corruption/article_f6d608af-c787-5823-b16c-5f2d87c75a94.html"
+        ]
+      }
+    },
+    {
+      "lat": 41.1739,
+      "lon": -76.8834,
+      "name": "Harrisburg, PA",
+      "v": 18000,
+      "meta": {
+        "who": "Stephen R. Reed, Mayor",
+        "years": "1982–2010",
+        "scheme": "Diverted proceeds from repeated municipal bond issues — nominally for a trash-incinerator retrofit that never worked and ultimately buried the city in roughly $350 million in debt — to buy Wild West and Civil War memorabilia he stored in his own home and private facilities.",
+        "outcome": "Charged with 499 corruption counts, most dismissed on statute-of-limitations grounds; pleaded guilty to 20 counts of receiving stolen property; sentenced to 2 years probation, no jail time. Harrisburg's incinerator debt forced the city into state receivership in 2011 and the first-ever SEC securities-fraud charge against a U.S. city.",
+        "cites": [
+          "https://theburgnews.com/news/former-mayor-stephen-reed-guilty-plea-deal",
+          "https://www.wgal.com/article/former-harrisburg-mayor-stephen-reed-pleads-guilty-to-stolen-property-charges/8631940"
+        ]
+      }
+    },
+    {
+      "lat": 28.6775,
+      "lon": -99.8281,
+      "name": "Crystal City, TX",
+      "v": 2250000,
+      "meta": {
+        "who": "James Jonas III, City Manager/City Attorney; Ricardo Lopez, Mayor; Rogelio Mata, Mayor Pro-Tem; Roel Mata & Gilbert Urrabazo, City Council members",
+        "years": "2012–2016",
+        "scheme": "Diverted $2.25 million raised from a municipal debt offering — earmarked for water meters, HVAC, and lighting upgrades — into the city's general fund to cover the manager's salary, while soliciting bribes from vendors seeking city business, leaving Crystal City $3 million in the hole.",
+        "outcome": "Jonas convicted at federal trial on 14 counts (bribery, wire fraud, honest-services fraud); sentenced to 35 years federal prison. Lopez convicted, sentenced to 8 years. Three council members pleaded guilty to bribery, sentenced to 21–33 months each and ordered to repay $11,292 in bribes received.",
+        "cites": [
+          "https://www.ksat.com/news/2017/06/26/jury-finds-former-top-crystal-city-officials-guilty-in-bribery-kickback-scheme/",
+          "https://www.expressnews.com/news/local/article/Crystal-City-officials-sentenced-for-taking-bribes-13345760.php",
+          "https://www.ksat.com/news/local/2020/08/15/federal-court-denies-appeal-of-ex-city-manager-of-crystal-city-convicted-in-bribery-scheme/"
+        ]
+      }
+    },
+    {
+      "lat": 39.9259,
+      "lon": -75.1196,
+      "name": "Camden, NJ (ABSCAM)",
+      "v": 400000,
+      "meta": {
+        "who": "Angelo Errichetti, Mayor of Camden & NJ State Senator; Louis Johanson, Philadelphia City Councilman",
+        "years": "1978–1980",
+        "scheme": "In the FBI's landmark ABSCAM sting, a fictitious Arab sheikh offered casino licenses and investment cash for political favors; Camden's mayor brokered introductions for a fake $400,000 casino investment and personally pocketed $25,000, later helping arrange a $100,000 payment to a state casino-commission official caught on the same tapes.",
+        "outcome": "Errichetti convicted at federal trial of bribery and conspiracy; sentenced to 6 years federal prison, $40,000 fine. Johanson convicted, 3 years, $20,000 fine. NOTE: ABSCAM's larger and more famous haul — one U.S. Senator and six U.S. Representatives, all convicted — involved federal, not municipal, officials, and is excluded from this municipal-corruption ledger per protocol; only the two municipal figures (Camden's mayor and a Philadelphia city councilman) are recorded here.",
+        "cites": [
+          "https://www.encyclopedia.com/law/law-magazines/abscam-trials-1980-1981",
+          "https://time.com/archive/6855679/the-fbi-stings-congress/",
+          "https://www.fbi.gov/history/cases-and-criminals/abscam"
+        ]
+      }
+    },
+    {
+      "lat": 34.0039,
+      "lon": -118.2301,
+      "name": "Vernon, CA",
+      "v": 60000,
+      "meta": {
+        "who": "Bruce Malkenhorst Sr., City Administrator/Clerk/Treasurer",
+        "years": "1978–2005",
+        "scheme": "Held five overlapping city posts simultaneously in a corruption-plagued industrial town of about 100 residents, drawing over $911,000 in his final year while illegally billing the city for golf outings, massages, and personal credit-card bills.",
+        "outcome": "Pleaded guilty to misappropriating public funds; sentenced to probation, ordered to repay $60,000 plus a $10,000 fine, no prison time. CalPERS later cut his record $551,688/year pension to $115,848 and, after an administrative law judge upheld the cut, moved in 2015 to recover a further $3.5 million in past overpayments.",
+        "cites": [
+          "http://www.laobserved.com/biz/2011/05/ex-vernon_official_p.php",
+          "https://calpensions.com/2015/11/19/calpers-to-vernon-pensioner-repay-3-5-million/",
+          "https://www.nbcnews.com/news/world/convicted-official-cutting-my-pension-425-000-year-elder-abuse-flna810038"
+        ]
+      }
+    },
+    {
+      "lat": 40.8568,
+      "lon": -74.1285,
+      "name": "Passaic, NJ",
+      "v": 110000,
+      "meta": {
+        "who": "Alex D. Blanco, Mayor",
+        "years": "2010–2012",
+        "scheme": "Solicited $110,000 in bribes from two developers, funded by federal HUD housing money the city had released to them for a low-income housing project, in exchange for ensuring the project's approval — elected on a promise of clean government after two of his three predecessors went to prison for corruption.",
+        "outcome": "Pleaded guilty to soliciting and accepting corrupt payments; sentenced to 27 months federal prison, 3 years supervised release, $110,000 restitution; resigned from office immediately upon his plea.",
+        "cites": [
+          "https://www.ice.gov/news/releases/former-nj-mayor-sentenced-27-months-prison-taking-110000-bribe",
+          "https://eu.northjersey.com/story/news/2016/11/17/passaic-mayor-pleads-guilty-accepting-bribes-developers/94023134/"
+        ]
+      }
+    },
+    {
+      "lat": 33.9562,
+      "lon": -83.988,
+      "name": "Gwinnett County, GA",
+      "v": 36500,
+      "meta": {
+        "who": "Shirley Lasseter, County Commissioner",
+        "years": "2011–2012",
+        "scheme": "Agreed to sell her official vote approving a real-estate development to an undercover FBI agent posing as a money launderer for drug traffickers, taking $36,500 in cash installments while her son (a zoning-board appointee she herself had named) promised an ownership stake in the project.",
+        "outcome": "Pleaded guilty to bribery-related federal charges; sentenced to 33 months federal prison; resigned from office May 31, 2012.",
+        "cites": [
+          "https://www.justice.gov/archive/usao/gan/press/2012/09-05-12b.html",
+          "https://www.gainesvilletimes.com/news/former-gwinnett-commissioner-gets-almost-3-years-for-taking-bribes/"
+        ]
+      }
+    },
+    {
+      "lat": 37.4716,
+      "lon": -121.1297,
+      "name": "Patterson, CA",
+      "v": 1500000,
+      "meta": {
+        "who": "Jeffrey Menge, Assistant Superintendent/Chief Business Officer, Patterson Joint Unified School District; Eric Drabert, IT Director",
+        "years": "2018–2022",
+        "scheme": "Menge secretly created and controlled a Nevada shell company, CenCal Tech, fronted by a fictitious executive named “Frank Barnes,” then used it to double-bill and overbill the school district for services never delivered, funding a home remodel and a Ferrari 458, an Audi R8, and a Corvette Z06.",
+        "outcome": "Both pleaded guilty to theft concerning federally funded programs; Menge sentenced to 30 months federal prison and ordered to pay $550,000 restitution, Drabert to 18 months and $200,000 restitution.",
+        "cites": [
+          "https://www.goldrushcam.com/sierrasuntimes/index.php/news/local-news/76015-ex-assistant-superintendent-and-it-director-of-patterson-joint-unified-school-district-sentenced-for-1-5-million-embezzlement",
+          "https://www.modbee.com/news/local/crime/article314915066.html",
+          "https://www.aol.com/news/court-orders-750k-restitution-1-224302648.html"
+        ]
+      }
+    },
+    {
+      "lat": 38.1162,
+      "lon": -82.5957,
+      "name": "Fort Gay, WV",
+      "v": 370000,
+      "meta": {
+        "who": "Joetta Hatfield, Mayor; Sheila Bowen, Treasurer/Recorder",
+        "years": "2017–2024",
+        "scheme": "Wrote themselves unauthorized checks from various town accounts with no supporting documentation, over-compensated their own paid leave, withdrew cash, and altered utility payments in a town of fewer than 700 people.",
+        "outcome": "Both pleaded guilty to felony embezzlement; each sentenced to 1 to 10 years in state prison. Hatfield ordered to pay $245,249 restitution, Bowen $127,004; both resigned from town office in December 2024.",
+        "cites": [
+          "https://www.wowktv.com/news/former-fort-gay-mayor-recorder-sentenced-in-embezzlement-case/",
+          "https://wchstv.com/news/local/former-fort-gay-officials-sentenced-to-prison-for-embezzling-370k-in-public-funding"
+        ]
+      }
+    },
+    {
+      "lat": 42.1029,
+      "lon": -77.2336,
+      "name": "Addison, NY",
+      "v": 1171362,
+      "meta": {
+        "who": "Ursula Stone, Village Clerk-Treasurer",
+        "years": "2004–2023",
+        "scheme": "Ran the small village's entire financial operation with zero oversight for 19 years, intercepting checks the school district paid to the village and cashing them for herself, giving herself unauthorized raises and health-insurance buyout payments, and cashing out unused leave time she wasn't entitled to.",
+        "outcome": "Pleaded guilty to first-degree Corrupting the Government (B felony); sentenced to 3 to 9 years state prison, ordered to pay full $1.1 million restitution, and forced to forfeit her public pension — the first pension forfeiture for public corruption in New York state history.",
+        "cites": [
+          "https://www.osc.ny.gov/press/releases/2024/08/nys-comptroller-dinapoli-steuben-county-district-attorney-baker-and-nys-police-former-addison",
+          "https://www.osc.ny.gov/local-government/audits/village/2025/07/11/village-addison-former-clerk-treasurers-misappropriation-funds-2024m-19",
+          "https://13wham.com/news/local/former-addison-village-clerk-in-steuben-county-pleads-guilty-to-stealing-1-million-forfeits-pension-ursula-stone-comptroller-investigation-checks"
+        ]
+      }
+    },
+    {
+      "lat": 32.746,
+      "lon": -96.9978,
+      "name": "Grand Prairie, TX",
+      "v": 600000,
+      "meta": {
+        "who": "Carolyn Foster, Chief Financial Officer, Grand Prairie ISD",
+        "years": "2014–2015",
+        "scheme": "As CFO, ordered large sums of cash delivered by armored truck to the district's administration vault — meant for teacher awards — and rewrote district financial procedures so she alone could authorize the withdrawals, pocketing the money in $100,000 increments.",
+        "outcome": "Pleaded guilty to federal-program theft; sentenced to 37 months (the maximum within guidelines) federal prison, ordered to pay $633,302 restitution; judge called her conduct “horrendous.”",
+        "cites": [
+          "https://www.dallasnews.com/news/crime/2018/03/01/former-cfo-of-grand-prairie-schools-gets-37-months-in-prison-after-using-armored-trucks-to-steal-600000/",
+          "https://www.nbcdfw.com/local/dfw-morningnews-former-grand-prairie-cfo-given-37-months-in-federal-prison-for-stealing-600000/256112/"
+        ]
+      }
+    },
+    {
+      "lat": 35.1679,
+      "lon": -78.9728,
+      "name": "Spring Lake, NC",
+      "v": 567070,
+      "meta": {
+        "who": "Gay Cameron Tucker, Finance Director",
+        "years": "2016–2021",
+        "scheme": "Wrote checks from the town's bank accounts to herself, forging the signatures of the mayor and town manager, and kept the transactions off the town's books — undetected because the town had stopped conducting routine audits.",
+        "outcome": "Pleaded guilty to embezzlement from a local government receiving federal funds and aggravated identity theft; sentenced to 4 years federal prison; the state's Local Government Commission took control of the town's finances after her removal.",
+        "cites": [
+          "https://www.cityviewnc.com/stories/former-spring-lake-finance-director-sentenced-to-four-years-in-prison-for-embezzlement/",
+          "https://www.beaufortcountynow.com/post/59348/former-spring-lake-finance-director-pleads-guilty-to-embezzlement.html",
+          "https://www.foxnews.com/us/north-carolina-towns-finance-director-pleads-guilty-embezzling-more-500000"
+        ]
+      }
+    },
+    {
+      "lat": 41.14,
+      "lon": -104.8203,
+      "name": "South Cheyenne Water & Sewer District, WY",
+      "v": 350000,
+      "meta": {
+        "who": "Dena Hansen, General Manager",
+        "years": "2014–2024",
+        "scheme": "As the district's longtime general manager, altered deposit slips over roughly a decade to skim customer payments meant for the special water-and-sewer district's operating accounts.",
+        "outcome": "Convicted at jury trial on one count of felony theft; sentencing pending pre-sentence investigation as of the audit's disclosure.",
+        "cites": [
+          "https://www.wyomingnews.com/news/local_news/jury-finds-south-cheyenne-water-sewer-district-manager-guilty-of-theft/article_6cb4041b-ab7a-400a-9c86-6f8725f6a3c2.html",
+          "https://cowboystatedaily.com/2026/06/17/jury-finds-former-cheyenne-water-manager-guilty-of-stealing-350k-over-a-decade/"
+        ]
+      }
+    },
+    {
+      "lat": 38.272,
+      "lon": -87.7625,
+      "name": "Owen County, IN",
+      "v": 346157,
+      "meta": {
+        "who": "Angie Lawson, County Auditor and County Council Member",
+        "years": "2005–2014",
+        "scheme": "Used county-issued credit cards as her personal accounts for eight years — food, alcohol, gift cards, toys, jewelry, vacations — while serving first as elected auditor, then as chief deputy auditor.",
+        "outcome": "Convicted of embezzling more than $300,000; sentenced to 20 months federal prison, ordered to pay $346,157 restitution; the state attorney general separately sued to recover nearly $100,000 in investigative costs.",
+        "cites": [
+          "https://www.wrtv.com/news/call-6-investigators/former-owen-county-auditor-now-in-federal-prison",
+          "https://www.heraldtimesonline.com/story/news/local/2015/10/29/former-owen-county-auditor-sentenced-to-20-months-in-priso/117507276/"
+        ]
+      }
+    },
+    {
+      "lat": 41.6111,
+      "lon": -86.7227,
+      "name": "LaPorte County, IN",
+      "v": 150000,
+      "meta": {
+        "who": "Mary Ray, Chief Deputy Auditor",
+        "years": "2011–2012",
+        "scheme": "Embezzled county funds while serving as chief deputy auditor and hid the theft by underreporting the money as income on her federal tax returns, while separately defrauding her elderly, disabled father-in-law out of over $600,000 and gambling the proceeds at casinos.",
+        "outcome": "Convicted at federal trial on two counts of theft of government monies, two counts of false tax statements, and seven counts of wire fraud; sentenced to 84 months federal prison, ordered to forfeit $137,250 and pay $801,316 total restitution.",
+        "cites": [
+          "https://www.justice.gov/archives/opa/pr/former-county-chief-deputy-auditor-sentenced-84-months-embezzling-government-funds-tax-fraud",
+          "https://www.southbendtribune.com/story/news/crime/2015/09/19/ex-auditor-convicted-of-taking-money-from-laporte-county/46218931/"
+        ]
+      }
+    },
+    {
+      "lat": 39.9995,
+      "lon": -84.5613,
+      "name": "Butler County, OH",
+      "v": 4000000,
+      "meta": {
+        "who": "Mary C. Rogers, County Auditor",
+        "years": "2004–2006",
+        "scheme": "As the county official overseeing a fiber-optics installation project, conspired to help a contractor falsely claim it had a county contract in order to fraudulently secure roughly $4 million from a bank, while separately failing to report over $56,000 in income from a side tax-preparation business.",
+        "outcome": "Pleaded guilty to conspiracy to commit mail and wire fraud and filing a false tax return; sentenced to 24 months federal prison, ordered to pay $4 million restitution to the defrauded bank; resigned upon her guilty plea in 2008.",
+        "cites": [
+          "https://www.justice.gov/archive/usao/ohs/news/07-26-11.html",
+          "https://www.fox19.com/story/15150467/former-butler-county-auditor-sentenced-to-24-months-in-prison"
+        ]
+      }
+    },
+    {
+      "lat": 39.9242,
+      "lon": -83.8088,
+      "name": "Clark County, OH",
+      "v": 1800000,
+      "meta": {
+        "who": "Robert Vanderhorst, Clark County Auditor's Office employee",
+        "years": "2007–2022",
+        "scheme": "Opened a bank account for a phony vendor, deposited county checks into it over 15 years, then quietly moved the money into his own accounts or withdrew it as cash to pay for out-of-state trips, home renovations, and cars.",
+        "outcome": "Pleaded guilty to felony aggravated theft and theft in office; sentenced to 7 years state prison; the Ohio Auditor of State issued a final finding for recovery of more than $1.8 million against him.",
+        "cites": [
+          "https://www.springfieldnewssun.com/news/1-8-million-theft-state-audit-details-brazen-crime-by-ex-clark-county-auditor-s/article_861ad91c-bf13-55f9-a4ac-16af26904782.html",
+          "https://ohioauditor.gov/news/pressreleases/Details/6100"
+        ]
+      }
+    },
+    {
+      "lat": 47.6062,
+      "lon": -122.3321,
+      "name": "Seattle, WA",
+      "v": 1100000,
+      "meta": {
+        "who": "Joseph Phan, Seattle Public Utilities engineer",
+        "years": "2009–2012",
+        "scheme": "Deposited 70 checks made out to the city's public utility into his own personal bank account over three years, using the stolen money to buy houses, rental properties, and undeveloped land.",
+        "outcome": "Pleaded guilty to 67 counts of first-degree theft; sentenced to 7.5 years state prison — called the largest public embezzlement case the sentencing judge had seen — with about half of the stolen $1.1 million recovered through seized assets and the rest covered by the city's insurer.",
+        "cites": [
+          "https://www.spokesman.com/stories/2014/jan/19/former-utility-engineer-gets-term-for-thefts/",
+          "https://www.columbian.com/news/2014/jan/18/ex-seattle-public-utilities-engineer-gets-prison/"
+        ]
+      }
+    },
+    {
+      "lat": 39.5081,
+      "lon": -91.5288,
+      "name": "Center, MO",
+      "v": 317326,
+      "meta": {
+        "who": "Tracey Ray, City Clerk",
+        "years": "2015–2019",
+        "scheme": "As the small city's sole financial gatekeeper — collecting payments, paying bills, reconciling every bank statement herself — pocketed cash residents paid in person for city services and falsified monthly financial reports to the Board of Aldermen to hide the shortfall.",
+        "outcome": "Indicted by federal grand jury on wire-fraud and federal-program-theft charges, then pleaded guilty; total theft documented at $317,325.59.",
+        "cites": [
+          "https://khmoradio.com/federal-grand-jury-indicts-local-city-clerk/",
+          "https://krcgtv.com/news/local/former-center-mo-city-clerk-pleads-to-stealing-317k-from-town"
+        ]
+      }
+    },
+    {
+      "lat": 37.1273,
+      "lon": -90.4501,
+      "name": "Greenville, MO",
+      "v": 168957,
+      "meta": {
+        "who": "Pamela S. Birmingham, City Clerk",
+        "years": "2013–2018",
+        "scheme": "Cashed roughly $39,000 in city checks payable to Greenville herself, falsified board records to conceal about $26,000 of the improper payments, gave herself pay raises without board approval, and transferred money between accounts to hide the shortfalls in a Wayne County town of under 500 residents.",
+        "outcome": "Convicted of receiving stolen property; sentenced to 10 years state prison, ordered to repay $168,957 to the city.",
+        "cites": [
+          "https://www.waynecojournalbanner.com/2022/03/31/birmingham-sentenced-to-10-years-in-prison-ordered-to-repay-168957-to-greenville/",
+          "https://auditor.mo.gov/news/item/former-greenville-clerk-sentenced-to-10-years-in-prison-ordered-to-repay-more-than-168000"
+        ]
+      }
+    },
+    {
+      "lat": 32.7466,
+      "lon": -100.35,
+      "name": "Maverick County, TX",
+      "v": 1300000,
+      "meta": {
+        "who": "Eliaz Maldonado, Precinct 1 Commissioner; Rodolfo Heredia, County Commissioner; Eduardo Rene Rodriguez & Jaime Flores, Precinct 1 foremen; Hector Chavez Jr., Solid Waste Authority head",
+        "years": "2007–2013",
+        "scheme": "Border-county commissioners ran their precincts as “virtual fiefdoms,” rigging bids and taking kickbacks on a multimillion-dollar Texas Department of Public Safety grant meant to improve conditions in the county's poor colonias — one concrete-pouring “ghost project” billed $96 per square foot against a $3.33 state benchmark.",
+        "outcome": "More than a dozen officials and contractors convicted or pleaded guilty in the FBI investigation; Maldonado and Heredia each received the 10-year statutory maximum for bribery, with other defendants sentenced from 3.5 to 9.7 years; prosecutors estimated the corrupt commissioners cost the county $1.3 million over two years alone.",
+        "cites": [
+          "https://www.expressnews.com/news/local/article/Details-of-Maverick-Corruption-trickle-out-6099701.php",
+          "https://www.fbi.gov/contact-us/field-offices/sanantonio/news/press-releases/former-maverick-county-commissioner-former-county-employee-and-three-contractors-sentenced-to-federal-prison-in-connection-with-a-bribery-kickback-and-bid-rigging-scheme"
+        ]
+      }
+    },
+    {
+      "lat": 41.402,
+      "lon": -74.3243,
+      "name": "Crawford, NY",
+      "v": 21296,
+      "meta": {
+        "who": "Jolene Roy, Town Clerk",
+        "years": "2017–2018",
+        "scheme": "Stole cash paid to the town for room rentals at the Crawford Senior Center and falsified town records to cover up the missing money.",
+        "outcome": "Pleaded guilty to third-degree grand larceny and first-degree tampering with public records; ordered to pay $21,296.25 restitution as part of her plea deal.",
+        "cites": [
+          "https://www.recordonline.com/story/news/crime/2020/02/13/ex-crawford-town-clerk-pleads-guilty-to-embezzling-21k/111806816/",
+          "https://www.osc.ny.gov/press/releases/2020/02/dinapoli-announces-guilty-plea-town-crawford-embezzlement-case"
+        ]
+      }
+    },
+    {
+      "lat": 33.169,
+      "lon": -90.854,
+      "name": "Hollandale, MS",
+      "v": 393000,
+      "meta": {
+        "who": "Mario Willis, Superintendent, Hollandale School District",
+        "years": "2019–2022",
+        "scheme": "Used his position as superintendent to conspire with a Clarksdale-district counterpart and a Missouri teacher to embezzle U.S. Department of Education program funds intended for students.",
+        "outcome": "Pleaded guilty to conspiracy to embezzle federal program funds; sentenced to 20 months federal prison, ordered to pay $393,000 restitution.",
+        "cites": [
+          "https://www.wjtv.com/news/state/former-mississippi-school-superintendents-sentenced-for-stealing-education-funds/",
+          "https://www.clarionledger.com/story/news/2026/06/03/mississippi-educators-sentenced-embezzlement-scheme-school/90387528007/"
+        ]
+      }
+    },
+    {
+      "lat": 34.2001,
+      "lon": -90.5709,
+      "name": "Clarksdale, MS",
+      "v": 143000,
+      "meta": {
+        "who": "Earl Joe Nelson, Superintendent, Clarksdale Municipal School District (later Leake County School District)",
+        "years": "2019–2022",
+        "scheme": "As superintendent, joined a conspiracy with counterparts in other districts and a Missouri teacher to embezzle nearly $400,000 combined in U.S. Department of Education funds meant for students.",
+        "outcome": "Pleaded guilty to conspiracy to embezzle federal program funds; sentenced to 14 months federal prison, ordered to pay $143,000 restitution.",
+        "cites": [
+          "https://www.wjtv.com/news/state/former-mississippi-school-superintendents-sentenced-for-stealing-education-funds/",
+          "https://www.clarionledger.com/story/news/2026/06/03/mississippi-educators-sentenced-embezzlement-scheme-school/90387528007/"
+        ]
+      }
+    },
+    {
+      "lat": 29.6499,
+      "lon": -90.1121,
+      "name": "Jefferson Parish, LA",
+      "v": 66000,
+      "meta": {
+        "who": "Aaron Broussard, Parish President",
+        "years": "2003–2010",
+        "scheme": "Created a no-show \"paralegal supervisor\" job for his unqualified ex-wife, funneling her a rising salary for years of work she never performed, while separately taking $66,000 in bribes from a telecom vendor in exchange for steering the parish's communications contracts to his company.",
+        "outcome": "Pleaded guilty to conspiracy to commit bribery, wire fraud, and theft concerning federally funded programs; sentenced to 46 months federal prison — the fifth conviction in a corruption probe that also convicted his ex-wife, his parish attorney, and a vendor.",
+        "cites": [
+          "https://www.justice.gov/archive/usao/lae/news/2012/2012_09_25_aaron_broussard_plea.html",
+          "https://www.upi.com/Top_News/US/2013/02/25/Broussard-sentenced-to-46-months/73011361832412/"
+        ]
+      }
+    },
+    {
+      "lat": 41.1542,
+      "lon": -75.865,
+      "name": "Fairview Township, PA",
+      "v": 400000,
+      "meta": {
+        "who": "Karen McGinnis, Tax Collector",
+        "years": "2023–2025",
+        "scheme": "As the township's elected tax collector, responsible for property-tax payments owed to the township, Luzerne County, and the Crestwood School District, wrote checks to herself from the tax-collection bank accounts she controlled.",
+        "outcome": "Convicted of embezzling public funds; sentenced to 20 months federal prison, 3 years supervised release, ordered to pay $367,088 restitution (having repaid about $40,000 before the theft was discovered).",
+        "cites": [
+          "https://www.irs.gov/compliance/criminal-investigation/former-fairview-township-tax-collector-sentenced-to-20-months-imprisonment-for-embezzling-400000-in-property-taxes",
+          "https://www.pennlive.com/crime/2026/03/former-york-county-tax-collector-sentenced-for-stealing-over-400k.html"
+        ]
+      }
+    },
+    {
+      "lat": 39.9215,
+      "lon": -75.288,
+      "name": "Aldan, PA",
+      "v": 1300000,
+      "meta": {
+        "who": "Robert Park, Tax Collector (Borough of Aldan and William Penn School District)",
+        "years": "1990–2012",
+        "scheme": "Held the elected tax-collector post for both the borough and school district for 22 years and diverted more than $1.3 million in tax revenue into personal stock-market gambling.",
+        "outcome": "Pleaded guilty to two counts of theft by failure to make required disposition of funds; sentenced to 364 days to 2 years less a day in county prison, 5 years consecutive probation, nearly $1 million restitution, 150 hours community service, and ordered to speak to local students about \"the false hope of fast money.\"",
+        "cites": [
+          "https://www.delcotimes.com/2014/04/17/former-aldan-tax-collector-sentenced-to-prison-ordered-to-lecture-students-on-false-hope-of-fast-money/",
+          "https://www.nbcphiladelphia.com/news/local/former-tax-collector-charged-with-stealing-13m/1969197/"
+        ]
+      }
+    },
+    {
+      "lat": 34.6159,
+      "lon": -89.1884,
+      "name": "Hickory Flat, MS",
+      "v": 104257,
+      "meta": {
+        "who": "Stephanie Churchill, Town Clerk",
+        "years": "2018–2021",
+        "scheme": "Collected water and sewage bill payments from Hickory Flat residents but simply never deposited the cash into the town's water-and-sewage department accounts.",
+        "outcome": "Pleaded guilty (Alford plea) to embezzlement; sentenced to 4 years house arrest, ordered to pay $55,850 restitution after a surety bond already returned $50,000 to taxpayers; permanently barred from handling public money again.",
+        "cites": [
+          "https://www.osa.ms.gov/news/stephanie-churchill-pleads-guilty-embezzlement",
+          "https://www.djournal.com/news/crime-law-enforcement/former-hickory-flat-town-clerk-pleads-guilty-to-embezzlement/article_33b7d627-7dbe-5d34-92c4-a1c653eff887.html"
+        ]
+      }
+    },
+    {
+      "lat": 31.5046,
+      "lon": -91.069,
+      "name": "Roxie, MS",
+      "v": 109426,
+      "meta": {
+        "who": "Amanda Lewis, Town Clerk",
+        "years": "2015–2018",
+        "scheme": "Manipulated the tiny town's accounting software to skim cash and money orders that residents paid in person for their water bills, concealing the theft for nearly three years before officials noticed the water fund coming up short.",
+        "outcome": "Convicted of embezzlement in Franklin County Circuit Court; sentenced to 20 years under Department of Corrections supervision (house arrest and probation), ordered to repay the remaining balance of a $109,426 demand after $50,000 was recovered from her surety bond.",
+        "cites": [
+          "https://www.osa.ms.gov/news/amanda-lewis-guilty-embezzlement",
+          "https://www.wapt.com/article/former-roxie-town-clerk-arrested-for-embezzlement-in-water-funds/35461527"
+        ]
+      }
+    }
+  ]
+}

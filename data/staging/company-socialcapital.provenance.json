@@ -1,0 +1,309 @@
+{
+  "layer": "company-socialcapital",
+  "retrieved": "2026-07-07T18:18:43Z",
+  "file": {
+    "name": "social_capital_county.csv",
+    "hdx_resource_name": "Social Capital Atlas - US Counties.csv",
+    "hdx_resource_id": "ec896b64-c922-4737-b759-e4bd7f73b8cc",
+    "hdx_dataset_id": "85ee8e10-0c66-4635-b997-79b6fad44c71",
+    "hdx_dataset_slug": "social-capital-atlas",
+    "hdx_dataset_url": "https://data.humdata.org/dataset/social-capital-atlas",
+    "hdx_api_used": "https://data.humdata.org/api/3/action/package_show?id=social-capital-atlas",
+    "direct_download_url": "https://data.humdata.org/dataset/85ee8e10-0c66-4635-b997-79b6fad44c71/resource/ec896b64-c922-4737-b759-e4bd7f73b8cc/download/social_capital_county.csv",
+    "downloaded_file_size_bytes": 717799,
+    "hdx_reported_size_bytes": 717799,
+    "size_match": true,
+    "last_modified_per_hdx": "2022-08-01T00:56:29.646459",
+    "dataset_organization": "AI for Good at Meta",
+    "dataset_source_attribution": "Data for Good at Meta (previously Facebook)",
+    "companion_files_also_retrieved": [
+      "LICENSE.pdf (resource id eea36412-034c-4c86-b85c-9e4171aa580a) -- read in full, verbatim text below",
+      "README.pdf / 'Codebook for Publicly Available Data on Social Capital' (resource id fbe5b0b9-e81c-41c7-a9f2-3ebf8212cf64, July 2022) -- read pages 1-21 (overview, county codebook, privacy protection, citation) for variable definitions and methodology"
+    ]
+  },
+  "license_verbatim": {
+    "note_on_hdx_metadata_field": "The HDX CKAN package metadata field itself only records license_id='hdx-other' / license_title='Other' with no license_url -- this is NOT the actual license, just CKAN's generic placeholder for a non-catalog license. The real license is the dedicated LICENSE.pdf resource shipped alongside the data, transcribed verbatim below.",
+    "source_resource": "LICENSE.pdf, https://data.humdata.org/dataset/85ee8e10-0c66-4635-b997-79b6fad44c71/resource/eea36412-034c-4c86-b85c-9e4171aa580a/download/license.pdf",
+    "copyright_holder": "Meta Platforms, Inc.",
+    "full_text": "License\n\nUnder the terms of this License (the \"License\"), Meta Platforms, Inc. hereby grants, to any person or organization (\"You\") obtaining a copy of this dataset and associated documentation files (the \"Dataset\") or otherwise accessing or using the Dataset, to use and redistribute the Dataset, with or without modification, provided that the following conditions are met:\n\n1. Redistribution of the Dataset (or any portion of) must include and be subject to this License.\n2. Neither the name of the copyright holder, nor the names of its contributors, may be used to endorse or promote products derived from this Dataset without explicit, prior written permission.\n3. Use or redistribution of the Dataset must adhere to applicable laws and regulations.\n4. You agree not to use the Dataset in any way (including combining the Data with other data sources) that could lead to the identification of any individual.\n\nTHIS DATASET IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS DATASET, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.",
+    "characterization": "A permissive, BSD/attribution-style redistribution license custom-drafted by Meta (not a named Creative Commons or Open Data Commons license). Redistribution WITH modification is explicitly permitted provided this license text travels with it, Meta's name isn't used for endorsement without permission, applicable law is followed, and -- distinctively -- the redistributor agrees not to combine this data with other sources in a way that could re-identify an individual (condition 4). This last clause is a real, binding term for any downstream redistribution of the aggregated county values (they are county-level aggregates already, so on their own they carry negligible re-identification risk, but see caveats below on the underlying privacy-protection design)."
+  },
+  "measure_definition": {
+    "primary_measure": "ec_county",
+    "one_line_definition": "ec_county = two times the average share of high-socioeconomic-status (SES) Facebook friends among low-SES individuals in the county (i.e., 2 x mean fraction of a below-median-SES person's friends who are above-median-SES) -- the paper's 'economic connectedness' (EC), verbatim per the codebook: 'Baseline definition of economic connectedness: two times the share of high-SES friends among low-SES individuals, averaged over all low-SES individuals in the county.'",
+    "why_the_factor_of_two": "The x2 scaling means a county where friendships are class-blind (the share of high-SES friends among low-SES people matches the county's actual high-SES population share) scores EC=1.0 exactly; EC>1 means low-SES people are MORE connected to high-SES people than population shares alone would predict, EC<1 means less. This is why observed values run ~0.29-1.36 rather than a 0-1 share -- consumers reading the raw ec_county number should treat 1.0 as the 'population-representative' benchmark, not 0.5.",
+    "task_brief_note": "The acquisition brief described this as 'the share of above-median-income friends' without the x2 factor and expected a ~0.3-1.3 range; the codebook's own formal definition (confirmed against the actual data, min 0.2947 / max 1.3597) includes the x2 factor. The paper's variable is used as-is, unmodified, per the authors' own definition -- this note flags the discrepancy for anyone expecting a bare 0-1 share.",
+    "ses_construction": "SES (socioeconomic status) for adults is calculated from a machine-learning model trained to predict household income/wealth from Facebook and Instagram usage and profile data (device type, page likes, check-ins, etc.), described in Supplementary Information B.1 of Chetty et al. 2022a; 'low-SES' = below-median, 'high-SES' = above-median, computed within the relevant geography.",
+    "population_sampled": "Facebook users aged 25-44, active on the platform at least once in the 30 days prior to the snapshot, with at least 100 US-based Facebook friends, and a non-missing residential ZIP code as of May 28, 2022 (per README Section 1, 'Overview'). This is NOT the full US adult population -- it is Facebook's 25-44 user base meeting those activity/connectivity thresholds.",
+    "companion_measures_captured": {
+      "clustering_county": "The average fraction of an individual's friend pairs who are also friends with each other (local clustering coefficient), averaged over individuals in the county; a measure of social cohesion/clique-iness, not connectedness across class lines.",
+      "volunteering_rate_county": "The percentage of Facebook users who are members of a group predicted to be about 'volunteering' or 'activism' based on group title/characteristics (with manual review of the 50 largest such groups nationally and the largest group per state); a civic-engagement measure."
+    }
+  },
+  "processing": {
+    "input_rows_total": 3089,
+    "rows_with_non_null_ec_county": 3018,
+    "rows_with_null_ec_county": 71,
+    "null_ec_reason": "These 71 counties failed the source's own minimum-cell-size privacy threshold: per README Section 3.3, Meta/Opportunity Insights only release ec_county (and exposure/friending-bias) for county cells with at least 100 low-SES AND at least 100 high-SES Facebook users meeting the sample criteria. All 71 are small/rural counties (e.g. Perry AL pop ~9,486; several Alaska boroughs and Colorado/Georgia counties under ~10k population) -- excluded by design, not a download error. None were dropped by this pipeline beyond what the source itself withheld.",
+    "rows_kept_in_output": 3018,
+    "keep_rule": "value = ec_county, kept iff ec_county is present (non-blank, non-'.') in the source CSV. No additional filtering (e.g. by population or state) was applied to the main output -- all 3,018 counties with a released EC value are included in company-socialcapital.json.",
+    "value_rounding": "ec_county rounded to 4 decimal places in the output 'value' field; label displays 2 decimal places.",
+    "label_format": "'economic connectedness {value:.2f} \u2014 {county_name}' where county_name is the source file's own 'county_name' field (format 'County, State', e.g. 'Hamilton, Ohio'), used verbatim -- no separate county-name lookup/join was needed since the source file already carries county_name alongside the FIPS code.",
+    "key_field": "5-digit county FIPS code, taken verbatim from the source 'county' column, zero-padded to 5 digits (source stores it as a bare integer, e.g. 1001 for Autauga County AL -> '01001').",
+    "geographic_coverage": "51 distinct states/DC represented among the 3,018 counties with data (all 50 states + District of Columbia). No US territories (Puerto Rico, Guam, etc.) are in this file -- consistent with the Facebook Data for Good social-capital product's stated scope of US counties. Connecticut's 2022 switch from 8 counties to 9 planning regions is NOT reflected in this vintage; Connecticut still appears here as pre-2022 legacy counties (this data's county boundaries reflect the geography used by Chetty et al. 2022, consistent with the paper's original release)."
+  },
+  "coverage": {
+    "total_county_rows_in_source_file": 3089,
+    "counties_with_usable_ec_county": 3018,
+    "counties_excluded_null_ec": 71,
+    "approx_total_us_counties_and_equivalents": "~3,144 (2020-census-era Census Bureau count); this source's 3,089 total rows is somewhat below that, most likely reflecting the source's own county definitions/mergers as of its 2018-2020 Facebook-sample construction rather than a gap introduced by this pipeline -- not independently reconciled row-by-row against a canonical FIPS master list beyond the format/territory checks noted above.",
+    "counties_with_ec_and_pop2018": 2942,
+    "counties_with_ec_but_missing_pop2018": 76,
+    "missing_pop_reason": "pop2018 (Census ACS 2018 population) is a separate join Meta/OI added to the file, not derived from Facebook data; 76 counties have EC but no pop2018 value -- mostly small Alaska boroughs/census areas, sparse Colorado/Kansas counties, and similar, where ACS 2018 county-level population estimates were apparently unavailable or not joined by the source's own pipeline. These 76 rows ARE included in the JSON output (they have a valid EC value) but were excluded from the population>=50k top/bottom-5 callouts below since population is unknown.",
+    "national_ec_county_distribution": {
+      "n": 3018,
+      "min": 0.2947,
+      "max": 1.3597,
+      "median": 0.8069,
+      "mean": 0.8145,
+      "note": "min/max/median/mean over the 3,018 counties with a released ec_county value, unweighted by population."
+    }
+  },
+  "sanity_check_geography": {
+    "expected_per_brief": "high EC in the Mountain West / upper Midwest, low in the Deep South",
+    "result": "CONFIRMED. State-mean ec_county (unweighted average of that state's counties) ranks New Hampshire, North Dakota, Minnesota, Utah, Wyoming, Nebraska, and Alaska among the highest, and South Carolina, Alabama, Georgia, New Mexico, North Carolina, Mississippi, Florida, and Tennessee among the lowest -- matching both the task brief's expectation and the geographic pattern shown in Figure 2A of Chetty et al. 2022a (the paper's own published county map).",
+    "top_8_states_by_mean_ec_county": [
+      {
+        "state": "New Hampshire",
+        "mean_ec_county": 1.0874,
+        "n_counties": 10
+      },
+      {
+        "state": "North Dakota",
+        "mean_ec_county": 1.055,
+        "n_counties": 48
+      },
+      {
+        "state": "Minnesota",
+        "mean_ec_county": 1.0479,
+        "n_counties": 87
+      },
+      {
+        "state": "Hawaii",
+        "mean_ec_county": 1.0413,
+        "n_counties": 4
+      },
+      {
+        "state": "Rhode Island",
+        "mean_ec_county": 1.0233,
+        "n_counties": 5
+      },
+      {
+        "state": "Utah",
+        "mean_ec_county": 1.0212,
+        "n_counties": 27
+      },
+      {
+        "state": "District of Columbia",
+        "mean_ec_county": 0.9962,
+        "n_counties": 1
+      },
+      {
+        "state": "Nebraska",
+        "mean_ec_county": 0.9884,
+        "n_counties": 78
+      }
+    ],
+    "bottom_8_states_by_mean_ec_county": [
+      {
+        "state": "Tennessee",
+        "mean_ec_county": 0.679,
+        "n_counties": 95
+      },
+      {
+        "state": "Florida",
+        "mean_ec_county": 0.665,
+        "n_counties": 67
+      },
+      {
+        "state": "Mississippi",
+        "mean_ec_county": 0.6344,
+        "n_counties": 79
+      },
+      {
+        "state": "North Carolina",
+        "mean_ec_county": 0.634,
+        "n_counties": 99
+      },
+      {
+        "state": "New Mexico",
+        "mean_ec_county": 0.6274,
+        "n_counties": 29
+      },
+      {
+        "state": "Georgia",
+        "mean_ec_county": 0.6072,
+        "n_counties": 148
+      },
+      {
+        "state": "Alabama",
+        "mean_ec_county": 0.5955,
+        "n_counties": 66
+      },
+      {
+        "state": "South Carolina",
+        "mean_ec_county": 0.5638,
+        "n_counties": 46
+      }
+    ]
+  },
+  "top_5_counties_min_pop_50k": [
+    {
+      "rank": 1,
+      "fips": "33015",
+      "county": "Rockingham, New Hampshire",
+      "ec_county": 1.3597,
+      "population_2018": 305129
+    },
+    {
+      "rank": 2,
+      "fips": "08035",
+      "county": "Douglas, Colorado",
+      "ec_county": 1.3533,
+      "population_2018": 328614
+    },
+    {
+      "rank": 3,
+      "fips": "06075",
+      "county": "San Francisco, California",
+      "ec_county": 1.3124,
+      "population_2018": 870044
+    },
+    {
+      "rank": 4,
+      "fips": "51013",
+      "county": "Arlington, Virginia",
+      "ec_county": 1.2723,
+      "population_2018": 231803
+    },
+    {
+      "rank": 5,
+      "fips": "34037",
+      "county": "Sussex, New Jersey",
+      "ec_county": 1.2577,
+      "population_2018": 142298
+    }
+  ],
+  "bottom_5_counties_min_pop_50k": [
+    {
+      "rank": 1,
+      "fips": "37155",
+      "county": "Robeson, North Carolina",
+      "ec_county": 0.3626,
+      "population_2018": 133442
+    },
+    {
+      "rank": 2,
+      "fips": "35031",
+      "county": "McKinley, New Mexico",
+      "ec_county": 0.416,
+      "population_2018": 72849
+    },
+    {
+      "rank": 3,
+      "fips": "13095",
+      "county": "Dougherty, Georgia",
+      "ec_county": 0.4167,
+      "population_2018": 91049
+    },
+    {
+      "rank": 4,
+      "fips": "37047",
+      "county": "Columbus, North Carolina",
+      "ec_county": 0.4491,
+      "population_2018": 56293
+    },
+    {
+      "rank": 5,
+      "fips": "37065",
+      "county": "Edgecombe, North Carolina",
+      "ec_county": 0.4546,
+      "population_2018": 53332
+    }
+  ],
+  "top_5_counties_no_population_floor_for_reference": [
+    {
+      "fips": "33015",
+      "county": "Rockingham, New Hampshire",
+      "ec_county": 1.3597,
+      "population_2018": 305129
+    },
+    {
+      "fips": "08035",
+      "county": "Douglas, Colorado",
+      "ec_county": 1.3533,
+      "population_2018": 328614
+    },
+    {
+      "fips": "06075",
+      "county": "San Francisco, California",
+      "ec_county": 1.3124,
+      "population_2018": 870044
+    },
+    {
+      "fips": "49029",
+      "county": "Morgan, Utah",
+      "ec_county": 1.2913,
+      "population_2018": 11391
+    },
+    {
+      "fips": "16065",
+      "county": "Madison, Idaho",
+      "ec_county": 1.2809,
+      "population_2018": 38705
+    }
+  ],
+  "bottom_5_counties_no_population_floor_for_reference": [
+    {
+      "fips": "46121",
+      "county": "Todd, South Dakota",
+      "ec_county": 0.2947,
+      "population_2018": 10146
+    },
+    {
+      "fips": "46102",
+      "county": "Shannon, South Dakota",
+      "ec_county": 0.3305,
+      "population_2018": 14335
+    },
+    {
+      "fips": "13273",
+      "county": "Terrell, Georgia",
+      "ec_county": 0.3474,
+      "population_2018": 8859
+    },
+    {
+      "fips": "01011",
+      "county": "Bullock, Alabama",
+      "ec_county": 0.3552,
+      "population_2018": 10352
+    },
+    {
+      "fips": "45005",
+      "county": "Allendale, South Carolina",
+      "ec_county": 0.3609,
+      "population_2018": 9214
+    }
+  ],
+  "caveats": [
+    "Facebook-derived, not a population census: ec_county is constructed entirely from Facebook users aged 25-44 who were active in the prior 30 days and had >=100 US Facebook friends as of the May 28, 2022 snapshot (README Section 1). Counties with lower Facebook penetration, older/younger population skew, or lower average friend-counts among that age band are represented by a narrower and potentially less representative slice of residents than counties with high, broad-based Facebook use -- this is a platform-population bias, not a random sample of all county residents.",
+    "Exposure vs. friending bias: ec_county (economic connectedness) conflates two distinct underlying mechanisms that the paper itself decomposes in Social Capital II (Chetty et al. 2022b): 'exposure' (whether low- and high-SES people even share the same institutions/groups, e.g. schools, workplaces, neighborhoods) and 'friending bias' (whether, GIVEN co-exposure, low-SES people are actually befriended by high-SES people at a lower rate). A low EC county could reflect either low exposure (segregated institutions) or high friending bias (segregated even within shared institutions, i.e. self-segregation) or both -- ec_county alone does not distinguish the two. The source file's other fields (exposure_grp_mem_county, bias_grp_mem_county) carry this decomposition for a county-level breakdown; they were not carried into this output's main 'value' but are available in the raw source CSV if the map wants a future 'exposure vs bias' split.",
+    "Differential-privacy noise: every ec_county value has been intentionally perturbed with calibrated Laplace-distributed noise (epsilon=8, per README Section 3.1.4) on top of ordinary sampling error, specifically so no single individual's friendship pattern can be reverse-engineered from the published statistic. The published ec_se_county (standard error) column -- not carried into this output -- combines both sampling error and this added-noise variance; consumers wanting uncertainty bands should re-join to the raw source CSV via the FIPS key.",
+    "71 counties (2.3% of the 3,089-row file) have no ec_county value at all because they fell below the source's minimum-cell-size privacy threshold (need >=100 low-SES AND >=100 high-SES qualifying Facebook users in the county) -- these are excluded from the output entirely, not zero-filled or estimated by this pipeline. All are small/rural counties.",
+    "Vintage is 2022 publication of a 2018-2020-era Facebook social-graph snapshot (specifically, the underlying friendship network and SES model reflect data collected/processed through the paper's 2022 Nature publication, with the final public-release snapshot dated as of May 28, 2022 for user residency; see README). This is not a live/current measure of social capital -- it substantially predates 2026 and does not reflect any changes in social ties, migration, or platform usage since roughly 2020-2022.",
+    "License condition 4 (Meta's own LICENSE.pdf) explicitly prohibits combining this dataset with other data sources in any way that could lead to identification of an individual. County-level aggregates (this output) carry negligible individual re-identification risk on their own, but this condition should be kept in mind if this layer is ever cross-tabulated at finer geography or joined to other person-level data.",
+    "county_name in the source file already includes the state (format 'County, State'), so no separate FIPS-to-name crosswalk/join was performed or needed for labeling -- this is a direct pass-through of the source's own naming, not an independently re-verified county-name lookup.",
+    "Connecticut retains its pre-2022 8-county geography in this file (not the 9 planning regions Connecticut adopted for federal statistical purposes starting in 2022); this reflects the source's own vintage/methodology, unmodified here.",
+    "civic_organizations_county (Facebook 'Public Good' pages per 1,000 users) exists in the source file but was NOT requested by the brief and was not captured in extras or regions; only clustering_county and volunteering_rate_county were checked for presence per the task instructions (both are present for all 3,089 rows, independent of whether ec_county itself is present -- they use a different, looser minimum-cell-size rule of >=100 total Facebook users rather than >=100-per-SES-group)."
+  ]
+}

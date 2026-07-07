@@ -1,0 +1,159 @@
+{
+  "layer": "despair-suicide",
+  "retrieved": "2026-07-07",
+  "verification_pass_result": {
+    "protocol_check": "Both required deliverables attempted per the WANTLIST binding protocol: (1) county-level all-ages rates as heat, (2) state-level youth rates for plate statistics. Deliverable (1) is complete and verified. Deliverable (2) is BLOCKED — see stateYouth_gap below. Nothing was fabricated or estimated to fill the gap."
+  },
+  "source_used": {
+    "name": "County Health Rankings & Roadmaps (CHR&R), 2025 Annual Data Release, National Analytic Data CSV",
+    "publisher": "University of Wisconsin Population Health Institute, in partnership with the Robert Wood Johnson Foundation",
+    "measure": "Suicides (measure v161)",
+    "download_url": "https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv",
+    "landing_page": "https://www.countyhealthrankings.org/health-data/methodology-and-sources/data-documentation",
+    "measure_definition_page": "https://www.countyhealthrankings.org/health-data/population-health-and-well-being/quality-of-life/mental-health/suicides",
+    "access_type": "Open, direct HTTP download, no login, no application, no API key. robots.txt for countyhealthrankings.org checked and contains only standard Drupal admin/asset disallows plus a 30-second crawl-delay (respected: one request made); no AI-specific or wholesale block.",
+    "underlying_data_lineage": "CHR&R's Suicides measure is derived FROM NCHS/NVSS mortality data (National Center for Health Statistics 'Detailed Deaths (Mortality) - Multiple cause of death, states and all counties, 2016-2023' file, as compiled from the 57 vital-statistics jurisdictions via the Vital Statistics Cooperative Program), with denominators from the Census Bureau Population Estimates Program. This is CHR&R's own re-publication/re-aggregation of the same underlying NCHS source that CDC WONDER also draws from — not an independent data collection."
+  },
+  "why_this_source_and_not_cdc_wonder_directly": {
+    "attempted_first": "CDC WONDER Underlying Cause of Death (databases D76 and the 2018-2024 Single Race successor at wonder.cdc.gov/ucd-icd10-expanded.html), exactly as instructed, including the 'agree to data-use terms' step.",
+    "api_test_performed": "A live POST request was sent to https://wonder.cdc.gov/controller/datarequest/D76 with accept_datause_restrictions=true and a by-variable grouping on D76.V9 (State), pooling years 2018-2020 as a test. This is a real request against the live server, not a documentation read.",
+    "api_test_result_verbatim": "CDC WONDER's own server rejected the request with: 'Location group by variables (B_1 through B_5) were found: D76.V9' and 'Only national data are available for this dataset when using the WONDER web service. Please check that your query does not group results by region, division, state, county or urbanization, (B_1 through B_5), nor limit these location variables to any specific values. For more information please contact CDC WONDER customer support at cwus@cdc.gov or (888) 496-8347.'",
+    "documentation_confirmation": "CDC's own WONDER API help page (https://wonder.cdc.gov/wonder/help/wonder-api.html) states this is deliberate, longstanding policy, not a bug: 'The vital statistics online databases are open to API queries as of February 23, 2015. However, in keeping with the vital statistics policy for public data sharing, only national data are available for query by the API... These sub-national data fields cannot be grouped by or limited via the API, although these fields are available in the web application.'",
+    "classification": "This is a genuine, first-party-confirmed structural GATE on the specific granularity this deliverable requires (county), not a syntax error, not a paywall, and not the robots.txt AI-crawler notice (see separate note below) — it is CDC policy that county/state mortality data from the National Vital Statistics System is available ONLY through the human-driven browser web application, never through the programmatic API, regardless of accepting the data-use terms.",
+    "browser_fallback_attempted": "Per the task's own contingency ('If the API fights you, try the saved-query export approach'), the WONDER browser web application (wonder.cdc.gov/ucd-icd10-expanded.html, the 'Underlying Cause of Death, 2018-2024' database, which exactly covers the requested pooled window) was opened and the data-use 'I Agree' step was located. However, sustained browser-automation tool failures in this execution environment (four consecutive session drops/errors, including one navigation that silently landed on an unrelated ATF government website, followed by a broader multi-minute MCP tool-layer outage affecting both the browser tool and the web-search tool simultaneously) made this path operationally unworkable within a reasonable number of attempts. This is disclosed as a TOOL/ENVIRONMENT failure, not a source-access gate — a human or a more stable automation session could very likely complete this path and obtain a fully first-party WONDER pull. Recommended if this layer is revisited.",
+    "robots_txt_note_disclosed_for_completeness": "wonder.cdc.gov/robots.txt contains an explicit AI-training opt-out block naming 'ClaudeBot' and 'Claude-User' among ~50 named crawlers, plus a wildcard 'DisallowAITraining: /' and 'Content-Usage: ai=n' directive, alongside 'Allow: /'. This was read and weighed: it is a standard AI-model-training scraping opt-out (matching a widely-circulated September 2025 template), not a per-dataset access restriction, and it does not itself account for why county data was unavailable — the definitive reason is the documented, first-party API policy above, confirmed by the server's own error response. This is disclosed for full transparency rather than omitted."
+  },
+  "chr_vs_wonder_recommendation_from_source_itself": "CHR&R's own Suicides measure page explicitly recommends: 'We recommend starting with the CDC WONDER database, which contains information on suicide rates by race, ethnicity, age, gender, geography, and more... Small counties might need to combine multiple years of data to see rates, as CDC suppresses any rates when there are fewer than 10 deaths.' This deliverable follows that exact suppression logic via CHR&R's pre-aggregated file, since WONDER's own programmatic channel is not available for this pipeline.",
+  "vintage": {
+    "years_pooled": "2018-2022 (5-year pooled)",
+    "release": "2025 Annual Data Release (CHR&R), published ~2025; a newer November 2025 update using 2019-2023 exists for most states/counties but was not used for this deliverable to keep a single, uniform, fully-documented vintage across all counties, since the Nov-2025 update's exact per-county coverage/consistency was not independently verified in this pass.",
+    "data_created_note": "The underlying NCHS source file covers 2016-2023 vital records; CHR&R's 2025 release specifically draws the 2018-2022 five-year window for this measure."
+  },
+  "rate_type": {
+    "primary": "age-adjusted",
+    "disclosure": "CHR&R's 'Suicides raw value' (v161_rawvalue) is explicitly documented by the source as age-adjusted ('Number of deaths due to suicide per 100,000 population (age-adjusted)'). A crude rate is also present in the same file (v161_other_data_1, column label 'Crude suicide rate') but was not used for the primary regions[] output; it was cross-checked internally (see cross_validation) but not shipped in the deliverable schema, which calls for one rateType per file.",
+    "age_adjustment_method": "CHR&R does not itself disclose the exact reference population/method in the analytic CSV; this is standard NCHS direct age-adjustment to the 2000 U.S. standard population, consistent with how NCHS age-adjusts all its published mortality rates, but this specific claim was not independently re-derived or confirmed against a CHR&R methods document in this pass — flagged as a minor caveat below."
+  },
+  "suppression": {
+    "rule_source": "NCHS/CDC Public Health Service Act (42 U.S.C. 242m(d)) confidentiality rule, read directly from CDC WONDER's own data-use restrictions page (wonder.cdc.gov/datause.html): 'Do not present or publish statistics representing nine or fewer births or deaths, including rates based on counts of nine or fewer... in figures, graphs, maps, tables, etc.' CHR&R's Suicides measure inherits this same rule from its NCHS source.",
+    "independent_verification_performed": "Programmatically checked the actual downloaded data: among all 2,448 non-suppressed (filled) county rows, the minimum pooled 5-year death numerator is exactly 10, with zero counties at any value 1 through 9. This confirms CHR&R is correctly and consistently applying the 9-or-fewer suppression threshold to this measure, not merely reporting a data gap for some other reason.",
+    "counties_total_in_source": 3152,
+    "counties_usable": 2448,
+    "counties_suppressed": 704,
+    "suppressed_representation": "Suppressed counties are OMITTED from regions[] entirely (not present as a zero, not present as a null placeholder inside a record) and are instead counted in the top-level suppressedCount field. This matches the protocol instruction: 'suppressed counties are recorded as suppressed, not estimated' — no value was invented or modeled for any of the 704 counties.",
+    "no_estimation_performed": "No Bayesian smoothing, spatial borrowing, or any other estimation was applied by this pipeline to fill suppressed counties. CHR&R's own file does not appear to apply small-area modeling for this base (non-race-stratified) Suicides measure either — the flag structure for v161 has no 'Unreliable/Suppressed' flag column for the base measure (unlike its race-stratified sub-measures, which do carry a 0/1/2 flag), and the clean 10-death floor observed is consistent with straightforward suppress-below-threshold rather than model-then-suppress-only-non-convergent-cases (contrast with despair-overdoses.provenance.json's MIOV source, which does apply Bayesian modeling for 1-9-death counties)."
+  },
+  "geography_coverage": {
+    "total_county_rows_in_source": 3152,
+    "states_and_dc_represented": 51,
+    "territories_included": "None. Puerto Rico and other territories are not present in this county-level file (0 PR rows found), consistent with CHR&R's standard 50-states-plus-DC scope.",
+    "state_level_rows": {
+      "count": 51,
+      "all_filled_no_suppression": "All 51 state-level rows (50 states + DC) have a non-blank age-adjusted rate; state populations are large enough that the 9-or-fewer suppression threshold essentially never triggers at that geographic level.",
+      "top_5_states": [
+        {
+          "state": "Wyoming",
+          "rate": 28.6
+        },
+        {
+          "state": "Alaska",
+          "rate": 27.8
+        },
+        {
+          "state": "Montana",
+          "rate": 27.6
+        },
+        {
+          "state": "New Mexico",
+          "rate": 24.5
+        },
+        {
+          "state": "Idaho",
+          "rate": 22.0
+        }
+      ],
+      "bottom_state": {
+        "state": "District of Columbia",
+        "rate": 6.2
+      }
+    }
+  },
+  "national_context_county_rates_2018_2022": {
+    "min": 5.4,
+    "median": 18.1,
+    "mean": 19.4,
+    "max": 106.8,
+    "max_county": "Kusilvak Census Area, Alaska (FIPS 02158)",
+    "note": "These are summary statistics of the 2,448 usable COUNTY-LEVEL age-adjusted rates in this file (unweighted distribution across counties), not a population-weighted national aggregate. The separate national row in the source (FIPS 00000) reports a population-weighted national age-adjusted rate of 14.0 per 100,000 for the same 2018-2022 window (239,283 deaths / ~1.65 billion pooled person-years), which is the correct single figure for 'the U.S. rate' — the min/median/mean/max above describe the SPREAD across counties, not the national total, and should not be confused with it."
+  },
+  "five_highest_rate_counties_2018_2022": [
+    {
+      "fips": "02158",
+      "county": "Kusilvak Census Area",
+      "state": "Alaska",
+      "rate": 106.8,
+      "five_year_deaths": 44
+    },
+    {
+      "fips": "02180",
+      "county": "Nome Census Area",
+      "state": "Alaska",
+      "rate": 87.9,
+      "five_year_deaths": 45
+    },
+    {
+      "fips": "02188",
+      "county": "Northwest Arctic Borough",
+      "state": "Alaska",
+      "rate": 87.8,
+      "five_year_deaths": 34
+    },
+    {
+      "fips": "38005",
+      "county": "Benson County",
+      "state": "North Dakota",
+      "rate": 73.4,
+      "five_year_deaths": 19
+    },
+    {
+      "fips": "46121",
+      "county": "Todd County",
+      "state": "South Dakota",
+      "rate": 70.5,
+      "five_year_deaths": 34
+    }
+  ],
+  "cross_validation": {
+    "method": "National and state-level figures checked against independently-published NCHS Data Briefs, which draw on the same underlying NVSS mortality data but were compiled and published separately by NCHS (not by CHR&R).",
+    "checks_performed": [
+      "NCHS Data Brief No. 541 (Sept 2025), single-year 2022 and 2023 age-adjusted state suicide rates: Alaska 27.6 (2022) / 28.2 (2023), Montana 28.7 (2022) / 26.6 (2023), Wyoming 25.6 (2022) / 26.3 (2023) — closely bracket this deliverable's 2018-2022-pooled figures of Alaska 27.8, Montana 27.6, Wyoming 28.6, confirming the same three states dominate in both the single-year NCHS series and the 5-year-pooled CHR&R series, with values in the same numeric range.",
+      "National age-adjusted rate: this deliverable's 2018-2022 pooled national figure (14.0) sits consistent with NCHS Data Brief 541's single-year national figures of 14.2 (2022) and 14.1 (2023) — a 5-year-pooled rate landing just below/within range of adjacent single-year national rates is exactly the expected relationship, not a discrepancy.",
+      "Geographic pattern of highest-rate counties (Alaska Native-majority census areas/boroughs; Northern Plains/Rocky Mountain tribal and rural counties: North Dakota, South Dakota, Montana, New Mexico, Colorado) matches decades of well-documented American Indian/Alaska Native and rural-West suicide-disparity literature published by CDC, IHS, and academic sources — not an artifact of this specific dataset."
+    ]
+  },
+  "alternative_sources_considered": [
+    {
+      "name": "CDC WONDER Underlying Cause of Death API (D76 / 2018-2024 Single Race successor)",
+      "status": "Attempted first per task instructions; structurally blocked for county/state grouping via the programmatic API (first-party confirmed via live request); browser-application fallback attempted but blocked by sustained tool/environment failures in this execution session, not by the source itself. See detailed notes above."
+    },
+    {
+      "name": "CDC WISQARS (Web-based Injury Statistics Query and Reporting System) — state-level youth (ages 15-19) suicide rates",
+      "status": "Identified as the correct instrument for the STATE YOUTH deliverable (a pre-built CDC-authored deep link exists: https://wisqars.cdc.gov/reports/?o=MORT&y1=2024&y2=2024&t=0&i=2&m=20810&g=00&me=0&s=0&r=0&ry=2&e=0&yp=65&a=ALL&g1=0&g2=199&a1=0&a2=199&r1=STATE&r2=NONE&r3=NONE&r4=NONE, linked directly from CDC's own official 'Suicide Data and Statistics' page at cdc.gov/suicide/data/index.html under 'Suicide rates by state'). This is a client-side-rendered (Next.js) application; the underlying data table is fetched by JavaScript after page load and is not present in the static HTML (confirmed via direct curl — the response is a fixed ~17KB SPA shell regardless of query parameters). Multiple attempts to render this page via the available browser-automation tool failed: repeated session drops mid-task, one navigation that silently returned content from an unrelated government website (a symptom of environment/session instability, not a WISQARS access restriction), and a sustained multi-minute outage of the entire MCP tool bridge (affecting both the browser tool and a separate, unrelated web-search tool simultaneously) that did not resolve before this deliverable was finalized. NOT source-gated: WISQARS itself returns HTTP 200, has no adverse robots.txt, and is a fully open, no-login CDC public tool; CDC visibly intends and links to exactly this state-by-suicide-by-age query for public use."
+    }
+  ],
+  "stateYouth_gap": {
+    "status": "NOT DELIVERED this pass — reported as a blocker, not filled with estimates or invented figures.",
+    "reason": "Tool/environment failure (browser automation and web-search tool outage), not a data-access gate. The correct source (WISQARS, CDC's own state-by-age suicide query tool) is open and CDC visibly designed it for exactly this use, including publishing a ready-made deep link from its own suicide-statistics landing page. This should be retried with a stable browser session.",
+    "exact_retry_path": "Navigate to https://wisqars.cdc.gov/reports/?o=MORT&y1=<latest stable year, e.g. 2023 or 2024>&y2=<same or short pooled range>&t=0&i=2&m=20810&g=00&me=0&s=0&r=0&ry=2&e=0&yp=65&a=ALL&g1=0&g2=199&a1=10&a2=19&r1=STATE&r2=NONE&r3=NONE&r4=NONE (a1/a2=10/19, or 15/19 per task's stated preference) and use the page's 'Download Data CSV' control once the table renders. i=2 in this URL is CDC's own parameter value for Intent=Suicide (confirmed by the fact that CDC's own suicide-statistics page links this exact URL under its 'Suicide rates by state' heading).",
+    "expected_suppression_at_this_geography": "State-level youth (10-19 or 15-19) counts will likely trigger suppression in several low-population states (e.g., Vermont, Wyoming, DC, Alaska, North Dakota) since a single state's annual youth suicide count can fall into the 1-9 range; multi-year pooling (as instructed for the county layer) would likely be necessary here too, and should be applied and disclosed exactly as done for the county deliverable if this is completed later."
+  },
+  "caveats": [
+    "This is a SUBSTITUTE source for the county layer, not a direct CDC WONDER pull. It is a re-publication/re-aggregation of the same underlying NCHS/NVSS mortality data, one step removed from the primary federal source, exactly as anticipated by the task's own source-ordering ('If both fail: report blockers' — here, source 1's programmatic channel failed for the required granularity, so source 2 was used, per instructions, with derivation disclosed).",
+    "Age-adjustment reference population/method for the CHR&R 'raw value' was taken on the source's own word (its measure-definition page explicitly calls it age-adjusted) but was not independently re-derived from first principles in this pass.",
+    "Pooled 5-year window (2018-2022) means individual-year fluctuations (e.g., a single bad year in a small county) are smoothed into the multi-year rate; this is the correct and intended tradeoff for defeating small-county suppression, per the task's own instructions, but should not be read as an annual snapshot.",
+    "704 of 3,152 counties (22.3%) carry no rate in this deliverable because they are suppressed at the source. This is a real data gap, not a signal of zero risk — these are disproportionately low-population counties, and their absence from a 'heat' visualization should not be visually coded as safe/green/absent risk.",
+    "State-level YOUTH suicide rates (the task's second deliverable) were NOT obtained in this pass due to a disclosed tool/environment failure, not a source-side gate. stateYouth is shipped as an empty array; do not backfill it with modeled or estimated values.",
+    "A newer CHR&R update (November 2025, using 2019-2023 for 'most' states/counties) exists but was not used, to avoid mixing partially-updated vintages across counties without independently re-verifying its exact coverage; if refreshed, re-confirm total row count and suppression count for that vintage before switching.",
+    "County boundaries follow the 2025 Annual Data Release's current county-equivalent definitions (including Connecticut's post-2022 planning regions, per the source's own documentation); no independent re-check of historically merged/renamed counties was performed beyond confirming well-formed 5-digit FIPS codes and zero duplicates."
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "layer": "motion-sorting",
+  "retrieved": "2026-07-07",
+  "vintage": "2022-2023",
+  "vintage_note": "This is the newest county-to-county IRS SOI migration pair available as of the retrieval date. The IRS migration data landing page (https://www.irs.gov/statistics/soi-tax-stats-migration-data) lists available filing-year pairs as 1990-2011, 2011-2022, and 2022-2023; the 2022-2023 subpage's own footer reads 'Page Last Reviewed or Updated: 20-Mar-2026' and the served files carry an HTTP Last-Modified of 19-Mar-2026, confirming no newer (e.g. 2023-2024) county-to-county file has been published yet. State-to-state summary files exist for the same 2022-2023 vintage; there is no newer full COUNTY-level pair to prefer over it.",
+  "verification_performed_before_acquisition": [
+    "Fetched the IRS migration-data landing page directly (curl, not cache) and enumerated every /statistics/soi-tax-stats-migration-data-YYYY-YYYY subpage link to find the true URL for the newest vintage (an initial search-engine content fetch had guessed an incorrect, non-existent 'county-to-county-migration-data-2022-2023' URL that 404'd; the real page is /statistics/soi-tax-stats-migration-data-2022-2023).",
+    "Fetched that subpage directly and extracted every .csv/.xlsx/.pdf href to confirm the exact national county inflow/outflow file names (countyinflow2223.csv, countyoutflow2223.csv) and the documentation PDF name (2223inpublicmigdoc.pdf) before downloading anything.",
+    "Downloaded and read the full IRS 2022-2023 Migration Data Users Guide PDF (33 pages) to obtain the authoritative record layout and the exact 'Special Summary Level Records' code table (Section E.6) rather than inferring exclusion codes from the raw data alone.",
+    "Cross-checked the documented layout and codes against the first ~15 rows of each raw CSV before writing any transform logic."
+  ],
+  "sources": [
+    {
+      "name": "IRS SOI Tax Stats — County-to-County Inflow, Filing Year 2022-2023 (national)",
+      "url": "https://www.irs.gov/pub/irs-soi/countyinflow2223.csv",
+      "retrieved_via": "direct HTTPS download (curl), HTTP 200",
+      "file_size_bytes": 4571970,
+      "md5": "d1e461bd1247a73acb0a428801bb7cc9",
+      "raw_row_count": 90048,
+      "server_last_modified": "Thu, 19 Mar 2026 11:11:21 GMT",
+      "local_path": "data/raw/irs_migration_2022_2023/countyinflow2223.csv"
+    },
+    {
+      "name": "IRS SOI Tax Stats — County-to-County Outflow, Filing Year 2022-2023 (national)",
+      "url": "https://www.irs.gov/pub/irs-soi/countyoutflow2223.csv",
+      "retrieved_via": "direct HTTPS download (curl), HTTP 200",
+      "file_size_bytes": 4584439,
+      "md5": "2282fea1aa549527f0f350b6ea5f4ad5",
+      "raw_row_count": 90358,
+      "server_last_modified": "Thu, 19 Mar 2026 11:11:21 GMT",
+      "local_path": "data/raw/irs_migration_2022_2023/countyoutflow2223.csv"
+    },
+    {
+      "name": "2022-2023 Migration Data Users Guide (record layouts, disclosure protection rules, special summary level codes)",
+      "url": "https://www.irs.gov/pub/irs-soi/2223inpublicmigdoc.pdf",
+      "retrieved_via": "direct HTTPS download (curl), HTTP 200",
+      "file_size_bytes": 431090,
+      "md5": "aa098b9a8a004ded740752a79f974157",
+      "local_path": "data/raw/irs_migration_2022_2023/2223inpublicmigdoc.pdf",
+      "sections_used": "C.4 (Migration Status definitions), D (Disclosure Protection Procedures), E.3/E.4 (County Outflow/Inflow Record Layout), E.6 (Special Summary Level Records — the authoritative code table for state FIPS 57/58/59/96/97/98)"
+    },
+    {
+      "name": "IRS SOI tax stats - Migration data (landing/index page)",
+      "url": "https://www.irs.gov/statistics/soi-tax-stats-migration-data",
+      "note": "Used only to confirm 2022-2023 is the newest available vintage and to locate the correct subpage URL; not a data source itself."
+    }
+  ],
+  "record_layout": {
+    "inflow_csv_columns": ["y2_statefips", "y2_countyfips", "y1_statefips", "y1_countyfips", "y1_state", "y1_countyname", "n1", "n2", "agi"],
+    "outflow_csv_columns": ["y1_statefips", "y1_countyfips", "y2_statefips", "y2_countyfips", "y2_state", "y2_countyname", "n1", "n2", "agi"],
+    "y1": "Year 1 (2022) location = origin",
+    "y2": "Year 2 (2023) location = destination",
+    "n1": "number of returns filed — approximates households",
+    "n2": "number of personal exemptions claimed — approximates individuals/people",
+    "agi": "adjusted gross income in $ thousands (not carried into this layer's output; available in the raw files if needed later)"
+  },
+  "exclusion_rules_applied": {
+    "source_of_truth": "IRS 2022-2023 Migration Data Users Guide, Section E.6 'Special Summary Level Records', cross-verified against the raw CSVs (after exclusion, max state FIPS observed on either side of any retained row is 56 — no special code leaked through).",
+    "rules": [
+      {
+        "rule": "Drop special/summary county-total header rows",
+        "detail": "Every county carries synthetic header rows where the OTHER side's state FIPS is one of: 96 (Total Migration – US and Foreign), 97 (Total Migration – US, with county=001 meaning Same State and county=003 meaning Different State), or 98 (Total Migration – Foreign). These are county-level rollups, not real county-to-county pairs, and are dropped.",
+        "rows_dropped_inflow": 33291,
+        "rows_dropped_outflow": 33601,
+        "note_on_asymmetry": "The inflow and outflow files drop a different count of special-code rows (33,291 vs 33,601) because the outflow file additionally carries per-county 'Other Flows' aggregate rows (state 58/59, folding low-count different-county-same-state and different-state destinations into 7 categories: Same State, Different State, and 4 census regions — Northeast/Midwest/South/West) that the inflow file structures slightly differently; both sets are the documented Section E.6 codes, this asymmetry is expected and not a data-quality problem."
+      },
+      {
+        "rule": "Drop non-migrant rows",
+        "detail": "Rows where origin state+county equals destination state+county are 'Non-migrant' returns — taxpayers who did not change county — per Section C.4 definition #1 in the Users Guide. These are not migration flows and are dropped.",
+        "rows_dropped_inflow": 3143,
+        "rows_dropped_outflow": 3143,
+        "note": "Exactly one non-migrant row per county (3,143 counties/county-equivalents), symmetric across both files as expected."
+      },
+      {
+        "rule": "Drop disclosure-suppressed cells",
+        "detail": "IRS disclosure protection (Section D) replaces n1/n2 with a -1 sentinel for any county-to-county cell representing fewer than 20 returns, and additionally suppresses any single return representing an outsized share of a cell's total (undisclosed threshold, cannot be recovered). All rows with n1 == -1 or n2 == -1 are dropped rather than treated as zero.",
+        "rows_dropped_inflow_included_in_special_code_bucket": "5,818 total -1 sentinel rows observed pre-filter across the inflow file (mostly folded into the 'Other Flows' 58/59 categories already excluded above, plus some suppressed within otherwise-real county pairs); after the special-code and non-migrant exclusions above, any remaining -1 rows are additionally caught by this rule.",
+        "note": "This is the single biggest source of undercount versus true total migration: county-to-county pairs with 1-19 returns are systematically invisible in this file (either suppressed to -1 or pre-aggregated into the Other Flows buckets, which this pipeline also excludes since they carry no real destination county). This layer therefore represents migration flows of 20+ tax-filing households between any given county pair, not all migration."
+      }
+    ],
+    "genuine_flow_rows_retained": {
+      "inflow_file": 53614,
+      "outflow_file": 53614,
+      "cross_file_consistency_check": "PASSED — the set of (origin,destination) directed pairs retained from the inflow file and from the outflow file are IDENTICAL (0 pairs present in only one file) and every shared pair has an IDENTICAL (n1,n2) value in both files (0 mismatches across 53,614 shared pairs). This is the strongest available internal-consistency check: it confirms the exclusion logic was applied symmetrically and that IRS's own inflow and outflow tabulations of the same underlying matched-return data agree exactly at the row level."
+    }
+  },
+  "aggregation_method": {
+    "county_totals": "For each of 2,866 counties/county-equivalents with any recorded flow: 'in' = sum of n1 (households) across all genuine inbound rows for that county in the inflow file; 'out' = sum of n1 across all genuine outbound rows in the outflow file; 'net' = in - out (households); 'people' = (sum of n2 inbound) - (sum of n2 outbound), i.e. net migration in individuals/exemptions.",
+    "county_coverage": "2,866 of 3,143 total US counties/county-equivalents (91.2%) appear in the output with at least one recorded flow above the disclosure-suppression floor. The remaining 277 counties recorded ZERO county-to-county flows clearing the >=20-return disclosure threshold in either direction for this vintage (typically the smallest, most rural US counties, where every individual inter-county flow fell under 20 returns and was folded into the Other-Flows aggregates); their true migration did not disappear from the source, it disappeared into the aggregate buckets this pipeline correctly excludes as non-attributable-to-a-specific-county-pair.",
+    "flow_pairs_selection": "Per county: computed its top 4 inflow sources (by households, from the inflow file) and its top 4 outflow destinations (by households, from the outflow file). Unioned and deduplicated (a directed pair (a,b) kept once even if it appears as both 'a's top outflow destination' and 'b's top inflow source', which is the common case for the largest flows)."
+  },
+  "threshold": {
+    "spec_default": 100,
+    "spec_instruction": "Task instructions specify: drop pairs under 100 households; target 6,000-12,000 arcs; if over, raise the threshold and report the final cutoff.",
+    "outcome_at_spec_default": {
+      "threshold_hh": 100,
+      "arc_count": 5802,
+      "note": "At the literal top-4-in/top-4-out selection with the specified >=100hh floor, the natural yield (5,802) fell BELOW the 6,000 target floor. This is because the top-4-per-county-per-direction cap, not the 100hh threshold, is the binding constraint: there are many more real county pairs nationally with >=100 households than 4-per-county-per-direction allows through (confirmed by testing top-5/top-6 selection, which raise the count without changing the threshold, and by testing lower thresholds at fixed top-4, which do raise the count — see below)."
+    },
+    "final_threshold_hh": 90,
+    "final_arc_count": 6246,
+    "adjustment_rationale": "Since the task's spec anticipates only the over-target case explicitly, and the shortfall here comes from an under-target outcome, the threshold was lowered in the same mechanical direction the spec's search loop implies (adjust the household floor, not the top-N-per-county cap, since top-N was fixed at the spec's literal value of 4) until the arc count entered the 6,000-12,000 band. 90 households was the first 10-household step that cleared 6,000 (6,246 arcs); the spec's original 100hh default is preserved as the reference/anchor value and the actual final cutoff (90) is reported here per the spec's own instruction to report the final cutoff whenever it moves off the default.",
+    "sensitivity_table_hh_floor_at_fixed_top4": {
+      "100": 5802,
+      "90": 6246,
+      "50": 9167,
+      "20": 13858
+    }
+  },
+  "sanity_checks": {
+    "national_net_households": 0,
+    "national_net_people": 0,
+    "national_net_interpretation": "Exactly zero, as required — every household/person counted as leaving one county in this dataset is also counted as arriving at another county in this dataset (internal US county-to-county migration is a closed system by construction once foreign and non-migrant rows are excluded), so summing net across all 2,866 counties must telescope to zero. It does, exactly.",
+    "total_inflow_households": 6482290,
+    "total_outflow_households": 6482290,
+    "total_households_interpretation": "Total households counted moving IN across all counties (6,482,290) equals total households counted moving OUT across all counties (6,482,290) exactly — the same closed-system check from the flow-sum side rather than the per-county-net side.",
+    "top_5_net_gainers_households": [
+      {"fips": "12105", "name": "Polk County, FL", "net_households": 9800, "net_people": 19407, "in": 25406, "out": 15606},
+      {"fips": "12101", "name": "Pasco County, FL", "net_households": 9415, "net_people": 18561, "in": 23125, "out": 13710},
+      {"fips": "32003", "name": "Clark County, NV", "net_households": 8040, "net_people": 11396, "in": 45428, "out": 37388},
+      {"fips": "48339", "name": "Montgomery County, TX", "net_households": 7926, "net_people": 17362, "in": 23390, "out": 15464},
+      {"fips": "48491", "name": "Williamson County, TX", "net_households": 7407, "net_people": 14769, "in": 27754, "out": 20347}
+    ],
+    "top_5_net_losers_households": [
+      {"fips": "06037", "name": "Los Angeles County, CA", "net_households": -38257, "net_people": -81742, "in": 114343, "out": 152600},
+      {"fips": "12086", "name": "Miami-Dade County, FL", "net_households": -20351, "net_people": -37899, "in": 38451, "out": 58802},
+      {"fips": "36081", "name": "Queens County, NY", "net_households": -16761, "net_people": -38865, "in": 45244, "out": 62005},
+      {"fips": "36005", "name": "Bronx County, NY", "net_households": -15921, "net_people": -30247, "in": 20580, "out": 36501},
+      {"fips": "17031", "name": "Cook County, IL", "net_households": -13129, "net_people": -38954, "in": 78978, "out": 92107}
+    ],
+    "task_expectation_check": {
+      "expected_gainers_named_in_task": ["Maricopa AZ", "Riverside CA", "Polk FL"],
+      "actual_ranks_among_2866_counties_by_net_hh": {"Polk FL (12105)": 1, "Maricopa AZ (04013)": 9, "Riverside CA (06065)": 23},
+      "riverside_ca_detail": {"fips": "06065", "in": 49965, "out": 46827, "net_households": 3138, "net_people": 10844, "rank": 23},
+      "expected_losers_named_in_task": ["Los Angeles CA", "Cook IL", "Kings NY"],
+      "actual_ranks_among_2866_counties_by_net_hh": {"Los Angeles CA (06037)": 1, "Cook IL (17031)": 5, "Kings NY / Brooklyn (36047)": 6},
+      "verdict": "Strong match. Polk FL and Maricopa AZ both land in the actual top-10 gainers (ranks 1 and 9); Riverside CA is a real, sizeable net gainer (+3,138 households) but ranks 23rd rather than top-10 for this specific vintage — reported honestly rather than cherry-picked. All three named losers (LA, Cook, Kings-NY/Brooklyn) land in the actual top 6 losers (ranks 1, 5, 6)."
+    }
+  },
+  "arc_count": 6246,
+  "county_count": 2866,
+  "output_files": {
+    "motion_sorting_json": {
+      "path": "data/staging/motion-sorting.json",
+      "size_bytes": 472269,
+      "counties": 2866,
+      "flows": 6246
+    }
+  },
+  "caveats": [
+    "COVERAGE BIAS — TAX FILERS ONLY: This dataset is built entirely from IRS Form 1040 individual income tax returns. It structurally undercounts migration by both the very poor and the very wealthy, and this is the single most important caveat for any reading of this layer. On the poor end: people below the federal filing threshold (roughly the poorest ~15-20% of US adults in a typical year, plus many students, retirees on Social Security alone, and undocumented immigrants without an ITIN) never appear in the source data at all — their moves are invisible, not merely undercounted. On the wealthy end: the data measures RETURNS and EXEMPTIONS, not net worth or true population; a single ultra-wealthy household still counts as one return regardless of the scale of the actual relocation (family offices, multiple residences, complex trust/estate filing arrangements can also decouple 'mailing address on the return' from 'where a wealthy person actually lives most of the year') and the extreme high end of the wealth distribution is a very small number of returns that gets no special visibility in a household/return-counted dataset. The result is a map of MIDDLE-CLASS-AND-UP TAX-FILING migration, not of migration in general — it will systematically understate churn in the lowest-income counties/neighborhoods and can misstate the character (though generally not grossly the direction) of moves at the very top of the wealth distribution.",
+    "MAILING ADDRESS, NOT RESIDENCE: The IRS documentation explicitly notes the address on a return is a mailing address that may not reflect actual residence, and a taxpayer may earn income in one location, move mid-year, and file up to nine months later from another address. This can introduce lag and noise into the county-pair assignment, though it is unlikely to bias the net-migration totals in any consistent direction.",
+    "DISCLOSURE SUPPRESSION HIDES SMALL FLOWS: County-to-county cells under 20 returns are either suppressed outright (-1 sentinel, dropped) or folded into 'Other Flows' aggregate buckets without a real destination/origin county (also dropped by this pipeline, since they cannot be attributed to a specific county pair). This means the true number of counties any given county exchanges migrants with is undercounted here, especially for small/rural counties -- 277 of 3,143 US counties (8.8%) have literally zero flow above this floor in either direction for this vintage and do not appear in the flows or counties output at all, though presumably every county has SOME migration too small to individually disclose.",
+    "SELECTED-ARC SUBSET, NOT ALL FLOWS: The 'flows' array is a curated top-4-inflow-plus-top-4-outflow-per-county subset (6,246 of many more real county pairs clearing the 90-household floor), designed for a legible flow-map render, not an exhaustive edge list. The full underlying flow data (53,614 genuine county-to-county pairs, pre-selection) exists in the raw CSVs and could be re-extracted at a different threshold/top-N if a denser or sparser map is wanted later.",
+    "GEOCODING DRIFT ACROSS YEARS: Per Section C.3 of the Users Guide, the ZIP-to-county crosswalk is revised annually; a handful of counties (documented in the PDF's Appendix 1/2, e.g. Chattahoochee County GA at +4.51% net change purely from crosswalk revision) show artificial year-over-year shifts from crosswalk boundary changes rather than real migration. This mostly affects small counties and is disclosed by IRS itself, not something this pipeline can correct for.",
+    "AGE/INCOME/AGI DETAIL NOT CARRIED FORWARD: The raw files also report adjusted gross income (AGI) per flow; this layer intentionally does not carry AGI into the output (per the task's specified output schema) but it remains available in the raw CSVs under data/raw/irs_migration_2022_2023/ if an income-weighted reading of the Great Sorting is wanted in a future pass.",
+    "NO FABRICATION: Every county and flow record in the output is derived directly from a real IRS-published row; no interpolation, estimation, or synthetic filling was performed for missing/suppressed cells (they are simply absent from the output, per the standing project principle of no fabricated records)."
+  ],
+  "transform_script": "pipeline/scratch/build_motion_sorting.py"
+}
