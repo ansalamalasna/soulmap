@@ -3,7 +3,7 @@
     "title": "THE SOUL SURVEY",
     "tagline": "A topographic survey of the collective soul, conducted in objective data.",
     "sheet": "SHEET NO. 1 — THE HUMAN SIGNAL",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "surveyed": "JULY 2026",
     "manifesto": "Every act leaves a coordinate. A birth, a search, a warehouse, a crash — each one lands somewhere, and the landing is recorded. Alone, each record is trivia. Stacked, they become relief: ridgelines of genius, basins of grief, the bright grid of the machines we serve and that serve us. This is not a map of the land. It is a map of what we do on it. Toggle the layers. Watch the country change shape. The terrain is us."
   },
@@ -13,7 +13,42 @@
     { "id": "power",   "name": "Power",   "reading": "where the machines and the money live", "order": 3 },
     { "id": "motion",  "name": "Motion",  "reading": "the logistics bloodstream", "order": 4 },
     { "id": "loss",    "name": "Loss",    "reading": "where we grieve, in aggregate", "order": 5 },
-    { "id": "omen",    "name": "Omen",    "reading": "what we named the land when we were afraid", "order": 6 }
+    { "id": "omen",    "name": "Omen",    "reading": "what we named the land when we were afraid", "order": 6 },
+    { "id": "wonder",  "name": "Wonder",  "reading": "what we see when we look up", "order": 7 },
+    { "id": "despair", "name": "Despair", "reading": "where the pain settles", "order": 8 },
+    { "id": "residue", "name": "Residue", "reading": "the poison we left behind", "order": 9 }
+  ],
+  "readings": [
+    {
+      "id": "orientation", "special": "orientation",
+      "title": "Orientation", "kicker": "HOW TO READ THIS MAP", "scope": "us",
+      "text": "Seven instruments, one terrain. Each layer is a real dataset with coordinates. Density becomes elevation; overlap becomes light. Watch them arrive."
+    },
+    {
+      "id": "corridor", "title": "The Corridor of Grief", "kicker": "MOTION × LOSS", "scope": "us",
+      "layers": ["motion-fulfillment", "loss-crashes"], "bbox": [[-102, 31.5], [-74, 43.5]],
+      "text": "The fulfillment network follows the interstates — and so does death. The same asphalt carries the packages and collects the toll. Orange and red are the same roads seen twice: once as commerce, once as grief."
+    },
+    {
+      "id": "ashburn", "title": "The Capital of the Internet", "kicker": "POWER, MAGNIFIED", "scope": "us",
+      "layers": ["power-datacenters"], "bbox": [[-78.7, 38.35], [-76.5, 39.65]],
+      "text": "One stretch of Northern Virginia answers most of the questions you ask the internet. Power is cheap, land is flat, fiber is thick — and the cloud condenses along the Potomac. The new AI campuses are landing in the same basin, like sediment."
+    },
+    {
+      "id": "dark-states", "title": "The Dark States", "kicker": "DESIRE × LAW", "scope": "us",
+      "layers": ["desire-searches"], "bbox": [[-125, 24], [-66, 50]],
+      "text": "In 2025 the most complete public record of American desire developed holes: Pornhub blocks access in 22 age-verification states, and its map went dark there. The hatched states are not empty of desire — they are empty of measurement. Censorship, rendered as cartography."
+    },
+    {
+      "id": "memory-pools", "title": "Where Memory Pools", "kicker": "MEMORY — WORLD SHEET", "scope": "world",
+      "layers": ["memory-births"], "bbox": [[-12, 37], [28, 59]],
+      "text": "Five thousand years of remembered births, and most of them pool in a triangle you could cross in a week. Paris alone holds 28,055. Memory is not a meritocracy of geography — it flows toward courts, ports, and printing presses."
+    },
+    {
+      "id": "devils-country", "title": "Devil's Country", "kicker": "OMEN × TERRAIN", "scope": "us",
+      "layers": ["omen-names"], "bbox": [[-122, 31.5], [-99, 47.5]],
+      "text": "When surveyors named the arid West they reached for hell: 1,922 devils against 809 angels, and the devils cluster in the canyons and badlands where the land fought back. Fear got the dramatic terrain. Hope settled in the valleys."
+    }
   ],
   "layers": [
     {
@@ -27,9 +62,10 @@
       "unit": "notable births",
       "statline": "{n} remembered births",
       "status": "live",
+      "caveat": "visibility scoring favors the recently famous; 25.6% of source records lack coordinates",
       "essay": {
         "what": "The birthplaces of 1,704,189 notable humans — everyone with a verified Wikipedia/Wikidata footprint born between 3500 BC and 2018 AD, from the cross-verified database of notable people (Laouenan et al., Scientific Data, 2022). Every golden grain is a place that produced someone the world still remembers. The 12,000 most visible burn as distinct stars.",
-        "how": "2,291,817 records streamed and aggregated to 0.25° cells; 74.4% carry verified birth coordinates. Brightness follows log density. Star selection uses the database's composite visibility score across five criteria — which favors the recently famous, and we disclose it: memory's spotlight is aimed at the present.",
+        "how": "2,291,817 records streamed and aggregated to 0.25° cells; 74.4% carry verified birth coordinates. Brightness follows log density. Star selection uses the database's composite visibility score across five criteria — which favors the recently famous, and we disclose it: memory's spotlight is aimed at the present. Use the era scrubber to walk the nebula through five thousand years.",
         "why": "Memory has a geography. It pools where rivers meet, where ports open, where empires kept their books — Paris alone holds 28,055 remembered births, more than most nations. Genius is not sown evenly; it is watered by cities. The nebula argues something uncomfortable: the world remembers people from places that were already powerful."
       },
       "plateStats": [
@@ -50,6 +86,7 @@
       "unit": "top relative search",
       "statline": "{n} desires measured · 22 states dark",
       "status": "live",
+      "caveat": "22 states unmeasured — access blocked; countries show top relative categories",
       "essay": {
         "what": "The top disproportionate search term per state — what each place seeks more than the rest of the country does — from Pornhub Insights' 2025 Year in Review, plus the top relative category for the 20 most-visiting countries. Recorded verbatim. Text only.",
         "how": "Read from the official year-in-review infographic (via archive; the live site refuses this container) and cross-checked against independent press republications, zero discrepancies. Countries carry relative categories because that is what Pornhub publishes at country level.",
@@ -73,6 +110,7 @@
       "unit": "data centers",
       "statline": "{n} data centers",
       "status": "live",
+      "caveat": "OpenStreetMap completeness follows mapping effort; centroids, not entrances",
       "essay": {
         "what": "4,342 data centers with ground coordinates, worldwide: 4,244 mapped by OpenStreetMap contributors, plus 98 of the newest US hyperscale and AI campuses — xAI Colossus, Stargate sites — from the Brockovich accountability map, which tracks what OSM hasn't surveyed yet.",
         "how": "Overpass API over telecom=data_center and building=data_center, nodes, ways and relations, deduplicated within 200 meters. Community-mapped data inherits community bias: coverage follows mapping effort, so Europe and North America are sharpest. © OpenStreetMap contributors, ODbL.",
@@ -96,6 +134,7 @@
       "unit": "Fortune 500 HQs",
       "statline": "{n} thrones of capital",
       "status": "live",
+      "caveat": "city-level coordinates; FY2024 revenue per Fortune methodology",
       "essay": {
         "what": "All 500 headquarters of the 2025 Fortune 500, each sized by revenue. Walmart sits at rank 1 with $680,985 million — a single company out-earning the GDP of most countries.",
         "how": "Fortune's own 2025 ranking (fiscal-year 2024 revenue), 100% geocoded to city coordinates, 100% revenue coverage, zero companies dropped. Point area scales with revenue; the map is honest about hierarchy.",
@@ -119,6 +158,7 @@
       "unit": "Amazon facilities",
       "statline": "{n} Amazon facilities",
       "status": "live",
+      "caveat": "facility types inferred from code shape; square footage unavailable",
       "essay": {
         "what": "314 active Amazon US logistics facilities — 217 fulfillment centers, 70 sortation centers, 27 inbound cross-docks — the physical bloodstream of same-day desire.",
         "how": "Verified facility codes from live FBA shipment routing (fba.wiki reference), geocoded 100% to city coordinates. The classic industry source, MWPVL, withdrew its public tables — a reminder that even logistics data has a supply chain.",
@@ -142,6 +182,7 @@
       "unit": "fatal crashes",
       "statline": "{deaths} deaths on the road",
       "status": "live",
+      "caveat": "129 crashes (136 deaths) had no usable coordinates and are not shown",
       "essay": {
         "what": "Every located fatal traffic crash in the United States in 2023: 37,640 crashes, 40,889 deaths, one point each, from NHTSA's Fatality Analysis Reporting System. This is the most complete map of American grief published every year — and almost no one ever looks at it.",
         "how": "The FARS national accident file, with 129 unlocatable crashes (136 deaths) excluded and disclosed. Each point is one crash; where the red brightens, deaths overlap. About 112 people died on the roads every single day of 2023.",
@@ -166,6 +207,7 @@
       "unit": "place names",
       "statline": "{dark} devils · {light} angels",
       "status": "live",
+      "caveat": "natural features and settlements only; word-boundary matching",
       "essay": {
         "what": "Every natural feature and settlement in America officially named for the beyond: 1,922 for devils, hell, and purgatory; 809 for angels, paradise, and Eden. Devils Canyon. Hells Half Acre. Angel Ridge. Paradise Valley.",
         "how": "Word-boundary search across all 981,698 official names in the USGS Geographic Names Information System, restricted to natural features and populated places — no churches, no schools, nothing self-named. Red points are the dark names; bone-white points are the light ones.",
@@ -179,6 +221,78 @@
       ]
     },
     {
+      "id": "wonder-ufos",
+      "title": "The Sky Is Watching Back",
+      "theme": "wonder",
+      "accent": "#8dffab",
+      "scopes": ["us", "world"],
+      "forms": { "points": true, "contours": true, "tint": false },
+      "weight": 0.5,
+      "unit": "sightings",
+      "statline": "{n} sightings reported",
+      "status": "pending",
+      "caveat": "self-reported testimony, geocoded to towns; corpus frozen mid-2014; reporting bias toward population and internet access",
+      "essay": {
+        "what": "80,331 UFO sightings reported to the National UFO Reporting Center between 1906 and 2014, each with a mappable location — strange lights, discs, triangles, and orbs; every point a moment when somebody looked up and could not explain what they saw. The Phoenix Lights of March 1997 are in here, a tight knot of triangles over Arizona.",
+        "how": "The open community-geocoded NUFORC corpus (consolidated June 2014, checksum-verified). Reports are self-submitted and located to the nearest town. This layer maps testimony, not verified phenomena — which is exactly what makes it a soul measurement.",
+        "why": "Wonder has a geography, and it looks suspiciously like population plus darkness plus loneliness. The sightings trace where people live and where the sky is big enough to watch. The map says less about visitors than about who is looking up — and how badly they want an answer."
+      },
+      "plateStats": [
+        { "label": "sightings reported", "value": "80,331" },
+        { "label": "span", "value": "1906 – 2014" },
+        { "label": "top shapes", "value": "light 16,336 · triangle 7,734 · circle 7,547" },
+        { "label": "reported in the U.S.", "value": "91.4%" }
+      ]
+    },
+    {
+      "id": "despair-overdoses",
+      "title": "The Quiet Epidemic",
+      "theme": "despair",
+      "accent": "#c489d6",
+      "scopes": ["us"],
+      "forms": { "points": false, "contours": false, "tint": true, "regionKind": "county" },
+      "weight": 0.0,
+      "unit": "deaths per 100k",
+      "statline": "overdose rates in {n} counties",
+      "status": "pending",
+      "caveat": "rates, not raw counts; small counties may be modeled or suppressed",
+      "essay": {
+        "what": "2024 drug overdose death rates for 3,014 US counties — the per-capita geography of the deadliest drug crisis in American history, tinted deeper violet as the rate climbs. The highest rate in the nation is Knott County, Kentucky: 139.1 deaths per 100,000.",
+        "how": "CDC's Mapping Injury, Overdose, and Violence county dataset (calendar year 2024, crude rates per 100k; smaller counties use CDC's own Bayesian smoothing, disclosed). 129 counties with suppressed counts stay dark and are counted honestly rather than smoothed over.",
+        "why": "The epidemic is not urban and it is not random — it settles along Appalachia's coal seams, in post-industrial river valleys, in the places the work left first. Toggle the Thrones of Capital over this tint and read the negative space: despair pools farthest from the money. One hopeful note lives in this vintage: 2024 saw the largest one-year national decline on record."
+      },
+      "plateStats": [
+        { "label": "counties with rates", "value": "3,014" },
+        { "label": "vintage", "value": "2024" },
+        { "label": "highest rate", "value": "Knott Co., KY — 139.1 per 100k" },
+        { "label": "median county rate", "value": "15.7 per 100k" }
+      ]
+    },
+    {
+      "id": "residue-superfund",
+      "title": "What We Buried",
+      "theme": "residue",
+      "accent": "#d6e055",
+      "scopes": ["us"],
+      "forms": { "points": true, "contours": false, "tint": false },
+      "weight": 0.4,
+      "unit": "contaminated sites",
+      "statline": "{n} places we poisoned",
+      "status": "pending",
+      "caveat": "National Priorities List only — thousands of lesser Superfund-program sites are not shown",
+      "essay": {
+        "what": "All 1,840 sites of the EPA's National Priorities List — the most contaminated ground in America: mines, smelters, chemical plants, landfills, military ranges. Love Canal is here. So is the Butte pit complex, and Hanford four times over.",
+        "how": "EPA's own NPL inventory with coordinates (the dataset behind its Superfund 'Where You Live' map), statuses normalized to proposed (37), final (1,343), and deleted (460) — where deleted means cleaned up enough to leave the list, not erased from the ground.",
+        "why": "Industry leaves a residue that outlives the industry: acid in the aquifer, lead in the yard soil, a fence around a field. The acid-yellow points cluster where America made things and walked away. Stack them on the Thrones of Capital and you are looking at the before and after of the same story."
+      },
+      "plateStats": [
+        { "label": "NPL sites", "value": "1,840" },
+        { "label": "final / deleted / proposed", "value": "1,343 / 460 / 37" },
+        { "label": "coordinate coverage", "value": "100%" },
+        { "label": "oldest wound", "value": "Love Canal, NY — deleted 2004" }
+      ]
+    },
+    {
       "id": "loss-layoffs",
       "title": "Notice of Mass Layoff",
       "theme": "loss",
@@ -189,6 +303,7 @@
       "unit": "workers affected",
       "statline": "",
       "status": "pending",
+      "caveat": "sources gated; nothing shown rather than something invented",
       "pendingNote": "Standardized WARN notice data is gated (commercial paywall / authenticated academic access). The registry slot is reserved; the survey continues.",
       "essay": {
         "what": "Mass-layoff (WARN) notices by state — where the jobs vanish, in aggregate. Pending: the standardized multi-state datasets are currently paywalled or access-gated.",

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>THE SOUL SURVEY — a topographic survey of the collective soul</title>
-<meta name="description" content="One map, many strange datasets: where the remembered were born, where desire points, where the cloud touches ground, where the fulfillment network breathes, where the crashes happened, what we named the land. Toggle the layers. The terrain is us.">
+<meta name="description" content="One map, many strange datasets: where the remembered were born, where desire points, where the cloud touches ground, where the crashes happened, what we named the land, what we see in the sky, where the pain settles, what we buried. Toggle the layers. The terrain is us.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Grotesk:wght@300..700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -30,17 +30,29 @@
     <div class="scope-switch" role="tablist" aria-label="Map scope">
       <button id="scopeUS" class="on">CONTERMINOUS&nbsp;U.S.</button><button id="scopeWorld">THE&nbsp;WORLD</button>
     </div>
-    <button id="aboutBtn">ABOUT&nbsp;/&nbsp;SOURCES</button>
+    <div class="mh-menu-wrap">
+      <button id="readingsBtn">READINGS&nbsp;▾</button>
+      <div id="readingsMenu"></div>
+    </div>
+    <button id="locateBtn" title="Zoom to your location and compose your local reading">⌖&nbsp;LOCATE</button>
+    <button id="exportBtn" title="Render this view as a poster PNG">⤓&nbsp;SHEET</button>
+    <button id="aboutBtn">ABOUT</button>
   </div>
 </header>
 
+<button id="railToggle">LAYERS</button>
 <aside id="rail" aria-label="Survey layers"></aside>
+
+<div id="eraBar"></div>
 
 <footer id="marginalia">
   <div id="datum" class="marg"></div>
   <div id="statline" class="marg"></div>
   <div id="scalebar" class="marg"><div id="sbBar"></div><span id="sbLabel"></span></div>
 </footer>
+
+<div id="capCard"></div>
+<div id="toast"></div>
 
 <section id="plate" aria-live="polite"><div id="plateInner"></div></section>
 <div id="about"><div id="aboutInner"></div></div>

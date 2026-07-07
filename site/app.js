@@ -23,7 +23,9 @@ const VIS={
  'power-fortune500':{core:.72},
  'motion-fulfillment':{core:.72,cA:.36},
  'loss-crashes':{r:1.45,core:.38,cA:.42},
- 'omen-names':{r:2.0,core:.6}
+ 'omen-names':{r:2.0,core:.6},
+ 'wonder-ufos':{core:.5,cA:.34},
+ 'residue-superfund':{core:.66}
 };
 const CONTOUR_T=[.10,.18,.30,.45,.62,.82];
 
@@ -49,6 +51,7 @@ const SC={};           // per-scope caches
 const glowBMs={};      // lid -> {cv,ctx,t:{k,x,y}}
 let qt=null,qtTimer=null,bakeTimer=null;
 let hoverPt=null;
+let era=-1,eraPlay=null,reading=null,readingSaved=null,orientTimers=[],hashHadState=false,hashTimer=null;
 
 const cvs={base:$('#cvBase'),terr:$('#cvTerrain'),glow:$('#cvGlow'),lab:$('#cvLabel')};
 const ctxs={};
@@ -87,6 +90,17 @@ function buildSprites(){
  SPR.crash=makeSprite(byId['loss-crashes'].accent,VIS['loss-crashes'].core);
  SPR.omenD=makeSprite(byId['omen-names'].accent,VIS['omen-names'].core);
  SPR.omenL=makeSprite(byId['omen-names'].accent2||'#f2ead8',VIS['omen-names'].core);
+ if(byId['wonder-ufos'])SPR.ufo=makeSprite(byId['wonder-ufos'].accent,VIS['wonder-ufos'].core);
+ if(byId['residue-superfund'])SPR.sf=makeSprite(byId['residue-superfund'].accent,VIS['residue-superfund'].core);
+}
+function inEra(b){
+ if(b==null||isNaN(b))return false;
+ if(era===0)return b<=500;
+ if(era===1)return b>=501&&b<=1500;
+ if(era===2)return b>=1501&&b<=1800;
+ if(era===3)return b>=1801&&b<=1900;
+ if(era===4)return b>=1901;
+ return true;
 }
 
 function projArrays(proj,lonA,latA){
@@ -197,7 +211,7 @@ function recomputeShade(){
  const C=SC[scope],GW=C.GW,GH=C.GH;
  const E=new Float32Array(GW*GH);let mx=0;
  for(const l of live){
-  const g=C.grids[l.id];if(!g)continue;
+  const g=layerGrid(C,l.id);if(!g)continue;
   const a=alpha[l.id]*(l.weight||0);if(a<=0.01)continue;
   for(let i=0;i<E.length;i++)E[i]+=g[i]*a;
  }
@@ -260,6 +274,17 @@ function drawBase(){
   ctx.strokeStyle='rgba(58,74,100,.55)';ctx.lineWidth=lw(.55);ctx.stroke(C.paths.stateMesh);
   ctx.strokeStyle='rgba(96,116,148,.6)';ctx.lineWidth=lw(1);ctx.stroke(C.paths.nation);
  }
+ // despair county tint (static base-space bitmap, faded by layer alpha)
+ const ova=alpha['despair-overdoses']||0;
+ if(ova>0.02&&scope==='us'&&D['despair-overdoses']){
+  ensureCounties(C);
+  if(C.countyTintCv){
+   applyT(ctx);
+   ctx.globalAlpha=ova;
+   ctx.drawImage(C.countyTintCv,0,0,W,H);
+   ctx.globalAlpha=1;
+  }
+ }
  // desire tint
  const dl=byId['desire-searches'];
  const da=alpha['desire-searches']||0;
@@ -295,7 +320,7 @@ function drawTerrain(){
  ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
  ctx.globalAlpha=1;ctx.drawImage(C.shadeCv,ext[0][0],ext[0][1],exw,exh);
  for(const l of live){
-  const cs=C.contours[l.id];if(!cs)continue;
+  const cs=layerContours(C,l.id);if(!cs)continue;
   const a=alpha[l.id];if(a<=0.02)continue;
   const cA=(VIS[l.id]&&VIS[l.id].cA)||.4;
   ctx.strokeStyle=l.accent;
@@ -315,10 +340,22 @@ function drawPointsTo(ctx,lid){
  const draw=(spr,x,y,r)=>{const sx=x*k+t.x,sy=y*k+t.y;if(sx<-60||sx>W+60||sy<-60||sy>H+60)return;const rr=r*kk;ctx.drawImage(spr,sx-rr,sy-rr,rr*2,rr*2);};
  if(d.kind==='memory'){
   const wf=scope==='world'?0.68:1;
-  const P=L.cells,vv=d.cells.v;
-  for(let i=0;i<P.n;i++){if(!P.keep[i])continue;const r=(1.1+Math.log1p(vv[i])*0.62)*wf;draw(SPR.memCell,P.xs[i],P.ys[i],Math.min(r,7.5*wf));}
-  const S=L.stars,sv=d.stars.v;
-  for(let i=0;i<S.n;i++){if(!S.keep[i])continue;draw(SPR.memStar,S.xs[i],S.ys[i],(1.2+sv[i]*.014)*wf);}
+  if(scope==='world')ctx.globalAlpha=0.82;
+  const P=L.cells,vv=d.cells.v,ee=d.cells.e;
+  for(let i=0;i<P.n;i++){
+   if(!P.keep[i])continue;
+   const val=era<0?vv[i]:(ee&&ee[i]?ee[i][era]:0);
+   if(!val)continue;
+   const r=(1.1+Math.log1p(val)*0.62)*wf;
+   draw(SPR.memCell,P.xs[i],P.ys[i],Math.min(r,7.5*wf));
+  }
+  const S=L.stars,sv=d.stars.v,sb=d.stars.birth;
+  for(let i=0;i<S.n;i++){
+   if(!S.keep[i])continue;
+   if(era>=0&&!inEra(sb[i]))continue;
+   draw(SPR.memStar,S.xs[i],S.ys[i],(1.2+sv[i]*.014)*wf);
+  }
+  ctx.globalAlpha=1;
  }else{
   const P=L.pts;
   if(lid==='loss-crashes'){
@@ -335,6 +372,11 @@ function drawPointsTo(ctx,lid){
   }else if(lid==='omen-names'){
    const ss=d.s;
    for(let i=0;i<P.n;i++){if(!P.keep[i])continue;draw(ss[i]?SPR.omenL:SPR.omenD,P.xs[i],P.ys[i],2.0);}
+  }else if(lid==='wonder-ufos'){
+   const vv=d.v;
+   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;draw(SPR.ufo,P.xs[i],P.ys[i],1.35+Math.log1p(vv?vv[i]:1)*.6);}
+  }else if(lid==='residue-superfund'){
+   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;draw(SPR.sf,P.xs[i],P.ys[i],2.2);}
   }
  }
 }
@@ -421,6 +463,7 @@ function drawLabels(){
   let shown=0;
   for(let i=0;i<L.n&&shown<26;i++){
    if(!L.keep[i])continue;
+   if(era>=0&&!inEra(d.birth[i]))continue;
    const [sx,sy]=S(L.xs[i],L.ys[i]);
    if(sx<padLeft()||sx>W-20||sy<100||sy>H-80)continue;
    if(!free(sx,sy,70))continue;take(sx,sy,70);
@@ -490,8 +533,20 @@ function rebuildQt(){
   const l=byId[lid];if(!l.forms.points)continue;
   const L=C.layers[lid];if(!L)continue;
   if(D[lid].kind==='memory'){
-   const P=L.cells;for(let i=0;i<P.n;i++)if(P.keep[i])items.push({x:P.xs[i],y:P.ys[i],lid,i,kind:'cell'});
-   const St=L.stars;for(let i=0;i<St.n;i++)if(St.keep[i])items.push({x:St.xs[i],y:St.ys[i],lid,i,kind:'star'});
+   const dd=D[lid],ee=dd.cells.e;
+   const P=L.cells;
+   for(let i=0;i<P.n;i++){
+    if(!P.keep[i])continue;
+    const val=era<0?dd.cells.v[i]:(ee&&ee[i]?ee[i][era]:0);
+    if(!val)continue;
+    items.push({x:P.xs[i],y:P.ys[i],lid,i,kind:'cell'});
+   }
+   const St=L.stars,sb=dd.stars.birth;
+   for(let i=0;i<St.n;i++){
+    if(!St.keep[i])continue;
+    if(era>=0&&!inEra(sb[i]))continue;
+    items.push({x:St.xs[i],y:St.ys[i],lid,i,kind:'star'});
+   }
   }else{
    const P=L.pts;for(let i=0;i<P.n;i++)if(P.keep[i])items.push({x:P.xs[i],y:P.ys[i],lid,i,kind:'pt'});
   }
@@ -505,15 +560,37 @@ function tipHTML(f){
  const l=byId[f.lid],d=D[f.lid];
  let k=l.title.toUpperCase(),ti='',s='';
  if(f.kind==='star'){const st=d.stars;ti='★ '+st.name[f.i];s=(st.birth[f.i]?'b. '+st.birth[f.i]+' · ':'')+(st.dom[f.i]||'')+`<br>visibility ${st.v[f.i]} / 100`;}
- else if(f.kind==='cell'){const v=d.cells.v[f.i];ti=fmtInt(v)+' remembered birth'+(v>1?'s':'')+' near here';const lab=d.cells.lab[String(f.i)];if(lab)s='brightest: '+lab;}
+ else if(f.kind==='cell'){
+  const ee=d.cells.e;
+  const v=era<0?d.cells.v[f.i]:(ee&&ee[f.i]?ee[f.i][era]:0);
+  ti=fmtInt(v)+' remembered birth'+(v>1?'s':'')+' near here';
+  if(era>=0&&d.eras)ti+=' ('+d.eras.labels[era]+')';
+  const lab=d.cells.lab[String(f.i)];if(lab)s='brightest: '+lab;
+ }
  else if(f.lid==='loss-crashes'){const v=d.v[f.i];ti=v===1?'One person died here':v+' people died here';s=MONTHS[d.m[f.i]]+' 2023 · fatal crash';}
  else if(f.lid==='power-datacenters'){ti=d.name[f.i]||'Unnamed facility';s='data center';}
  else if(f.lid==='power-fortune500'){const v=d.v[f.i];ti='#'+d.rank[f.i]+' '+d.name[f.i];s=d.loc[f.i]+' · $'+(v>=1e6?(v/1e6).toFixed(2)+'T':v>=1000?(v/1000).toFixed(1)+'B':v+'M')+' revenue';}
  else if(f.lid==='motion-fulfillment'){ti=d.name[f.i]||'Amazon facility';s=(d.typeNames[d.t[f.i]]||'')+' · '+d.loc[f.i];}
  else if(f.lid==='omen-names'){ti=d.name[f.i];s=(d.s[f.i]?'light':'dark')+' name · '+d.cls[f.i]+', '+d.st[f.i];}
+ else if(f.lid==='wonder-ufos'){const v=d.v?d.v[f.i]:1;ti=v>1?fmtInt(v)+' sightings reported here':'A sighting reported here';s=(d.yr&&d.yr[f.i]?'most recent '+d.yr[f.i]+' · ':'')+'NUFORC testimony';}
+ else if(f.lid==='residue-superfund'){ti=d.name[f.i];s=['proposed for the NPL','on the National Priorities List','deleted from the NPL — cleaned enough to leave'][d.st2[f.i]]+' · '+d.state[f.i];}
  return {k,ti,s,color:f.lid==='omen-names'&&d.s[f.i]?(byId[f.lid].accent2||'#f2ead8'):l.accent};
 }
 function regionTip(qx,qy){
+ const C0=SC[scope];
+ const ova=alpha['despair-overdoses']||0;
+ if(ova>0.3&&scope==='us'&&C0.countyBoxes){
+  idT(hitCtx);
+  const dd0=D['despair-overdoses'].counties,l0=byId['despair-overdoses'];
+  for(const b of C0.countyBoxes){
+   if(qx<b.x0||qx>b.x1||qy<b.y0||qy>b.y1)continue;
+   if(hitCtx.isPointInPath(b.p,qx*dpr,qy*dpr)){
+    const e=dd0[b.fips];
+    if(e)return {k:'THE QUIET EPIDEMIC',ti:b.name,s:'<b>'+e.label+'</b>',color:l0.accent};
+    return {k:'THE QUIET EPIDEMIC',ti:b.name,s:'no reportable rate — suppressed or missing<br>(small counts protect privacy)',color:'#5a6577'};
+   }
+  }
+ }
  const da=alpha['desire-searches']||0;
  if(da<=0.3||!scopeHas('desire-searches'))return null;
  const C=SC[scope],dd=D['desire-searches'],l=byId['desire-searches'];
@@ -568,7 +645,10 @@ function onMove(ev){
 
 // ---------- UI ----------
 function updateStatline(){
- const parts=activeIds().map(lid=>byId[lid].statline).filter(Boolean);
+ const parts=activeIds().map(lid=>{
+  if(lid==='memory-births'&&era>=0&&D[lid].eras)return fmtInt(D[lid].eras.totals[era])+' births, '+D[lid].eras.labels[era];
+  return byId[lid].statline;
+ }).filter(Boolean);
  $('#statline').textContent=parts.join('  ·  ');
 }
 function updateDatumDefault(){
@@ -599,6 +679,8 @@ function toggleLayer(lid){
  if(byId[lid].status!=='live'||!scopeHas(lid))return;
  target[lid]=target[lid]>0?0:1;
  chipRefresh();updateStatline();scheduleQt();
+ if(typeof eraRefresh==='function')eraRefresh();
+ if(typeof writeHash==='function')writeHash();
  terrainDirty=true;dirty=true;
 }
 function buildRail(){
@@ -652,6 +734,7 @@ function openPlate(lid){
   '<div class="pl-h" style="color:'+l.accent+'">WHAT</div><div class="pl-body">'+l.essay.what+'</div>'+
   '<div class="pl-h" style="color:'+l.accent+'">HOW</div><div class="pl-body">'+l.essay.how+'</div>'+
   '<div class="pl-h" style="color:'+l.accent+'">WHY</div><div class="pl-body">'+l.essay.why+'</div>'+
+  (l.caveat?'<div class="pl-cav"><b>FIELD NOTE</b> — '+l.caveat+'</div>':'')+
   (srcs?'<div class="pl-h" style="color:'+l.accent+'">SOURCES</div><div class="pl-src">'+srcs+'</div>':'')+
   (l.status==='live'?'<div class="pl-solo">SOLO VIEW — other layers dimmed · close to restore</div>':'<div class="pl-solo">'+(l.pendingNote||'')+'</div>');
  $('#plate').style.borderTopColor=l.accent;
@@ -682,9 +765,13 @@ function buildHero(){
   '<p class="hero-man">'+R.meta.manifesto+'</p>'+
   '<div class="hero-stats">'+live.length+' LAYERS LIVE · '+fmtInt(total)+' COORDINATES OF HUMAN ACTIVITY · ZERO RUNTIME NETWORK CALLS</div>'+
   '<button id="heroEnter">ENTER THE SURVEY</button>'+
-  '<div class="hero-hint">hover anything · toggle layers with 1–'+railOrder.length+' · scroll to zoom · U / W to change sheets</div>'+
+  '<div class="hero-hint">hover anything · toggle layers with '+(railOrder.length>9?'1–9 and 0':'1–'+railOrder.length)+' · R for readings · scroll to zoom · U / W to change sheets</div>'+
   '</div>';
- const go=()=>{$('#hero').classList.add('gone');};
+ const go=()=>{
+  if($('#hero').classList.contains('gone'))return;
+  $('#hero').classList.add('gone');
+  maybeOrientation();
+ };
  $('#heroEnter').addEventListener('click',go);
  $('#hero').addEventListener('wheel',go,{passive:true});
 }
@@ -717,46 +804,440 @@ function switchScope(s){
  $('#scopeWorld').classList.toggle('on',s==='world');
  chipRefresh();updateStatline();updateDatumDefault();
  bakeGlow();rebuildQt();updateScalebar();
+ if(typeof eraRefresh==='function')eraRefresh();
+ if(typeof writeHash==='function')writeHash();
  terrainDirty=true;dirty=true;
+}
+
+// ---------- v2: era-aware grids ----------
+function memGrid(C,er){
+ C.eraGrids=C.eraGrids||{};
+ if(C.eraGrids[er])return C.eraGrids[er];
+ const d=D['memory-births'],L=C.layers['memory-births'];
+ const out={grid:null,contours:null};
+ if(!d||!L||!d.cells.e){C.eraGrids[er]=out;return out;}
+ const ext=C.ext,exw=ext[1][0]-ext[0][0],exh=ext[1][1]-ext[0][1],GW=C.GW,GH=C.GH;
+ const grid=new Float32Array(GW*GH),P=L.cells,ee=d.cells.e;
+ for(let i=0;i<P.n;i++){
+  if(!P.keep[i]||!ee[i])continue;
+  const v=ee[i][er];if(!v)continue;
+  const gx=Math.floor((P.xs[i]-ext[0][0])/exw*GW),gy=Math.floor((P.ys[i]-ext[0][1])/exh*GH);
+  if(gx>=0&&gx<GW&&gy>=0&&gy<GH)grid[gy*GW+gx]+=Math.log1p(v);
+ }
+ let g=gaussBlur(grid,GW,GH);
+ const nz=[];for(let i=0;i<g.length;i++)if(g[i]>0)nz.push(g[i]);
+ nz.sort((a,b)=>a-b);
+ const p99=nz.length?nz[Math.min(nz.length-1,Math.floor(nz.length*.996))]:1;
+ for(let i=0;i<g.length;i++)g[i]=Math.min(1,g[i]/p99);
+ out.grid=g;
+ const cs=d3.contours().size([GW,GH]).thresholds(CONTOUR_T)(g);
+ out.contours=cs.map((c,ci)=>{
+  const p=new Path2D();
+  c.coordinates.forEach(poly=>poly.forEach(ring=>{
+   ring.forEach((pt,j)=>{
+    const x=ext[0][0]+pt[0]/GW*exw,y=ext[0][1]+pt[1]/GH*exh;
+    j?p.lineTo(x,y):p.moveTo(x,y);
+   });p.closePath();
+  }));
+  return {p,i:ci};
+ });
+ C.eraGrids[er]=out;
+ return out;
+}
+function layerGrid(C,lid){
+ if(lid==='memory-births'&&era>=0){const m=memGrid(C,era);return m.grid;}
+ return C.grids[lid];
+}
+function layerContours(C,lid){
+ if(lid==='memory-births'&&era>=0){const m=memGrid(C,era);return m.contours;}
+ return C.contours[lid];
+}
+
+// ---------- v2: counties ----------
+function ensureCounties(C){
+ if(C.countyBoxes||scope!=='us'||!B.counties)return;
+ if(!geo.counties)geo.counties=topo.feature(B.counties,B.counties.objects.counties).features;
+ const dd=D['despair-overdoses'];
+ C.countyBoxes=[];
+ for(const f of geo.counties){
+  const fips=String(f.id).padStart(5,'0');
+  const ds=C.gp(f);if(!ds)continue;
+  const p=new Path2D(ds);
+  const bb=C.gp.bounds(f);
+  C.countyBoxes.push({fips,p,name:f.properties.name,x0:bb[0][0],y0:bb[0][1],x1:bb[1][0],y1:bb[1][1]});
+ }
+ if(dd&&dd.counties){
+  const cv=document.createElement('canvas');cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+  const x=cv.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);
+  const ac=byId['despair-overdoses'].accent,vmax=dd.vmax||60;
+  for(const b of C.countyBoxes){
+   const e=dd.counties[b.fips];if(!e)continue;
+   const norm=Math.min(1,e.v/vmax);
+   x.fillStyle=hexA(ac,0.05+norm*0.42);
+   x.fill(b.p);
+  }
+  C.countyTintCv=cv;
+ }
+}
+
+// ---------- v2: toast ----------
+let toastT=null;
+function toast(msg,ms){
+ const el=$('#toast');el.textContent=msg;el.classList.add('show');
+ clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),ms||3400);
+}
+
+// ---------- v2: era scrubber ----------
+function buildEraBar(){
+ const d=D['memory-births'];
+ if(!d||!d.eras)return;
+ const bar=$('#eraBar');bar.innerHTML='';
+ const mk=(label,e)=>{
+  const b=document.createElement('button');b.textContent=label;b.dataset.era=e;
+  b.addEventListener('click',()=>setEra(parseInt(b.dataset.era,10)));
+  bar.appendChild(b);return b;
+ };
+ mk('ALL TIME',-1);
+ d.eras.labels.forEach((lb,i)=>mk(lb,i));
+ const play=document.createElement('button');play.className='play';play.textContent='▶';
+ play.addEventListener('click',()=>{
+  if(eraPlay){clearInterval(eraPlay);eraPlay=null;play.textContent='▶';return;}
+  play.textContent='■';let e=era<0?-1:era;
+  eraPlay=setInterval(()=>{
+   e++;
+   if(e>4){setEra(-1);clearInterval(eraPlay);eraPlay=null;play.textContent='▶';return;}
+   setEra(e);
+  },2100);
+ });
+ bar.appendChild(play);
+ eraRefresh();
+}
+function eraRefresh(){
+ const d=D['memory-births'];
+ const show=d&&d.eras&&activeIds().indexOf('memory-births')>=0;
+ $('#eraBar').classList.toggle('show',!!show);
+ document.querySelectorAll('#eraBar button[data-era]').forEach(b=>{
+  b.classList.toggle('on',parseInt(b.dataset.era,10)===era);
+ });
+}
+function setEra(e){
+ if(e===era)return;
+ era=e;
+ eraRefresh();
+ bakeGlow();scheduleQt();updateStatline();writeHash();
+ terrainDirty=true;dirty=true;
+}
+
+// ---------- v2: camera flights ----------
+function flyTo(bbox,ms,done){
+ const C=SC[scope];
+ const pts=[[bbox[0][0],bbox[0][1]],[bbox[1][0],bbox[1][1]],[bbox[0][0],bbox[1][1]],[bbox[1][0],bbox[0][1]]];
+ let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9,ok=false;
+ for(const g of pts){
+  const p=C.proj(g);if(!p)continue;ok=true;
+  x0=Math.min(x0,p[0]);y0=Math.min(y0,p[1]);x1=Math.max(x1,p[0]);y1=Math.max(y1,p[1]);
+ }
+ if(!ok){done&&done();return;}
+ const ext=C.ext,aw=ext[1][0]-ext[0][0],ah=ext[1][1]-ext[0][1];
+ const k=Math.max(1,Math.min(26,0.85*Math.min(aw/Math.max(x1-x0,1),ah/Math.max(y1-y0,1))));
+ const cx=(x0+x1)/2,cy=(y0+y1)/2,ecx=(ext[0][0]+ext[1][0])/2,ecy=(ext[0][1]+ext[1][1])/2;
+ const target=d3.zoomIdentity.translate(ecx-k*cx,ecy-k*cy).scale(k);
+ d3.select('#stage').transition('fly').duration(ms||2500).ease(d3.easeCubicInOut)
+  .call(zoomB.transform,target).on('end interrupt',()=>{done&&done();});
+}
+
+// ---------- v2: readings ----------
+function capBase(kicker,title,body,accent){
+ return '<div class="cc-k" style="color:'+(accent||'#e8b34b')+'">'+kicker+'</div>'+
+  '<div class="cc-t">'+title+'</div>'+(body?'<div class="cc-x">'+body+'</div>':'');
+}
+function showCap(html){const c=$('#capCard');c.innerHTML=html;c.classList.add('open');}
+function hideCap(){$('#capCard').classList.remove('open');}
+function wireCapNav(){
+ const p=$('#ccPrev'),n=$('#ccNext'),e=$('#ccEnd');
+ if(p)p.addEventListener('click',()=>stepReading(-1));
+ if(n)n.addEventListener('click',()=>stepReading(1));
+ if(e)e.addEventListener('click',endReading);
+}
+function capForReading(r,idx){
+ const ac=(r.layers&&r.layers.length&&byId[r.layers[0]])?byId[r.layers[0]].accent:'#e8b34b';
+ return capBase(r.kicker,r.title,r.text,ac)+
+  '<div class="cc-row"><span class="cc-step">READING '+(idx+1)+' OF '+R.readings.length+'</span>'+
+  '<span class="cc-nav"><button class="cc-btn" id="ccPrev">◀ PREV</button><button class="cc-btn" id="ccNext">NEXT ▶</button><button class="cc-btn" id="ccEnd">✕ END</button></span></div>';
+}
+function clearOrient(){orientTimers.forEach(clearTimeout);orientTimers=[];}
+function startReading(i){
+ const r=R.readings[i];if(!r)return;
+ clearOrient();
+ if(plateOpen)closePlate();
+ $('#readingsMenu').classList.remove('open');
+ if(reading===null)readingSaved={scope:scope,targets:{...target},t:{k:t.k,x:t.x,y:t.y},era:era};
+ reading=i;
+ if(r.special==='orientation'){runOrientation();return;}
+ if(r.scope!==scope)switchScope(r.scope);
+ if(era!==-1){era=-1;}
+ for(const l of live)target[l.id]=(r.layers.indexOf(l.id)>=0?1:0);
+ chipRefresh();updateStatline();eraRefresh();scheduleQt();
+ terrainDirty=true;dirty=true;
+ flyTo(r.bbox,2600);
+ showCap(capForReading(r,i));
+ wireCapNav();
+}
+function stepReading(dir){
+ if(reading===null)return;
+ let j=(reading+dir+R.readings.length)%R.readings.length;
+ startReading(j);
+}
+function runOrientation(){
+ if(scope!=='us')switchScope('us');
+ for(const l of live)target[l.id]=0;
+ era=-1;
+ chipRefresh();updateStatline();eraRefresh();scheduleQt();terrainDirty=true;dirty=true;
+ d3.select('#stage').transition('fly').duration(900).call(zoomB.transform,d3.zoomIdentity);
+ const skipRow='<div class="cc-row"><span class="cc-step">ORIENTATION</span><span class="cc-nav"><button class="cc-btn" id="ccEnd">SKIP ▸</button></span></div>';
+ showCap(capBase('HOW TO READ THIS MAP','Orientation',R.readings[0].text)+skipRow);
+ wireCapNav();
+ railOrder.forEach((lid,ix)=>{
+  orientTimers.push(setTimeout(()=>{
+   target[lid]=1;
+   chipRefresh();updateStatline();scheduleQt();terrainDirty=true;dirty=true;
+   const l=byId[lid],th=themeById[l.theme];
+   showCap(capBase(th.name.toUpperCase()+' — '+th.reading.toUpperCase(),l.title,l.statline||l.unit,l.accent)+skipRow);
+   wireCapNav();
+  },1300+ix*1800));
+ });
+ orientTimers.push(setTimeout(()=>{
+  showCap(capBase('THE SOUL SURVEY','The terrain is us.','Toggle layers. Hover anything. Open a reading. Every point is real.')+
+   '<div class="cc-row"><span class="cc-step"></span><span class="cc-nav"><button class="cc-btn" id="ccEnd">EXPLORE ▸</button></span></div>');
+  wireCapNav();
+  orientTimers.push(setTimeout(endReading,4200));
+ },1300+railOrder.length*1800+600));
+}
+function endReading(){
+ clearOrient();
+ if(eraPlay){clearInterval(eraPlay);eraPlay=null;}
+ if(readingSaved){
+  if(readingSaved.scope!==scope)switchScope(readingSaved.scope);
+  for(const k in readingSaved.targets)target[k]=readingSaved.targets[k];
+  era=readingSaved.era;
+  const s=readingSaved.t;
+  d3.select('#stage').transition('fly').duration(1500).ease(d3.easeCubicInOut)
+   .call(zoomB.transform,d3.zoomIdentity.translate(s.x,s.y).scale(s.k));
+ }
+ reading=null;readingSaved=null;
+ hideCap();
+ chipRefresh();updateStatline();eraRefresh();scheduleQt();
+ terrainDirty=true;dirty=true;writeHash();
+}
+function maybeOrientation(){
+ if(hashHadState)return;
+ startReading(0);
+}
+function buildReadingsMenu(){
+ const m=$('#readingsMenu');m.innerHTML='';
+ R.readings.forEach((r,i)=>{
+  const it=document.createElement('div');it.className='rm-item';
+  it.innerHTML='<div class="rk">'+r.kicker+'</div><div class="rt">'+r.title+'</div>';
+  it.addEventListener('click',()=>startReading(i));
+  m.appendChild(it);
+ });
+}
+
+// ---------- v2: locate ----------
+function havKm(la1,lo1,la2,lo2){
+ const R6=6371,dLa=(la2-la1)*Math.PI/180,dLo=(lo2-lo1)*Math.PI/180;
+ const a=Math.sin(dLa/2)**2+Math.cos(la1*Math.PI/180)*Math.cos(la2*Math.PI/180)*Math.sin(dLo/2)**2;
+ return R6*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+function nearestOf(la,lo,lats,lons){
+ let bi=-1,bd=1e9;
+ for(let i=0;i<lats.length;i++){
+  const d=havKm(la,lo,lats[i],lons[i]);
+  if(d<bd){bd=d;bi=i;}
+ }
+ return {i:bi,km:bd};
+}
+function locateMe(){
+ if(!navigator.geolocation){toast('Geolocation is unavailable in this frame — open the shared link in its own tab.');return;}
+ toast('Surveying your position…',8000);
+ navigator.geolocation.getCurrentPosition(pos=>{
+  const la=pos.coords.latitude,lo=pos.coords.longitude;
+  const usProj=buildScope('us').proj([lo,la]);
+  if(usProj){if(scope!=='us')switchScope('us');}
+  else{buildScope('world');if(scope!=='world')switchScope('world');}
+  flyTo([[lo-1.5,la-1.05],[lo+1.5,la+1.05]],2600);
+  const lines=[];
+  const add=(lid,text)=>{const l=byId[lid];lines.push('<span class="dot" style="background:'+l.accent+'"></span>'+text);};
+  const dm=D['memory-births'];
+  if(dm){const n=nearestOf(la,lo,dm.stars.lat,dm.stars.lon);if(n.i>=0)add('memory-births','Most notable neighbor: <b>'+dm.stars.name[n.i]+'</b>'+(dm.stars.birth[n.i]?' (b. '+dm.stars.birth[n.i]+')':'')+' · '+Math.round(n.km)+' km');}
+  const do2=D['omen-names'];
+  if(do2){const n=nearestOf(la,lo,do2.lat,do2.lon);if(n.i>=0)add('omen-names','Nearest omen: <b>'+do2.name[n.i]+'</b> ('+(do2.s[n.i]?'light':'dark')+') · '+Math.round(n.km)+' km');}
+  const dc=D['power-datacenters'];
+  if(dc){const n=nearestOf(la,lo,dc.lat,dc.lon);if(n.i>=0)add('power-datacenters','Nearest data center: <b>'+(dc.name[n.i]||'unnamed facility')+'</b> · '+Math.round(n.km)+' km');}
+  const df=D['motion-fulfillment'];
+  if(df){const n=nearestOf(la,lo,df.lat,df.lon);if(n.i>=0)add('motion-fulfillment','Nearest Amazon node: <b>'+df.name[n.i]+'</b> · '+Math.round(n.km)+' km');}
+  const ds=D['residue-superfund'];
+  if(ds){const n=nearestOf(la,lo,ds.lat,ds.lon);if(n.i>=0)add('residue-superfund','Nearest buried residue: <b>'+ds.name[n.i]+'</b> · '+Math.round(n.km)+' km');}
+  const dcr=D['loss-crashes'];
+  if(dcr){
+   let c=0,dth=0;
+   for(let i=0;i<dcr.lat.length;i++){
+    if(Math.abs(dcr.lat[i]-la)>0.45||Math.abs(dcr.lon[i]-lo)>0.6)continue;
+    if(havKm(la,lo,dcr.lat[i],dcr.lon[i])<=40){c++;dth+=dcr.v[i];}
+   }
+   add('loss-crashes','Within 40 km in 2023: <b>'+fmtInt(c)+' fatal crashes · '+fmtInt(dth)+' deaths</b>');
+  }
+  const du=D['wonder-ufos'];
+  if(du){const n=nearestOf(la,lo,du.lat,du.lon);if(n.i>=0)add('wonder-ufos','Nearest sighting: <b>'+(du.v&&du.v[n.i]>1?fmtInt(du.v[n.i])+' reports':'1 report')+'</b> · '+Math.round(n.km)+' km');}
+  showCap(capBase('FIELD REPORT — '+la.toFixed(3)+'°, '+lo.toFixed(3)+'°','Your Local Reading','')+
+   '<div class="cc-loc">'+lines.join('<br>')+'</div>'+
+   '<div class="cc-row"><span class="cc-step">THE SURVEY, SURVEYED AROUND YOU</span><span class="cc-nav"><button class="cc-btn" id="ccEnd">✕ CLOSE</button></span></div>');
+  const e=$('#ccEnd');if(e)e.addEventListener('click',hideCap);
+  toast('Position found.');
+ },err=>{
+  toast('Location unavailable — permission denied or blocked in this frame. Try the shared link in its own tab.');
+ },{timeout:12000,maximumAge:600000});
+}
+
+// ---------- v2: export sheet ----------
+function exportSheet(){
+ hoverPt=null;
+ drawBase();drawTerrain();drawGlow();drawLabels();
+ const off=document.createElement('canvas');off.width=Math.round(W*dpr);off.height=Math.round(H*dpr);
+ const x=off.getContext('2d');
+ x.fillStyle='#070a10';x.fillRect(0,0,off.width,off.height);
+ x.drawImage(cvs.base,0,0);x.drawImage(cvs.terr,0,0);x.drawImage(cvs.glow,0,0);x.drawImage(cvs.lab,0,0);
+ x.setTransform(dpr,0,0,dpr,0,0);
+ x.strokeStyle='rgba(170,188,214,.4)';x.lineWidth=1;x.strokeRect(14,14,W-28,H-28);
+ x.textAlign='left';x.textBaseline='top';
+ x.fillStyle='#8a94a6';x.font='500 10px "IBM Plex Mono"';
+ x.fillText(R.meta.sheet+' · SURVEYED '+R.meta.surveyed,34,30);
+ x.fillStyle='#e8e4d8';x.font='900 30px "Fraunces"';x.fillText('THE SOUL SURVEY',32,44);
+ x.fillStyle='#8a94a6';x.font='400 9.5px "IBM Plex Mono"';x.fillText(R.meta.tagline.toUpperCase(),34,82);
+ x.textBaseline='middle';
+ let ly=H-44;
+ const ids=activeIds();
+ for(let i=ids.length-1;i>=0;i--){
+  const l=byId[ids[i]];
+  x.fillStyle=l.accent;x.beginPath();x.arc(38,ly,3.5,0,7);x.fill();
+  x.fillStyle='#c9cfda';x.font='500 9.5px "IBM Plex Mono"';
+  x.fillText(l.title.toUpperCase()+'  —  '+(l.statline||l.unit),50,ly);
+  ly-=17;
+ }
+ const dnow=new Date();
+ x.textAlign='right';
+ x.fillStyle='#8a94a6';x.font='400 9px "IBM Plex Mono"';
+ x.fillText('SHEET RENDERED '+dnow.toISOString().slice(0,10)+' · '+(scope==='us'?'ALBERS EQUAL-AREA':'EQUAL EARTH')+' · SOULMAP',W-34,H-56);
+ x.fillStyle='#5a6577';x.font='400 8px "IBM Plex Mono"';
+ x.fillText('© OPENSTREETMAP CONTRIBUTORS · GEONAMES CC-BY · LAOUENAN ET AL. CC-BY-SA · NHTSA FARS · USGS GNIS · EPA · CDC · NUFORC',W-34,H-40);
+ off.toBlob(b=>{
+  if(!b){toast('Export failed — canvas too large?');return;}
+  const url=URL.createObjectURL(b);
+  const inFrame=(function(){try{return window.self!==window.top;}catch(e){return true;}})();
+  if(inFrame){
+   const w=window.open(url,'_blank');
+   toast(w?'Sheet rendered — save the image from the new tab.':'Popup blocked — allow popups to export the sheet.');
+  }else{
+   const a=document.createElement('a');a.href=url;a.download='soul-survey-'+scope+'-'+dnow.toISOString().slice(0,10)+'.png';
+   document.body.appendChild(a);a.click();a.remove();
+   toast('Sheet exported.');
+  }
+  setTimeout(()=>URL.revokeObjectURL(url),90000);
+ },'image/png');
+}
+
+// ---------- v2: permalinks ----------
+function writeHash(){
+ clearTimeout(hashTimer);
+ hashTimer=setTimeout(()=>{
+  try{
+   const l=railOrder.map(id=>target[id]>0?1:0).join('');
+   history.replaceState(null,'','#s='+scope+'&l='+l+'&e='+era+'&k='+t.k.toFixed(3)+'&x='+t.x.toFixed(1)+'&y='+t.y.toFixed(1));
+  }catch(e){}
+ },300);
+}
+let pendingHashT=null;
+function parseHash(){
+ try{
+  const h=location.hash.replace(/^#/,'');
+  if(!h)return false;
+  const q={};h.split('&').forEach(kv=>{const p=kv.split('=');q[p[0]]=decodeURIComponent(p[1]||'');});
+  if(!q.s||(q.s!=='us'&&q.s!=='world'))return false;
+  scope=q.s;
+  if(q.e!==undefined){const e=parseInt(q.e,10);if(e>=-1&&e<=4)era=e;}
+  if(q.k){
+   const k=parseFloat(q.k),xx=parseFloat(q.x),yy=parseFloat(q.y);
+   if(isFinite(k)&&isFinite(xx)&&isFinite(yy))pendingHashT=d3.zoomIdentity.translate(xx,yy).scale(Math.max(1,Math.min(26,k)));
+  }
+  return {bits:q.l||''};
+ }catch(e){return false;}
 }
 
 // ---------- zoom ----------
 const zoomB=d3.zoom().scaleExtent([1,26]).on('zoom',ev=>{
  t=ev.transform;dirty=true;
  clearTimeout(bakeTimer);bakeTimer=setTimeout(()=>{bakeGlow();},140);
-}).on('end',()=>{bakeGlow();updateScalebar();});
+}).on('end',()=>{bakeGlow();updateScalebar();writeHash();});
 
 // ---------- init ----------
 function init(){
  sizeCanvases();
  buildSprites();
  railOrder=buildRail();
- buildScope('us');
+ const hp=parseHash();
+ if(hp){hashHadState=true;}
+ buildScope(scope);
  buildHero();
  buildAbout();
+ buildEraBar();
+ buildReadingsMenu();
  $('#mhSheet').textContent=R.meta.sheet+' · '+R.meta.surveyed;
  $('#mhTitle').innerHTML='THE <em>SOUL</em> SURVEY';
  $('#mhTagline').textContent=R.meta.tagline;
+ $('#scopeUS').classList.toggle('on',scope==='us');
+ $('#scopeWorld').classList.toggle('on',scope==='world');
  $('#scopeUS').addEventListener('click',()=>switchScope('us'));
  $('#scopeWorld').addEventListener('click',()=>switchScope('world'));
  $('#aboutBtn').addEventListener('click',()=>$('#about').classList.add('open'));
  $('#about').addEventListener('click',ev=>{if(ev.target.id==='about')$('#about').classList.remove('open');});
+ $('#readingsBtn').addEventListener('click',ev=>{ev.stopPropagation();$('#readingsMenu').classList.toggle('open');});
+ document.addEventListener('click',ev=>{if(!ev.target.closest('.mh-menu-wrap'))$('#readingsMenu').classList.remove('open');});
+ $('#locateBtn').addEventListener('click',locateMe);
+ $('#exportBtn').addEventListener('click',exportSheet);
+ $('#railToggle').addEventListener('click',()=>$('#rail').classList.toggle('open'));
+ if(hp&&hp.bits){
+  for(let i=0;i<railOrder.length&&i<hp.bits.length;i++)target[railOrder[i]]=hp.bits[i]==='1'?1:0;
+  for(const l of live){alpha[l.id]=target[l.id];}
+ }
  const stage=$('#stage');
  d3.select(stage).call(zoomB).on('dblclick.zoom',null);
+ if(pendingHashT)d3.select(stage).call(zoomB.transform,pendingHashT);
  stage.addEventListener('pointermove',onMove);
+ stage.addEventListener('pointerdown',()=>{
+  if(reading!==null&&R.readings[reading]&&R.readings[reading].special){
+   clearOrient();
+   for(const l of live)target[l.id]=1;
+   endReading();
+  }
+ });
  stage.addEventListener('pointerleave',()=>{tip.style.display='none';hoverPt=null;updateDatumDefault();dirty=true;});
  window.addEventListener('keydown',ev=>{
   if(ev.key==='Escape'){
    if($('#about').classList.contains('open'))$('#about').classList.remove('open');
+   else if(reading!==null)endReading();
+   else if($('#capCard').classList.contains('open'))hideCap();
    else if(plateOpen)closePlate();
-   else $('#hero').classList.add('gone');
+   else{$('#hero').classList.add('gone');}
    return;
   }
-  const n=parseInt(ev.key,10);
+  let n=parseInt(ev.key,10);
+  if(ev.key==='0')n=10;
   if(n>=1&&n<=railOrder.length){toggleLayer(railOrder[n-1]);return;}
   if(ev.key==='u'||ev.key==='U')switchScope('us');
   if(ev.key==='w'||ev.key==='W')switchScope('world');
+  if(ev.key==='r'||ev.key==='R')$('#readingsMenu').classList.toggle('open');
  });
+ if(hashHadState)$('#hero').classList.add('gone');
  let rsT=null;
  window.addEventListener('resize',()=>{
   clearTimeout(rsT);
@@ -769,9 +1250,10 @@ function init(){
    terrainDirty=true;dirty=true;
   },220);
  });
- chipRefresh();updateStatline();updateDatumDefault();
+ chipRefresh();updateStatline();updateDatumDefault();eraRefresh();
  bakeGlow();rebuildQt();updateScalebar();
- if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{dirty=true;});
+ $('#stage').classList.add('ready');
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{dirty=true;bakeGlow();});
  frame();
 }
 try{init();}catch(e){err(e);}
