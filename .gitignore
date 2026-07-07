@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+data/raw/
+data/ref/world_places.csv
+*.zip
+.DS_Store
+node_modules/

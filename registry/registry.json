@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "title": "THE SOUL SURVEY",
+    "tagline": "A topographic survey of the collective soul, conducted in objective data.",
+    "sheet": "SHEET NO. 1 — THE HUMAN SIGNAL",
+    "version": "0.1.0",
+    "surveyed": "JULY 2026",
+    "manifesto": "Every act leaves a coordinate. A birth, a search, a warehouse, a crash — each one lands somewhere, and the landing is recorded. Alone, each record is trivia. Stacked, they become relief: ridgelines of genius, basins of grief, the bright grid of the machines we serve and that serve us. This is not a map of the land. It is a map of what we do on it. Toggle the layers. Watch the country change shape. The terrain is us."
+  },
+  "themes": [
+    { "id": "memory",  "name": "Memory",  "reading": "where the remembered entered the world", "order": 1 },
+    { "id": "desire",  "name": "Desire",  "reading": "what each place wants more than everywhere else", "order": 2 },
+    { "id": "power",   "name": "Power",   "reading": "where the machines and the money live", "order": 3 },
+    { "id": "motion",  "name": "Motion",  "reading": "the logistics bloodstream", "order": 4 },
+    { "id": "loss",    "name": "Loss",    "reading": "where we grieve, in aggregate", "order": 5 },
+    { "id": "omen",    "name": "Omen",    "reading": "what we named the land when we were afraid", "order": 6 }
+  ],
+  "layers": [
+    {
+      "id": "memory-births",
+      "title": "Where the Remembered Were Born",
+      "theme": "memory",
+      "accent": "#e8b34b",
+      "scopes": ["us", "world"],
+      "forms": { "points": true, "contours": true, "tint": false },
+      "weight": 1.0,
+      "unit": "notable births",
+      "statline": "{n} remembered births",
+      "status": "live",
+      "essay": {
+        "what": "The birthplaces of 1,704,189 notable humans — everyone with a verified Wikipedia/Wikidata footprint born between 3500 BC and 2018 AD, from the cross-verified database of notable people (Laouenan et al., Scientific Data, 2022). Every golden grain is a place that produced someone the world still remembers. The 12,000 most visible burn as distinct stars.",
+        "how": "2,291,817 records streamed and aggregated to 0.25° cells; 74.4% carry verified birth coordinates. Brightness follows log density. Star selection uses the database's composite visibility score across five criteria — which favors the recently famous, and we disclose it: memory's spotlight is aimed at the present.",
+        "why": "Memory has a geography. It pools where rivers meet, where ports open, where empires kept their books — Paris alone holds 28,055 remembered births, more than most nations. Genius is not sown evenly; it is watered by cities. The nebula argues something uncomfortable: the world remembers people from places that were already powerful."
+      },
+      "plateStats": [
+        { "label": "records processed", "value": "2,291,817" },
+        { "label": "located births", "value": "1,704,189" },
+        { "label": "densest cell", "value": "Paris — 28,055" },
+        { "label": "runners-up", "value": "New York 23,018 · London 19,583" }
+      ]
+    },
+    {
+      "id": "desire-searches",
+      "title": "The Geography of Desire",
+      "theme": "desire",
+      "accent": "#ff4f9a",
+      "scopes": ["us", "world"],
+      "forms": { "points": false, "contours": false, "tint": true, "labels": true },
+      "weight": 0.0,
+      "unit": "top relative search",
+      "statline": "{n} desires measured · 22 states dark",
+      "status": "live",
+      "essay": {
+        "what": "The top disproportionate search term per state — what each place seeks more than the rest of the country does — from Pornhub Insights' 2025 Year in Review, plus the top relative category for the 20 most-visiting countries. Recorded verbatim. Text only.",
+        "how": "Read from the official year-in-review infographic (via archive; the live site refuses this container) and cross-checked against independent press republications, zero discrepancies. Countries carry relative categories because that is what Pornhub publishes at country level.",
+        "why": "Desire is regional — it borrows local accents, local nostalgia, local taboos. But the loudest data on this map is the silence: 22 states are dark because Pornhub blocks access where age-verification laws passed. Desire didn't vanish there. The measurement did. Legislation has redrawn the map of what can be known, and the gray states are a new terra incognita — the first layer of this survey to be censored in real time."
+      },
+      "plateStats": [
+        { "label": "jurisdictions measured", "value": "29 (28 states + DC)" },
+        { "label": "states dark (access blocked)", "value": "22" },
+        { "label": "countries covered", "value": "20" },
+        { "label": "review year", "value": "2025" }
+      ]
+    },
+    {
+      "id": "power-datacenters",
+      "title": "Where the Cloud Touches Ground",
+      "theme": "power",
+      "accent": "#38e1ff",
+      "scopes": ["us", "world"],
+      "forms": { "points": true, "contours": true, "tint": false },
+      "weight": 1.0,
+      "unit": "data centers",
+      "statline": "{n} data centers",
+      "status": "live",
+      "essay": {
+        "what": "4,342 data centers with ground coordinates, worldwide: 4,244 mapped by OpenStreetMap contributors, plus 98 of the newest US hyperscale and AI campuses — xAI Colossus, Stargate sites — from the Brockovich accountability map, which tracks what OSM hasn't surveyed yet.",
+        "how": "Overpass API over telecom=data_center and building=data_center, nodes, ways and relations, deduplicated within 200 meters. Community-mapped data inherits community bias: coverage follows mapping effort, so Europe and North America are sharpest. © OpenStreetMap contributors, ODbL.",
+        "why": "The cloud is a place. It hums in Northern Virginia — Ashburn is the true capital of the internet — and clusters wherever power is cheap, land is flat, and fiber is thick. Every question you ask online is answered somewhere on this map. Notice the new AI campuses landing in the same basins: the machines settle like sediment, in layers, along the same rivers of electricity."
+      },
+      "plateStats": [
+        { "label": "total mapped", "value": "4,342" },
+        { "label": "in the United States", "value": "1,673 (38.5%)" },
+        { "label": "top operators", "value": "AWS 228 · Digital Realty 166 · Equinix 162" },
+        { "label": "newest additions", "value": "xAI Colossus, Stargate campuses" }
+      ]
+    },
+    {
+      "id": "power-fortune500",
+      "title": "The Thrones of Capital",
+      "theme": "power",
+      "accent": "#a78bfa",
+      "scopes": ["us"],
+      "forms": { "points": true, "contours": false, "tint": false },
+      "weight": 0.6,
+      "unit": "Fortune 500 HQs",
+      "statline": "{n} thrones of capital",
+      "status": "live",
+      "essay": {
+        "what": "All 500 headquarters of the 2025 Fortune 500, each sized by revenue. Walmart sits at rank 1 with $680,985 million — a single company out-earning the GDP of most countries.",
+        "how": "Fortune's own 2025 ranking (fiscal-year 2024 revenue), 100% geocoded to city coordinates, 100% revenue coverage, zero companies dropped. Point area scales with revenue; the map is honest about hierarchy.",
+        "why": "Capital keeps addresses. Five hundred corporations, thirty-odd metros — the thrones sit clustered in a handful of skylines while their consequences spread everywhere else on this map: the warehouses they command, the data centers they rent, the towns they leave. Toggle Motion on top of this layer and watch command become circulation."
+      },
+      "plateStats": [
+        { "label": "headquarters mapped", "value": "500 of 500" },
+        { "label": "list year", "value": "2025 (FY2024 revenue)" },
+        { "label": "rank 1", "value": "Walmart — $680,985M" },
+        { "label": "states represented", "value": "37 + DC" }
+      ]
+    },
+    {
+      "id": "motion-fulfillment",
+      "title": "The Fulfillment Bloodstream",
+      "theme": "motion",
+      "accent": "#ff8a3d",
+      "scopes": ["us"],
+      "forms": { "points": true, "contours": true, "tint": false },
+      "weight": 0.8,
+      "unit": "Amazon facilities",
+      "statline": "{n} Amazon facilities",
+      "status": "live",
+      "essay": {
+        "what": "314 active Amazon US logistics facilities — 217 fulfillment centers, 70 sortation centers, 27 inbound cross-docks — the physical bloodstream of same-day desire.",
+        "how": "Verified facility codes from live FBA shipment routing (fba.wiki reference), geocoded 100% to city coordinates. The classic industry source, MWPVL, withdrew its public tables — a reminder that even logistics data has a supply chain.",
+        "why": "This is the geometry of impatience: a warehouse within a night's drive of nearly every American. The network follows interstates the way veins follow bone — I-70, I-80, the Inland Empire, the Lehigh Valley. Toggle Loss on top and see the same corridors twice: the roads that deliver everything also collect their toll."
+      },
+      "plateStats": [
+        { "label": "active facilities", "value": "314" },
+        { "label": "fulfillment centers", "value": "217" },
+        { "label": "sortation centers", "value": "70" },
+        { "label": "inbound cross-docks", "value": "27" }
+      ]
+    },
+    {
+      "id": "loss-crashes",
+      "title": "Every Fatal Crash of 2023",
+      "theme": "loss",
+      "accent": "#ff3b30",
+      "scopes": ["us"],
+      "forms": { "points": true, "contours": true, "tint": false },
+      "weight": 1.0,
+      "unit": "fatal crashes",
+      "statline": "{deaths} deaths on the road",
+      "status": "live",
+      "essay": {
+        "what": "Every located fatal traffic crash in the United States in 2023: 37,640 crashes, 40,889 deaths, one point each, from NHTSA's Fatality Analysis Reporting System. This is the most complete map of American grief published every year — and almost no one ever looks at it.",
+        "how": "The FARS national accident file, with 129 unlocatable crashes (136 deaths) excluded and disclosed. Each point is one crash; where the red brightens, deaths overlap. About 112 people died on the roads every single day of 2023.",
+        "why": "Loss is not scattered at random — it traces our infrastructure exactly. The red follows every highway, pools at intersections and city edges, thins where nobody drives. Zoom in anywhere and you are looking at ordinary trips: commutes, errands, the drive home. The shape of this layer is simply the shape of daily life, drawn in its worst outcomes."
+      },
+      "plateStats": [
+        { "label": "fatal crashes located", "value": "37,640" },
+        { "label": "lives lost", "value": "40,889" },
+        { "label": "per day", "value": "~112" },
+        { "label": "excluded (no coordinates)", "value": "129 crashes · 136 deaths" }
+      ]
+    },
+    {
+      "id": "omen-names",
+      "title": "Devil's Land, Angel's Land",
+      "theme": "omen",
+      "accent": "#ff5340",
+      "accent2": "#f2ead8",
+      "scopes": ["us"],
+      "forms": { "points": true, "contours": false, "tint": false },
+      "weight": 0.4,
+      "unit": "place names",
+      "statline": "{dark} devils · {light} angels",
+      "status": "live",
+      "essay": {
+        "what": "Every natural feature and settlement in America officially named for the beyond: 1,922 for devils, hell, and purgatory; 809 for angels, paradise, and Eden. Devils Canyon. Hells Half Acre. Angel Ridge. Paradise Valley.",
+        "how": "Word-boundary search across all 981,698 official names in the USGS Geographic Names Information System, restricted to natural features and populated places — no churches, no schools, nothing self-named. Red points are the dark names; bone-white points are the light ones.",
+        "why": "Surveyors named what they felt. The devils cluster in the hard land — the canyons, buttes, and badlands of the arid West, where the ground itself seemed hostile — while the angels settle in gentler valleys. Fear got the dramatic terrain; hope got the farmland. The final ratio is 2.4 devils for every angel, which may be the most honest theological statement America has ever made."
+      },
+      "plateStats": [
+        { "label": "dark names", "value": "1,922" },
+        { "label": "light names", "value": "809" },
+        { "label": "ratio", "value": "2.4 : 1" },
+        { "label": "names searched", "value": "981,698" }
+      ]
+    },
+    {
+      "id": "loss-layoffs",
+      "title": "Notice of Mass Layoff",
+      "theme": "loss",
+      "accent": "#6b8cae",
+      "scopes": ["us"],
+      "forms": { "points": false, "contours": false, "tint": true },
+      "weight": 0.0,
+      "unit": "workers affected",
+      "statline": "",
+      "status": "pending",
+      "pendingNote": "Standardized WARN notice data is gated (commercial paywall / authenticated academic access). The registry slot is reserved; the survey continues.",
+      "essay": {
+        "what": "Mass-layoff (WARN) notices by state — where the jobs vanish, in aggregate. Pending: the standardized multi-state datasets are currently paywalled or access-gated.",
+        "how": "This layer will aggregate trailing-12-month WARN notices per 100k residents once an open standardized source is secured. No questionable numbers were shipped in the meantime.",
+        "why": "A survey that fakes a layer betrays all the others. This slot stays visibly empty as a promise: the map is built to keep growing, honestly."
+      },
+      "plateStats": [
+        { "label": "status", "value": "source gated — pending" }
+      ]
+    }
+  ]
+}
