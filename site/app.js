@@ -900,6 +900,7 @@ function openPlate(lid){
   '<div class="pl-h" style="color:'+l.accent+'">WHY</div><div class="pl-body">'+l.essay.why+'</div>'+
   (l.caveat?'<div class="pl-cav"><b>FIELD NOTE</b> — '+l.caveat+'</div>':'')+
   (srcs?'<div class="pl-h" style="color:'+l.accent+'">SOURCES</div><div class="pl-src">'+srcs+'</div>':'')+
+  (l.status==='live'&&D[l.id]?'<div class="pl-h" style="color:'+l.accent+'">DATA</div><div class="pl-src"><a href="https://github.com/ansalamalasna/soulmap/blob/main/data/staging/'+l.id+'.json" target="_blank" rel="noopener noreferrer">staging JSON</a> · <a href="https://github.com/ansalamalasna/soulmap/blob/main/data/staging/'+l.id+'.provenance.json" target="_blank" rel="noopener noreferrer">provenance</a> · <a href="https://github.com/ansalamalasna/soulmap/blob/main/registry/registry.json" target="_blank" rel="noopener noreferrer">registry entry</a></div>':'')+
   (l.status==='live'?'<div class="pl-solo">SOLO VIEW — other layers dimmed · close to restore</div>':'<div class="pl-solo">'+(l.pendingNote||'')+'</div>');
  $('#plate').style.borderTopColor=l.accent;
  $('#plate').classList.add('open');
@@ -952,9 +953,23 @@ function buildAbout(){
   '<div class="ab-h">METHOD</div>'+
   '<div class="ab-body" style="font-size:13px">Point layers render as additive light — where records overlap, the map burns brighter. Weighted density fields drive the shared relief. The page is fully self-contained: basemaps, data, and libraries are baked in at build time and it makes zero runtime network calls (fonts degrade gracefully). Built on a registry architecture: adding a future layer is one data file and one registry entry.</div>'+
   '<div class="ab-h">SOURCES & LICENSES</div><div class="ab-src">'+rows+
-  '<div style="margin-top:10px">Basemaps: Natural Earth (public domain). Geocoding: GeoNames (CC-BY 4.0). Notable-people data: Laouenan et al. (CC-BY-SA 4.0). Map data © OpenStreetMap contributors (ODbL). FARS &amp; GNIS: U.S. public domain.</div></div>'+
+  '<div style="margin-top:10px">Basemaps: Natural Earth (public domain). Geocoding &amp; reference places: GeoNames (CC-BY 4.0). Notable-people data: Laouenan et al. (CC-BY-SA 4.0). Map data © OpenStreetMap contributors (ODbL). FARS &amp; GNIS: U.S. public domain.</div></div>'+
+  '<div class="ab-h">METHODS</div>'+
+  '<div class="ab-body" style="font-size:13px">Each layer is fetched by its own pipeline script into a staging file with a provenance sidecar (method, counts, caveats), then packed — coordinates quantized to ~110 m, giant datasets aggregated to cells — and baked into this single page. Terrain is computed here in your browser: density grids from the active layers, Gaussian-smoothed, contoured, and hillshaded; nothing is pre-rendered. Findings are computed at build time by pipeline/correlate.py (county joins, cell-grid log–log correlations), hand-reviewed, and shipped with their method notes; one deliberately spurious correlation is included as the control. Known limitations live on each plate as a FIELD NOTE. Full pipeline, data, and provenance: <a href="https://github.com/ansalamalasna/soulmap" target="_blank" rel="noopener noreferrer">github.com/ansalamalasna/soulmap</a>.</div>'+
+  '<div class="ab-h">CITE THIS SURVEY</div>'+
+  '<div class="ab-cite" id="abCiteText">The Soul Survey (v'+R.meta.version+', '+R.meta.surveyed.toLowerCase()+'). A topographic survey of the collective soul, conducted in objective data. https://ansalamalasna.github.io/soulmap/ — Layer vintages: FARS 2023 · CDC MIOV 2024 · Fortune 2025 · Pornhub Insights 2025 · NUFORC 1906–2014 · EPA NPL 2026-07 · USGS GNIS 2026-07 · Laouenan et al. 2022 (CC-BY-SA).</div>'+
+  '<button class="ab-copy" id="abCopy">COPY CITATION</button>'+
+  '<div class="ab-h">SURVEY LOG</div>'+
+  '<table class="ab-log">'+live.map(l=>'<tr><td>'+l.title+'</td><td>'+(l.retrieved?String(l.retrieved).slice(0,10):'—')+'</td><td>'+(l.statline||l.unit)+'</td></tr>').join('')+
+  '<tr><td>Releases</td><td colspan="2">v0.1 first light · v0.2 readings, eras, three layers · v0.3 findings, sound, curation · v0.3.1 reference &amp; zoom crossfade · v'+R.meta.version+' the Index, dossiers, trust kit</td></tr></table>'+
   '<div class="ab-h">CONTROLS</div>'+
-  '<div class="ab-kbd"><b>1–'+railOrder.length+'</b> toggle layers &nbsp; <b>U</b> United States &nbsp; <b>W</b> World &nbsp; <b>scroll</b> zoom &nbsp; <b>drag</b> pan &nbsp; <b>ESC</b> close</div>';
+  '<div class="ab-kbd"><b>/</b> search the Index &nbsp; <b>1–'+railOrder.length+'</b> toggle layers &nbsp; <b>G</b> place names &nbsp; <b>R</b> readings &nbsp; <b>F</b> findings &nbsp; <b>E</b> everything &nbsp; <b>C</b> curated &nbsp; <b>U</b>/<b>W</b> sheets &nbsp; <b>scroll</b> zoom &nbsp; <b>ESC</b> close</div>';
+ const cp=$('#abCopy');
+ if(cp)cp.addEventListener('click',()=>{
+  const txt=$('#abCiteText').textContent;
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(()=>toast('Citation copied.'),()=>toast('Select the citation text to copy it.'));
+  else toast('Select the citation text to copy it.');
+ });
  $('#aboutClose').addEventListener('click',()=>$('#about').classList.remove('open'));
 }
 
@@ -1107,7 +1122,7 @@ function flyTo(bbox,ms,done){
  const k=Math.max(1,Math.min(26,0.85*Math.min(aw/Math.max(x1-x0,1),ah/Math.max(y1-y0,1))));
  const cx=(x0+x1)/2,cy=(y0+y1)/2,ecx=(ext[0][0]+ext[1][0])/2,ecy=(ext[0][1]+ext[1][1])/2;
  const target=d3.zoomIdentity.translate(ecx-k*cx,ecy-k*cy).scale(k);
- d3.select('#stage').transition('fly').duration(ms||2500).ease(d3.easeCubicInOut)
+ d3.select('#stage').transition('fly').duration(REDUCED?0:(ms||2500)).ease(d3.easeCubicInOut)
   .call(zoomB.transform,target).on('end interrupt',()=>{done&&done();});
 }
 
@@ -1230,35 +1245,8 @@ function locateMe(){
   const usProj=buildScope('us').proj([lo,la]);
   if(usProj){if(scope!=='us')switchScope('us');}
   else{buildScope('world');if(scope!=='world')switchScope('world');}
-  flyTo([[lo-1.5,la-1.05],[lo+1.5,la+1.05]],2600);
-  const lines=[];
-  const add=(lid,text)=>{const l=byId[lid];lines.push('<span class="dot" style="background:'+l.accent+'"></span>'+text);};
-  const dm=D['memory-births'];
-  if(dm){const n=nearestOf(la,lo,dm.stars.lat,dm.stars.lon);if(n.i>=0)add('memory-births','Most notable neighbor: <b>'+dm.stars.name[n.i]+'</b>'+(dm.stars.birth[n.i]?' (b. '+dm.stars.birth[n.i]+')':'')+' · '+Math.round(n.km)+' km');}
-  const do2=D['omen-names'];
-  if(do2){const n=nearestOf(la,lo,do2.lat,do2.lon);if(n.i>=0)add('omen-names','Nearest omen: <b>'+do2.name[n.i]+'</b> ('+(do2.s[n.i]?'light':'dark')+') · '+Math.round(n.km)+' km');}
-  const dc=D['power-datacenters'];
-  if(dc){const n=nearestOf(la,lo,dc.lat,dc.lon);if(n.i>=0)add('power-datacenters','Nearest data center: <b>'+(dc.name[n.i]||'unnamed facility')+'</b> · '+Math.round(n.km)+' km');}
-  const df=D['motion-fulfillment'];
-  if(df){const n=nearestOf(la,lo,df.lat,df.lon);if(n.i>=0)add('motion-fulfillment','Nearest Amazon node: <b>'+df.name[n.i]+'</b> · '+Math.round(n.km)+' km');}
-  const ds=D['residue-superfund'];
-  if(ds){const n=nearestOf(la,lo,ds.lat,ds.lon);if(n.i>=0)add('residue-superfund','Nearest buried residue: <b>'+ds.name[n.i]+'</b> · '+Math.round(n.km)+' km');}
-  const dcr=D['loss-crashes'];
-  if(dcr){
-   let c=0,dth=0;
-   for(let i=0;i<dcr.lat.length;i++){
-    if(Math.abs(dcr.lat[i]-la)>0.45||Math.abs(dcr.lon[i]-lo)>0.6)continue;
-    if(havKm(la,lo,dcr.lat[i],dcr.lon[i])<=40){c++;dth+=dcr.v[i];}
-   }
-   add('loss-crashes','Within 40 km in 2023: <b>'+fmtInt(c)+' fatal crashes · '+fmtInt(dth)+' deaths</b>');
-  }
-  const du=D['wonder-ufos'];
-  if(du){const n=nearestOf(la,lo,du.lat,du.lon);if(n.i>=0)add('wonder-ufos','Nearest sighting: <b>'+(du.v&&du.v[n.i]>1?fmtInt(du.v[n.i])+' reports':'1 report')+'</b> · '+Math.round(n.km)+' km');}
-  showCap(capBase('FIELD REPORT — '+la.toFixed(3)+'°, '+lo.toFixed(3)+'°','Your Local Reading','')+
-   '<div class="cc-loc">'+lines.join('<br>')+'</div>'+
-   '<div class="cc-row"><span class="cc-step">THE SURVEY, SURVEYED AROUND YOU</span><span class="cc-nav"><button class="cc-btn" id="ccEnd">✕ CLOSE</button></span></div>');
-  const e=$('#ccEnd');if(e)e.addEventListener('click',hideCap);
-  toast('Position found.');
+  openDossier(la,lo,'Your Position');
+  toast('Position found — dossier drawn.');
  },err=>{
   toast('Location unavailable — permission denied or blocked in this frame. Try the shared link in its own tab.');
  },{timeout:12000,maximumAge:600000});
@@ -1495,6 +1483,285 @@ function audioToggle(){
  }
 }
 
+// ---------- v4: THE INDEX ----------
+const REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let INDEX=null,idxResults=[],idxSel=0;
+function buildIndex(){
+ if(INDEX)return INDEX;
+ const E=[];
+ const push=(label,sub,o)=>{if(label)E.push(Object.assign({label:String(label),l:String(label).toLowerCase(),sub},o));};
+ if(B.places){
+  for(const r of B.places.us)push(r[0],r[1]+' · place',{type:'place',scope:'us',la:r[2],lo:r[3],pop:r[4]});
+  for(const r of B.places.world)push(r[0],r[1]+' · place',{type:'place',scope:'world',la:r[2],lo:r[3],pop:r[4]});
+ }
+ const dm=D['memory-births'];
+ if(dm)for(let i=0;i<dm.stars.name.length;i++)push(dm.stars.name[i],(dm.stars.birth[i]?'b. '+dm.stars.birth[i]+' · ':'')+(dm.stars.dom[i]||'memory'),{type:'star',lid:'memory-births',i,scope:'any',la:dm.stars.lat[i],lo:dm.stars.lon[i],pop:(dm.stars.v[i]||0)*20000});
+ const sf=D['residue-superfund'];
+ if(sf)for(let i=0;i<sf.name.length;i++)push(sf.name[i],'Superfund · '+sf.state[i],{type:'pt',lid:'residue-superfund',i,scope:'us',la:sf.lat[i],lo:sf.lon[i],pop:120000});
+ const f5=D['power-fortune500'];
+ if(f5)for(let i=0;i<f5.name.length;i++)push(f5.name[i],'#'+f5.rank[i]+' · '+f5.loc[i],{type:'pt',lid:'power-fortune500',i,scope:'us',la:f5.lat[i],lo:f5.lon[i],pop:(f5.v[i]||0)*3});
+ const am=D['motion-fulfillment'];
+ if(am)for(let i=0;i<am.name.length;i++)push(am.name[i],(am.typeNames[am.t[i]]||'')+' · '+am.loc[i],{type:'pt',lid:'motion-fulfillment',i,scope:'us',la:am.lat[i],lo:am.lon[i],pop:100000});
+ const om=D['omen-names'];
+ if(om)for(let i=0;i<om.name.length;i++)push(om.name[i],(om.s[i]?'light':'dark')+' omen · '+om.st[i],{type:'pt',lid:'omen-names',i,scope:'us',la:om.lat[i],lo:om.lon[i],pop:80000});
+ for(const st in STATE_NAME)push(STATE_NAME[st],'state',{type:'state',st,scope:'us',pop:5000000});
+ for(const l of live)push(l.title,'layer · '+themeById[l.theme].name,{type:'layer',lid:l.id,pop:3000000});
+ R.readings.forEach((r,i)=>push(r.title,'reading',{type:'reading',ri:i,pop:3000000}));
+ if(R.findings)R.findings.findings.forEach(f=>push(f.title,'finding · '+f.stat,{type:'finding',f,pop:3000000}));
+ INDEX=E;
+ return E;
+}
+function searchIndex(q){
+ q=q.trim().toLowerCase();
+ if(q.length<2)return [];
+ const out=[];
+ for(const e of buildIndex()){
+  const ix=e.l.indexOf(q);
+  if(ix<0)continue;
+  let s=(ix===0?3:(e.l.charCodeAt(ix-1)===32?2:1))+Math.min(1.6,(e.pop||0)/6e6);
+  out.push([s,e]);
+ }
+ out.sort((a,b)=>b[0]-a[0]);
+ return out.slice(0,8).map(x=>x[1]);
+}
+function showTipAt(content,p){
+ const sx=p[0]*t.k+t.x,sy=p[1]*t.k+t.y;
+ tip.style.display='block';
+ tip.style.borderLeftColor=content.color;
+ tip.innerHTML='<div class="tt-k" style="color:'+content.color+'">'+content.k+'</div><div class="tt-t">'+content.ti+'</div>'+(content.s?'<div class="tt-s">'+content.s+'</div>':'');
+ tip.style.left=Math.min(sx+16,W-300)+'px';
+ tip.style.top=Math.min(sy+14,H-130)+'px';
+}
+function selectEntry(e){
+ closeIndex();
+ if(e.type==='layer'){openPlate(e.lid);return;}
+ if(e.type==='reading'){startReading(e.ri);return;}
+ if(e.type==='finding'){applyFinding(e.f);return;}
+ let sc=e.scope;
+ if(sc==='any')sc=buildScope('us').proj([e.lo,e.la])?'us':'world';
+ if(sc==='us'&&e.type==='place'&&!buildScope('us').proj([e.lo,e.la]))sc='world';
+ if(sc!==scope)switchScope(sc);
+ if(e.lid&&!target[e.lid]&&scopeHas(e.lid)){
+  target[e.lid]=1;
+  chipRefresh();updateStatline();eraRefresh();scheduleQt();terrainDirty=true;bakeGlow(true);
+ }
+ let la=e.la,lo=e.lo;
+ if(e.type==='state'){
+  const c=SC[scope].stateCent[e.st];
+  if(c&&SC[scope].proj.invert){const g=SC[scope].proj.invert(c);if(g){lo=g[0];la=g[1];}}
+ }
+ const dLo=e.type==='state'?3.4:0.55,dLa=e.type==='state'?2.4:0.38;
+ flyTo([[lo-dLo,la-dLa],[lo+dLo,la+dLa]],2200,()=>{
+  const C=SC[scope],p=C.proj([lo,la]);
+  if(!p)return;
+  if(e.type==='star'||e.type==='pt'){
+   const f={lid:e.lid,i:e.i,kind:e.type==='star'?'star':'pt'};
+   const content=tipHTML(f);
+   hoverPt={x:p[0],y:p[1],color:content.color};dirty=true;
+   showTipAt(content,p);
+  }else{
+   hoverPt={x:p[0],y:p[1],color:'#c8d2e2'};dirty=true;
+   showTipAt({k:e.type==='state'?'REFERENCE — STATE':'REFERENCE',ti:e.label,s:e.sub,color:'#c8d2e2'},p);
+  }
+ });
+}
+function renderIdx(res){
+ idxResults=res;idxSel=0;
+ const box=$('#idxResults');
+ box.innerHTML=res.length?'':'<div class="ix-empty">Type a town, a person, a company, a facility code, a buried site, an omen, a state, a layer, a reading, a finding. Everything named in the survey is indexed — 13,000 entries, all local.</div>';
+ res.forEach((e,i)=>{
+  const d=document.createElement('div');
+  d.className='ix-row'+(i===idxSel?' sel':'');
+  d.innerHTML='<span class="ix-l">'+e.label+'</span><span class="ix-s">'+e.sub+'</span>'+(e.type==='place'?'<button class="ix-dossier" title="Open field dossier" aria-label="Open field dossier">▤</button>':'');
+  d.addEventListener('click',ev=>{
+   if(ev.target.closest('.ix-dossier')){closeIndex();openDossier(e.la,e.lo,e.label);return;}
+   selectEntry(e);
+  });
+  box.appendChild(d);
+ });
+}
+function idxHighlight(){
+ document.querySelectorAll('.ix-row').forEach((r,i)=>r.classList.toggle('sel',i===idxSel));
+}
+function openIndex(){
+ buildIndex();
+ $('#indexOverlay').classList.add('open');
+ const inp=$('#idxInput');inp.value='';
+ renderIdx([]);
+ setTimeout(()=>inp.focus(),30);
+}
+function closeIndex(){$('#indexOverlay').classList.remove('open');}
+
+// ---------- v4: FIELD DOSSIER ----------
+let rateRank=null;
+function getRateRank(){
+ if(rateRank)return rateRank;
+ const dd=D['despair-overdoses'];
+ rateRank={};
+ if(dd){
+  const arr=Object.entries(dd.counties).sort((a,b)=>b[1].v-a[1].v);
+  arr.forEach(([fips],i)=>rateRank[fips]=i+1);
+  rateRank.__n=arr.length;
+ }
+ return rateRank;
+}
+function doRow(lid,html){
+ const l=byId[lid];
+ return '<div class="do-row"><span class="dot" style="background:'+(l?l.accent:'#c8d2e2')+'"></span><span>'+html+'</span></div>';
+}
+function openDossier(la,lo,label){
+ const usOk=!!buildScope('us').proj([lo,la]);
+ if(usOk&&scope!=='us')switchScope('us');
+ flyTo([[lo-1.2,la-0.85],[lo+1.2,la+0.85]],2200);
+ const secs=[];
+ // THE GROUND
+ let ground='';
+ let stName='',countyName='',countyFips=null;
+ if(usOk){
+  const C=buildScope('us');
+  const p=C.proj([lo,la]);
+  idT(hitCtx);
+  for(const st in C.statePaths){if(hitCtx.isPointInPath(C.statePaths[st],p[0]*dpr,p[1]*dpr)){stName=STATE_NAME[st]||st;
+   const dd=D['desire-searches'];
+   if(dd){
+    if(dd.us[st])ground+=doRow('desire-searches','State’s signature search: <b>'+dd.us[st]+'</b>');
+    else if(dd.dark.indexOf(st)>=0)ground+=doRow('desire-searches','Desire: <b>unmeasured</b> — access blocked here (dark state)');
+   }
+   break;}}
+  ensureCounties(C);
+  if(C.countyBoxes){
+   for(const b of C.countyBoxes){
+    if(p[0]<b.x0||p[0]>b.x1||p[1]<b.y0||p[1]>b.y1)continue;
+    if(hitCtx.isPointInPath(b.p,p[0]*dpr,p[1]*dpr)){countyName=b.name;countyFips=b.fips;break;}
+   }
+  }
+  if(countyFips){
+   const dd=D['despair-overdoses'];
+   const e=dd&&dd.counties[countyFips];
+   const rr=getRateRank();
+   if(e)ground=doRow('despair-overdoses','Overdose mortality: <b>'+e.v+' per 100k (2024)</b> — rank '+(rr[countyFips]||'—')+' of '+fmtInt(rr.__n||0)+' counties')+ground;
+   else ground=doRow('despair-overdoses','Overdose mortality: <b>suppressed</b> (small counts protect privacy)')+ground;
+  }
+ }
+ if(ground)secs.push(['THE GROUND',ground]);
+ // THE LIGHT
+ let light='';
+ const dm=D['memory-births'];
+ if(dm){
+  const n=nearestOf(la,lo,dm.stars.lat,dm.stars.lon);
+  if(n.i>=0)light+=doRow('memory-births','Most notable neighbor: <b>'+dm.stars.name[n.i]+'</b>'+(dm.stars.birth[n.i]?' (b. '+dm.stars.birth[n.i]+')':'')+' · '+Math.round(n.km)+' km');
+  let births=0;
+  for(let i=0;i<dm.cells.lat.length;i++){
+   if(Math.abs(dm.cells.lat[i]-la)>0.7||Math.abs(dm.cells.lon[i]-lo)>0.9)continue;
+   if(havKm(la,lo,dm.cells.lat[i],dm.cells.lon[i])<=50)births+=dm.cells.v[i];
+  }
+  light+=doRow('memory-births','Remembered births within 50 km: <b>'+fmtInt(births)+'</b>');
+ }
+ if(light)secs.push(['THE LIGHT',light]);
+ // THE MACHINES
+ let mach='';
+ const dc=D['power-datacenters'];
+ if(dc){const n=nearestOf(la,lo,dc.lat,dc.lon);if(n.i>=0)mach+=doRow('power-datacenters','Nearest data center: <b>'+(dc.name[n.i]||'unnamed facility')+'</b> · '+Math.round(n.km)+' km');}
+ const f5=D['power-fortune500'];
+ if(f5&&usOk){const n=nearestOf(la,lo,f5.lat,f5.lon);if(n.i>=0)mach+=doRow('power-fortune500','Nearest throne: <b>#'+f5.rank[n.i]+' '+f5.name[n.i]+'</b> · '+Math.round(n.km)+' km');}
+ const am=D['motion-fulfillment'];
+ if(am&&usOk){const n=nearestOf(la,lo,am.lat,am.lon);if(n.i>=0)mach+=doRow('motion-fulfillment','Nearest Amazon node: <b>'+am.name[n.i]+'</b> ('+(am.typeNames[am.t[n.i]]||'')+') · '+Math.round(n.km)+' km');}
+ if(mach)secs.push(['THE MACHINES',mach]);
+ // THE TOLL
+ let toll='';
+ const cr=D['loss-crashes'];
+ if(cr&&usOk){
+  let c=0,dth=0;
+  for(let i=0;i<cr.lat.length;i++){
+   if(Math.abs(cr.lat[i]-la)>0.45||Math.abs(cr.lon[i]-lo)>0.6)continue;
+   if(havKm(la,lo,cr.lat[i],cr.lon[i])<=40){c++;dth+=cr.v[i];}
+  }
+  toll+=doRow('loss-crashes','Fatal crashes within 40 km (2023): <b>'+fmtInt(c)+'</b> · <b>'+fmtInt(dth)+' deaths</b>');
+ }
+ const sf=D['residue-superfund'];
+ if(sf&&usOk){const n=nearestOf(la,lo,sf.lat,sf.lon);if(n.i>=0)toll+=doRow('residue-superfund','Nearest buried ground: <b>'+sf.name[n.i]+'</b> ('+['proposed','on the NPL','deleted'][sf.st2[n.i]]+') · '+Math.round(n.km)+' km');}
+ const uf=D['wonder-ufos'];
+ if(uf){
+  let s=0;
+  for(let i=0;i<uf.lat.length;i++){
+   if(Math.abs(uf.lat[i]-la)>0.7||Math.abs(uf.lon[i]-lo)>0.9)continue;
+   if(havKm(la,lo,uf.lat[i],uf.lon[i])<=50)s+=uf.v?uf.v[i]:1;
+  }
+  toll+=doRow('wonder-ufos','Sightings reported within 50 km: <b>'+fmtInt(s)+'</b> (1906–2014)');
+ }
+ if(toll)secs.push(['THE TOLL & THE SKY',toll]);
+ // THE OMENS
+ let omens='';
+ const om=D['omen-names'];
+ if(om&&usOk){
+  let bd=1e9,bi=-1,ld=1e9,li=-1;
+  for(let i=0;i<om.lat.length;i++){
+   const d=havKm(la,lo,om.lat[i],om.lon[i]);
+   if(om.s[i]===0){if(d<bd){bd=d;bi=i;}}else{if(d<ld){ld=d;li=i;}}
+  }
+  if(bi>=0)omens+=doRow('omen-names','Nearest dark name: <b>'+om.name[bi]+'</b> · '+Math.round(bd)+' km');
+  if(li>=0)omens+=doRow('omen-names','Nearest light name: <b>'+om.name[li]+'</b> · '+Math.round(ld)+' km');
+ }
+ if(omens)secs.push(['THE OMENS',omens]);
+
+ const title=label||'Your Position';
+ const coords=Math.abs(la).toFixed(3)+'°'+(la>=0?'N':'S')+'  '+Math.abs(lo).toFixed(3)+'°'+(lo>=0?'E':'W')+(countyName?' · '+countyName+(stName?' — '+stName.toUpperCase():''):stName?' · '+stName.toUpperCase():'');
+ window.__dossier={title,coords,secs};
+ $('#dossierInner').innerHTML='<button class="pl-x" id="doClose">✕ ESC</button>'+
+  '<div class="do-over">FIELD DOSSIER — '+R.meta.sheet+'</div>'+
+  '<div class="do-title">'+title+'</div>'+
+  '<div class="do-coords">'+coords+'</div>'+
+  secs.map(s=>'<div class="do-h">'+s[0]+'</div>'+s[1]).join('')+
+  '<div class="do-actions"><button class="cc-btn" id="doExport">⤓ EXPORT DOSSIER</button><button class="cc-btn" id="doClose2">CLOSE</button></div>';
+ $('#dossier').classList.add('open');
+ const close=()=>$('#dossier').classList.remove('open');
+ $('#doClose').addEventListener('click',close);
+ $('#doClose2').addEventListener('click',close);
+ $('#doExport').addEventListener('click',exportDossier);
+}
+function exportDossier(){
+ const d=window.__dossier;if(!d)return;
+ const Wd=1080,pad=70;
+ const rows=[];
+ d.secs.forEach(s=>{
+  rows.push(['h',s[0]]);
+  const tmp=document.createElement('div');tmp.innerHTML=s[1];
+  tmp.querySelectorAll('.do-row').forEach(r=>{
+   const dot=r.querySelector('.dot');
+   rows.push(['r',r.textContent.trim(),dot?dot.style.background:'#c8d2e2']);
+  });
+ });
+ const Hd=250+rows.reduce((a,r)=>a+(r[0]==='h'?58:34),0)+120;
+ const off=document.createElement('canvas');off.width=Wd*2;off.height=Hd*2;
+ const x=off.getContext('2d');x.scale(2,2);
+ x.fillStyle='#070a10';x.fillRect(0,0,Wd,Hd);
+ x.strokeStyle='rgba(170,188,214,.4)';x.strokeRect(16,16,Wd-32,Hd-32);
+ x.textBaseline='top';x.textAlign='left';
+ x.fillStyle='#8a94a6';x.font='500 11px "IBM Plex Mono"';x.fillText('FIELD DOSSIER — '+R.meta.sheet+' · SURVEYED '+R.meta.surveyed,pad,60);
+ x.fillStyle='#e8e4d8';x.font='italic 700 40px "Fraunces"';x.fillText(d.title,pad-2,84);
+ x.fillStyle='#8a94a6';x.font='400 11px "IBM Plex Mono"';x.fillText(d.coords,pad,140);
+ let y=196;
+ for(const r of rows){
+  if(r[0]==='h'){
+   x.strokeStyle='rgba(148,166,196,.16)';x.beginPath();x.moveTo(pad,y);x.lineTo(Wd-pad,y);x.stroke();
+   x.fillStyle='#e8b34b';x.font='500 11px "IBM Plex Mono"';x.fillText(r[1],pad,y+16);y+=58;
+  }else{
+   x.fillStyle=r[2];x.beginPath();x.arc(pad+5,y+8,4,0,7);x.fill();
+   x.fillStyle='#c9cfda';x.font='400 13px "IBM Plex Mono"';x.fillText(r[1],pad+22,y);y+=34;
+  }
+ }
+ x.fillStyle='#5a6577';x.font='400 9px "IBM Plex Mono"';
+ x.fillText('THE SOUL SURVEY · WHERE, NOT WHY · SOURCES: NHTSA FARS · CDC · EPA · USGS GNIS · NUFORC · OSM (ODbL) · GEONAMES (CC-BY) · LAOUENAN ET AL. (CC-BY-SA)',pad,Hd-70);
+ off.toBlob(b=>{
+  if(!b){toast('Export failed.');return;}
+  const url=URL.createObjectURL(b);
+  const inFrame=(function(){try{return window.self!==window.top;}catch(e){return true;}})();
+  if(inFrame){const w=window.open(url,'_blank');toast(w?'Dossier rendered — save it from the new tab.':'Popup blocked — allow popups to export.');}
+  else{const a=document.createElement('a');a.href=url;a.download='soul-survey-dossier.png';document.body.appendChild(a);a.click();a.remove();toast('Dossier exported.');}
+  setTimeout(()=>URL.revokeObjectURL(url),90000);
+ },'image/png');
+}
+
 // ---------- zoom ----------
 const zoomB=d3.zoom().scaleExtent([1,26]).on('zoom',ev=>{
  t=ev.transform;dirty=true;needBake=true;zooming=true;
@@ -1530,6 +1797,17 @@ function init(){
  $('#locateBtn').addEventListener('click',locateMe);
  $('#exportBtn').addEventListener('click',exportSheet);
  $('#audioBtn').addEventListener('click',audioToggle);
+ $('#indexBtn').addEventListener('click',openIndex);
+ $('#indexOverlay').addEventListener('click',ev=>{if(ev.target.id==='indexOverlay')closeIndex();});
+ $('#dossier').addEventListener('click',ev=>{if(ev.target.id==='dossier')$('#dossier').classList.remove('open');});
+ const idxInp=$('#idxInput');
+ idxInp.addEventListener('input',()=>renderIdx(searchIndex(idxInp.value)));
+ idxInp.addEventListener('keydown',ev=>{
+  if(ev.key==='ArrowDown'){ev.preventDefault();if(idxResults.length){idxSel=(idxSel+1)%idxResults.length;idxHighlight();}}
+  else if(ev.key==='ArrowUp'){ev.preventDefault();if(idxResults.length){idxSel=(idxSel-1+idxResults.length)%idxResults.length;idxHighlight();}}
+  else if(ev.key==='Enter'){if(idxResults[idxSel])selectEntry(idxResults[idxSel]);}
+  else if(ev.key==='Escape'){closeIndex();}
+ });
  $('#railToggle').addEventListener('click',()=>$('#rail').classList.toggle('open'));
  const sh=$('#splitHandle');let shDrag=false;
  sh.addEventListener('pointerdown',ev=>{shDrag=true;try{sh.setPointerCapture(ev.pointerId);}catch(e){}});
@@ -1551,8 +1829,15 @@ function init(){
  });
  stage.addEventListener('pointerleave',()=>{tip.style.display='none';hoverPt=null;updateDatumDefault();dirty=true;});
  window.addEventListener('keydown',ev=>{
+  if(ev.target&&(ev.target.tagName==='INPUT'||ev.target.tagName==='TEXTAREA')){
+   if(ev.key==='Escape')closeIndex();
+   return;
+  }
+  if(ev.key==='/'){ev.preventDefault();openIndex();return;}
   if(ev.key==='Escape'){
-   if($('#about').classList.contains('open'))$('#about').classList.remove('open');
+   if($('#indexOverlay').classList.contains('open'))closeIndex();
+   else if($('#dossier').classList.contains('open'))$('#dossier').classList.remove('open');
+   else if($('#about').classList.contains('open'))$('#about').classList.remove('open');
    else if(reading!==null||findingOpen)endReading();
    else if($('#capCard').classList.contains('open'))hideCap();
    else if(plateOpen)closePlate();
