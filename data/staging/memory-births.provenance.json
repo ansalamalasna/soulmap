@@ -1,0 +1,144 @@
+{
+  "layer": "memory-births",
+  "retrieved": "2026-07-07T03:42:56Z",
+  "methodology": {
+    "summary": "Streamed the full cross-verified-database.csv.gz (2,291,817 data rows) row by row using Python's csv module over a gzip stream (no full-file load into memory). For each row with valid birthplace coordinates, incremented a 0.25-degree lat/lon grid cell counter and maintained a bounded max-heap (size 2) per cell of the highest-notability individuals born there. Simultaneously maintained a single global bounded max-heap (size 12,000) over all rows with valid coordinates and a notability score, keyed on the notability score, to produce the ranked top-individuals list. Both structures are updated in a single linear pass; the raw file was deleted immediately after the pass completed.",
+    "grid": "0.25-degree cells; cell 'lat'/'lon' are the cell CENTER coordinates, rounded to 2 decimals. Every emitted cell has v >= 1 (no empty cells emitted). Cell 'top' lists up to 2 names of the highest-notability people born in that cell, each formatted as 'Name (birthYear)', or plain 'Name' when birth year is unknown/legendary (e.g. Homer, Abraham, Zoroaster).",
+    "top_points": "The 12,000 highest-notability individuals globally with valid birth coordinates AND a non-null notability score. 'v' is that score min-max normalized to 0-100 within this 12,000-person set only (not the full 2.29M dataset), so v=100 is the single most-visible person among the top 12,000, not an absolute ceiling. Coordinates rounded to 3 decimals (~110m precision)."
+  },
+  "exact_columns_used": {
+    "person_name": "name (row index 12) — underscored Wikidata-style label (e.g. 'Claus_Hammel'); converted to spaced display form ('Claus Hammel') for output.",
+    "birth_year": "birth (row index 1) — integer, negative for BC dates (e.g. -100 = 100 BC). Left as null in meta.birth when missing/unparseable rather than guessed (affects 195,919 of 2,291,817 total rows, and 37 of the top-12,000 records — mostly antiquity/legendary figures with no precise birth year in the source, e.g. Homer, Pythagoras, Abraham).",
+    "birthplace_latitude": "bpla1 (row index 45)",
+    "birthplace_longitude": "bplo1 (row index 43)",
+    "notability_score_primary": "sum_visib_ln_5criteria (row index 31) — a continuous log-scaled composite visibility score built from 5 criteria (Wikipedia page views, article length, number of language editions, inbound link count, etc., per the paper's methodology). Used directly as the ranking key for both cell 'top' selection and the global top-12,000 list because it is continuous (unlike ranking_visib_5criteria, which is an ordinal rank and ties/inverts poorly for this purpose). Populated for 100% of rows that have valid birth coordinates (0 missing in a full stratified check and in the production run) — no fallback rows were actually needed.",
+    "notability_score_fallback": "wiki_readers_2015_2018 (row index 26), log1p-transformed — defensive fallback coded for rows with coordinates but a missing sum_visib_ln_5criteria. Never triggered in the production run against the real file (rows_missing_score_among_valid_coords = 0); retained in the script for robustness.",
+    "occupation_domain": "level3_main_occ (row index 23) — most granular occupation label (e.g. 'playwright', 'football', 'magnate'); falls back to level1_main_occ (row index 11, a coarse category like 'Culture', 'Sports & Games') when level3 is blank. Underscores converted to spaces."
+  },
+  "filters_applied": [
+    "Row excluded from all outputs if 'name' is empty (0 rows affected).",
+    "Row excluded from cells/records if bpla1 or bplo1 is empty/unparseable (585,741 of 2,291,817 rows, i.e. rows without valid coords).",
+    "1 row excluded for out-of-range lat/lon (outside [-90,90]/[-180,180]) after parsing.",
+    "Rows with valid coordinates but no notability score DO still count toward a cell's density (v) but cannot appear in that cell's 'top' names or in the global top-12,000 list. This did not occur in the real data (0 such rows) but the code path exists.",
+    "No occupation/domain filter — all occupation types included.",
+    "No birth-year filter — full 3500BC-2018AD range included in both outputs.",
+    "No manual curation, deduplication beyond the source file's own entity resolution, or fabricated fields of any kind."
+  ],
+  "stats": {
+    "total_rows_in_source_file": 2291817,
+    "rows_with_valid_birthplace_coords": 1704189,
+    "coverage_pct_valid_coords": 74.36,
+    "rows_with_valid_coords_and_notability_score": 1704189,
+    "rows_missing_name": 0,
+    "rows_missing_birth_year": 195919,
+    "rows_missing_birth_year_pct_of_total": 8.55,
+    "rows_missing_notability_score_among_valid_coords": 0,
+    "rows_excluded_bad_lat_lon_range": 1,
+    "rows_us_located_birth_coordinate_heuristic": 322882,
+    "us_heuristic_note": "Counted via a birth-COORDINATE bounding-box test (CONUS lat 24-50/lon -125..-66, Alaska mainland lat 51-72/lon -179.5..-129, Hawaii lat 18.5-22.5/lon -160.5..-154.5), not from a citizenship/country column (none exists for birthplace in this dataset). This is a geometric approximation: it can mis-classify a handful of births extremely close to the US-Canada/US-Mexico border and excludes the Aleutian Islands west of 180 degrees longitude.",
+    "num_grid_cells_with_births": 41531,
+    "num_top_point_records": 12000,
+    "densest_10_cells": [
+      {
+        "lat": 48.88,
+        "lon": 2.38,
+        "v": 28055,
+        "top": [
+          "Voltaire (1694)",
+          "Emma Watson (1990)"
+        ]
+      },
+      {
+        "lat": 40.62,
+        "lon": -73.88,
+        "v": 23018,
+        "top": [
+          "Donald Trump (1946)",
+          "Michael Jordan (1963)"
+        ]
+      },
+      {
+        "lat": 51.62,
+        "lon": -0.12,
+        "v": 19583,
+        "top": [
+          "Elizabeth II (1926)",
+          "Queen Victoria (1819)"
+        ]
+      },
+      {
+        "lat": 52.62,
+        "lon": 13.38,
+        "v": 16513,
+        "top": [
+          "Wilhelm II, German Emperor (1859)",
+          "Frederick the Great (1712)"
+        ]
+      },
+      {
+        "lat": 48.12,
+        "lon": 16.38,
+        "v": 12855,
+        "top": [
+          "Marie Antoinette (1755)",
+          "Franz Schubert (1797)"
+        ]
+      },
+      {
+        "lat": 41.88,
+        "lon": 12.38,
+        "v": 10582,
+        "top": [
+          "Julius Caesar (-100)",
+          "Augustus (-63)"
+        ]
+      },
+      {
+        "lat": 59.38,
+        "lon": 18.12,
+        "v": 9110,
+        "top": [
+          "Avicii (1989)",
+          "Ingrid Bergman (1915)"
+        ]
+      },
+      {
+        "lat": -34.62,
+        "lon": -58.38,
+        "v": 8828,
+        "top": [
+          "Pope Francis (1936)",
+          "Diego Maradona (1960)"
+        ]
+      },
+      {
+        "lat": 34.12,
+        "lon": -118.12,
+        "v": 7638,
+        "top": [
+          "Marilyn Monroe (1926)",
+          "Angelina Jolie (1975)"
+        ]
+      },
+      {
+        "lat": 41.88,
+        "lon": -87.62,
+        "v": 7497,
+        "top": [
+          "Hillary Clinton (1947)",
+          "Walt Disney (1901)"
+        ]
+      }
+    ]
+  },
+  "caveats": [
+    "MISSING-COORDINATE SHARE: ~25.6% of all rows (585,741 / 2,291,817) lack usable birthplace coordinates and are entirely absent from both 'cells' and 'records'. Coverage is not uniform: it skews lower for antiquity and for individuals from regions/eras with sparser Wikidata geocoding.",
+    "PRESENT-DAY / RECENCY BIAS IN THE NOTABILITY SCORE: sum_visib_ln_5criteria is derived substantially from modern digital-visibility signals (Wikipedia page views 2015-2018, number of language editions, link counts). In the top-12,000 ranked list this produces a strong skew toward 20th/21st-century figures: 46% of the top 12,000 were born 1950-1999, versus ~1.1% born BC and ~7.7% born before 1500 AD. The single highest-scored individual in the whole dataset is Donald Trump, followed by Barack Obama and Adolf Hitler — an artifact of internet-era attention volume, not a claim about historical importance. This is a well-known property of the source metric (documented by the original authors) and should be surfaced to end users of the 'records' layer, e.g. by also offering era-stratified or per-domain top lists downstream rather than treating the flat top-12,000 as a canonical 'most important people in history' ranking.",
+    "BIRTH YEAR PRECISION: birth years are the paper's point estimate (often a midpoint of birth_min/birth_max for historically uncertain dates); 37 of the top-12,000 records and 195,919 of all rows have no birth year at all (left as null, not guessed) — mostly antiquity/legendary/religious figures (Homer, Abraham, Zoroaster, Mary mother of Jesus, etc.).",
+    "GRID CELL 'TOP' NAMES ARE NOT EXHAUSTIVE: only the top 2 by notability score are kept per cell; a cell with thousands of births (e.g. Paris, 28,055) still surfaces only its 2 highest-scored residents by this specific metric, which again favors contemporary celebrities over historical figures within very dense cells.",
+    "SOURCE LICENSE: the file's licence badge in the underlying dataset metadata is CC-BY-SA 4.0 (share-alike), not plain CC-BY as sometimes assumed for this dataset family — noted here so downstream redistribution honors the share-alike clause.",
+    "GEOCODING GRANULARITY: bpla1/bplo1 in the source represent a single point per historical place name (often a city centroid resolved by the original authors' geocoding pipeline); precision therefore varies by place and era, and the 0.25-degree (~28km at the equator) grid in 'cells' further coarsens this.",
+    "ENCODING: the source CSV is not fully valid UTF-8 (a small number of name fields, mostly historical Portuguese-nobility entries, contain truncated multi-byte sequences from an apparent upstream '– Wikipedia' suffix artifact). Decoding used errors='replace', which affects only the display text of a handful of names in the full 2.29M-row set and did not affect any of the 12,000 top-ranked names, coordinates, scores, or years.",
+    "US COUNT IS A COORDINATE HEURISTIC, NOT A CITIZENSHIP FIELD: see 'us_heuristic_note' above — do not conflate with the dataset's own area1_of_rattachment/citizenship columns, which reflect affiliation, not birthplace."
+  ]
+}
