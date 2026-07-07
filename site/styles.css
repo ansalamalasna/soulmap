@@ -303,3 +303,16 @@ a{color:var(--gold)}
 .ab-log td{border-bottom:1px solid var(--line);padding:3px 10px 3px 0;vertical-align:top}
 .ab-log td:first-child{color:var(--ink)}
 button:focus-visible,.chip:focus-visible{outline:1px solid var(--gold);outline-offset:2px}
+
+/* ============ V0.5 ============ */
+.pl-banner{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;line-height:1.7;color:var(--ink);
+  background:rgba(232,179,75,.10);border:1px solid var(--gold);padding:10px 12px;margin-bottom:14px}
+.pl-lens{margin-top:4px}
+.pl-lensrow{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-bottom:7px}
+.pl-lenslab{font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;color:var(--ink-faint);width:100%;text-transform:uppercase}
+.lz-chip{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;padding:4px 9px;border:1px solid var(--line);color:var(--ink-dim);transition:all .15s}
+.lz-chip span{color:var(--ink-faint);font-size:7.5px}
+.lz-chip:hover{border-color:var(--line-strong);color:var(--ink)}
+.lz-chip.on{background:rgba(232,228,216,.12);color:var(--ink);border-color:var(--line-strong)}
+.dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:700px){.dd-grid{grid-template-columns:1fr}}

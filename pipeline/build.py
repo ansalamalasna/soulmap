@@ -4,11 +4,34 @@ Packs data/staging/*.json into compact layer payloads, merges era buckets,
 computes stats, and injects registry + data + basemaps + vendored libs into
 a single self-contained dist/index.html. Zero runtime network calls.
 """
-import json, os
+import json, os, sys
 from collections import Counter, defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def p(*parts): return os.path.join(ROOT, *parts)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from correlate import county_centroids
+
+STATE_FIPS = {"01":"AL","02":"AK","04":"AZ","05":"AR","06":"CA","08":"CO","09":"CT","10":"DE","11":"DC","12":"FL","13":"GA","15":"HI","16":"ID","17":"IL","18":"IN","19":"IA","20":"KS","21":"KY","22":"LA","23":"ME","24":"MD","25":"MA","26":"MI","27":"MN","28":"MS","29":"MO","30":"MT","31":"NE","32":"NV","33":"NH","34":"NJ","35":"NM","36":"NY","37":"NC","38":"ND","39":"OH","40":"OK","41":"OR","42":"PA","44":"RI","45":"SC","46":"SD","47":"TN","48":"TX","49":"UT","50":"VT","51":"VA","53":"WA","54":"WV","55":"WI","56":"WY"}
+
+import re
+def shrink_label(s):
+    """Page-weight discipline: labels lose ' County' and parenthetical vintages
+    (the plate carries vintage); tooltips stay readable."""
+    s = re.sub(r"\s*\((?:19|20)\d\d[^)]*\)", "", s)
+    s = s.replace(" County,", ",").replace(" Parish,", ",").replace(" Borough,", ",").replace(" Census Area,", ",")
+    s = s.replace("economic connectedness", "EC").replace(" deaths per 100k", "/100k").replace(" per 100k", "/100k")
+    s = s.replace(" households", " hh")
+    return re.sub(r"\s+", " ", s).strip()
+
+def pack_county_regions(st):
+    counties, vals = {}, []
+    for r in st["regions"]:
+        counties[str(r["key"]).zfill(5)] = {"v": r["value"], "label": shrink_label(r["label"])}
+        vals.append(r["value"])
+    vals.sort()
+    vmax = vals[int(len(vals)*0.95)] if vals else 1
+    return counties, round(float(vmax), 3)
 
 STATES = ["AL","AK","AZ","AR","CA","CO","CT","DE","DC","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
 ERA_LABELS = ["≤ 500", "501–1500", "1501–1800", "1801–1900", "1901–2018"]
@@ -45,7 +68,7 @@ def build():
             c_lat, c_lon, c_v = [], [], []
             for i, c in enumerate(cells):
                 c_lat.append(rnd(c["lat"],2)); c_lon.append(rnd(c["lon"],2)); c_v.append(int(c["v"]))
-                if c["v"] >= 5 and c.get("top"):
+                if c["v"] >= 9 and c.get("top"):
                     labs[str(i)] = c["top"][0][:48]
             stars = sorted(st["records"], key=lambda r: -(r.get("v") or 0))[:5000]
             s_pack = {
@@ -53,6 +76,18 @@ def build():
                 "v":[rnd(r.get("v") or 0,1) for r in stars], "name":[(r.get("name") or "")[:48] for r in stars],
                 "birth":[(r.get("meta") or {}).get("birth") for r in stars],
                 "dom":[((r.get("meta") or {}).get("domain") or "")[:24] for r in stars]}
+            bios = load_staging("memory-bios")
+            if bios:
+                bmap = {(b["name"], b.get("birth")): b for b in bios.get("bios", [])}
+                s_pack["desc"] = []
+                s_pack["death"] = []
+                hit = 0
+                for r in stars:
+                    b = bmap.get(((r.get("name") or "")[:48], (r.get("meta") or {}).get("birth"))) or bmap.get((r.get("name"), (r.get("meta") or {}).get("birth")))
+                    if b: hit += 1
+                    s_pack["desc"].append((b.get("desc") or "")[:110] if b else "")
+                    s_pack["death"].append(b.get("death") if b else None)
+                print(f"  bios joined: {hit}/5000 stars")
             total = sum(c_v)
             packed = {"kind":"memory","n":total,
                 "cells":{"lat":c_lat,"lon":c_lon,"v":c_v,"lab":labs},"stars":s_pack}
@@ -177,22 +212,16 @@ def build():
             keys = sorted(groups.keys())
             pk = {"lat":[k[0] for k in keys], "lon":[k[1] for k in keys],
                   "v":[groups[k][0] for k in keys],
-                  "yr":[groups[k][1] or None for k in keys]}
+                  "dec":[(-1 if not groups[k][1] else min(max((groups[k][1]-1940)//10,0),8)) for k in keys]}
             total_reports = sum(pk["v"])
             layers_data[lid] = {"kind":"points","n":len(keys),"reports":total_reports, **pk}
             lay["count"] = total_reports
             lay["vintage"] = st.get("vintage","")
 
         elif lid == "despair-overdoses":
-            counties = {}
-            vals = []
-            for r in st["regions"]:
-                counties[str(r["key"]).zfill(5)] = {"v": r["value"], "label": r["label"]}
-                vals.append(r["value"])
-            vals.sort()
-            vmax = vals[int(len(vals)*0.95)] if vals else 60
+            counties, vmax = pack_county_regions(st)
             layers_data[lid] = {"kind":"regions","regionKind":"county","counties":counties,
-                                "vmax": rnd(vmax,1), "vintage": st.get("vintage","")}
+                                "vmax": vmax, "vintage": st.get("vintage","")}
             lay["count"] = len(counties)
 
         elif lid == "residue-superfund":
@@ -205,13 +234,144 @@ def build():
             layers_data[lid] = {"kind":"points","n":len(recs), **pk}
             lay["count"] = len(recs)
 
+        elif lid in ("despair-suicide", "company-socialcapital", "faith-altar"):
+            counties, vmax = pack_county_regions(st)
+            layers_data[lid] = {"kind":"regions","regionKind":"county","counties":counties,
+                                "vmax": vmax, "vintage": st.get("vintage","")}
+            lay["count"] = len(counties)
+            if lid == "despair-suicide":
+                if st.get("suppressedCount") is not None:
+                    lay["plateStats"].append({"label":"counties suppressed (kept dark)","value":fmt_int(st["suppressedCount"])})
+                youth = sorted(st.get("stateYouth") or [], key=lambda r: -r["value"])[:3]
+                if youth:
+                    lay["plateStats"].append({"label":"highest state youth rates","value":" · ".join(f"{y['state']} {y['value']}" for y in youth)})
+                lay["plateStats"].append({"label":"vintage","value":st.get("vintage","")})
+            if lid == "company-socialcapital":
+                rr = sorted(st["regions"], key=lambda r: -r["value"])
+                lay["plateStats"].append({"label":"most connected","value":rr[0]["label"][:44]})
+                lay["plateStats"].append({"label":"least connected","value":rr[-1]["label"][:44]})
+                lay["plateStats"].append({"label":"benchmark","value":"EC 1.0 = class-blind friendship"})
+
+        elif lid == "control-arsenal":
+            recs = st["records"]
+            pk = {"lat":[rnd(r["lat"]) for r in recs],"lon":[rnd(r["lon"]) for r in recs],
+                  "v":[int(r.get("v") or 1) for r in recs]}
+            total = st.get("totalDealers") or sum(pk["v"])
+            layers_data[lid] = {"kind":"points","n":len(recs),"dealers":total, **pk}
+            lay["count"] = total
+            lay["plateStats"].append({"label":"licensed dealers (types 01+02)","value":fmt_int(total)})
+            lay["plateStats"].append({"label":"cells on the map","value":fmt_int(len(recs))})
+            lay["plateStats"].append({"label":"vintage","value":st.get("vintage","")})
+
+        elif lid == "betrayal-ledger":
+            # Protocol gate at build time: conviction + court amount + 2+ citations.
+            # Staging keeps partial entries for citation completion; the page ships only the impeccable.
+            allr = st["records"]
+            recs = sorted([r for r in allr if (r.get("v") or 0) > 0 and len((r.get("meta") or {}).get("cites") or []) >= 2],
+                          key=lambda r: -(r.get("v") or 0))
+            if len(recs) < len(allr):
+                print(f"  betrayal-ledger: {len(allr)-len(recs)} entries held back pending citations/amounts")
+            pk = {"lat":[rnd(r["lat"]) for r in recs],"lon":[rnd(r["lon"]) for r in recs],
+                  "name":[(r.get("name") or "")[:44] for r in recs],
+                  "v":[int(r.get("v") or 0) for r in recs],
+                  "who":[((r.get("meta") or {}).get("who") or "")[:70] for r in recs],
+                  "years":[((r.get("meta") or {}).get("years") or "")[:20] for r in recs],
+                  "scheme":[((r.get("meta") or {}).get("scheme") or "")[:120] for r in recs],
+                  "outcome":[((r.get("meta") or {}).get("outcome") or "")[:80] for r in recs]}
+            total = sum(pk["v"])
+            layers_data[lid] = {"kind":"points","n":len(recs),"stolen":total, **pk}
+            lay["count"] = len(recs)
+            lay["amt"] = f"${total/1e6:,.0f}M"
+            for r in recs[:4]:
+                lay["plateStats"].append({"label":r["name"][:26]+" — "+(r.get("meta") or {}).get("years",""),"value":f"${r['v']/1e6:,.1f}M"})
+
+        elif lid == "motion-sorting":
+            cents = county_centroids()
+            cname = {}
+            ctopo = load(p("data","ref","counties-10m.json"))
+            for g in ctopo["objects"]["counties"]["geometries"]:
+                cname[str(g["id"]).zfill(5)] = g.get("properties",{}).get("name","")
+            counties, vals = {}, []
+            for c in st["counties"]:
+                f = str(c["fips"]).zfill(5)
+                nm = cname.get(f,"")
+                stp = STATE_FIPS.get(f[:2],"")
+                sign = "+" if c["net"]>=0 else "−"
+                counties[f] = {"v": c["net"], "label": f"net {sign}{abs(c['net']):,} hh — {nm}, {stp}"}
+                vals.append(abs(c["net"]))
+            vals.sort()
+            vmax = vals[int(len(vals)*0.95)] if vals else 1
+            alat,alon,blat,blon,hh = [],[],[],[],[]
+            skipped = 0
+            for fl in st["flows"]:
+                if fl["hh"] < 120: continue   # page-weight cutoff, disclosed on the plate
+                a = cents.get(str(fl["a"]).zfill(5)); b = cents.get(str(fl["b"]).zfill(5))
+                if not a or not b: skipped += 1; continue
+                alat.append(rnd(a[0],2)); alon.append(rnd(a[1],2))
+                blat.append(rnd(b[0],2)); blon.append(rnd(b[1],2))
+                hh.append(int(fl["hh"]))
+            hs = sorted(hh)
+            arcmax = hs[int(len(hs)*0.95)] if hs else 1
+            layers_data[lid] = {"kind":"flows","n":len(counties),
+                                "counties":counties,"vmax":vmax,
+                                "arcs":{"alat":alat,"alon":alon,"blat":blat,"blon":blon,"hh":hh},
+                                "arcmax":arcmax,"vintage":st.get("vintage","")}
+            lay["count"] = len(counties); lay["arcs"] = len(hh)
+            gain = sorted(st["counties"], key=lambda c: -c["net"])[:2]
+            lose = sorted(st["counties"], key=lambda c: c["net"])[:2]
+            lay["plateStats"].append({"label":"biggest inhale","value":" · ".join(f"{cname.get(str(c['fips']).zfill(5),'')} {STATE_FIPS.get(str(c['fips']).zfill(5)[:2],'')} +{c['net']:,}" for c in gain)})
+            lay["plateStats"].append({"label":"biggest exhale","value":" · ".join(f"{cname.get(str(c['fips']).zfill(5),'')} {STATE_FIPS.get(str(c['fips']).zfill(5)[:2],'')} {c['net']:,}" for c in lose)})
+            lay["plateStats"].append({"label":"corridors drawn","value":fmt_int(len(hh))+f" (of 53,614 real pairs)"})
+            if skipped: print(f"  motion-sorting: {skipped} flows skipped (no centroid)")
+
         lay["status"] = "live"
         sl = lay.get("statline","")
         sl = sl.replace("{n}", fmt_int(lay.get("count",0)))
         sl = sl.replace("{deaths}", fmt_int(lay.get("deaths",0)))
         sl = sl.replace("{dark}", fmt_int(lay.get("dark",0)))
         sl = sl.replace("{light}", fmt_int(lay.get("light",0)))
+        sl = sl.replace("{arcs}", fmt_int(lay.get("arcs",0)))
+        sl = sl.replace("{amt}", str(lay.get("amt","")))
         lay["statline"] = sl
+
+    # ---- entity lens filters (declared from packed fields) ----
+    def mk_filter(lid, field, label, code_labels):
+        d = layers_data.get(lid)
+        if not d or field not in d: return
+        counts = Counter(d[field])
+        values = [[code, lbl, counts.get(code, 0)] for code, lbl in code_labels if counts.get(code, 0) > 0]
+        if len(values) < 2: return
+        for lay in registry["layers"]:
+            if lay["id"] == lid:
+                lay.setdefault("filters", []).append({"field": field, "label": label, "values": values})
+    if "power-datacenters" in layers_data:
+        d = layers_data["power-datacenters"]
+        OPS = [("meta",0,"Meta"),("facebook",0,"Meta"),("aws",1,"AWS"),("amazon",1,"AWS"),("google",2,"Google"),
+               ("microsoft",3,"Microsoft"),("azure",3,"Microsoft"),("equinix",4,"Equinix"),("digital realty",5,"Digital Realty")]
+        op = []
+        for nm in d["name"]:
+            low = (nm or "").lower(); code = -1
+            for pat, c, _ in OPS:
+                if pat in low: code = c; break
+            op.append(code)
+        d["op"] = op
+        mk_filter("power-datacenters","op","Operator",[(0,"Meta"),(1,"AWS"),(2,"Google"),(3,"Microsoft"),(4,"Equinix"),(5,"Digital Realty")])
+    if "wonder-ufos" in layers_data:
+        mk_filter("wonder-ufos","dec","Decade (latest report)",[(0,"1940s"),(1,"1950s"),(2,"1960s"),(3,"1970s"),(4,"1980s"),(5,"1990s"),(6,"2000s"),(7,"2010s")])
+    if "motion-fulfillment" in layers_data:
+        mk_filter("motion-fulfillment","t","Facility type",[(0,"Fulfillment"),(1,"Sortation"),(2,"Cross-dock")])
+    if "omen-names" in layers_data:
+        mk_filter("omen-names","s","Side",[(0,"Devils & hells"),(1,"Angels & paradises")])
+    if "residue-superfund" in layers_data:
+        mk_filter("residue-superfund","st2","Status",[(0,"Proposed"),(1,"On the list"),(2,"Deleted (cleaned)")])
+    if "loss-crashes" in layers_data:
+        MNL = [(i, m) for i, m in enumerate(["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]) if i]
+        mk_filter("loss-crashes","m","Month",MNL)
+
+    # readings only run when all their layers are live
+    live_ids = {l["id"] for l in registry["layers"] if l.get("status") == "live"}
+    registry["readings"] = [r for r in registry["readings"]
+                            if r.get("special") or all(x in live_ids for x in r.get("layers", []))]
 
     os.makedirs(p("data","layers"), exist_ok=True)
     for lid, d in layers_data.items():

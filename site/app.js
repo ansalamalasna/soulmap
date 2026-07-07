@@ -55,6 +55,8 @@ let hoverPt=null;
 let zooming=false,zoomEndT=null,needBake=false,lastBakePump=0,bakeRR=0;
 let era=-1,eraPlay=null,reading=null,readingSaved=null,orientTimers=[],hashHadState=false,hashTimer=null;
 let refNames=true,refBounds=true;const refSyncs=[];
+let lens={},pickMode=null;
+function hasGlow(l){return !!(l.forms.points||l.forms.flows);}
 
 const cvs={base:$('#cvBase'),terr:$('#cvTerrain'),glow:$('#cvGlow'),lab:$('#cvLabel')};
 const ctxs={};
@@ -157,6 +159,8 @@ function buildScope(s){
    C.layers[l.id]={cells:projArrays(proj,d.cells.lon,d.cells.lat),stars:projArrays(proj,d.stars.lon,d.stars.lat)};
   }else if(d.kind==='points'){
    C.layers[l.id]={pts:projArrays(proj,d.lon,d.lat)};
+  }else if(d.kind==='flows'){
+   C.layers[l.id]={fa:projArrays(proj,d.arcs.alon,d.arcs.alat),fb:projArrays(proj,d.arcs.blon,d.arcs.blat)};
   }
  }
  // density grids + contours
@@ -301,21 +305,24 @@ function drawBase(){
    if(C.countyMeshPath){ctx.strokeStyle='rgba(96,116,148,.20)';ctx.lineWidth=lw(.5);ctx.stroke(C.countyMeshPath);}
   }
  }
- // despair county tint (static base-space bitmap, faded by layer alpha)
- const ova=alpha['despair-overdoses']||0;
- if(ova>0.02&&scope==='us'&&D['despair-overdoses']){
-  ensureCounties(C);
-  if(C.countyTintCv){
-   const cmT=compareMode,lidT='despair-overdoses';
-   const clipT=cmT&&(lidT===cmT.a||lidT===cmT.b);
+ // county tint layers (static base-space bitmaps, faded by layer alpha)
+ if(scope==='us'){
+  for(const lT of countyTintLayers()){
+   const aT=alpha[lT.id]||0;
+   if(aT<=0.02)continue;
+   ensureCounties(C);
+   const cvT=countyTintFor(C,lT.id);
+   if(!cvT)continue;
+   const cmT=compareMode;
+   const clipT=cmT&&(lT.id===cmT.a||lT.id===cmT.b);
    if(clipT){
     ctx.save();idT(ctx);ctx.beginPath();
-    if(lidT===cmT.a)ctx.rect(0,0,cmT.x*W,H);else ctx.rect(cmT.x*W,0,W-cmT.x*W,H);
+    if(lT.id===cmT.a)ctx.rect(0,0,cmT.x*W,H);else ctx.rect(cmT.x*W,0,W-cmT.x*W,H);
     ctx.clip();
    }
    applyT(ctx);
-   ctx.globalAlpha=ova;
-   ctx.drawImage(C.countyTintCv,0,0,W,H);
+   ctx.globalAlpha=aT;
+   ctx.drawImage(cvT,0,0,W,H);
    ctx.globalAlpha=1;
    if(clipT){ctx.restore();applyT(ctx);}
   }
@@ -382,6 +389,24 @@ function drawPointsTo(ctx,lid,step){
  const C=SC[scope],d=D[lid],L=C.layers[lid];if(!L)return;
  const k=t.k,kk=Math.pow(k,.42);
  const draw=(spr,x,y,r)=>{const sx=x*k+t.x,sy=y*k+t.y;if(sx<-60||sx>W+60||sy<-60||sy>H+60)return;const rr=r*kk;ctx.drawImage(spr,sx-rr,sy-rr,rr*2,rr*2);};
+ if(d.kind==='flows'){
+  const A=L.fa,Bf=L.fb,hh=d.arcs.hh,am=d.arcmax||1;
+  const st2=(step>1&&A.n>6000)?step:1;
+  ctx.strokeStyle=byId[lid].accent;
+  ctx.lineCap='round';
+  for(let i=0;i<A.n;i+=st2){
+   if(!A.keep[i]||!Bf.keep[i])continue;
+   const ax=A.xs[i]*k+t.x,ay=A.ys[i]*k+t.y,bx=Bf.xs[i]*k+t.x,by=Bf.ys[i]*k+t.y;
+   if((ax<-80&&bx<-80)||(ax>W+80&&bx>W+80)||(ay<-80&&by<-80)||(ay>H+80&&by>H+80))continue;
+   const f=Math.min(1,hh[i]/am);
+   ctx.globalAlpha=(0.07+0.45*Math.pow(f,0.7))*(st2>1?1.6:1);
+   ctx.lineWidth=0.5+1.9*f;
+   const mx=(ax+bx)/2,my=(ay+by)/2,ddx=bx-ax,ddy=by-ay;
+   ctx.beginPath();ctx.moveTo(ax,ay);ctx.quadraticCurveTo(mx-ddy*0.16,my+ddx*0.16,bx,by);ctx.stroke();
+  }
+  ctx.globalAlpha=1;
+  return;
+ }
  if(d.kind==='memory'){
   const wf=scope==='world'?0.68:1;
   const st2=(step>1&&L.cells.n>30000)?step:1;
@@ -404,30 +429,32 @@ function drawPointsTo(ctx,lid,step){
   ctx.globalAlpha=1;
  }else{
   const P=L.pts;
+  const LZ=lens[lid];
+  const lzSkip=LZ?(ii)=>{const arr=d[LZ.field];return arr&&arr[ii]!==LZ.v;}:null;
   if(lid==='loss-crashes'){
    const vv=d.v;
    const st2=(step>1&&P.n>30000)?step:1;
    if(st2>1)ctx.globalAlpha=Math.min(1,1.7);
-   for(let i=0;i<P.n;i+=st2){if(!P.keep[i])continue;draw(SPR.crash,P.xs[i],P.ys[i],Math.min(1.55+(vv[i]-1)*.8,4.2));}
+   for(let i=0;i<P.n;i+=st2){if(!P.keep[i])continue;if(lzSkip&&lzSkip(i))continue;draw(SPR.crash,P.xs[i],P.ys[i],Math.min(1.55+(vv[i]-1)*.8,4.2));}
    ctx.globalAlpha=1;
   }else if(lid==='power-datacenters'){
-   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;draw(SPR.dc,P.xs[i],P.ys[i],2.0);}
+   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;if(lzSkip&&lzSkip(i))continue;draw(SPR.dc,P.xs[i],P.ys[i],2.0);}
   }else if(lid==='power-fortune500'){
    const vv=d.v;
-   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;draw(SPR.f500,P.xs[i],P.ys[i],1.7+Math.sqrt(Math.max(vv[i],0))/826*7);}
+   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;if(lzSkip&&lzSkip(i))continue;draw(SPR.f500,P.xs[i],P.ys[i],1.7+Math.sqrt(Math.max(vv[i],0))/826*7);}
   }else if(lid==='motion-fulfillment'){
    const tt=d.t;
-   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;draw(SPR.ful,P.xs[i],P.ys[i],tt[i]===2?3.1:tt[i]===1?2.1:2.6);}
+   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;if(lzSkip&&lzSkip(i))continue;draw(SPR.ful,P.xs[i],P.ys[i],tt[i]===2?3.1:tt[i]===1?2.1:2.6);}
   }else if(lid==='omen-names'){
    const ss=d.s;
-   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;draw(ss[i]?SPR.omenL:SPR.omenD,P.xs[i],P.ys[i],2.0);}
+   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;if(lzSkip&&lzSkip(i))continue;draw(ss[i]?SPR.omenL:SPR.omenD,P.xs[i],P.ys[i],2.0);}
   }else if(lid==='wonder-ufos'){
    const vv=d.v,uw=scope==='world'?0.8:1;
    if(scope==='world')ctx.globalAlpha=0.75;
-   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;draw(SPR.ufo,P.xs[i],P.ys[i],(1.35+Math.log1p(vv?vv[i]:1)*.6)*uw);}
+   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;if(lzSkip&&lzSkip(i))continue;draw(SPR.ufo,P.xs[i],P.ys[i],(1.35+Math.log1p(vv?vv[i]:1)*.6)*uw);}
    ctx.globalAlpha=1;
   }else if(lid==='residue-superfund'){
-   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;draw(SPR.sf,P.xs[i],P.ys[i],2.0);}
+   for(let i=0;i<P.n;i++){if(!P.keep[i])continue;if(lzSkip&&lzSkip(i))continue;draw(SPR.sf,P.xs[i],P.ys[i],2.0);}
   }
  }
 }
@@ -440,7 +467,7 @@ function bufFor(lid){
  return bm;
 }
 function bakeLayer(lid,full){
- const l=byId[lid];if(!l||!l.forms.points)return;
+ const l=byId[lid];if(!l||!hasGlow(l))return;
  const bm=bufFor(lid);
  bm.cur^=1;
  const cv=bm.cvs[bm.cur],x=cv.getContext('2d');
@@ -468,7 +495,7 @@ function drawGlow(){
  const now=performance.now();
  const cm=compareMode;
  for(const l of live){
-  const lid=l.id;if(!l.forms.points)continue;
+  const lid=l.id;if(!hasGlow(l))continue;
   const a=alpha[lid];if(a<=0.01||!scopeHas(lid))continue;
   const bm=glowBMs[lid];if(!bm||!bm.curT)continue;
   const clip=cm&&(lid===cm.a||lid===cm.b);
@@ -648,7 +675,7 @@ function frame(){
  const now=performance.now();
  if(needBake&&now-lastBakePump>90){
   lastBakePump=now;needBake=zooming;
-  const ids=activeIds().filter(id=>byId[id].forms.points);
+  const ids=activeIds().filter(id=>hasGlow(byId[id]));
   if(ids.length){bakeRR=(bakeRR+1)%ids.length;bakeLayer(ids[bakeRR],!zooming);}
  }
  let fading=false;
@@ -682,8 +709,13 @@ function rebuildQt(){
     if(era>=0&&!inEra(sb[i]))continue;
     items.push({x:St.xs[i],y:St.ys[i],lid,i,kind:'star'});
    }
-  }else{
-   const P=L.pts;for(let i=0;i<P.n;i++)if(P.keep[i])items.push({x:P.xs[i],y:P.ys[i],lid,i,kind:'pt'});
+  }else if(L.pts){
+   const P=L.pts,LZq=lens[lid],arrq=LZq?D[lid][LZq.field]:null;
+   for(let i=0;i<P.n;i++){
+    if(!P.keep[i])continue;
+    if(arrq&&arrq[i]!==LZq.v)continue;
+    items.push({x:P.xs[i],y:P.ys[i],lid,i,kind:'pt'});
+   }
   }
  }
  qt=d3.quadtree().x(d=>d.x).y(d=>d.y).addAll(items);
@@ -694,7 +726,12 @@ const tip=$('#tooltip');
 function tipHTML(f){
  const l=byId[f.lid],d=D[f.lid];
  let k=l.title.toUpperCase(),ti='',s='';
- if(f.kind==='star'){const st=d.stars;ti='★ '+st.name[f.i];s=(st.birth[f.i]?'b. '+st.birth[f.i]+' · ':'')+(st.dom[f.i]||'')+`<br>visibility ${st.v[f.i]} / 100`;}
+ if(f.kind==='star'){
+  const st=d.stars;ti='★ '+st.name[f.i];
+  s=(st.birth[f.i]?'b. '+st.birth[f.i]:'')+(st.death&&st.death[f.i]?' – d. '+st.death[f.i]:'')+(st.dom[f.i]?' · '+st.dom[f.i]:'');
+  if(st.desc&&st.desc[f.i])s+='<br>'+st.desc[f.i];
+  s+=`<br>visibility ${st.v[f.i]} / 100`;
+ }
  else if(f.kind==='cell'){
   const ee=d.cells.e;
   const v=era<0?d.cells.v[f.i]:(ee&&ee[f.i]?ee[f.i][era]:0);
@@ -707,22 +744,29 @@ function tipHTML(f){
  else if(f.lid==='power-fortune500'){const v=d.v[f.i];ti='#'+d.rank[f.i]+' '+d.name[f.i];s=d.loc[f.i]+' · $'+(v>=1e6?(v/1e6).toFixed(2)+'T':v>=1000?(v/1000).toFixed(1)+'B':v+'M')+' revenue';}
  else if(f.lid==='motion-fulfillment'){ti=d.name[f.i]||'Amazon facility';s=(d.typeNames[d.t[f.i]]||'')+' · '+d.loc[f.i];}
  else if(f.lid==='omen-names'){ti=d.name[f.i];s=(d.s[f.i]?'light':'dark')+' name · '+d.cls[f.i]+', '+d.st[f.i];}
- else if(f.lid==='wonder-ufos'){const v=d.v?d.v[f.i]:1;ti=v>1?fmtInt(v)+' sightings reported here':'A sighting reported here';s=(d.yr&&d.yr[f.i]?'most recent '+d.yr[f.i]+' · ':'')+'NUFORC testimony';}
+ else if(f.lid==='wonder-ufos'){const v=d.v?d.v[f.i]:1;ti=v>1?fmtInt(v)+' sightings reported here':'A sighting reported here';const DECS=['1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2010s'];const dc2=d.dec?d.dec[f.i]:-1;s=(dc2>=0?'latest in the '+DECS[dc2]+' · ':'')+'NUFORC testimony';}
  else if(f.lid==='residue-superfund'){ti=d.name[f.i];s=['proposed for the NPL','on the National Priorities List','deleted from the NPL — cleaned enough to leave'][d.st2[f.i]]+' · '+d.state[f.i];}
  return {k,ti,s,color:f.lid==='omen-names'&&d.s[f.i]?(byId[f.lid].accent2||'#f2ead8'):l.accent};
 }
 function regionTip(qx,qy){
  const C0=SC[scope];
- const ova=alpha['despair-overdoses']||0;
- if(ova>0.3&&scope==='us'&&C0.countyBoxes){
-  idT(hitCtx);
-  const dd0=D['despair-overdoses'].counties,l0=byId['despair-overdoses'];
-  for(const b of C0.countyBoxes){
-   if(qx<b.x0||qx>b.x1||qy<b.y0||qy>b.y1)continue;
-   if(hitCtx.isPointInPath(b.p,qx*dpr,qy*dpr)){
-    const e=dd0[b.fips];
-    if(e)return {k:'THE QUIET EPIDEMIC',ti:b.name,s:'<b>'+e.label+'</b>',color:l0.accent};
-    return {k:'THE QUIET EPIDEMIC',ti:b.name,s:'no reportable rate — suppressed or missing<br>(small counts protect privacy)',color:'#5a6577'};
+ if(scope==='us'&&C0.countyBoxes){
+  const tls=countyTintLayers().filter(l=>(alpha[l.id]||0)>0.3).reverse();
+  if(tls.length){
+   idT(hitCtx);
+   for(const b of C0.countyBoxes){
+    if(qx<b.x0||qx>b.x1||qy<b.y0||qy>b.y1)continue;
+    if(hitCtx.isPointInPath(b.p,qx*dpr,qy*dpr)){
+     const lines=[];let color=null,anySupp=false;
+     for(const lT of tls){
+      const e=D[lT.id].counties[b.fips];
+      if(e){lines.push('<b>'+e.label+'</b>');if(!color)color=lT.accent;}
+      else if(lT.id==='despair-overdoses'||lT.id==='despair-suicide')anySupp=true;
+     }
+     if(!lines.length&&anySupp)return {k:'COUNTY',ti:b.name,s:'no reportable rate — suppressed or missing<br>(small counts protect privacy)',color:'#5a6577'};
+     if(lines.length)return {k:'COUNTY — '+tls.map(l=>l.title.toUpperCase()).join(' × '),ti:b.name,s:lines.join('<br>'),color:color||'#c8d2e2'};
+     break;
+    }
    }
   }
  }
@@ -799,7 +843,9 @@ function onMove(ev){
 function updateStatline(){
  const parts=activeIds().map(lid=>{
   if(lid==='memory-births'&&era>=0&&D[lid].eras)return fmtInt(D[lid].eras.totals[era])+' births, '+D[lid].eras.labels[era];
-  return byId[lid].statline;
+  let s=byId[lid].statline;
+  if(lens[lid])s=(s?s+' ':'')+'· lens: '+lens[lid].label;
+  return s;
  }).filter(Boolean);
  $('#statline').textContent=parts.join('  ·  ');
 }
@@ -891,6 +937,7 @@ function openPlate(lid){
  const stats=(l.plateStats||[]).map(s=>'<div class="pl-stat"><div class="v">'+s.value+'</div><div class="l">'+s.label+'</div></div>').join('');
  const srcs=(l.sources||[]).map(s=>'<div>'+(s.url?'<a href="'+s.url+'" target="_blank" rel="noopener noreferrer">'+s.name+'</a>':s.name)+(s.note?' — '+s.note:'')+'</div>').join('');
  inner.innerHTML='<button class="pl-x" id="plateClose">✕ ESC</button>'+
+  (l.protocol?'<div class="pl-banner">'+l.protocol+'</div>':'')+
   '<div class="pl-over" style="color:'+l.accent+'">'+th.name.toUpperCase()+' — '+th.reading.toUpperCase()+'</div>'+
   '<div class="pl-title">'+l.title+'</div>'+
   '<div class="pl-unit">'+(l.statline||l.unit)+(l.retrieved?' · surveyed '+String(l.retrieved).slice(0,10):'')+'</div>'+
@@ -900,11 +947,19 @@ function openPlate(lid){
   '<div class="pl-h" style="color:'+l.accent+'">WHY</div><div class="pl-body">'+l.essay.why+'</div>'+
   (l.caveat?'<div class="pl-cav"><b>FIELD NOTE</b> — '+l.caveat+'</div>':'')+
   (srcs?'<div class="pl-h" style="color:'+l.accent+'">SOURCES</div><div class="pl-src">'+srcs+'</div>':'')+
+  (l.status==='live'&&l.filters&&l.filters.length&&D[l.id]?'<div class="pl-h" style="color:'+l.accent+'">LENSES</div><div class="pl-lens">'+l.filters.map(fl=>'<div class="pl-lensrow"><span class="pl-lenslab">'+fl.label+'</span><button class="lz-chip'+(!lens[l.id]||lens[l.id].field!==fl.field?' on':'')+'" data-lid="'+l.id+'" data-clear="1">ALL</button>'+fl.values.map(v=>'<button class="lz-chip'+(lens[l.id]&&lens[l.id].field===fl.field&&lens[l.id].v===v[0]?' on':'')+'" data-lid="'+l.id+'" data-field="'+fl.field+'" data-v="'+v[0]+'" data-label="'+v[1]+'">'+v[1]+' <span>'+fmtInt(v[2])+'</span></button>').join('')+'</div>').join('')+'</div>':'')+
   (l.status==='live'&&D[l.id]?'<div class="pl-h" style="color:'+l.accent+'">DATA</div><div class="pl-src"><a href="https://github.com/ansalamalasna/soulmap/blob/main/data/staging/'+l.id+'.json" target="_blank" rel="noopener noreferrer">staging JSON</a> · <a href="https://github.com/ansalamalasna/soulmap/blob/main/data/staging/'+l.id+'.provenance.json" target="_blank" rel="noopener noreferrer">provenance</a> · <a href="https://github.com/ansalamalasna/soulmap/blob/main/registry/registry.json" target="_blank" rel="noopener noreferrer">registry entry</a></div>':'')+
   (l.status==='live'?'<div class="pl-solo">SOLO VIEW — other layers dimmed · close to restore</div>':'<div class="pl-solo">'+(l.pendingNote||'')+'</div>');
  $('#plate').style.borderTopColor=l.accent;
  $('#plate').classList.add('open');
  $('#plateClose').addEventListener('click',closePlate);
+ inner.querySelectorAll('.lz-chip').forEach(b=>b.addEventListener('click',()=>{
+  const bl=b.dataset.lid;
+  if(b.dataset.clear)delete lens[bl];
+  else lens[bl]={field:b.dataset.field,v:parseInt(b.dataset.v,10),label:b.dataset.label};
+  bakeLayer(bl,true);scheduleQt();updateStatline();dirty=true;
+  openPlate(bl);
+ }));
  if(l.status==='live'){
   if(!scopeHas(lid)&&l.scopes.includes('us'))switchScope('us');
   if(!plateOpen)savedTargets={...target};
@@ -961,7 +1016,7 @@ function buildAbout(){
   '<button class="ab-copy" id="abCopy">COPY CITATION</button>'+
   '<div class="ab-h">SURVEY LOG</div>'+
   '<table class="ab-log">'+live.map(l=>'<tr><td>'+l.title+'</td><td>'+(l.retrieved?String(l.retrieved).slice(0,10):'—')+'</td><td>'+(l.statline||l.unit)+'</td></tr>').join('')+
-  '<tr><td>Releases</td><td colspan="2">v0.1 first light · v0.2 readings, eras, three layers · v0.3 findings, sound, curation · v0.3.1 reference &amp; zoom crossfade · v'+R.meta.version+' the Index, dossiers, trust kit</td></tr></table>'+
+  '<tr><td>Releases</td><td colspan="2">v0.1 first light · v0.2 readings, eras, three layers · v0.3 findings, sound, curation · v0.3.1 reference &amp; zoom crossfade · v0.4 the Index, dossiers, trust kit · v'+R.meta.version+' the sorting, the ledger, lenses &amp; bios</td></tr></table>'+
   '<div class="ab-h">CONTROLS</div>'+
   '<div class="ab-kbd"><b>/</b> search the Index &nbsp; <b>1–'+railOrder.length+'</b> toggle layers &nbsp; <b>G</b> place names &nbsp; <b>R</b> readings &nbsp; <b>F</b> findings &nbsp; <b>E</b> everything &nbsp; <b>C</b> curated &nbsp; <b>U</b>/<b>W</b> sheets &nbsp; <b>scroll</b> zoom &nbsp; <b>ESC</b> close</div>';
  const cp=$('#abCopy');
@@ -1046,18 +1101,36 @@ function ensureCounties(C){
   const bb=C.gp.bounds(f);
   C.countyBoxes.push({fips,p,name:f.properties.name,x0:bb[0][0],y0:bb[0][1],x1:bb[1][0],y1:bb[1][1]});
  }
- if(dd&&dd.counties){
-  const cv=document.createElement('canvas');cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
-  const x=cv.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);
-  const ac=byId['despair-overdoses'].accent,vmax=dd.vmax||60;
+}
+function countyTintFor(C,lid){
+ C.countyTints=C.countyTints||{};
+ if(C.countyTints[lid]!==undefined)return C.countyTints[lid];
+ const d=D[lid],l=byId[lid];
+ if(!d||!C.countyBoxes){C.countyTints[lid]=null;return null;}
+ const cv=document.createElement('canvas');cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+ const x=cv.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);
+ if(d.kind==='flows'){
+  const vmax=d.vmax||1;
   for(const b of C.countyBoxes){
-   const e=dd.counties[b.fips];if(!e)continue;
-   const norm=Math.min(1,e.v/vmax);
-   x.fillStyle=hexA(ac,0.04+norm*0.30);
+   const e=d.counties[b.fips];if(!e)continue;
+   const norm=Math.min(1,Math.abs(e.v)/vmax);
+   x.fillStyle=hexA(e.v>=0?l.accent:(l.accent2||'#c98a7a'),0.04+norm*0.30);
    x.fill(b.p);
   }
-  C.countyTintCv=cv;
+ }else{
+  const vmax=d.vmax||60;
+  for(const b of C.countyBoxes){
+   const e=d.counties[b.fips];if(!e)continue;
+   const norm=Math.min(1,e.v/vmax);
+   x.fillStyle=hexA(l.accent,0.04+norm*0.30);
+   x.fill(b.p);
+  }
  }
+ C.countyTints[lid]=cv;
+ return cv;
+}
+function countyTintLayers(){
+ return live.filter(l=>l.forms.tint&&l.forms.regionKind==='county'&&scopeHas(l.id));
 }
 
 // ---------- v2: toast ----------
@@ -1533,6 +1606,14 @@ function showTipAt(content,p){
  tip.style.top=Math.min(sy+14,H-130)+'px';
 }
 function selectEntry(e){
+ if(pickMode&&e.la!=null){
+  const A=pickMode.A;
+  pickMode=null;
+  closeIndex();
+  $('#idxHint').textContent='↑↓ select · ENTER go · ▤ field dossier on places · ESC close';
+  renderDossierDiff(A,computeDossier(e.la,e.lo,e.label));
+  return;
+ }
  closeIndex();
  if(e.type==='layer'){openPlate(e.lid);return;}
  if(e.type==='reading'){startReading(e.ri);return;}
@@ -1590,7 +1671,10 @@ function openIndex(){
  renderIdx([]);
  setTimeout(()=>inp.focus(),30);
 }
-function closeIndex(){$('#indexOverlay').classList.remove('open');}
+function closeIndex(){
+ $('#indexOverlay').classList.remove('open');
+ if(pickMode){pickMode=null;$('#idxHint').textContent='↑↓ select · ENTER go · ▤ field dossier on places · ESC close';}
+}
 
 // ---------- v4: FIELD DOSSIER ----------
 let rateRank=null;
@@ -1613,6 +1697,10 @@ function openDossier(la,lo,label){
  const usOk=!!buildScope('us').proj([lo,la]);
  if(usOk&&scope!=='us')switchScope('us');
  flyTo([[lo-1.2,la-0.85],[lo+1.2,la+0.85]],2200);
+ renderDossier(computeDossier(la,lo,label));
+}
+function computeDossier(la,lo,label){
+ const usOk=!!buildScope('us').proj([lo,la]);
  const secs=[];
  // THE GROUND
  let ground='';
@@ -1706,18 +1794,43 @@ function openDossier(la,lo,label){
 
  const title=label||'Your Position';
  const coords=Math.abs(la).toFixed(3)+'°'+(la>=0?'N':'S')+'  '+Math.abs(lo).toFixed(3)+'°'+(lo>=0?'E':'W')+(countyName?' · '+countyName+(stName?' — '+stName.toUpperCase():''):stName?' · '+stName.toUpperCase():'');
- window.__dossier={title,coords,secs};
+ return {title,coords,secs};
+}
+function renderDossier(d){
+ window.__dossier=d;
  $('#dossierInner').innerHTML='<button class="pl-x" id="doClose">✕ ESC</button>'+
   '<div class="do-over">FIELD DOSSIER — '+R.meta.sheet+'</div>'+
-  '<div class="do-title">'+title+'</div>'+
-  '<div class="do-coords">'+coords+'</div>'+
-  secs.map(s=>'<div class="do-h">'+s[0]+'</div>'+s[1]).join('')+
-  '<div class="do-actions"><button class="cc-btn" id="doExport">⤓ EXPORT DOSSIER</button><button class="cc-btn" id="doClose2">CLOSE</button></div>';
+  '<div class="do-title">'+d.title+'</div>'+
+  '<div class="do-coords">'+d.coords+'</div>'+
+  d.secs.map(s=>'<div class="do-h">'+s[0]+'</div>'+s[1]).join('')+
+  '<div class="do-actions"><button class="cc-btn" id="doCompare">⇄ COMPARE</button><button class="cc-btn" id="doExport">⤓ EXPORT DOSSIER</button><button class="cc-btn" id="doClose2">CLOSE</button></div>';
  $('#dossier').classList.add('open');
  const close=()=>$('#dossier').classList.remove('open');
  $('#doClose').addEventListener('click',close);
  $('#doClose2').addEventListener('click',close);
  $('#doExport').addEventListener('click',exportDossier);
+ $('#doCompare').addEventListener('click',()=>{
+  pickMode={A:d};
+  $('#dossier').classList.remove('open');
+  openIndex();
+  $('#idxHint').textContent='PICK THE SECOND PLACE — any town, star, or site with coordinates · ESC cancels';
+ });
+}
+function renderDossierDiff(A,B){
+ window.__dossier=null;
+ const names=[];
+ A.secs.concat(B.secs).forEach(s=>{if(names.indexOf(s[0])<0)names.push(s[0]);});
+ const find=(d,n)=>{const s=d.secs.find(x=>x[0]===n);return s?s[1]:'<div class="do-row"><span class="dot" style="background:#5a6577"></span><span>— not surveyed here</span></div>';};
+ $('#dossierInner').innerHTML='<button class="pl-x" id="doClose">✕ ESC</button>'+
+  '<div class="do-over">FIELD DOSSIER — FACE TO FACE</div>'+
+  '<div class="dd-grid"><div><div class="do-title" style="font-size:21px">'+A.title+'</div><div class="do-coords">'+A.coords+'</div></div>'+
+  '<div><div class="do-title" style="font-size:21px">'+B.title+'</div><div class="do-coords">'+B.coords+'</div></div></div>'+
+  names.map(n=>'<div class="do-h">'+n+'</div><div class="dd-grid"><div>'+find(A,n)+'</div><div>'+find(B,n)+'</div></div>').join('')+
+  '<div class="do-actions"><button class="cc-btn" id="doClose2">CLOSE</button></div>';
+ $('#dossier').classList.add('open');
+ const close=()=>$('#dossier').classList.remove('open');
+ $('#doClose').addEventListener('click',close);
+ $('#doClose2').addEventListener('click',close);
 }
 function exportDossier(){
  const d=window.__dossier;if(!d)return;

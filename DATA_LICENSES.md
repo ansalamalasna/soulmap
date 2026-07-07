@@ -13,6 +13,13 @@
 | despair-overdoses | CDC NCIPC "Mapping Injury, Overdose, and Violence — County" (Socrata psx4-wq38), Intent=Drug_OD, CY2024 | US public data | Crude rates per 100k; ~47% of counties Bayesian-modeled by CDC; 129 suppressed counties excluded |
 | residue-superfund | EPA "Superfund NPL Sites with Status Information" ArcGIS feature service | US public data | 1,840 sites: 1,343 final · 460 deleted · 37 proposed; 100% coordinate coverage |
 | memory-eras | Same cross-verified database (Laouenan et al.) re-aggregated into five era buckets | **CC-BY-SA 4.0** | Grand total matches memory-births exactly (1,704,189) |
+| despair-suicide | NCHS/NVSS via County Health Rankings 2025 analytic release (pooled 2018–2022, age-adjusted) | Open; NCHS suppression honored (704 counties dark) | Protocol-bound heat; CDC WONDER API refuses sub-national queries by policy (documented) |
+| motion-sorting | IRS SOI county-to-county migration, 2022–2023 | US public data | Tax-filer households; corridors ≥120hh drawn of 53,614 real pairs |
+| company-socialcapital | Social Capital Atlas (Chetty et al. 2022) via HDX | **Meta custom permissive license** — redistribution OK with license attached; no combining to re-identify individuals | EC ×2 calibration (1.0 = class-blind); differential-privacy noise |
+| faith-altar | 2020 U.S. Religion Census (ASARB) via usreligioncensus.org | **All rights reserved, attribution requested** — facts reproduced with attribution | ~1% counties >1,000/1k (cross-county worshipper draw, documented) |
+| betrayal-ledger | Curated by the survey from DOJ/USAO releases, court records, major-outlet reporting | Facts of public record; per-entry citations in staging | Conviction/plea only; court-established amounts |
+| memory-bios | Wikidata descriptions (via wbgetentities) | CC0 | One line per star; IDs recovered from the cross-verified database |
+| control-arsenal | — pending — ATF FFL lists verified open but browser-gated during acquisition | US public data (when landed) | ZIP gazetteer staged (GeoNames CC-BY) |
 | loss-layoffs | — pending — | — | Standardized WARN sources are paywalled/gated; layer intentionally empty |
 | basemaps | Natural Earth via world-atlas / us-atlas (TopoJSON) | Public domain | |
 | geocoding ref | GeoNames cities500 | CC-BY 4.0 | `data/ref/world_places.csv` is regenerable and excluded from the repo |

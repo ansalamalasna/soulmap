@@ -3,7 +3,7 @@
     "title": "THE SOUL SURVEY",
     "tagline": "A topographic survey of the collective soul, conducted in objective data.",
     "sheet": "SHEET NO. 1 — THE HUMAN SIGNAL",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "surveyed": "JULY 2026",
     "manifesto": "Every act leaves a coordinate. A birth, a search, a warehouse, a crash — each one lands somewhere, and the landing is recorded. Alone, each record is trivia. Stacked, they become relief: ridgelines of genius, basins of grief, the bright grid of the machines we serve and that serve us. This is not a map of the land. It is a map of what we do on it. Toggle the layers. Watch the country change shape. The terrain is us."
   },
@@ -16,7 +16,11 @@
     { "id": "omen",    "name": "Omen",    "reading": "what we named the land when we were afraid", "order": 6 },
     { "id": "wonder",  "name": "Wonder",  "reading": "what we see when we look up", "order": 7 },
     { "id": "despair", "name": "Despair", "reading": "where the pain settles", "order": 8 },
-    { "id": "residue", "name": "Residue", "reading": "the poison we left behind", "order": 9 }
+    { "id": "residue", "name": "Residue", "reading": "the poison we left behind", "order": 9 },
+    { "id": "company", "name": "Company", "reading": "the company we keep", "order": 10 },
+    { "id": "control", "name": "Control", "reading": "arms and the watching state", "order": 11 },
+    { "id": "faith",   "name": "Faith",   "reading": "what we kneel to", "order": 12 },
+    { "id": "betrayal","name": "Betrayal","reading": "trust, broken, with receipts", "order": 13 }
   ],
   "readings": [
     {
@@ -48,6 +52,21 @@
       "id": "devils-country", "title": "Devil's Country", "kicker": "OMEN × TERRAIN", "scope": "us",
       "layers": ["omen-names"], "bbox": [[-122, 31.5], [-99, 47.5]],
       "text": "When surveyors named the arid West they reached for hell: 1,922 devils against 809 angels, and the devils cluster in the canyons and badlands where the land fought back. Fear got the dramatic terrain. Hope settled in the valleys."
+    },
+    {
+      "id": "great-sorting", "title": "The Great Sorting", "kicker": "MOTION — WHO LEAVES, WHO ARRIVES", "scope": "us",
+      "layers": ["motion-sorting"], "bbox": [[-125, 24], [-66, 50]],
+      "text": "Every year America quietly trades about a million households between its counties. The arcs are the trades; teal counties are inhaling, ember counties are exhaling. The Sun Belt breathes in; the old cores breathe out. Follow any single arc and it is a moving truck, a job taken, a goodbye said in a driveway."
+    },
+    {
+      "id": "ledger-betrayals", "title": "The Ledger of Betrayals", "kicker": "BETRAYAL — THE CONVICTED ONLY", "scope": "us",
+      "layers": ["betrayal-ledger"], "bbox": [[-125, 24], [-66, 50]],
+      "text": "So many ways to steal a town, every one on this map ending in a conviction. Dixon, Illinois is the archetype: $53.7 million siphoned over 22 years by the city comptroller, spent on champion quarter horses, in a town of sixteen thousand. The ledger names only the convicted, cites every line, and asks the only question that matters: who was supposed to be watching?"
+    },
+    {
+      "id": "arsenal-altar", "title": "The Arsenal and the Altar", "kicker": "CONTROL × FAITH", "scope": "us",
+      "layers": ["control-arsenal", "faith-altar"], "bbox": [[-107, 29], [-80, 42]],
+      "text": "Two geographies of devotion, drawn from license rolls and pew counts. Steel points are the places that sell arms; the candle-gold wash is the density of the faithful. Sometimes they are the same places, sometimes opposites — the survey only shows where, and lets you argue about why."
     }
   ],
   "layers": [
@@ -291,6 +310,123 @@
         { "label": "coordinate coverage", "value": "100%" },
         { "label": "oldest wound", "value": "Love Canal, NY — deleted 2004" }
       ]
+    },
+    {
+      "id": "despair-suicide",
+      "title": "The Quiet Hours",
+      "theme": "despair",
+      "accent": "#7f9bc9",
+      "scopes": ["us"],
+      "forms": { "points": false, "contours": false, "tint": true, "regionKind": "county" },
+      "weight": 0.0,
+      "unit": "deaths per 100k",
+      "statline": "suicide rates in {n} counties",
+      "status": "pending",
+      "protocol": "If you or someone you know is struggling, call or text 988 — the Suicide & Crisis Lifeline. This layer shows rates for places, never points for people.",
+      "caveat": "pooled multi-year rates; suppressed counties stay dark by law and by principle; groups, never individuals",
+      "essay": {
+        "what": "Suicide mortality rates for 2,448 US counties, pooled over five years (2018–2022) so that small places can be shown honestly. Another 704 counties stay dark — their counts fall under the federal confidentiality floor, and the survey keeps them dark rather than estimate. Every value is a rate for a place. Nothing on this map is a person.",
+        "how": "NCHS vital-statistics mortality via County Health Rankings' open analytic release, age-adjusted, with every suppression rule honored and independently re-verified (no published county sits under ten pooled deaths). A note on gates: CDC's own WONDER API refuses sub-national mortality queries by deliberate policy — the browser-only rule is real, and it shaped this acquisition. State youth rates remain a disclosed gap on this plate until the WISQARS path is completed. Safe-messaging practice governs all copy: no methods, no simple causes.",
+        "why": "The quietest layer in the survey, and the one that most needed the heat-not-points rule. The geography is real — western Alaska, the northern plains, the Mountain West carry rates the coasts do not — and it coincides with distance: from care, from neighbors, from the nearest bright cluster on every other layer of this map. Where, not why, was never more important."
+      },
+      "plateStats": []
+    },
+    {
+      "id": "motion-sorting",
+      "title": "The Great Sorting",
+      "theme": "motion",
+      "accent": "#4fd8c4",
+      "accent2": "#c98a7a",
+      "scopes": ["us"],
+      "forms": { "points": false, "contours": false, "tint": true, "flows": true, "regionKind": "county" },
+      "weight": 0.0,
+      "unit": "migration flows",
+      "statline": "{arcs} corridors · {n} counties sorted",
+      "status": "pending",
+      "caveat": "IRS tax-filer data — the poorest and richest households are undercounted; households, not people, unless noted",
+      "essay": {
+        "what": "County-to-county migration drawn from IRS tax returns: the survey's first flow map. Teal counties gained households on net; ember counties lost them. The arcs are the largest corridors — each one thousands of actual moves.",
+        "how": "IRS Statistics of Income migration files, latest filing-year pair. Same-county and summary rows excluded per the file layout; corridors kept above a disclosed household threshold so the map stays legible. Tax-filer data undercounts the poorest and the richest; that caveat rides on every number.",
+        "why": "This is the country rearranging itself in real time — out of the old cores, into the Sun Belt, following rent and work and weather. Toggle the thrones or the fulfillment network underneath and watch what the movers are moving toward. Every arc is a bet that somewhere else is better."
+      },
+      "plateStats": []
+    },
+    {
+      "id": "company-socialcapital",
+      "title": "The Company We Keep",
+      "theme": "company",
+      "accent": "#f2b8c6",
+      "scopes": ["us"],
+      "forms": { "points": false, "contours": false, "tint": true, "regionKind": "county" },
+      "weight": 0.0,
+      "unit": "economic connectedness",
+      "statline": "connectedness in {n} counties",
+      "status": "pending",
+      "caveat": "derived from Facebook friendships, adults 25–44; measures cross-class friendship, not warmth",
+      "essay": {
+        "what": "Economic connectedness by county, from the Social Capital Atlas: the share of above-median-income friends in below-median-income people's networks — the strongest known community-level predictor of a poor child's chance of rising.",
+        "how": "Chetty et al. (2022), built from anonymized Facebook friendship graphs for adults 25–44, published openly with differential-privacy noise. The measure is calibrated so 1.0 means class-blind friendship; the real range runs 0.29 to 1.36. Rose wash deepens where cross-class friendship is thick. It measures who knows whom — not kindness, not warmth, and only among people on the platform.",
+        "why": "The loneliness layer, inverted: this is where the bridges are. Lay it over Despair and the argument starts by itself — the places where classes actually befriend each other are rarely the places the epidemics chose. Where the wash runs thin, the ladder is missing a rung."
+      },
+      "plateStats": []
+    },
+    {
+      "id": "control-arsenal",
+      "title": "The Arsenal",
+      "theme": "control",
+      "accent": "#b8c4d8",
+      "scopes": ["us"],
+      "forms": { "points": true, "contours": true, "tint": false },
+      "weight": 0.5,
+      "unit": "licensed dealers",
+      "statline": "{n} licensed gun dealers",
+      "status": "pending",
+      "pendingNote": "Source verified open (ATF monthly FFL lists) but served behind a browser-only gate that outlasted this survey window. The ZIP gazetteer is staged; the slot is reserved for the retry.",
+      "caveat": "retail license types 01 and 02 only; ZIP-centroid locations aggregated to cells",
+      "essay": {
+        "what": "Every federally licensed retail firearms dealer and pawnbroker in America, aggregated to cells — the storefront geography of the Second Amendment.",
+        "how": "ATF's monthly Federal Firearms Licensee listing, types 01 and 02, geocoded by premise ZIP and binned so the page stays light. Counts are of licenses, not guns; a cell's glow is commerce, not crime.",
+        "why": "The arsenal is not where the fear is loudest on television — it follows highways and county seats, a hardware-store geography. Pair it with the Altar and the two devotions of the interior sit side by side; pair it with Loss and hold your judgment: the survey shows where, never why."
+      },
+      "plateStats": []
+    },
+    {
+      "id": "faith-altar",
+      "title": "The Altar",
+      "theme": "faith",
+      "accent": "#ffe08a",
+      "scopes": ["us"],
+      "forms": { "points": false, "contours": false, "tint": true, "regionKind": "county" },
+      "weight": 0.0,
+      "unit": "adherents per 1k",
+      "statline": "adherence in {n} counties",
+      "status": "pending",
+      "caveat": "congregation-reported adherence, 2020 census; traditions self-define membership; ~1% of counties exceed 1,000 per 1k where regional congregations draw worshippers across county lines",
+      "essay": {
+        "what": "Religious adherents per thousand residents in every county, from the 2020 U.S. Religion Census — the candle-gold wash of organized belief, with each county's largest tradition on the tooltip.",
+        "how": "Congregation-by-congregation counts assembled by the religion census, published at county level. Adherence is what congregations report; traditions define membership differently, and the unaffiliated are the negative space.",
+        "why": "The altar's geography is older than any other layer here — Utah's wash, the Baptist South, the Lutheran upper plains, the Catholic border counties are all still exactly where the nineteenth century left them. Belief, it turns out, is the slowest-moving thing the survey has ever mapped."
+      },
+      "plateStats": []
+    },
+    {
+      "id": "betrayal-ledger",
+      "title": "The Ledger of Betrayals",
+      "theme": "betrayal",
+      "accent": "#ffd23e",
+      "scopes": ["us"],
+      "forms": { "points": true, "contours": false, "tint": false },
+      "weight": 0.3,
+      "unit": "convicted betrayals",
+      "statline": "{n} betrayals · {amt} stolen",
+      "status": "pending",
+      "caveat": "convicted or pled only; court-established amounts; every entry carries citations in the staging data",
+      "essay": {
+        "what": "The great municipal frauds of America, curated one conviction at a time: who stole, from which town, how much, for how long, and what it cost them. Dixon, Illinois anchors the ledger — $53.7 million over 22 years, a comptroller, and a stable of champion horses.",
+        "how": "Built by hand from Justice Department releases, court records, and major-outlet reporting; no dataset of this existed, so the survey made one. Only the convicted are named. Every entry ships with its citations. Amounts are court-established.",
+        "why": "Every coin-gold point is a place that trusted somebody with the books. Small towns dominate the ledger not because small towns are corrupt but because one person there IS the controls — the auditor, the treasurer, and the alarm, all in the same chair. This layer is what it costs when nobody is watching the watcher."
+      },
+      "plateStats": []
     },
     {
       "id": "loss-layoffs",

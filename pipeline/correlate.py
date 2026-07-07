@@ -165,3 +165,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# ---- v0.5 additions (run 2026-07-07) ----
+# F9  EC vs overdose:      n=2897  r=-0.330  bottom-EC quintile 22.9 vs top 9.8 per 100k  -> SHIPPED as "The Empty Chair"
+# F10 net migration vs OD: n=2768  gainers 22.2 vs losers 19.3, r=0.152                   -> REJECTED (too weak)
+# F11 EC vs net migration: n=2816  r=0.045                                                -> REJECTED (null)
+# Suicide data is excluded from the correlator entirely per the WANTLIST safe-messaging protocol.
