@@ -41,11 +41,11 @@ confirms access, granularity, and license.
 
 | # | Layer | Form | Status | Why it's first |
 |---|---|---|---|---|
-| 1 | **The Ledger of Betrayals** — the great municipal frauds, curated: Dixon IL ($53.7M, Rita Crundwell, 22 years — the archetype), Bell CA, Kilpatrick's Detroit, Jefferson County's $3B sewer, Harrisburg's incinerator | points + stories | DARK — we build it | The maintainer's ask; nobody has mapped it; pure soul: trust, betrayed, with dollar amounts |
-| 2 | **Suicide in America** — county all-ages rates + state youth rates on the plate | heat, protocol-bound | OPEN? (CDC/NCHS) | The despair theme is incomplete without it; handled per protocol |
-| 3 | **The Great Sorting** — IRS county-to-county migration flows | flows (new form) | OPEN? (IRS SOI) | Where everyone is going and leaving; unlocks the survey's first flow render and its best new reading |
-| 4 | **The Company We Keep** — Chetty/Meta Social Capital Atlas: economic connectedness by county | heat | OPEN? (socialcapital.org) | Loneliness measured; pairs devastatingly with despair and the thrones |
-| 5 | **The Arsenal and the Altar** — ATF licensed gun dealers × ARDA religious adherence, shipped as a pair | points × heat | OPEN? (ATF FFL list; ARDA) | Two open datasets, one juxtaposition reading; the survey's method in miniature |
+| 1 | **The Ledger of Betrayals** — the great municipal frauds, curated: Dixon IL ($53.7M, Rita Crundwell, 22 years — the archetype), Bell CA, Detroit, Roslyn NY's "Bad Education" case | points + stories | ✓ **BUILT** (v0.5) — ~40+ cases, conviction-only, cited | The maintainer's ask; nobody had mapped it; pure soul: trust, betrayed, with dollar amounts |
+| 2 | **Suicide in America** — county all-ages rates (state youth rates: disclosed gap, WISQARS path documented) | heat, protocol-bound | ✓ **ACQUIRED** (v0.5) — CHR&R/NCHS 2018–2022; verification finding: CDC WONDER's API refuses sub-national queries by policy | The despair theme was incomplete without it; handled per protocol |
+| 3 | **The Great Sorting** — IRS county-to-county migration flows | flows (new form) | ✓ **ACQUIRED** (v0.5) — 2022–2023, 2,866 counties, national net exactly 0 | The survey's first flow render and its best new reading |
+| 4 | **The Company We Keep** — Chetty/Meta Social Capital Atlas: economic connectedness by county | heat | ✓ **ACQUIRED** (v0.5) — 3,018 counties; custom Meta permissive license (no re-identification) recorded verbatim | Loneliness measured; produced the survey's strongest finding (r = −0.33 vs overdoses) |
+| 5 | **The Arsenal and the Altar** — ATF licensed gun dealers × religion census adherence, shipped as a pair | points × heat | acquisition in flight (v0.5) | Two open datasets, one juxtaposition reading; the survey's method in miniature |
 
 Bench (first substitutes): Eviction Lab county rates · EFF Atlas of Surveillance ·
 K-12 school shootings database · PEN America book bans · USALEEP tract life expectancy.
