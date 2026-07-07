@@ -5,6 +5,11 @@ about what it says about us.** If you can supply both, you can add an instrument
 
 ## Propose a layer
 
+Start with [docs/WANTLIST.md](docs/WANTLIST.md) — the survey's standing wishlist,
+organized by soul question with an ethics protocol that binds every acquisition.
+If your idea is on it, claim it in an issue; if it isn't, argue for the question
+it answers.
+
 Open an issue with the **Layer proposal** template. A good proposal answers:
 
 1. **WHAT** — what is the dataset, plainly? What does one point/region represent?

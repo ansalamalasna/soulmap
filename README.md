@@ -47,6 +47,13 @@ region values), add a registry entry (accent color, theme, essay: what/how/why),
 `python3 pipeline/build.py`. **Page-weight ceiling: the built page stays a single
 self-contained file under 8 MB** — aggregate to cells, not rows.
 
+## Where this is going
+
+- [docs/WANTLIST.md](docs/WANTLIST.md) — the data grocery list, organized by soul
+  question, with the binding ethics protocol and the Next Five acquisition slate.
+- [docs/EXPERIENCE.md](docs/EXPERIENCE.md) — the feature vision: entity lenses,
+  citizen readings, star bios, dossier diffs, the print atlas, and the expanded canon.
+
 ## Findings
 
 `pipeline/correlate.py` computes descriptive spatial statistics across layers at build
