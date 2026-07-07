@@ -1,0 +1,48 @@
+{
+  "layer": "loss-crashes",
+  "generated": "2026-07-07T03:40:22Z",
+  "methodology": "Downloaded the NHTSA Fatality Analysis Reporting System (FARS) 2023 National CSV archive and extracted accident.csv (one row per fatal motor-vehicle crash, national level, calendar year 2023). Read with UTF-8 encoding (verified to also decode cleanly under latin-1, but UTF-8 succeeded so it was used). Selected columns STATENAME, ST_CASE, MONTH, LATITUDE, LONGITUD, FATALS. Rows with unknown/unreported coordinate sentinel codes were dropped: LATITUDE >= 77 (covers the FARS 'unknown' codes 77.7777, 88.8888, 99.9999) or LATITUDE null; LONGITUD with absolute value >= 300 (covers 777.7777, 888.8888, 999.9999) or LONGITUD null; rows where (LATITUDE, LONGITUD) == (0, 0). All remaining valid rows were kept -- every fatal crash of 2023 with usable geocoding, no sampling or aggregation. Coordinates were rounded to 3 decimal places for the staging file. v = FATALS (fatalities in that crash). meta.m = MONTH (1-12).",
+  "source": {
+    "name": "NHTSA FARS 2023 National CSV",
+    "url": "https://static.nhtsa.gov/nhtsa/downloads/FARS/2023/National/FARS2023NationalCSV.zip",
+    "file_used": "FARS2023NationalCSV/accident.csv",
+    "license": "US public domain (US Government work)",
+    "year_attempted_first": 2023,
+    "year_used": 2023,
+    "note": "2023 zip returned HTTP 200 on first attempt; no fallback to 2022 was needed."
+  },
+  "counts": {
+    "raw_rows_in_accident_csv": 37769,
+    "rows_dropped_unknown_or_zero_coords": 129,
+    "rows_kept_in_staging": 37640,
+    "total_fatals_unfiltered_all_crashes": 41025,
+    "total_fatals_in_staging_kept_rows": 40889,
+    "fatals_excluded_due_to_dropped_coords": 136,
+    "distinct_states_in_kept_rows": 51,
+    "dropped_latitude_sentinel_value_counts": {
+      "77.7777": 85,
+      "99.9999": 36,
+      "88.8888": 8
+    },
+    "kept_rows_by_month": {
+      "1": 2768,
+      "2": 2639,
+      "3": 2780,
+      "4": 3054,
+      "5": 3221,
+      "6": 3197,
+      "7": 3396,
+      "8": 3410,
+      "9": 3409,
+      "10": 3507,
+      "11": 3104,
+      "12": 3155
+    }
+  },
+  "caveats": [
+    "129 of 37,769 crashes (0.34%) had unknown/unreported GPS coordinates (FARS sentinel codes 77.7777/88.8888/99.9999 latitude paired with 777.7777/888.8888/999.9999 longitude) and were dropped from the point layer; no (lat,lon) == (0,0) rows or null coordinates were present in this year's file.",
+    "This represents 2023 data (the most recent full annual FARS release at time of retrieval), not the '~39,000' figure mentioned as an estimate in the task -- the actual 2023 total is 37,769 fatal crashes before filtering, 37,640 after filtering, resulting in 41,025 total deaths unfiltered / 40,889 total deaths in the kept records.",
+    "FARS accident-level LATITUDE/LONGITUD reflect NHTSA's geocoded crash location; precision varies by state reporting practice and rural roads may be geocoded to a milepost/route reference point rather than the exact crash site.",
+    "Coordinates rounded to 3 decimal places (~110m precision) per staging spec; this is a deliberate precision reduction for the map layer, not a data quality issue."
+  ]
+}
