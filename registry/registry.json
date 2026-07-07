@@ -259,7 +259,7 @@
       "essay": {
         "what": "2024 drug overdose death rates for 3,014 US counties — the per-capita geography of the deadliest drug crisis in American history, tinted deeper violet as the rate climbs. The highest rate in the nation is Knott County, Kentucky: 139.1 deaths per 100,000.",
         "how": "CDC's Mapping Injury, Overdose, and Violence county dataset (calendar year 2024, crude rates per 100k; smaller counties use CDC's own Bayesian smoothing, disclosed). 129 counties with suppressed counts stay dark and are counted honestly rather than smoothed over.",
-        "why": "The epidemic is not urban and it is not random — it settles along Appalachia's coal seams, in post-industrial river valleys, in the places the work left first. Toggle the Thrones of Capital over this tint and read the negative space: despair pools farthest from the money. One hopeful note lives in this vintage: 2024 saw the largest one-year national decline on record."
+        "why": "The epidemic is not random — half of the hundred worst county rates sit in five Appalachian states. But this survey's first draft claimed despair pools farthest from the money, and the data overruled it: rates run higher near Fortune 500 headquarters than far from them, and Baltimore holds one of the worst rates in the nation. The crisis is rural and metropolitan at once — see The Folklore Fails in the Findings. One hopeful note lives in this vintage: 2024 saw the largest one-year national decline on record."
       },
       "plateStats": [
         { "label": "counties with rates", "value": "3,014" },

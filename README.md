@@ -41,9 +41,25 @@ Principles (do not reverse casually):
 
 ## Adding a layer
 
-See [docs/ADDING_A_LAYER.md](docs/ADDING_A_LAYER.md). Short version:
-write a pipeline script that emits `data/staging/<id>.json` (points, or region values),
-add a registry entry (accent color, theme, essay: what/how/why), run `python3 pipeline/build.py`.
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/ADDING_A_LAYER.md](docs/ADDING_A_LAYER.md).
+Short version: write a pipeline script that emits `data/staging/<id>.json` (points, or
+region values), add a registry entry (accent color, theme, essay: what/how/why), run
+`python3 pipeline/build.py`. **Page-weight ceiling: the built page stays a single
+self-contained file under 8 MB** — aggregate to cells, not rows.
+
+## Findings
+
+`pipeline/correlate.py` computes descriptive spatial statistics across layers at build
+time (county joins, cell-grid correlations). Hand-reviewed results ship in
+`data/findings.json` and render as FINDINGS cards — each with its method note and the
+standing disclaimer: **where, not why**. One deliberately spurious correlation is
+included as the epistemic control.
+
+## Deploy (GitHub Pages)
+
+The build also writes `docs/index.html`. Enable Pages once:
+repo **Settings → Pages → Deploy from a branch → `main` / `docs`** — the survey then
+lives at `https://<owner>.github.io/soulmap/`.
 
 ## Provenance & licenses
 

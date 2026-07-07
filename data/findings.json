@@ -1,0 +1,79 @@
+{
+  "disclaimer": "WHERE, NOT WHY — every number on this page is descriptive. Geography correlates everything with everything; the survey shows where things coincide and never claims to know why.",
+  "computed": "2026-07-07",
+  "method_root": "pipeline/correlate.py — county centroids decoded from the counties TopoJSON; distances by haversine; correlations are Pearson on log-transformed values. All inputs are the survey's own staged, provenance-tracked layers.",
+  "findings": [
+    {
+      "id": "superfund-overdose",
+      "title": "Poisoned Ground, Poisoned People",
+      "stat": "+81%",
+      "statLabel": "overdose rate near Superfund ground",
+      "body": "Counties within 15 km of a Superfund NPL site average 21.6 overdose deaths per 100k. Counties 75 km or farther average 11.9. Where we buried the industry, the epidemic runs nearly twice as hot.",
+      "method": "3,012 counties with 2024 CDC crude rates; county centroid to nearest of 1,840 NPL sites; bucket means ≤15 km (n=503) vs ≥75 km (n=665); Pearson r(rate, log distance) = −0.21. Industrial-legacy regions confound both variables.",
+      "layers": ["despair-overdoses", "residue-superfund"],
+      "scope": "us"
+    },
+    {
+      "id": "money-overdose",
+      "title": "The Folklore Fails",
+      "stat": "+55%",
+      "statLabel": "overdose rate near the thrones",
+      "body": "This survey's own essay assumed despair pools farthest from the money. The data disagrees: counties within 25 km of a Fortune 500 headquarters average 21.8 deaths per 100k against 14.1 in counties 150 km or farther. The epidemic is Appalachian and metropolitan at once — Baltimore holds one of the five worst rates in the nation. The essay has been corrected to match the data.",
+      "method": "Same county set; distance to nearest of 500 headquarters; ≤25 km (n=195) vs ≥150 km (n=1,099); r(rate, log distance) = −0.20. Crude rates run higher in older urban counties; headquarters proxy metros.",
+      "layers": ["despair-overdoses", "power-fortune500"],
+      "scope": "us"
+    },
+    {
+      "id": "corridor",
+      "title": "Half the Dying Happens Near the Network",
+      "stat": "51.9%",
+      "statLabel": "of fatal crashes within 50 km of the network",
+      "body": "More than half of 2023's fatal crashes happened within 50 km of an Amazon logistics facility; the median crash sits 47 km from the network. The corridors that promise tomorrow's package collect today's toll.",
+      "method": "37,640 located crashes; distance to nearest of 314 facilities. For scale: the median county centroid sits 127 km from the network, so crashes run systematically closer than the country's geography does. Both follow population and interstates.",
+      "layers": ["loss-crashes", "motion-fulfillment"],
+      "scope": "us"
+    },
+    {
+      "id": "continuity",
+      "title": "The Cloud Landed Nowhere New",
+      "stat": "99.7%",
+      "statLabel": "of data-center cells already held remembered births",
+      "body": "Nearly every quarter-degree cell that holds a data center already held the birthplace of someone the world remembers. Genius pooled in the same places for five thousand years; the machines moved into the same rooms.",
+      "method": "0.25° cells over the contiguous US; 8,374 cells hold memory or data centers; r(log births, log data centers) = 0.27. Population underlies both — read this as continuity, not cause.",
+      "layers": ["memory-births", "power-datacenters"],
+      "scope": "us"
+    },
+    {
+      "id": "spurious",
+      "title": "The Strongest Correlation Here Is Meaningless",
+      "stat": "r = 0.31",
+      "statLabel": "UFO sightings × data centers",
+      "spurious": true,
+      "body": "Sightings correlate with data centers more strongly than memory does — because both simply follow people. This card is the warning label for every other card on this page: geography correlates everything with everything. The survey shows where. It never proves why.",
+      "method": "0.25° US cells, log–log Pearson across 9,484 cells. Deliberately included as the epistemic control for the whole findings page.",
+      "layers": ["wonder-ufos", "power-datacenters"],
+      "scope": "us"
+    },
+    {
+      "id": "migration",
+      "title": "Memory Moved West for 4,300 Years — Then Turned",
+      "stat": "39° W",
+      "statLabel": "drift of the center of remembered birth",
+      "body": "The mean longitude of remembered births: 34°E in antiquity — the eastern Mediterranean. 18°E medieval. 2°E early modern. 5°W industrial. Then the drift stops, and in the 20th century it ticks back east as Asia re-enters the record. Drag the era scrubber and watch it happen.",
+      "method": "1,654,726 dated, located births; count-weighted mean longitude per era bucket: 34.3°E → 17.8°E → 2.1°E → 4.8°W → 4.6°W.",
+      "layers": ["memory-births"],
+      "scope": "world"
+    },
+    {
+      "id": "appalachia",
+      "title": "Half the Worst Counties, Five States",
+      "stat": "3.2×",
+      "statLabel": "Appalachian over-representation",
+      "body": "Fifty of the hundred highest overdose rates in America sit in Kentucky, West Virginia, Ohio, Virginia, and Tennessee — states that hold barely a sixth of the nation's rated counties. The seam of the epidemic follows the seam of the coal.",
+      "method": "Top-100 counties by 2024 crude rate; the five states hold 15.8% of rated counties but 50% of the top hundred.",
+      "layers": ["despair-overdoses"],
+      "scope": "us",
+      "bbox": [[-90, 34.5], [-76.5, 42]]
+    }
+  ]
+}

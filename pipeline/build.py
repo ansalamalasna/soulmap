@@ -25,6 +25,9 @@ def load_staging(layer_id):
 
 def build():
     registry = load(p("registry","registry.json"))
+    fpath = p("data","findings.json")
+    if os.path.exists(fpath):
+        registry["findings"] = load(fpath)
     layers_data = {}
     for lay in registry["layers"]:
         lid = lay["id"]
@@ -245,7 +248,10 @@ def build():
     os.makedirs(p("dist"), exist_ok=True)
     out = p("dist","index.html")
     with open(out,"w",encoding="utf-8") as f: f.write(html)
-    print(f"built {out}: {os.path.getsize(out)/1e6:.2f} MB")
+    os.makedirs(p("docs"), exist_ok=True)
+    import shutil
+    shutil.copyfile(out, p("docs","index.html"))
+    print(f"built {out}: {os.path.getsize(out)/1e6:.2f} MB (+ copied to docs/ for GitHub Pages)")
     for lid,d in layers_data.items():
         n = d.get('n', len(d.get('us',{}) or d.get('counties',{})))
         print(f"  {lid}: n={n}" + (f" reports={d['reports']}" if 'reports' in d else ""))
