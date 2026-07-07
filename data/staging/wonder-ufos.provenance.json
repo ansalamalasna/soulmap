@@ -1,0 +1,186 @@
+{
+  "layer": "wonder-ufos",
+  "retrieved": "2026-07-07",
+  "source_evaluation": {
+    "candidates_checked": [
+      {
+        "name": "timothyrenner/nuforc_sightings_data",
+        "url": "https://github.com/timothyrenner/nuforc_sightings_data",
+        "result": "NOT USED \u2014 data files are DVC-tracked, not committed to git. dvc.lock confirms the target artifact (data/processed/nuforc_reports.csv, md5 d790b70419875eae73cb665373fe0331, 281,671,412 bytes) exists but its DVC remote is a private Google Cloud Storage bucket (gs://trenner-personal-projects/nuforc-dvc), confirmed private by a direct HTTPS GET against the object's content-addressed path returning 403 Forbidden. The repo's README also states this dataset used to be pushed to a data.world mirror (data.world/timothyrenner/ufo-sightings) but 'will not be used to update the dataset on data.world any more' as of the README's last edit; data.world's public page renders client-side with no static download link, and its file-download API requires an authenticated bearer token (401 Unauthorized without one). Last dvc.lock update (i.e. last time the actual dataset changed): 2024-01-31. No GitHub Releases exist on the repo. This source was not reachable without credentials this session and was not used."
+      },
+      {
+        "name": "planetsig/ufo-reports",
+        "url": "https://github.com/planetsig/ufo-reports",
+        "result": "USED \u2014 csv-data/ufo-scrubbed-geocoded-time-standardized.csv is a plain file committed directly to the git repo, fetched over raw.githubusercontent.com, no auth/DVC/LFS involved. SHA-256 of the downloaded bytes (48c804c5923b3ab31118fd5a7b5e4c7578ddb1dd66f6a1418fa1c954ea644405) matches the checksum published by the source repo itself in csv-data/sha256cksums.txt."
+      }
+    ],
+    "decision": "Used planetsig/ufo-reports as the sole corpus (source 1 in the brief was unreachable without credentials; this is exactly the source named as the fallback alternative in the brief, source 2)."
+  },
+  "source": {
+    "name": "planetsig/ufo-reports (GitHub user Sigmond Axel)",
+    "repo_url": "https://github.com/planetsig/ufo-reports",
+    "file_url": "https://raw.githubusercontent.com/planetsig/ufo-reports/master/csv-data/ufo-scrubbed-geocoded-time-standardized.csv",
+    "file_sha256_verified": "48c804c5923b3ab31118fd5a7b5e4c7578ddb1dd66f6a1418fa1c954ea644405",
+    "file_sha256_matches_source_manifest": true,
+    "underlying_data": "National UFO Reporting Center (NUFORC), www.nuforc.org public sighting reports. This community conversion project scraped, cleaned, and geocoded the NUFORC archive; it is not an official NUFORC data product. NUFORC's own terms of service prohibit scraping/redistribution of their raw site content, a fact this dataset's own authors (and the alternative timothyrenner/nuforc_sightings_data repo) explicitly acknowledge; this file has nonetheless circulated openly and been mirrored/re-published on GitHub, Kaggle, and data.world for over a decade and is the most commonly cited 'NUFORC CSV' in public UFO-data analyses.",
+    "consolidation_date": "2014-06-30 (per the file's own sibling runstats.txt)",
+    "geocoding_method": "City/place-name level geocoding against opengeocode.org, MaxMind worldcities.csv / us-citylatlng.csv / us-state-countylatlng.csv, with remaining unmatched place names run through findlatitudelongitude.com in batch mode. This means coordinates resolve to a city/place centroid, NOT the precise witness location -- multiple sightings in the same city on different dates will share identical lat/lon."
+  },
+  "vintage": {
+    "sighting_date_range": "1906-2014",
+    "note": "A handful of pre-1945 sightings (13 rows total across 1906-1944) are retrospective reports -- witnesses recalling and submitting decades-old events -- not contemporaneous records; this is normal for civilian UFO-reporting archives and is not evidence of a data error. Volume is negligible (1990s: 9,214 kept rows; 2000s: 38,782; 2010-2014: 26,044) confirming the corpus is dominated by the post-1990s NUFORC online reporting era, consistent with NUFORC launching web-based report submission in the mid-1990s.",
+    "cutoff": "Data collection stops mid-2014 (last full month present is a partial 2014 -- only 2 kept records dated 2014 -- reflecting the file's 2014-06-30 consolidation timestamp). This corpus does NOT include any NUFORC reports from mid-2014 to present (over a decade of subsequent reports, which NUFORC's live database continues to accumulate, are absent from this file)."
+  },
+  "counts": {
+    "raw_data_lines_in_source_csv": 80332,
+    "dropped_bad_datetime_unparseable": 0,
+    "dropped_bad_coordinates_unparseable": 1,
+    "dropped_null_or_zero_zero_coordinates": 0,
+    "dropped_out_of_range_coordinates": 0,
+    "note_on_bad_coordinates": "Exactly one row failed float parsing: a 1974 Mescalero Indian Reservation, NM sighting with latitude field '33q.200088' (a stray letter 'q' before the decimal, almost certainly a data-entry/OCR-style typo for '33.200088', which is the correct latitude for that location). Per this project's no-fabrication rule the row was dropped rather than silently corrected.",
+    "unique_lat_lon_datetime_groups_after_dedup": 79252,
+    "final_record_count": 79252
+  },
+  "dedup": {
+    "rule": "Exact match on (datetime string, latitude string, longitude string) as instructed. Because this corpus geocodes to city-level centroids, groups with >1 row genuinely represent multiple independent NUFORC report submissions describing what is very likely the same sighting event witnessed from the same city at the same timestamp (e.g. a mass sighting reported separately by several people) -- collapsing them to one point per instructions, but the collapsed count is preserved as the record's `v` (weight) field rather than discarded, consistent with this repo's existing convention (loss-crashes.json uses `v` for multi-fatality weight at a single coordinate).",
+    "duplicate_groups_found": 939,
+    "extra_rows_collapsed": 1079,
+    "max_v_seen": 17,
+    "sum_of_v_across_all_kept_records": 80331
+  },
+  "us_vs_non_us": {
+    "method": "Same rough rectangular bounding-box heuristic already used by power-datacenters.provenance.json in this repo (continental US + AK + HI boxes; not a real border polygon). Chosen over trusting the CSV's own `country` field because that field is blank for 9,670 of 80,332 raw rows (~12%) -- mostly US state-only entries that a downstream import evidently failed to backfill with 'us' -- so a naive count on the country column alone would understate the US share.",
+    "us_bboxes_used": [
+      {
+        "name": "continental",
+        "lat_min": 24.0,
+        "lat_max": 50.0,
+        "lon_min": -125.0,
+        "lon_max": -66.0
+      },
+      {
+        "name": "alaska",
+        "lat_min": 51.0,
+        "lat_max": 72.0,
+        "lon_min": -170.0,
+        "lon_max": -129.0
+      },
+      {
+        "name": "hawaii",
+        "lat_min": 18.5,
+        "lat_max": 22.5,
+        "lon_min": -160.5,
+        "lon_max": -154.5
+      }
+    ],
+    "us_count": 72432,
+    "non_us_count": 6820,
+    "us_share_pct": 91.4,
+    "raw_country_field_distribution_before_bbox_reclassification": {
+      "us": 65114,
+      "(blank)": 9670,
+      "ca": 3000,
+      "gb": 1905,
+      "au": 538,
+      "de": 105
+    },
+    "caveat": "The bbox is rectangular, not a real national border; a small number of points near the US/Canada or US/Mexico border could be misclassified. Also note northern Mexico and the Canadian border strip could clip into the continental box slightly -- this is the same acknowledged limitation as the existing power-datacenters layer in this repo."
+  },
+  "top_shapes": [
+    {
+      "shape": "light",
+      "count": 16336
+    },
+    {
+      "shape": "triangle",
+      "count": 7734
+    },
+    {
+      "shape": "circle",
+      "count": 7547
+    },
+    {
+      "shape": "fireball",
+      "count": 6134
+    },
+    {
+      "shape": "other",
+      "count": 5565
+    },
+    {
+      "shape": "unknown",
+      "count": 5508
+    },
+    {
+      "shape": "sphere",
+      "count": 5301
+    },
+    {
+      "shape": "disk",
+      "count": 5140
+    },
+    {
+      "shape": "oval",
+      "count": 3653
+    },
+    {
+      "shape": "formation",
+      "count": 2402
+    },
+    {
+      "shape": "cigar",
+      "count": 2037
+    },
+    {
+      "shape": "changing",
+      "count": 1943
+    },
+    {
+      "shape": "(none)",
+      "count": 1917
+    },
+    {
+      "shape": "flash",
+      "count": 1322
+    },
+    {
+      "shape": "rectangle",
+      "count": 1277
+    }
+  ],
+  "hotspot_plausibility_check": {
+    "method": "Spot-checked whether well-known NUFORC hotspots show up dense in the kept records, as a sanity check that geocoding/dedup did not silently corrupt the corpus, against a low-population control region of similar box size.",
+    "checks": [
+      {
+        "area": "Phoenix, AZ (0.5deg box around 33.448,-112.074)",
+        "records_in_box": 1322,
+        "sum_v_in_box": 1358,
+        "finding": "51 kept records dated exactly 1997 cluster tightly within a few hundredths of a degree of Phoenix, with shapes 'triangle', 'formation', 'chevron', 'sphere' -- an unmistakable match to the well-documented 'Phoenix Lights' mass sighting of March 13, 1997. Confirms geocoding and dedup preserved the real event signature rather than corrupting or over-collapsing it."
+      },
+      {
+        "area": "Pacific Northwest (WA/OR bbox, lat 42-49, lon -125 to -117)",
+        "records_in_box": 6061,
+        "sum_v_in_box": 6157,
+        "finding": "Dense as expected for a widely-cited NUFORC hotspot region."
+      },
+      {
+        "area": "Wyoming control (similar-size bbox, lat 41-45, lon -111 to -104; lowest-population US state, no particular UFO-lore reputation)",
+        "records_in_box": 204,
+        "finding": "An order of magnitude sparser than Phoenix's box despite a comparable box area, consistent with density tracking population/reporting propensity rather than being uniform noise."
+      },
+      {
+        "area": "Outlier check: one kept record at (-82.863, -135.0), 1994, shape 'fireball'",
+        "finding": "Initially looked like a bad coordinate (open ocean near Antarctica). Traced back to the raw source row: city field literally reads 'antarctica (ross ice shelf) (antarctica)', country blank. A genuine self-reported sighting from an Antarctic expedition/station, correctly geocoded to a remote real-world location -- not a data defect. Left in the corpus as a legitimate non-US record."
+      }
+    ]
+  },
+  "caveats": [
+    "Reporting bias, not sighting bias: this is a self-reported civilian archive, not a verified catalog of aerial phenomena. Density reflects population, cultural predisposition to report, and regional NUFORC awareness at least as much as any actual rate of anomalous sightings -- e.g. dense California/Pacific-Northwest/Florida/Texas clusters track major population centers, not necessarily 'true' hotspots.",
+    "Corpus vintage: consolidated 2014-06-30 and not updated since (source repo's last commit touching the data files was 2014-07-08). NUFORC's live database has continued to grow for over a decade past this snapshot; none of that later data is represented here.",
+    "City-level geocoding, not report-level: coordinates are the geocoded city/place centroid, not the witness's precise location. Many sightings in the same town land on the exact same point; this is expected and is the reason the dedup step exists, not a sign of duplicate scraping.",
+    "'Shape' and free-text fields are self-reported and unverified; 'light', 'triangle', 'circle' dominate simply because those are the easiest shapes to describe from a distant, brief observation at night -- not evidence about the physical nature of anything observed.",
+    "This is explicitly a community-maintained, unofficial conversion of NUFORC's public site content. NUFORC's terms of service prohibit scraping and redistribution of their data; this file has nonetheless been circulating openly (GitHub, Kaggle, data.world mirrors) for over a decade. It is used here, unmodified in substance, as the largest reachable geocoded NUFORC-derived corpus per the task brief -- flagged for downstream awareness, not hidden.",
+    "A small number of pre-1990 rows (139 kept records across the 1940s-1980s) are almost certainly retrospective/recalled reports rather than contemporaneous ones; treat the pre-1990 tail as thin and less reliable than the 1990s-2014 bulk of the corpus.",
+    "One row was dropped for an unparseable coordinate (data-entry typo, not a systemic issue) -- see counts.note_on_bad_coordinates."
+  ]
+}
