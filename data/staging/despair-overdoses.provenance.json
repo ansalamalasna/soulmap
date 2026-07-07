@@ -1,0 +1,129 @@
+{
+  "layer": "despair-overdoses",
+  "retrieved": "2026-07-07",
+  "dataset": {
+    "name": "Mapping Injury, Overdose, and Violence (MIOV) - County",
+    "publisher": "CDC National Center for Injury Prevention and Control (NCIPC), based on NCHS/NVSS mortality data",
+    "socrata_domain": "data.cdc.gov",
+    "socrata_id": "psx4-wq38",
+    "landing_page": "https://data.cdc.gov/Public-Health-Surveillance/Mapping-Injury-Overdose-and-Violence-County/psx4-wq38",
+    "csv_export_url": "https://data.cdc.gov/api/views/psx4-wq38/rows.csv?accessType=DOWNLOAD",
+    "socrata_api_endpoint_example": "https://data.cdc.gov/resource/psx4-wq38.json?intent=Drug_OD&period=2024",
+    "dataset_created": "2024-12-09",
+    "dataset_last_updated_at_retrieval": "2026-06-22T14:35:14.000Z",
+    "row_data_as_of_field": "05/14/2026 (per row-level Data_As_Of column for the Drug_OD/2024 slice used here)"
+  },
+  "filter_applied": "Intent = 'Drug_OD' (drug overdose deaths, all intents combined: unintentional, suicide, homicide, undetermined \u2014 ICD-10 X40-X44, X60-X64, X85, Y10-Y14 per CDC's standard overdose case definition), Period = '2024' (calendar year, Jan-Dec 2024)",
+  "vintage": {
+    "year_used": "2024",
+    "note_on_recency": "2024 is the latest full calendar year in this dataset. A more recent 'TTM' (trailing twelve months) period is also published, covering December 2024-November 2025 at time of retrieval, with identical coverage (3,014 valid / 3,143 total counties, same 129 suppressed). Calendar-year 2024 was chosen over TTM for cleaner apples-to-apples interpretation and consistency with how CDC's other annual mortality products (NVSS, WONDER) report data. 2024 national figures are still described by CDC as provisional/subject to minor revision as of the retrieval date, consistent with normal NVSS finalization lag for overdose deaths (which involve coroner/ME investigation delays)."
+  },
+  "rate_type": {
+    "measure": "Crude death rate per 100,000 population",
+    "age_adjusted": false,
+    "disclosure": "This is a CRUDE rate, NOT age-adjusted. The source dataset documentation and column description ('Rate of deaths per 100,000 people') do not indicate age-adjustment, and this matches CDC's companion 'County-level Drug Overdose Mortality' NCHS dashboard, which is explicitly described as 'model-based CRUDE death rates for drug overdose per 100,000 population by county.' Age-adjusted rates are only published by CDC at the national and state level (e.g., NCHS Data Brief 549: national age-adjusted rate = 23.1/100k in 2024), not at the county level, because age-adjustment at small population sizes becomes statistically unstable. Comparisons of these county crude rates to the national age-adjusted rate (23.1) are not apples-to-apples; they are provided as rough context only."
+  },
+  "modeled_vs_observed": {
+    "description": "This dataset is a hybrid: most counties report DIRECTLY OBSERVED/CALCULATED rates from vital records. Only for counties with a suppressed death count of 1-9 in the given year does CDC apply a Bayesian spatial smoothing model (borrowing strength from neighboring counties) to produce a stabilized rate estimate and to protect privacy, per the dataset's own documentation: 'When there are 1-9 deaths in an area, CDC uses a Bayesian model to calculate rates.'",
+    "directly_observed_counties": 1592,
+    "bayesian_modeled_counties": 1422,
+    "modeled_note": "Modeled rows carry a 95% credible interval in the source's Rate_M_CI column (not carried into the output value/label to keep the schema simple); interval widths for modeled counties can be substantial (e.g., Lee County, KY 2024: rate 111.0, 95% CI 66.3-185.8), reflecting real uncertainty from small sample sizes even after modeling."
+  },
+  "counties_covered": {
+    "total_rows_in_source_for_2024_drug_od": 3143,
+    "usable_regions_in_output": 3014,
+    "suppressed_or_missing": 129,
+    "suppressed_missing_reason": "These 129 counties have a suppressed death count in the range '1-9' AND the source's Bayesian small-area model returned a sentinel value of -999 instead of a valid rate (apparent model non-convergence or insufficient neighboring-county data for smoothing, rather than simple suppression-by-threshold). CDC's Rate_M_CI column is also -999 for these rows, confirming no usable estimate was produced. These were excluded entirely rather than fabricated or estimated by this pipeline.",
+    "zero_rate_counties_included": 548,
+    "zero_rate_note": "548 counties/county-equivalents recorded a rate of 0.0, meaning no overdose deaths were recorded (or the recorded count rounds down to a rate of 0.0) for calendar year 2024. These are included in the output as legitimate low/zero values, not treated as missing.",
+    "state_coverage": "All 50 states plus the District of Columbia (51 state-level FIPS codes). U.S. territories (Puerto Rico, etc.) are not included in this county-level file.",
+    "approx_total_us_counties_and_equivalents": "~3,144 (Census Bureau county-equivalent count varies slightly by vintage; this source's 3,143 rows is consistent with that, reflecting some historical county mergers noted in CDC methodology, e.g. Alaska/Louisiana/Virginia independent-city consolidations)."
+  },
+  "national_context_crude_county_rates_2024": {
+    "min": 0.0,
+    "median": 15.7,
+    "mean": 17.62,
+    "max": 139.1,
+    "max_county": "Knott County, Kentucky (FIPS 21119)",
+    "note": "These are summary statistics of the 3,014 usable COUNTY-LEVEL CRUDE rates in this file, not the national aggregate rate. They should not be confused with the national age-adjusted rate (23.1 per 100k in 2024, per NCHS Data Brief 549) or the national crude rate, which are computed differently (single population-weighted calculation across all ~336 million residents rather than an unweighted distribution across counties of vastly different population sizes)."
+  },
+  "five_highest_rate_counties_2024": [
+    {
+      "fips": "21119",
+      "county": "Knott County",
+      "state": "Kentucky",
+      "rate": 139.1,
+      "count": 19,
+      "modeled": false
+    },
+    {
+      "fips": "21025",
+      "county": "Breathitt County",
+      "state": "Kentucky",
+      "rate": 123.5,
+      "count": 16,
+      "modeled": false
+    },
+    {
+      "fips": "24510",
+      "county": "Baltimore city",
+      "state": "Maryland",
+      "rate": 111.1,
+      "count": 628,
+      "modeled": false
+    },
+    {
+      "fips": "21129",
+      "county": "Lee County",
+      "state": "Kentucky",
+      "rate": 111.0,
+      "count": "10-50 (suppressed range; underlying value not disclosed by source)",
+      "modeled": true
+    },
+    {
+      "fips": "35039",
+      "county": "Rio Arriba County",
+      "state": "New Mexico",
+      "rate": 110.3,
+      "count": 44,
+      "modeled": false
+    }
+  ],
+  "cross_validation": {
+    "method": "National and directional trends checked against independent CDC/NCHS publications rather than a second full county-level source, since no second full county-level dataset for 2024 was found (see caveats).",
+    "checks_performed": [
+      "NCHS Data Brief No. 549 (Jan 2026): national age-adjusted overdose death rate fell from 31.3/100k (2023) to 23.1/100k (2024), a 26.2% decline, with 79,384 national deaths in 2024 \u2014 consistent with this file's median county crude rate (15.7) sitting below the (higher, weighted, age-adjusted) national figure, and with the well-documented 2023-2024 national decline.",
+      "NCHS Pressroom release (May 14, 2025): provisional 2024 national overdose deaths ~80,391 (26.9% decline from 2023's 110,037) \u2014 same directional story, close in magnitude to the finalized 79,384 figure.",
+      "Geographic pattern of highest-rate counties (central Appalachia \u2014 eastern Kentucky, southern West Virginia; Baltimore city; Rio Arriba County NM) matches decades of well-documented overdose-crisis geography reported by CDC, academic literature, and news coverage."
+    ]
+  },
+  "alternative_sources_considered": [
+    {
+      "name": "NCHS - Drug Poisoning Mortality by County: United States (older Hierarchical Bayesian model-based series)",
+      "socrata_ids": [
+        "rpvx-m2md (1999-2018 vintage)",
+        "p56q-jrxg",
+        "pbkm-d27e"
+      ],
+      "status": "Superseded for currency. This older NCHS county series (used for the CDC 'County-level Drug Overdose Mortality, 2003-2021' data-visualization dashboard) is FULLY model-based for every county (Hierarchical Bayesian INLA models with spatial/temporal random effects for ALL counties, not just small-count ones) and its most recent public vintage tops out at 2021. The MIOV dataset (psx4-wq38) used for this deliverable is more current (2024), covers a comparable number of counties, and is model-based only where a county's count is too small (1-9 deaths) to compute directly, making it a mix of observed + modeled rather than fully modeled. It was preferred for both recency and higher share of directly-observed rates."
+    },
+    {
+      "name": "VSRR Provisional County-Level Drug Overdose Death Counts",
+      "socrata_id": "gb4e-yj24",
+      "status": "Not used. This dataset provides death COUNTS (not rates per 100k) and is explicitly provisional/count-only; would have required an independent population denominator join to compute rates, introducing an extra source of error versus using CDC's own rate calculation in MIOV."
+    },
+    {
+      "name": "County Health Rankings & Roadmaps (countyhealthrankings.org) analytic data CSV",
+      "status": "Not used as primary; not separately re-verified for this deliverable. County Health Rankings itself sources its drug overdose mortality measure FROM the same underlying CDC NCHS county files (typically a 3-5 year pooled window, lagged 1-2 years further behind current year than the source used here), so it would not have been more current or more independent than data.cdc.gov itself for this metric."
+    }
+  ],
+  "caveats": [
+    "CRUDE, not age-adjusted: rates are not comparable across counties with very different age structures (e.g., a retirement county vs. a college-town county) as cleanly as age-adjusted rates would be. Use with that caveat if the map implies direct comparability.",
+    "Small-county instability: even after Bayesian smoothing, counties with 1-9 annual deaths (1,422 of 3,014 usable counties, ~47%) carry wide uncertainty intervals not exposed in the flat value/label schema requested for this deliverable; consumers wanting uncertainty bands should join back to the source's Rate_M_CI column via FIPS.",
+    "129 counties (4.1% of all county rows) are excluded entirely because the source's own small-area model returned a -999 sentinel instead of a usable rate; this is a data gap, not zero risk \u2014 do not visually treat these as 'no data = safe.'",
+    "2024 is still described by CDC/NCHS as provisional/finalizing as of the retrieval date; the underlying dataset's page was last updated 2026-06-22 and individual county rows carry a 'Data_As_Of: 05/14/2026' stamp, so minor future revisions to 2024 figures are possible.",
+    "Overdose deaths include unintentional, suicide, homicide, and undetermined-intent poisonings by CDC's standard case definition (ICD-10 X40-X44, X60-X64, X85, Y10-Y14) \u2014 this is the standard 'drug overdose death' definition used across CDC products, not solely accidental/unintentional overdoses.",
+    "County boundaries follow current (post-2020-census) county-equivalent definitions per the source; no independent re-check was done for the small number of historically merged/renamed counties (e.g., Alaska boroughs, Virginia independent cities) beyond confirming FIPS codes are well-formed 5-digit strings.",
+    "This deliverable does not independently re-derive or re-verify CDC's Bayesian small-area rates; it takes CDC's own published rate values as given (i.e., it is a pass-through of a modeled/observed hybrid rate, not a from-scratch mortality calculation)."
+  ]
+}

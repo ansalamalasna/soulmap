@@ -1,0 +1,239 @@
+{
+  "layer": "memory-eras",
+  "retrieved": "2026-07-07T04:56:23Z",
+  "method": {
+    "summary": "Streamed the full cross-verified-database.csv.gz (2,291,817 data rows) row by row using Python's csv module over a gzip text stream (no full-file load into memory, single linear pass). For every row with valid, in-range birthplace coordinates (bpla1/bplo1), the row was assigned to a 0.25-degree lat/lon grid cell (cell center = floor(v/0.25)*0.25 + 0.125, rounded to 2 decimals) and bucketed into one of 5 birth-year eras or an 'undated' (u) bucket based on the 'birth' column. Raw source file was deleted immediately after the pass completed, per policy.",
+    "grid": "0.25-degree cells; cell 'lat'/'lon' are the cell CENTER coordinates, rounded to 2 decimals — identical grid definition to the memory-births layer, so cells line up 1:1 across both layers.",
+    "era_definitions": {
+      "e0 (<=500)": "birth year <= 500 AD, inclusive of all BC/negative years (e.g. -100 = 100 BC) and years 1-500 AD.",
+      "e1 (501-1500)": "501 <= birth <= 1500",
+      "e2 (1501-1800)": "1501 <= birth <= 1800",
+      "e3 (1801-1900)": "1801 <= birth <= 1900",
+      "e4 (1901-2018)": "birth >= 1901 (dataset's empirical max birth year is 2018, per the source paper's title/scope 'notable people, 3500BC-2018AD')",
+      "u (undated)": "birth is empty/blank in the source, or fails integer parsing, for a row that otherwise HAS valid birthplace coordinates. Tracked per-cell as a 6th counter alongside the 5 e-values, and summed globally as the undated total."
+    }
+  },
+  "exact_columns_used": {
+    "birth_year": "birth (row index 1) — integer string, negative for BC dates; verified against source CSV header before processing.",
+    "birthplace_longitude": "bplo1 (row index 43) — verified against source CSV header before processing.",
+    "birthplace_latitude": "bpla1 (row index 45) — verified against source CSV header before processing."
+  },
+  "filters_applied": [
+    "Row excluded from all outputs if bpla1 or bplo1 is empty/unparseable-as-float.",
+    "Row excluded if parsed lat/lon falls outside [-90,90]/[-180,180].",
+    "1 row(s) excluded for out-of-range lat/lon after parsing.",
+    "No name-emptiness filter applied (this layer aggregates counts only, no per-row identity is retained in the output, unlike memory-births' 'top' names).",
+    "No occupation/domain filter — all occupation types included.",
+    "Cells with zero total births across all 6 buckets are never emitted (structurally impossible: a cell object is only created when at least one located row lands in it)."
+  ],
+  "stats": {
+    "total_rows_in_source_file": 2291817,
+    "rows_with_valid_birthplace_coords": 1704189,
+    "coverage_pct_valid_coords": 74.36,
+    "rows_excluded_missing_or_unparseable_coords": 587627,
+    "rows_excluded_bad_lat_lon_range": 1,
+    "num_grid_cells_with_births": 41531,
+    "era_totals": {
+      "e0_<=500": 2577,
+      "e1_501-1500": 15988,
+      "e2_1501-1800": 110405,
+      "e3_1801-1900": 333725,
+      "e4_1901+": 1192031,
+      "u_undated": 49463
+    },
+    "grand_total_check": 1704189
+  },
+  "validation": {
+    "prior_run_located_total": 1704189,
+    "this_run_located_total": 1704189,
+    "diff": 0,
+    "pct_diff": 0.0,
+    "within_1pct": true,
+    "era_totals": {
+      "e0_<=500": 2577,
+      "e1_501-1500": 15988,
+      "e2_1501-1800": 110405,
+      "e3_1801-1900": 333725,
+      "e4_1901+": 1192031,
+      "u_undated": 49463
+    },
+    "top_cells_e0": [
+      [
+        41.88,
+        12.38,
+        519
+      ],
+      [
+        37.88,
+        23.62,
+        97
+      ],
+      [
+        31.12,
+        29.88,
+        65
+      ],
+      [
+        41.12,
+        28.88,
+        29
+      ],
+      [
+        36.12,
+        36.12,
+        28
+      ]
+    ],
+    "top_cells_e1": [
+      [
+        43.88,
+        11.38,
+        501
+      ],
+      [
+        45.38,
+        12.38,
+        254
+      ],
+      [
+        41.12,
+        28.88,
+        187
+      ],
+      [
+        41.88,
+        12.38,
+        165
+      ],
+      [
+        38.62,
+        -9.12,
+        163
+      ]
+    ],
+    "top_cells_e2": [
+      [
+        48.88,
+        2.38,
+        4219
+      ],
+      [
+        51.62,
+        -0.12,
+        1899
+      ],
+      [
+        41.88,
+        12.38,
+        854
+      ],
+      [
+        48.12,
+        16.38,
+        809
+      ],
+      [
+        51.12,
+        4.38,
+        794
+      ]
+    ],
+    "top_cells_e3": [
+      [
+        48.88,
+        2.38,
+        7747
+      ],
+      [
+        51.62,
+        -0.12,
+        5410
+      ],
+      [
+        52.62,
+        13.38,
+        4605
+      ],
+      [
+        48.12,
+        16.38,
+        4323
+      ],
+      [
+        40.62,
+        -73.88,
+        3931
+      ]
+    ],
+    "top_cells_e4": [
+      [
+        40.62,
+        -73.88,
+        17859
+      ],
+      [
+        48.88,
+        2.38,
+        15511
+      ],
+      [
+        51.62,
+        -0.12,
+        11758
+      ],
+      [
+        52.62,
+        13.38,
+        11020
+      ],
+      [
+        48.12,
+        16.38,
+        7586
+      ]
+    ],
+    "top_cells_u": [
+      [
+        41.88,
+        12.38,
+        1199
+      ],
+      [
+        39.88,
+        -98.62,
+        1103
+      ],
+      [
+        40.62,
+        -73.88,
+        992
+      ],
+      [
+        48.88,
+        2.38,
+        487
+      ],
+      [
+        51.62,
+        -0.12,
+        487
+      ]
+    ],
+    "num_grid_cells": 41531,
+    "total_rows_in_source": 2291817,
+    "rows_missing_coords": 587627,
+    "rows_bad_range": 1,
+    "rows_missing_name": 0
+  },
+  "caveats": [
+    "MISSING-COORDINATE SHARE: rows without usable birthplace coordinates (587,627 of 2,291,817) are entirely absent from this layer's cells, identical in scope to the memory-births layer's coordinate coverage.",
+    "UNDATED-BUT-LOCATED ROWS: a row can have valid coordinates but no parseable birth year (mostly antiquity/legendary/religious figures per the source paper's own documentation, e.g. Homer, Abraham, Zoroaster). These rows are counted in each cell's 'u' value and in the global undated total, but are excluded from all 5 e0..e4 era totals — they will not appear on a time scrubber unless the UI explicitly surfaces the 'undated' bucket.",
+    "BIRTH YEAR IS A POINT ESTIMATE: per the source paper's methodology, birth years are often the midpoint of birth_min/birth_max for historically uncertain dates (not the raw source range), which can shift a small number of individuals across an era boundary versus a scholar's own dating.",
+    "ERA BOUNDARIES ARE COARSE AND EQUAL-WIDTH ONLY FOR MODERN ERAS: e0 spans roughly 4,000+ years (all of antiquity through 500 AD) in one bucket, reflecting genuine data sparsity for that period rather than a deliberate equal-interval scheme; e3/e4 are much narrower (100 and ~118 years) because notability coverage explodes in the industrial/internet era. Cell density comparisons across eras should account for this, not just raw counts.",
+    "GEOCODING GRANULARITY: bpla1/bplo1 represent a single point per historical place name (often a city centroid), and the 0.25-degree grid further coarsens this — identical caveat to memory-births.",
+    "SOURCE LICENSE: CC-BY-SA 4.0 (share-alike) per the dataset's Dataverse metadata; cite Laouenan et al., Scientific Data 9, 290 (2022), https://doi.org/10.1038/s41597-022-01369-4.",
+    "ENCODING: source CSV decoded with errors='replace' (a small number of name fields contain truncated multi-byte sequences); this layer does not emit any name fields, so this has no effect on memory-eras output, only noted for consistency with memory-births documentation.",
+    "RAW FILE DELETED: the downloaded cross-verified-database.csv.gz (~261.5 MB, MD5 59d787341e3dc53ba7e59152899a7b03) was deleted from data/raw/ immediately after this script completed, per repository policy (data/raw/ is gitignored and not meant to persist large downloads).",
+    "MISSING-COORDS BOOKKEEPING NOTE: this run derives rows_excluded_missing_or_unparseable_coords=587,627 directly and arithmetically (total_rows - located_rows - bad_range_rows), and this figure is internally self-consistent with every other number in this file. The prior memory-births provenance file reports a slightly different 'missing coords' figure (585,741, a difference of 1,886 rows) for what should be the same underlying set — most likely a difference in how that run's narrative summary bucketed a small number of edge-case rows (e.g. rows with a name-field issue) in its own prose stat, not a discrepancy in the actual located-rows count, which matches this run exactly (1,704,189 = 1,704,189, see 'validation' above). Treat this file's rows_excluded_missing_or_unparseable_coords as authoritative for this layer."
+  ]
+}

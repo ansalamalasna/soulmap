@@ -1,0 +1,220 @@
+{
+  "layer": "residue-superfund",
+  "retrieved": "2026-07-07",
+  "source_used": {
+    "primary": {
+      "name": "EPA Superfund National Priorities List (NPL) Sites with Status Information",
+      "type": "ArcGIS Hub Feature Service (hosted, official EPA org: whumbert_EPA)",
+      "landing_page": "https://hub.arcgis.com/datasets/EPA::superfund-national-priorities-list-npl-sites-with-status-information/about",
+      "rest_endpoint": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Superfund_National_Priorities_List_(NPL)_Sites_with_Status_Information/FeatureServer/0/query",
+      "underlying_source_per_epa_metadata": "Hazard Ranking System (HRS) documentation record / NPL listing documentation; lat/lon also derived from HRS documentation records",
+      "purpose_per_epa_metadata": "CSV file backing EPA's 'Where You Live' page under the Superfund web area",
+      "item_id": "c2b7cdff579c41bbba4898400aa38815",
+      "item_owner_org_id": "cJ9YHowT8TU7DUyn (EPA ArcGIS org)",
+      "query_method": "Direct REST query (f=json), returnGeometry=false, paginated resultOffset/resultRecordCount at 1000/page across 2 pages (1000 + 840), ordered by ObjectId2 ASC. Fields pulled: Site_Name, Site_EPA_ID, SEMS_ID, Region_ID, State, City, County, Status, Longitude, Latitude, Proposed_Date, Listing_Date, Deletion_Date, Construction_Completion_Date.",
+      "total_records_returned": 1840
+    },
+    "sources_investigated_but_not_used": [
+      {
+        "name": "EPA FRS Geospatial Data Download Service national CSV (https://www.epa.gov/frs/geospatial-data-download-service)",
+        "reason_not_used": "This is a bulk cross-program FRS geospatial file (all 'majors'/'special interest' facility types combined: AFS Majors, ACRES, NPDES Majors, RCRAInfo TSDs/LQGs, RMP, SEMS NPL, SSTS, TRI). It would require downloading a large multi-hundred-MB national file and filtering to the SEMS NPL interest type, and even filtered it does not carry the final/proposed/deleted NPL status distinction -- it is a facility locator, not an NPL status roster. The ArcGIS Hub dataset used instead is EPA's own purpose-built NPL-status dataset and is a strict subset with the exact fields needed (name, status, state, lat, lon), so it was preferred over reconstructing status from a generic facility file."
+      },
+      {
+        "name": "EPA ArcGIS REST 'SEMS' layer (gispub.epa.gov/arcgis/rest/services/OEI/FRS_INTERESTS/MapServer/21)",
+        "reason_not_used": "Live and queryable (confirmed), and does include LATITUDE83/LONGITUDE83, but has no NPL status field (final/proposed/deleted) and covers the broader FRS-SEMS universe including sites never listed on the NPL. Would not answer the 'final/proposed/deleted' requirement without a separate join to another EPA table."
+      },
+      {
+        "name": "EPA ArcGIS REST 'Superfund' layer (geopub.epa.gov/ArcGIS/rest/services/EMEF/efpoints/MapServer/0)",
+        "reason_not_used": "Same issue as above: live, has latitude/longitude, but no NPL status attribute -- appears to be a general Superfund-program facility locator rather than an NPL-status roster."
+      },
+      {
+        "name": "NASA SEDAC / CIESIN 'EPA NPL Sites Point Data with CIESIN Modifications, Version 2' (https://doi.org/10.7927/H44X55RB)",
+        "reason_not_used": "A well-known, citable dataset (1,747 sites) but frozen as of February 27, 2014 -- 12+ years stale relative to the 2026-07-07 retrieval date, and would miss all sites listed, proposed, or deleted since 2014 (dozens of PFAS-driven and other post-2014 listings/deletions). Kept in mind only as a cross-check reference for plausibility (see 'cross_check' below), not as the primary source."
+      },
+      {
+        "name": "Envirofacts REST API SEMS/CERCLIS tables (enviro.epa.gov)",
+        "reason_not_used": "Not queried directly because the ArcGIS Hub dataset (which EPA's own metadata says is generated from the same underlying HRS/CERCLIS documentation records) already provided a clean, complete, pre-joined name+status+state+lat/lon table with zero missing coordinates -- there was no gap left for Envirofacts to fill for this layer's required fields."
+      }
+    ]
+  },
+  "cross_check_against_published_totals": {
+    "task_prompt_ballpark": "~1,340 final + ~40 proposed + ~450 deleted",
+    "this_dataset_actual": {
+      "final": 1343,
+      "proposed": 37,
+      "deleted": 460,
+      "total": 1840
+    },
+    "assessment": "Matches the ballpark closely on all three status buckets (within 1% on final, within 8% on proposed, within 2% on deleted). This dataset's total of 1,840 also falls squarely in the task's expected 1,200-1,900 range."
+  },
+  "processing": {
+    "input_record_count": 1840,
+    "output_record_count": 1840,
+    "dropped_rows": {
+      "no_or_invalid_coordinates": 0,
+      "missing_name": 0,
+      "unmapped_status_value": 0,
+      "total_dropped": 0,
+      "note": "Zero rows dropped. The source dataset had complete Latitude/Longitude, Site_Name, and Status for all 1,840 records -- no coordinate/name/status gaps were found."
+    },
+    "status_normalization": {
+      "rule": "'NPL Site' -> 'final', 'Proposed NPL Site' -> 'proposed', 'Deleted NPL Site' -> 'deleted' (verbatim source values were exactly these three strings; no fuzzy matching needed)",
+      "counts": {
+        "final": 1343,
+        "deleted": 460,
+        "proposed": 37
+      }
+    },
+    "state_normalization": {
+      "rule": "Source 'State' field is the full state/territory name (e.g. 'Connecticut', 'Puerto Rico'); mapped to standard 2-letter USPS-style codes for all 57 distinct values present (50 states + DC + Puerto Rico + Guam + American Samoa + US Virgin Islands + Northern Mariana Islands + Federated States of Micronesia).",
+      "distinct_states_territories_present": 57,
+      "unmapped_values_kept_verbatim": []
+    },
+    "coordinate_rounding": {
+      "rule": "Rounded to 3 decimal places (~111m precision) per output spec.",
+      "collisions_introduced_by_rounding": {
+        "groups": 3,
+        "records_involved": 6,
+        "manually_reviewed": true,
+        "finding": "All 3 collision groups reviewed by hand and are genuine distinct EPA site records with different Site_EPA_ID / SEMS_ID values that happen to sit within ~111m of each other (adjacent industrial parcels in the same small town), not duplicate rows. One group ('Gratiot County Golf Course', St. Louis, MI) is the same site NAME appearing twice with both 'deleted' and 'final' status and two different EPA IDs (MID980794531 deleted 1983, MIN000510389 listed 2010) -- this reflects a real EPA history where an earlier deletion at that location was followed decades later by discovery and listing of separate contamination nearby under a new ID, not a data error."
+      }
+    },
+    "name_truncation": {
+      "rule": "Names capped at 60 characters (word-boundary truncation + ellipsis where possible) per output spec.",
+      "records_truncated": 13,
+      "share_of_total_pct": 0.71
+    }
+  },
+  "sanity_checks": {
+    "love_canal_ny": {
+      "expected": "Should exist, Niagara Falls NY, deleted status",
+      "found": [
+        {
+          "lat": 43.08,
+          "lon": -78.949,
+          "name": "Love Canal",
+          "v": 1,
+          "meta": {
+            "status": "deleted",
+            "state": "NY",
+            "epa_id": "NYD000606947",
+            "city": "Niagara Falls",
+            "listing_date": "09/08/1983",
+            "deletion_date": "09/30/2004"
+          }
+        }
+      ],
+      "passed": true
+    },
+    "hanford_wa": {
+      "expected": "Should exist, Washington state, DOE nuclear site (likely multiple sub-area entries)",
+      "found": [
+        {
+          "lat": 46.37,
+          "lon": -119.275,
+          "name": "Hanford 300-Area (USDOE)",
+          "v": 1,
+          "meta": {
+            "status": "final",
+            "state": "WA",
+            "epa_id": "WA2890090077",
+            "city": "Benton County",
+            "listing_date": "10/04/1989"
+          }
+        },
+        {
+          "lat": 46.323,
+          "lon": -119.285,
+          "name": "Hanford 1100-Area (USDOE)",
+          "v": 1,
+          "meta": {
+            "status": "deleted",
+            "state": "WA",
+            "epa_id": "WA4890090075",
+            "city": "Benton County",
+            "listing_date": "10/04/1989",
+            "deletion_date": "09/30/1996"
+          }
+        },
+        {
+          "lat": 46.701,
+          "lon": -119.483,
+          "name": "Hanford 100-Area (USDOE)",
+          "v": 1,
+          "meta": {
+            "status": "final",
+            "state": "WA",
+            "epa_id": "WA3890090076",
+            "city": "Benton County",
+            "listing_date": "10/04/1989"
+          }
+        },
+        {
+          "lat": 46.563,
+          "lon": -119.605,
+          "name": "Hanford 200-Area (USDOE)",
+          "v": 1,
+          "meta": {
+            "status": "final",
+            "state": "WA",
+            "epa_id": "WA1890090078",
+            "city": "Benton County",
+            "listing_date": "10/04/1989"
+          }
+        }
+      ],
+      "passed": true,
+      "note": "Found as 4 separate NPL entries -- Hanford 100-Area, 200-Area, 300-Area, 1100-Area (USDOE) -- reflecting how EPA lists this enormous DOE nuclear reservation as multiple discrete NPL sites by operable area rather than one single record."
+    },
+    "tar_creek_ok": {
+      "expected": "Should exist, Oklahoma, Ottawa County lead/zinc mining district",
+      "found": [
+        {
+          "lat": 36.944,
+          "lon": -94.842,
+          "name": "Tar Creek (Ottawa County)",
+          "v": 1,
+          "meta": {
+            "status": "final",
+            "state": "OK",
+            "epa_id": "OKD980629844",
+            "city": "Ottawa County",
+            "listing_date": "09/08/1983"
+          }
+        }
+      ],
+      "passed": true
+    },
+    "berkeley_pit_silver_bow_creek_mt": {
+      "expected": "Should exist, Montana, Butte mining/smelting area",
+      "found": [
+        {
+          "lat": 46.039,
+          "lon": -112.795,
+          "name": "Silver Bow Creek/Butte Area",
+          "v": 1,
+          "meta": {
+            "status": "final",
+            "state": "MT",
+            "epa_id": "MTD980502777",
+            "city": "Silver Bow Creek",
+            "listing_date": "09/08/1983"
+          }
+        }
+      ],
+      "passed": true,
+      "note": "EPA's official NPL site name for this location is 'Silver Bow Creek/Butte Area' -- there is no separate NPL entry literally named 'Berkeley Pit'; the pit is one water-quality feature within this larger official site boundary. Also found two related-but-distinct Montana NPL sites from the same Anaconda Copper mining/smelting complex: 'Anaconda Co. Smelter' and 'Anaconda Aluminum Co Columbia Falls Reduction Plant'."
+    },
+    "all_four_passed": true
+  },
+  "caveats": [
+    "This is a point-in-time snapshot (retrieved 2026-07-07) of a live, EPA-maintained ArcGIS feature service. EPA updates NPL status continuously (new proposals, final listings, deletions/partial deletions); a re-pull at a later date will not be byte-identical.",
+    "Coordinates are as provided by EPA's own HRS documentation records per the source's stated methodology, not independently re-geocoded or verified point-by-point against satellite imagery. For large multi-operable-unit sites (e.g. Hanford, spanning hundreds of square miles), the listed lat/lon is a single representative point for the whole NPL site record, not necessarily the geographic center or the most contaminated sub-area.",
+    "'State' in the source is a full name (e.g. 'Puerto Rico', 'Guam') and was mapped to a 2-letter code for this output; this dataset legitimately includes non-state US territories (Puerto Rico, Guam, American Samoa, US Virgin Islands, Northern Mariana Islands) and a Compact-of-Free-Association state (Federated States of Micronesia), consistent with the NPL's actual jurisdictional scope -- these are not errors, just reminders that 'state' here really means 'state or territory'.",
+    "Coordinates were rounded to 3 decimal places per the output spec (~111m precision), which introduced 3 groups of coordinate collisions (6 records total) between genuinely distinct, nearby EPA site records; these were manually reviewed and are not duplicates (see processing.coordinate_rounding above).",
+    "13 of 1,840 site names (0.7%) exceeded the 60-character cap and were truncated with an ellipsis; the full name is not preserved elsewhere in this output (only in EPA's own records, retrievable via the epa_id in meta).",
+    "'status' reflects only the current EPA classification at retrieval time. A site's status can have a rich history (e.g. proposed then withdrawn then re-proposed; partially deleted while remaining otherwise on the list) that this 3-way final/proposed/deleted normalization does not fully capture -- 'listing_date'/'deletion_date'/'proposed_date' in meta (where present) give partial history for consumers who want it.",
+    "This layer covers the National Priorities List specifically. It does NOT include the much larger universe of non-NPL sites also tracked in EPA's SEMS/CERCLIS systems (e.g. sites in earlier assessment/removal-only stages that never reached proposed/final NPL status), which was out of scope per the task brief.",
+    "No sites were found with (0,0) or otherwise clearly invalid placeholder coordinates in this source, so no coordinate-validity drops were needed -- an unusually clean dataset by government open-data standards."
+  ]
+}
